@@ -21,3 +21,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('home', function(){
     return view("pages.top-page.index");
 });
+
+Route::prefix('admin')->group(function(){
+    Route::get('add_product', function(){
+        return view("pages.admin.add_product");
+    });
+});

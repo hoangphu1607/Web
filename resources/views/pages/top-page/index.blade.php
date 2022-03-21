@@ -74,95 +74,18 @@
 @stop
 
 @section('breadcrumb')
-    @include('partial.breadcrumb')
+    @include('partial.users.breadcrumb')
 @stop
 @section('sidebar')
-    @include('partial.sidebar')
+    @include('partial.users.sidebar')
 @stop
 
 @section('content')
 @yield('sidebar');
     <div class="main-content" >
-        <div class="top-page">            
-            {{-- @yield('sidebar') --}}
-            <!-- this is content -->
-            {{-- <div class="container">
-                <div class="row blog-feed-2">
-                    <div id="iv0y" class="col-md-4">
-                        <div class="card mb-4 box-shadow"><img type="img" src="https://source.unsplash.com/collection/190727/300x300" class="card-img-top" />
-                            <div class="card-body">
-                                <h3 class="mb-0"><a href="#" class="text-dark text-decoration-none">Post title</a></h3>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button><button type="button"
-                                            class="btn btn-sm btn-outline-secondary">Delete</button></div><small class="text-muted">9 mins</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4 box-shadow"><img type="img" src="https://source.unsplash.com/collection/410546/300x300" class="card-img-top" />
-                            <div class="card-body">
-                                <h3 class="mb-0"><a href="#" class="text-dark text-decoration-none">Post title</a></h3>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button><button type="button"
-                                            class="btn btn-sm btn-outline-secondary">Delete</button></div><small class="text-muted">9 mins</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4 box-shadow"><img type="img" src="https://source.unsplash.com/collection/542909/300x300" class="card-img-top" />
-                            <div class="card-body">
-                                <h3 class="mb-0"><a href="#" class="text-dark text-decoration-none">Post title</a></h3>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button><button type="button"
-                                            class="btn btn-sm btn-outline-secondary">Delete</button></div><small class="text-muted">9 mins</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4 box-shadow"><img type="img" src="https://source.unsplash.com/collection/140489/300x300" class="card-img-top" />
-                            <div class="card-body">
-                                <h3 class="mb-0"><a href="#" class="text-dark text-decoration-none">Post title</a></h3>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button><button type="button"
-                                            class="btn btn-sm btn-outline-secondary">Delete</button></div><small class="text-muted">9 mins</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4 box-shadow"><img type="img" src="https://source.unsplash.com/collection/403065/300x300" class="card-img-top" />
-                            <div class="card-body">
-                                <h3 class="mb-0"><a href="#" class="text-dark text-decoration-none">Post title</a></h3>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button><button type="button"
-                                            class="btn btn-sm btn-outline-secondary">Delete</button></div><small class="text-muted">9 mins</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4 box-shadow"><img type="img" src="https://source.unsplash.com/collection/1410856/300x300" class="card-img-top" />
-                            <div class="card-body">
-                                <h3 class="mb-0"><a href="#" class="text-dark text-decoration-none">Post title</a></h3>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button><button type="button"
-                                            class="btn btn-sm btn-outline-secondary">Delete</button></div><small class="text-muted">9 mins</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-            <!-- Product AREA -->
+        <div class="top-page"> 
+		<!-- this is content -->           
+		<!-- Product AREA -->
 		<div class="product-area">
 			<div class="container">
 				<div class="row">

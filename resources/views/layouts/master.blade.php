@@ -16,11 +16,11 @@
     @yield('styles')
 </head>
 <body class="home-one">
-    @include('partial.header')
+    @include('partial.users.header')
 
     @yield('content')
 
-    @include('partial.footer')
+    @include('partial.users.footer')
 
     {{--Scripts js common--}}
     {{-- <script src="{{ asset('js/jquery-3.4.1.js') }}"></script> --}}
