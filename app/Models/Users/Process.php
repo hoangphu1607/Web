@@ -13,8 +13,7 @@ class Process extends Model
 
     // function insert data when user register
     public function register($data)
-    {
-        
+    {        
         DB::insert('insert into user (u_name, u_email, u_password, u_phone, u_address, u_avatar) 
         values (?, ?, ?, ?, ? ," ")', $data);        
     }
