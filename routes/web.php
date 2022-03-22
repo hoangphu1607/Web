@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Process_accout;
+use App\Models\Users\Process;
 use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\Process_accout;
 
@@ -30,9 +31,7 @@ Route::prefix('admin')->group(function(){
     });
 });
 
-Route::get('login', function(){
-    return view("pages.users.login");
-})->name('login');
-
-Route::get('register', [Process_accout::class,'index'])->name('register');
+Route::get('login',[Process_accout::class,'index_login'])->name('login');
+Route::post('login',[Process_accout::class,'login'])->name('post_login');
+Route::get('register', [Process_accout::class,'index_register'])->name('register');
 Route::post('register', [Process_accout::class,'register'])->name('post_register');

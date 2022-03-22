@@ -18,4 +18,13 @@ class Process extends Model
         DB::insert('insert into user (u_name, u_email, u_password, u_phone, u_address, u_avatar) 
         values (?, ?, ?, ?, ? ," ")', $data);        
     }
+
+    public function userLogin($data)
+    {
+        $query = DB::select('select * from user where u_email = ? and u_password = ?',$data);       
+        if(!empty($query)){           
+            return true;
+        }         
+        return false;
+    }
 }

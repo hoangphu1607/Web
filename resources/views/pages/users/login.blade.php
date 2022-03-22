@@ -86,7 +86,7 @@
                     <!-- Subheading -->
                     <p class="text-muted text-center mb-5"></p>
                     <!-- Form -->
-                    <form type="form">
+                    <form type="form"  method="POST" action="{{route('post_login')}}">
                         @csrf
                         <!-- tài khoản -->
                         <div class="form-group">
@@ -99,9 +99,13 @@
                             <!-- Input group -->
                             <div class="input-group input-group-merge">
                                 <!-- Input -->
-                                <input type="text" placeholder="Tên đăng nhập" class="form-control form-control-appended" /><!-- Icon -->
+                                <input type="text" placeholder="Tên đăng nhập" class="form-control form-control-appended" name="user_email" value="{{old('user_email')}}"/><!-- Icon -->
                                 
                             </div>
+                            <!-- thông báo lỗi -->
+                            @error('user_email')
+                                <label style="color: red;">{{$message}}</label>
+                            @enderror
                         </div>
                         <!-- Password -->
                         <div id="i4x74" class="form-group mt-2 mb-2">
@@ -109,14 +113,18 @@
                                 <div id="iwfuf" class="col">
                                     <!-- Label -->
                                     <label id="ipd68">MẬT KHẨU</label>
-                                </div>
+                                </div>                                
                             </div> 
                             <!-- / .row -->
                             <!-- Input group -->
                             <div class="input-group input-group-merge">
                                 <!-- Input -->
-                                <input type="password" placeholder="Mật khẩu " class="form-control form-control-appended" />
+                                <input type="password" placeholder="Mật khẩu " class="form-control form-control-appended" name="user_password"/>
                             </div>
+                            <!-- thong bao loi -->
+                            @error('user_password')
+                                    <label style="color: red;">{{$message}}</label>
+                            @enderror
                         </div>
                         <!-- Submit -->
                         <p class="text-center"><button id="ixxr2" class="btn btn-lg btn-block btn-primary mb-3 mt-2"> ĐĂNG NHẬP </button><!-- Link -->

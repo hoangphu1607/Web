@@ -12,10 +12,15 @@ class Process_accout extends Controller
     {
         $this->user = new Process();
     }
-    //display interface
-    public function index()
+    //display interface register
+    public function index_register()
     {
         return view('pages.users.register');
+    }
+    // display interface login
+    public function index_login()
+    {
+        return view('pages.users.login');
     }
     // process register
     public function register(Request $request)
@@ -49,5 +54,26 @@ class Process_accout extends Controller
         $this->user->register($dataInsert);
         
         return redirect()->route('home');
+    }
+
+    public function login(Request $request)
+    {
+        $request->validate([
+            'user_email' => 'required',
+            'user_password' => 'required',
+        ],[
+            'user_email.required' => 'Tên đăng nhập không được trống',
+            'user_password.required' => 'Mật khẩu không được trống',
+        ]);
+        $dataInsert=[           
+            $request->user_email,
+            sha1($request->user_password), //mã hóa bằng sha1           
+        ];
+        $query = $this->user->userLogin($dataInsert);
+        // dd($query);
+        if($query)
+            return redirect()->route('home');
+        else
+            return back();
     }
 }
