@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 21, 2022 at 03:32 AM
+-- Generation Time: Mar 22, 2022 at 12:46 PM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -133,12 +133,19 @@ CREATE TABLE `transaction` (
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `u_name` text COLLATE utf8_unicode_ci NOT NULL,
-  `u_phone` text COLLATE utf8_unicode_ci NOT NULL,
-  `u_passwork` text COLLATE utf8_unicode_ci NOT NULL,
   `u_email` text COLLATE utf8_unicode_ci NOT NULL,
+  `u_password` text COLLATE utf8_unicode_ci NOT NULL,
+  `u_phone` text COLLATE utf8_unicode_ci NOT NULL,
   `u_address` text COLLATE utf8_unicode_ci NOT NULL,
   `u_avatar` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `u_name`, `u_email`, `u_password`, `u_phone`, `u_address`, `u_avatar`) VALUES
+(1, 'vo hoang phu', 'hoangphu329@gmail.com', '45ada26a4abfe2437699067468ae31ae228493ca', '0796039900', 'vinh long', ' ');
 
 --
 -- Indexes for dumped tables
@@ -247,7 +254,7 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
