@@ -84,8 +84,8 @@
                                 <li><a href="#"><i class="fa fa-user"></i>Tài Khoản Của Tôi</a></li>
                                 {{-- <li><a href="#"><i class="fa fa-heart"></i>Wishlist</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-check-square-o"></i>Checkout</a></li> --}}
-                                <li><a href="#"><i class="fa fa-lock"></i>Đăng Nhập</a></li>
-                                <li><a href="#"><i class="fa fa-pencil-square-o"></i>Đăng Ký</a></li>
+                                <li><a href="{{route('login')}}"><i class="fa fa-lock"></i>Đăng Nhập</a></li>
+                                <li><a href="{{route('register')}}"><i class="fa fa-pencil-square-o"></i>Đăng Ký</a></li>
                             </ul>
                         </div>
                     </div>
