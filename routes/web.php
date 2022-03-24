@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Process_accout;
+use App\Http\Controllers\Admin\Manage;
 use App\Models\Users\Process;
 use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\Process_accout;
@@ -36,3 +37,5 @@ Route::post('login',[Process_accout::class,'login'])->name('post_login');
 Route::get('register', [Process_accout::class,'index_register'])->name('register');
 Route::post('register', [Process_accout::class,'register'])->name('post_register');
 Route::get('logout', [Process_accout::class,'logout'])->name('logout');
+Route::get('addCategories', [Manage::class,'showCategories'])->name('addCategories');
+Route::post('addCategories', [Manage::class,'addCategories'])->name('addCategories');

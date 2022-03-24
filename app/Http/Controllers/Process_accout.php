@@ -74,13 +74,15 @@ class Process_accout extends Controller
             $request->user_email,
             sha1($request->user_password), //mã hóa bằng sha1           
         ];
-        $query = $this->user->userLogin($dataInsert);        
+        $query = $this->user->userLogin($dataInsert);  
+           
         // save session login          
         $dataUser = [
             "user_id" => $query[0]->id,
             "user_email" => $query[0]->u_email,
             "user_name" => $query[0]->u_name
         ];
+        
         if(!empty($query)){
             session($dataUser);
             return redirect()->route('home');  
