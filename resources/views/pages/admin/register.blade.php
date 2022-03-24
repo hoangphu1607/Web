@@ -1,6 +1,6 @@
 @extends('layouts.login')
 
-@section('title', 'Đăng Ký Tài Khoản')
+@section('title', 'Tạo Tài Khoản Quản Trị')
 
 
 @section('style-libraries')
@@ -82,7 +82,7 @@
             <div id="ij88" class="col-12 col-md-5 col-xl-6 my-5">
                 <!-- Heading -->
                 <div class="card p-md-5 p-2">
-                    <h1 class="display-4 text-center mb-3"> ĐĂNG KÝ </h1>
+                    <h1 class="display-6 text-center mb-3"> ĐĂNG KÝ QUYỀN QUẢN TRỊ</h1>
                     <!-- Subheading -->
                     <p class="text-muted text-center mb-5"></p>
                     {{-- @if ($errors->any())

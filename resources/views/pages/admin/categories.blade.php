@@ -90,15 +90,26 @@
                     <label for="productName">TÊN LOẠI SẢN PHẨM:</label>
                     <input type="text" placeholder="Tên sản phẩm..." class="form-control" name="categories_name"/>
                 </div>
+                @error('categories_name')
+                    <div style="color: red">{{$message}}</div>
+                @enderror  
                 {{-- INPUT LINK ẢNH SẢN PHẨM --}}
                 <div class="form-group">
                     <label for="productName">AVATAR:</label>
                     @csrf
-                    <div class="image">
-                    
-                    <input type="file" class="form-control" required name="image">
-                    </div>                   
+                    <div class="image">                    
+                        <input type="file" class="form-control" required name="image">
+                    </div>       
+                    @error('image')
+                        <div style="color: red">{{$message}}</div>
+                    @enderror           
                 </div>
+                {{-- Load Ảnh Lên --}}
+                {{-- <div class="form-group">
+                    @if ($message = Session::get('success'))                    
+                        <img src="{{ asset('img\categories\{{ Session::get('image')}}') }}" alt="">                    
+                    @endif   
+                </div> --}}
                 {{-- BUTTON SUBMIT --}}
                 <button type="submit" class="btn btn-primary">Thêm Loại Sản Phẩm</button>
             </form>

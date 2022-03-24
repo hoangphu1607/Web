@@ -30,6 +30,14 @@ Route::prefix('admin')->group(function(){
     Route::get('add_product', function(){
         return view("pages.admin.add_product");
     });
+    Route::get('/', function(){
+        return view('pages.admin.login');
+    });
+    Route::get('register', function(){
+        return view('pages.admin.register');
+    });
+    Route::get('addCategories', [Manage::class,'showCategories'])->name('addCategories');
+    Route::post('addCategories', [Manage::class,'addCategories'])->name('addCategories');
 });
 
 Route::get('login',[Process_accout::class,'index_login'])->name('login');
@@ -37,5 +45,9 @@ Route::post('login',[Process_accout::class,'login'])->name('post_login');
 Route::get('register', [Process_accout::class,'index_register'])->name('register');
 Route::post('register', [Process_accout::class,'register'])->name('post_register');
 Route::get('logout', [Process_accout::class,'logout'])->name('logout');
-Route::get('addCategories', [Manage::class,'showCategories'])->name('addCategories');
-Route::post('addCategories', [Manage::class,'addCategories'])->name('addCategories');
+
+
+Route::get('add-img-product', function(){
+    return view("pages.admin.add_img_product");
+});
+

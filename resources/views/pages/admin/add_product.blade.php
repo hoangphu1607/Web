@@ -84,7 +84,7 @@
         <div class="card-header">Thêm Sản Phẩm</div>
         <div class="card-body">
             {{-- FORM THÊM SẢN PHẨM --}}
-            <form type="form" action="#" name="contact" method="POST" data-netlify="true">
+            <form type="form" action="#" name="contact" method="POST" data-netlify="true" enctype="multipart/form-data">
                 {{-- INPUT TÊN SẢN PHẨM --}}
                 <div class="form-group">
                     <label for="productName">TÊN SẢN PHẨM:</label>
@@ -118,7 +118,8 @@
                 {{-- INPUT LINK ẢNH SẢN PHẨM --}}
                 <div class="form-group">
                     <label for="productName">AVATAR:</label>
-                    <input type="text" placeholder="Link ảnh sản phẩm..." class="form-control" />
+                    <input type="file" name="photo">
+                    {{-- <input type="text" placeholder="Link ảnh sản phẩm..." class="form-control" /> --}}
                 </div>
                 {{-- TEXTAREA DESCRIPTIONS --}}               
 
