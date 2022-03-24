@@ -35,3 +35,4 @@ Route::get('login',[Process_accout::class,'index_login'])->name('login');
 Route::post('login',[Process_accout::class,'login'])->name('post_login');
 Route::get('register', [Process_accout::class,'index_register'])->name('register');
 Route::post('register', [Process_accout::class,'register'])->name('post_register');
+Route::get('logout', [Process_accout::class,'logout'])->name('logout');

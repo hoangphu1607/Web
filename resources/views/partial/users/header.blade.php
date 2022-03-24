@@ -81,11 +81,29 @@
                     <div class="col-md-8 col-sm-8 col-xs-12">
                         <div class="header-top-right">
                             <ul class="list-inline">
-                                <li><a href="#"><i class="fa fa-user"></i>Tài Khoản Của Tôi</a></li>
+                                @if(session('user_id'))                                    
+                                    <li>
+                                        <a href="#" style="color: #85ff85"><i class="fa fa-user"></i>Xin Chào {{session('user_name')}} !!!</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('logout')}}"><i class="fa fa-user-times"></i> Đăng Xuất </a>
+                                    </li>
+                                @else
+                                    <li>
+                                        <a href="{{route('login')}}"> <i class="fa fa-lock"></i>Đăng Nhập </a>                                    
+                                    </li>
+                                @endif 
+
+                                {{-- <li><a href="#"><i class="fa fa-user"></i>Tài Khoản Của Tôi</a></li> --}}
                                 {{-- <li><a href="#"><i class="fa fa-heart"></i>Wishlist</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-check-square-o"></i>Checkout</a></li> --}}
-                                <li><a href="{{route('login')}}"><i class="fa fa-lock"></i>Đăng Nhập</a></li>
-                                <li><a href="{{route('register')}}"><i class="fa fa-pencil-square-o"></i>Đăng Ký</a></li>
+                                {{-- <li><a href="{{route('login')}}"><i class="fa fa-lock"></i>Đăng Nhập 
+                                    @if(session('user_email'))                                       
+                                            <b>{{session('user_email')}}</b>
+                                                             
+                                    @endif 
+                                </a></li>
+                                <li><a href="{{route('register')}}"><i class="fa fa-pencil-square-o"></i>Đăng Ký</a></li> --}}
                             </ul>
                         </div>
                     </div>

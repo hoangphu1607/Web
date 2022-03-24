@@ -84,8 +84,16 @@
                 <div class="card p-md-5 p-2">
                     <h1 class="display-4 text-center mb-3"> ĐĂNG NHẬP </h1>
                     <!-- Subheading -->
+                    @if(session('message'))
+                        <div style="color: red; text-align: center">
+                            <b>{{session('message')}}</b>
+                        </div>                        
+                    @endif 
+                                          
+                
                     <p class="text-muted text-center mb-5"></p>
                     <!-- Form -->
+                                      
                     <form type="form"  method="POST" action="{{route('post_login')}}">
                         @csrf
                         <!-- tài khoản -->
@@ -96,6 +104,7 @@
                                 </div>
                             </div> 
                             <!-- / .row -->
+                            
                             <!-- Input group -->
                             <div class="input-group input-group-merge">
                                 <!-- Input -->

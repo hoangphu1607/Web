@@ -20,10 +20,11 @@ class Process extends Model
 
     public function userLogin($data)
     {
-        $query = DB::select('select * from user where u_email = ? and u_password = ?',$data);       
-        if(!empty($query)){           
-            return true;
-        }         
-        return false;
+        return DB::select('select * from user where u_email = ? and u_password = ?',$data);  
+        // $query = DB::select('select * from user where u_email = ? and u_password = ?',$data);       
+        // if(!empty($query)){           
+        //     return true;
+        // }         
+        // return false;
     }
 }
