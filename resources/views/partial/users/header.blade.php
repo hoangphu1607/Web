@@ -105,9 +105,9 @@
                                             <b>{{session('user_email')}}</b>
                                                              
                                     @endif 
-                                </a></li>
+                                </a></li> --}}
                                 
-                            </ul>
+                            </ul> 
                         </div>
                     </div>
                 </div>
@@ -212,12 +212,7 @@
                                 </li>
                                 
                                 <li><a href="shop.html">Sushi & Sashimi</a></li>
-                                {{-- <li><a href="blog-left-sidebar.html">Blog</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                                        <li><a href="blog-single.html">Blog Details</a></li>
-                                    </ul>
-                                </li> --}}
+                                
                                 {{-- <li><a href="#">Pages</a>
                                     <ul class="sub-menu">
                                         <li><a href="shop.html">Shop</a></li>
@@ -232,9 +227,9 @@
                                         <li><a href="look-book.html">Look Book</a></li>
                                         <li><a href="404.html">Error 404</a></li>
                                     </ul>
-                                </li> --}}
-                                {{-- <li><a href="contact.html">contact</a></li> --}}
-                            </ul>
+                                </li>
+                                <li><a href="contact.html">contact</a></li>
+                            </ul> --}}
                         </nav>
                     </div>
                     <!-- Mobile MENU AREA -->
