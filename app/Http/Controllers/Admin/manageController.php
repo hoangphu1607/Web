@@ -86,10 +86,11 @@ class manageController extends Controller
                 $s_image = $path_img,
             ];
 
-            DB::insert('insert into suppliers (s_name, s_email, s_phone, s_avt) values (?, ?, ?, ?)', $dataInsert);
+            DB::insert('insert into suppliers (s_name, s_email, s_phone, s_avt) values (?, ?, ?, ?)', $dataInsert);        
+         // DB::insert('insert into categories (c_name, c_avatar, c_active) values (?, ?, ?)', $dataInsert);
+            return redirect()->route('addCategories')->with('sucess','Thêm Thành Công!');
         }
-
+        else
+            return redirect()->route('addCategories')->with('false','Thêm Thất Bại!');      
     }
-
-
 }

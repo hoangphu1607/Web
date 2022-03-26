@@ -45,6 +45,8 @@ Route::prefix('admin')->group(function(){
     Route::get('addSuppliers', [manageController::class,'addSuppliers'])->name('addSuppliers');
     Route::post('addSuppliers', [manageController::class,'addSuppliers'])->name('addSuppliers');
     
+    Route::get('addCategories', [Manage::class,'showCategories'])->name('addCategories');
+    Route::post('addCategories', [Manage::class,'addCategories'])->name('addCategories');    
 });
 
 Route::get('login',[Process_accout::class,'index_login'])->name('login');

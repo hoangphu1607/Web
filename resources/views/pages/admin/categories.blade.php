@@ -85,10 +85,16 @@
 @section('content')
 <div class="container py-5">
     <div class="card">
+        @if (session('sucess'))
+            <div style="color:green">{{session('sucess')}}</div>
+        @elseif (session('false'))
+            <div style="color:red">{{session('false')}}</div>
+        @endif
         <div class="card-header">Thêm Loại Sản Phẩm</div>
         <div class="card-body">
             {{-- FORM THÊM LOẠI SẢN PHẨM --}}
-            <form type="form" action="{{route('addCategories')}}" name="contact" method="POST" data-netlify="true" enctype="multipart/form-data">
+            <form type="form" action="{{route('addCategories')}}" name="contact" method="POST" 
+            data-netlify="true" enctype="multipart/form-data" id="categories_form">
                 {{-- INPUT TÊN SẢN PHẨM --}}
                 <div class="form-group">
                     <label for="productName">TÊN LOẠI SẢN PHẨM:</label>
@@ -118,13 +124,45 @@
                 <button type="submit" class="btn btn-primary">Thêm Loại Sản Phẩm</button>
             </form>
             {{-- END FORM --}}
-        </div>  
-        <script type="text/javascript">
-            function notify() {
-                $.notify("Access granted", "success");
-            }
-        </script> 
-        <a href="#" onclick="notify()">Notify</a>    
+        </div>           
     </div>
 </div>
+@stop
+
+@section('scripts')
+    <script> 
+    $(document).ready(function() {
+        $('#categories_form').on('submit', function(e){
+            e.preventDefault();
+            let categoriesName = $('input[name="categories_name"]').val().trim();
+            
+            let categoriesAvatar = $('input[name="image"]').val().trim();
+            
+            let actionUrl = $(this).attr('action');
+
+            // let UrlImage = "{{ route('UrlImage') }}";
+
+            // console.log(UrlImage);
+
+            // $.ajax({
+            //     url: 
+            // });
+            // $.ajax({
+            //     url: actionUrl,
+            //     type: 'POST',
+            //     data:{
+
+            //     },
+            //     dataType: 'json',
+            //     sucess:function(response){
+            //         console.log(response);
+            //     },
+            //     error:function(error){
+            //         console.log(error);
+            //     }
+            // });
+            // alert(categoriesAvatar);
+        });
+    })
+    </script>
 @stop
