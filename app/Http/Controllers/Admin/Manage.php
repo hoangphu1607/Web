@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\File;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 class Manage extends Controller
 {
@@ -16,7 +17,7 @@ class Manage extends Controller
     public function addCategories(Request $request)
     {
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'categories_name' => 'required',
         ],[
             'image.image' => 'Định dạng không đúng!!!',
@@ -29,8 +30,15 @@ class Manage extends Controller
             $imageName = time().'.'.$request->image->extension();      // nên làm cách này cho ko trùng tên ảnh      
 
             $file->move('img\categories', $imageName); //chuyển file đến thư mục mong muốn 
-            $path_img= 'img\categories\\'. $imageName;
-            return back()->with('success','You have successfully upload image.')->with('image',$path_img); 
+            $path_img = 'img\categories\\'. $imageName; //lấy đường dẫn file đang tồn tại (img\categories\)
+            
+            $dataInsert = [
+                $c_name = $request->categories_name,
+                $c_avatar = $path_img,
+                $c_active = 0
+            ];
+            
+            DB::insert('insert into categories (c_name, c_avatar, c_active) values (?, ?, ?)', $dataInsert);
         }
           
 

@@ -70,6 +70,10 @@
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
     
     <script src="{{asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
+    <script src="{{asset('js/notify.js')}}"></script>
+    <script src="{{asset('js/notify.min.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.css" />
 @stop
 
 {{-- @section('ckeditor')
@@ -114,7 +118,13 @@
                 <button type="submit" class="btn btn-primary">Thêm Loại Sản Phẩm</button>
             </form>
             {{-- END FORM --}}
-        </div>
+        </div>  
+        <script type="text/javascript">
+            function notify() {
+                $.notify("Access granted", "success");
+            }
+        </script> 
+        <a href="#" onclick="notify()">Notify</a>    
     </div>
 </div>
 @stop
