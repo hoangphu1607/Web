@@ -70,10 +70,6 @@
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
     
     <script src="{{asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
-    <script src="{{asset('js/notify.js')}}"></script>
-    <script src="{{asset('js/notify.min.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.css" />
 @stop
 
 {{-- @section('ckeditor')
@@ -85,46 +81,48 @@
 @section('content')
 <div class="container py-5">
     <div class="card">
-        <div class="card-header">Thêm Loại Sản Phẩm</div>
+        <div class="card-header">Thêm Nhà Cung Cấp</div>
         <div class="card-body">
             {{-- FORM THÊM LOẠI SẢN PHẨM --}}
-            <form type="form" action="{{route('addCategories')}}" name="contact" method="POST" data-netlify="true" enctype="multipart/form-data">
+            <form type="form" action="{{route('addSuppliers')}}" name="contact" method="POST" data-netlify="true" enctype="multipart/form-data">
                 {{-- INPUT TÊN SẢN PHẨM --}}
                 <div class="form-group">
-                    <label for="productName">TÊN LOẠI SẢN PHẨM:</label>
-                    <input type="text" placeholder="Tên sản phẩm..." class="form-control" name="categories_name"/>
+                    <label for="suppName">TÊN ĐỐI TÁC:</label>
+                    <input type="text" placeholder="Tên nhà cung cấp..." class="form-control" name="suppliers_name"/>
+                    @error('suppliers_name')
+                        <div style="color: red">{{$message}}</div>
+                    @enderror
                 </div>
-                @error('categories_name')
-                    <div style="color: red">{{$message}}</div>
-                @enderror  
+                
                 {{-- INPUT LINK ẢNH SẢN PHẨM --}}
                 <div class="form-group">
-                    <label for="productName">AVATAR :</label>
+                    <label for="suppEmail">EMAIL ĐỐI TÁC:</label>
+                    <input type="text" placeholder="Email nhà cung cấp..." class="form-control" name="suppliers_mail"/>
+                    @error('suppliers_mail')
+                        <div style="color: red">{{$message}}</div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="suppPhone">SỐ ĐIỆN THOẠI ĐỐI TÁC:</label>
+                    <input type="number" placeholder="Số điện thoại nhà cung cấp..." class="form-control" name="suppliers_phonenumber"/>
+                    @error('suppliers_phonenumber')
+                        <div style="color: red">{{$message}}</div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="productName">AVATAR ĐỐI TÁC :</label>
                     @csrf
                     <div class="image">                    
-                        <input type="file" class="form-control" required name="image">
+                        <input type="file" class="form-control" name="suppliers_image">
                     </div>       
-                    @error('image')
+                    @error('suppliers_image')
                         <div style="color: red">{{$message}}</div>
                     @enderror           
                 </div>
-                {{-- Load Ảnh Lên --}}
-                {{-- <div class="form-group">
-                    @if ($message = Session::get('success'))                    
-                        <img src="{{ asset('img\categories\{{ Session::get('image')}}') }}" alt="">                    
-                    @endif   
-                </div> --}}
-                {{-- BUTTON SUBMIT --}}
-                <button type="submit" class="btn btn-primary">Thêm Loại Sản Phẩm</button>
+                <button type="submit" class="btn btn-primary">Thêm Đối Tác</button>
             </form>
             {{-- END FORM --}}
-        </div>  
-        <script type="text/javascript">
-            function notify() {
-                $.notify("Access granted", "success");
-            }
-        </script> 
-        <a href="#" onclick="notify()">Notify</a>    
+        </div>
     </div>
 </div>
 @stop
