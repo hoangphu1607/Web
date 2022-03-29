@@ -84,30 +84,24 @@
         <div class="card-header">Thêm Nhà Cung Cấp</div>
         <div class="card-body">
             {{-- FORM THÊM LOẠI SẢN PHẨM --}}
-            <form type="form" action="{{route('addSuppliers')}}" name="contact" method="POST" data-netlify="true" enctype="multipart/form-data">
+            <form type="form" action="{{route('addSuppliers')}}" id = "add_supp" name="contact" method="POST" data-netlify="true" enctype="multipart/form-data">
                 {{-- INPUT TÊN SẢN PHẨM --}}
                 <div class="form-group">
                     <label for="suppName">TÊN ĐỐI TÁC:</label>
                     <input type="text" placeholder="Tên nhà cung cấp..." class="form-control" name="suppliers_name"/>
-                    @error('suppliers_name')
-                        <div style="color: red">{{$message}}</div>
-                    @enderror
+                    <span style="color: red" class="error_suppliers_name error"></span>
                 </div>
                 
                 {{-- INPUT LINK ẢNH SẢN PHẨM --}}
                 <div class="form-group">
                     <label for="suppEmail">EMAIL ĐỐI TÁC:</label>
-                    <input type="text" placeholder="Email nhà cung cấp..." class="form-control" name="suppliers_mail"/>
-                    @error('suppliers_mail')
-                        <div style="color: red">{{$message}}</div>
-                    @enderror
+                    <input type="email" placeholder="Email nhà cung cấp..." class="form-control" name="suppliers_mail"/>
+                    <span style="color: red" class="error_suppliers_mail error"></span>
                 </div>
                 <div class="form-group">
                     <label for="suppPhone">SỐ ĐIỆN THOẠI ĐỐI TÁC:</label>
                     <input type="number" placeholder="Số điện thoại nhà cung cấp..." class="form-control" name="suppliers_phonenumber"/>
-                    @error('suppliers_phonenumber')
-                        <div style="color: red">{{$message}}</div>
-                    @enderror
+                    <span style="color: red" class="error_suppliers_phonenumber error"></span>
                 </div>
                 <div class="form-group">
                     <label for="productName">AVATAR ĐỐI TÁC :</label>
@@ -115,9 +109,7 @@
                     <div class="image">                    
                         <input type="file" class="form-control" name="suppliers_image">
                     </div>       
-                    @error('suppliers_image')
-                        <div style="color: red">{{$message}}</div>
-                    @enderror           
+                    <span style="color: red" class="error_suppliers_image error"></span>       
                 </div>
                 <button type="submit" class="btn btn-primary">Thêm Đối Tác</button>
             </form>
@@ -125,4 +117,45 @@
         </div>
     </div>
 </div>
+@stop
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $('#add_supp').on('submit', function(e){
+            // toastr["success"]("Thêm Thành Công", "Thông Báo")     
+            e.preventDefault();                    
+            
+            // console.log("{{ route('addSuppliers') }}");
+           //console.log(categories_name);
+            // $.ajaxSetup({
+            //     headers: {
+            //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //     }
+            // });
+            $('.error').text('');
+            $.ajax({
+                url: "form-addSuppliers",
+                method: 'POST', 
+                data: new FormData(this),
+                // dataType: 'json',                
+                cache: false,
+                contentType: false,
+                processData: false,                
+                success:function(response){ 
+                    toastr["success"]("Thêm "+ response.s_name+ " thành công!!!", "Thông Báo")  ;                  
+                },
+                error:function(error){  
+                    console.log(error);            
+                    let tb = error.responseJSON.errors;
+                    for(var i in tb){
+                        $('.error_' + i).text(tb[i][0]);
+                    }
+                },
+                            
+            });
+            // alert(categoriesAvatar);
+        });
+    })
+</script>
 @stop

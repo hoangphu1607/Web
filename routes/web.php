@@ -41,8 +41,8 @@ Route::prefix('admin')->group(function(){
     Route::get('manageCategories', [manageController::class,'manageCategories'])->name('manageCategories');
     Route::post('addCategories', [manageController::class,'addCategories'])->name('addCategories');
 
-    Route::get('form_addSuppliers', [manageController::class,'form_addSuppliers'])->name('form_addSuppliers');
-    Route::post('addSuppliers', [manageController::class,'addSuppliers'])->name('addSuppliers');    
+    Route::get('form-addSuppliers', [manageController::class,'form_addSuppliers'])->name('form_addSuppliers');
+    Route::post('form-addSuppliers', [manageController::class,'addSuppliers'])->name('addSuppliers');    
    
 });
 

@@ -45,41 +45,7 @@ class manageController extends Controller
             return response()->json([
                 "success" => 'true'                
             ]); 
-        }          
-               
-
-        // if (!$check->fails()) {
-        //     $file = $request->image; //Lấy file từ form sang -- image là dữ liệu nhập vào  
-        //    // $fileName =  $request->categories_name .'.'. $file->getClientOriginalExtension();//$request->categories_name đổi tên hình theo tên loại sản phẩm
-        //     $imageName = time().'.'.$request->image->extension();      // nên làm cách này cho ko trùng tên ảnh      
-
-        //     $file->move('img\categories', $imageName); //chuyển file đến thư mục mong muốn 
-        //     $path_img = 'img\categories\\'. $imageName; //lấy đường dẫn file đang tồn tại (img\categories\)
-            
-        //     $dataInsert = [
-        //         $c_name = $request->categories_name,
-        //         $c_avatar = $path_img,
-        //         $c_active = 0
-        //     ];            
-        //     // DB::insert('insert into categories (c_name, c_avatar, c_active) values (?, ?, ?)', $dataInsert);
-        //     return response()->json([
-        //         'success' => 'Thêm  thành công!!',
-        //     ]);
-        // }else{
-        //     return response()->json([
-        //         'error' => 'Thêm thất bại!!',
-        //     ]);
-        // }
-          
-
-        // $path = $request->file('image')->store('avatars');
-        // $path = $request->file('image')->path();
-        // $fullInfo = $request->file('image');
-        // $name = $fullInfo[0]->name;
-        // dd($fullInfo);
-        // dd($path);
-        // Storage::move($path, asset('img/categories/'));
-        // return $path;
+        }  
     }
 
     public function form_addSuppliers()
@@ -88,21 +54,23 @@ class manageController extends Controller
     }
 
     public function addSuppliers(Request $request){
+       
         $request->validate([
             'suppliers_name' => 'required',
             'suppliers_mail' =>'required',
-            'suppliers_phonenumber' => 'required',
+            'suppliers_phonenumber' => 'required|size:10|numeric',
             'suppliers_image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ],
         [
             'suppliers_name.required' => 'Tên nhà cung cấp không được bỏ trống',
             'suppliers_mail.required' => 'Email nhà cung cấp không được bỏ trống',
             'suppliers_phonenumber.required' => 'Số điện thoại nhà cung cấp không được bỏ trống',
+            'suppliers_phonenumber.size' => 'Số điện thoại không hợp lệ',
+            'suppliers_phonenumber.numeric' => 'Số điện thoại không hợp lệ',
             'suppliers_image.image' => 'Avatar không đúng định dạng !!!',
             'suppliers_image.mimes' => 'Avatar không đúng định dạng !!!',
         ]
-        );
-
+        );        
         if ($request->hasFile('suppliers_image')) {
             $file = $request->suppliers_image; //Lấy file từ form sang -- image là dữ liệu nhập vào  
            // $fileName =  $request->categories_name .'.'. $file->getClientOriginalExtension();//$request->categories_name đổi tên hình theo tên loại sản phẩm
@@ -118,9 +86,14 @@ class manageController extends Controller
 
             DB::insert('insert into suppliers (s_name, s_email, s_phone, s_avt) values (?, ?, ?, ?)', $dataInsert);        
          // DB::insert('insert into categories (c_name, c_avatar, c_active) values (?, ?, ?)', $dataInsert);
-            return redirect()->route('addCategories')->with('sucess','Thêm Thành Công!');
+            return response()->json([
+                "mess" => "true",
+                "s_name" => $request->suppliers_name
+            ]);
         }
         else
-            return redirect()->route('addCategories')->with('false','Thêm Thất Bại!');      
+            return response()->json([
+                "mess" => "false"
+            ]);
     }
 }
