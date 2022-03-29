@@ -37,16 +37,13 @@ Route::prefix('admin')->group(function(){
     Route::get('register', function(){
         return view('pages.admin.register');
     });
+    
     Route::get('manageCategories', [manageController::class,'manageCategories'])->name('manageCategories');
     Route::post('addCategories', [manageController::class,'addCategories'])->name('addCategories');
 
     Route::get('form_addSuppliers', [manageController::class,'form_addSuppliers'])->name('form_addSuppliers');
-
-    Route::get('addSuppliers', [manageController::class,'addSuppliers'])->name('addSuppliers');
-    Route::post('addSuppliers', [manageController::class,'addSuppliers'])->name('addSuppliers');
-    
-    Route::get('addCategories', [Manage::class,'showCategories'])->name('addCategories');
-    Route::post('addCategories', [Manage::class,'addCategories'])->name('addCategories');    
+    Route::post('addSuppliers', [manageController::class,'addSuppliers'])->name('addSuppliers');    
+   
 });
 
 Route::get('login',[Process_accout::class,'index_login'])->name('login');

@@ -93,26 +93,29 @@
         <div class="card-header">Thêm Loại Sản Phẩm</div>
         <div class="card-body">
             {{-- FORM THÊM LOẠI SẢN PHẨM --}}
-            <form type="form" action="{{route('addCategories')}}" name="contact" method="POST" 
+            <form type="form" action="{{ route('addCategories') }}" name="contact" method="POST" 
             data-netlify="true" enctype="multipart/form-data" id="categories_form">
+            @csrf
+                {{-- Thông báo thêm thành công --}}
+                @if(session('success'))
+                    <div style="color: green">{{session('success')}}</div>
+                @endif
                 {{-- INPUT TÊN SẢN PHẨM --}}
                 <div class="form-group">
                     <label for="productName">TÊN LOẠI SẢN PHẨM:</label>
-                    <input type="text" placeholder="Tên sản phẩm..." class="form-control" name="categories_name"/>
+                    <input type="text" placeholder="Tên sản phẩm..." class="form-control" name="categories_name"/>                    
+                    <span style="color: red" class="error_categories_name error"></span>
+                   
                 </div>
-                @error('categories_name')
-                    <div style="color: red">{{$message}}</div>
-                @enderror  
+                
                 {{-- INPUT LINK ẢNH SẢN PHẨM --}}
                 <div class="form-group">
-                    <label for="productName">AVATAR :</label>
-                    @csrf
+                    <label for="productName">AVATAR :</label>                    
                     <div class="image">                    
                         <input type="file" class="form-control" required name="image">
+                        <span style="color: red" class="error_image error"></span> 
                     </div>       
-                    @error('image')
-                        <div style="color: red">{{$message}}</div>
-                    @enderror           
+                             
                 </div>
                 {{-- Load Ảnh Lên --}}
                 {{-- <div class="form-group">
@@ -133,34 +136,38 @@
     <script> 
     $(document).ready(function() {
         $('#categories_form').on('submit', function(e){
-            e.preventDefault();
-            let categoriesName = $('input[name="categories_name"]').val().trim();
-            
-            let categoriesAvatar = $('input[name="image"]').val().trim();
-            
+            // toastr["success"]("Thêm Thành Công", "Thông Báo")     
+            e.preventDefault();                    
             let actionUrl = $(this).attr('action');
-
-            // let UrlImage = "{{ route('UrlImage') }}";
-
-            // console.log(UrlImage);
-
-            // $.ajax({
-            //     url: 
-            // });
-            // $.ajax({
-            //     url: actionUrl,
-            //     type: 'POST',
-            //     data:{
-
-            //     },
-            //     dataType: 'json',
-            //     sucess:function(response){
-            //         console.log(response);
-            //     },
-            //     error:function(error){
-            //         console.log(error);
+            let categories_name = $(this).find('input[name="categories_name"]').val();
+            let image = $(this).find('input[name="image"]').val();
+            let _token = $(this).find('input[name="_token"]').val();
+            // console.log(categories_name);
+            // $.ajaxSetup({
+            //     headers: {
+            //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             //     }
             // });
+            $('.error').text('');
+            $.ajax({
+                url: 'addCategories',
+                method: 'POST', 
+                data: new FormData(this),
+                // dataType: 'json',                
+                cache: false,
+                contentType: false,
+                processData: false,                
+                success:function(response){                   
+                    toastr["success"]("Thêm "+ categories_name+ " thành công!!!", "Thông Báo")  ;                  
+                },
+                error:function(error){              
+                    let tb = error.responseJSON.errors;
+                    for(var i in tb){
+                        $('.error_' + i).text(tb[i][0]);
+                    }
+                },
+                            
+            });
             // alert(categoriesAvatar);
         });
     })
