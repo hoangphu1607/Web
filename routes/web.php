@@ -28,19 +28,20 @@ Route::get('home', function(){
 })->name('home');
 
 Route::prefix('admin')->group(function(){
-    Route::get('add_product', function(){
-        return view("pages.admin.add_product");
-    });
+    // Thêm sản phẩm
+    Route::get('form-addProduct',[manageController::class, 'form_addProduct'])->name('form_addProduct');
+    Route::post('form-addProduct',[manageController::class, 'addProduct'])->name('addProduct');
+
     Route::get('/', function(){
         return view('pages.admin.login');
     });
     Route::get('register', function(){
         return view('pages.admin.register');
     });
-    
+    // Thêm loại sản phẩm
     Route::get('manageCategories', [manageController::class,'manageCategories'])->name('manageCategories');
     Route::post('addCategories', [manageController::class,'addCategories'])->name('addCategories');
-
+    // Thêm nhà cung cấp
     Route::get('form-addSuppliers', [manageController::class,'form_addSuppliers'])->name('form_addSuppliers');
     Route::post('form-addSuppliers', [manageController::class,'addSuppliers'])->name('addSuppliers');    
    
@@ -55,6 +56,13 @@ Route::get('logout', [Process_accout::class,'logout'])->name('logout');
 
 Route::get('add-img-product', function(){
     return view("pages.admin.add_img_product");
+});
+
+Route::get('details', function(){
+    return view("pages.users.details");
+});
+Route::get('edit', function(){
+    return view("pages.admin.edit");
 });
 
 
