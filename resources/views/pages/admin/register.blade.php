@@ -89,7 +89,7 @@
                         
                     @endif --}}
                     <!-- Form -->
-                    <form type="form" action="{{route('post_register')}}" method="POST">
+                    <form type="form" action="{{route('adminRegister')}}" method="POST" id="register">
                         @csrf
                         <!-- tên người dùng -->
                         <div class="form-group mt-2 mb-2">
@@ -101,12 +101,11 @@
                             <!-- Input group -->
                             <div class="input-group input-group-merge">
                                 <!-- Input -->
-                                <input type="text" placeholder="Họ và Tên phải nhiều hơn 6 ký tự" class="form-control form-control-appended" name="user_name" value="{{old('user_name')}}"/>
+                                <input type="text" placeholder="Họ và Tên phải nhiều hơn 6 ký tự" class="form-control form-control-appended" name="admin_name" value="{{old('admin_name')}}"/>
+                                <span style="color: red" class="error_admin_name error"></span>
                             </div>
                             {{-- label thông báo lỗi --}}
-                            @error('user_name')
-                                <label style="color: red">{{$message}}</label>
-                            @enderror
+                           
                         </div>
                         <!-- email -->
                         <div id="i4x74" class="form-group mt-2 mb-2">
@@ -120,11 +119,9 @@
                             <!-- Input group -->
                             <div class="input-group input-group-merge">
                                 <!-- Input -->
-                                <input type="email" placeholder="Email dùng để đăng nhập" class="form-control form-control-appended" name="user_mail" value="{{old('user_mail')}}"/>
+                                <input type="email" placeholder="Email dùng để đăng nhập" class="form-control form-control-appended" name="admin_mail" value="{{old('admin_mail')}}"/>
                                 {{-- label thông báo lỗi --}}
-                                @error('user_mail')
-                                    <label style="color: red">{{$message}}</label>
-                                @enderror
+                                <span style="color: red" class="error_admin_mail error"></span>
                             </div>
                         </div>
                         {{-- Số Điện Thoại --}}
@@ -138,12 +135,11 @@
                             <!-- Input group -->
                             <div class="input-group input-group-merge">
                                 <!-- Input -->
-                                <input type="text" placeholder="Số điện thoại " class="form-control form-control-appended" name="user_phone" value="{{old('user_phone')}}"/>
+                                <input type="text" placeholder="Số điện thoại " class="form-control form-control-appended" name="admin_phone" value="{{old('admin_phone')}}"/>
+                                <span style="color: red" class="error_admin_phone error"></span>
                             </div>
                             {{-- label thông báo lỗi --}}
-                            @error('user_phone')
-                                <label style="color: red">{{$message}}</label>
-                            @enderror
+                            
                         </div>
                         {{-- Mật khẩu --}}
                         <div id="i4x74" class="form-group mt-2 mb-2">
@@ -157,12 +153,11 @@
                             <!-- Input group -->
                             <div class="input-group input-group-merge">
                                 <!-- Input -->
-                                <input type="password" placeholder="Mật khẩu " class="form-control form-control-appended" name="user_password" value="{{old('user_password')}}"/>
+                                <input type="password" placeholder="Mật khẩu " class="form-control form-control-appended" name="admin_password" value="{{old('admin_password')}}"/>
+                                <span style="color: red" class="error_admin_password error"></span>
                             </div>
                             {{-- label thông báo lỗi --}}
-                            @error('user_password')
-                                <label style="color: red">{{$message}}</label>
-                            @enderror
+                           
                         </div>
                         {{-- Xác Nhận Mật khẩu --}}
                         <div id="i4x74" class="form-group mt-2 mb-2">
@@ -176,32 +171,11 @@
                             <!-- Input group -->
                             <div class="input-group input-group-merge">
                                 <!-- Input -->
-                                <input type="password" placeholder="Nhập Lại Mật khẩu " class="form-control form-control-appended" name="user_password_repeat" value="{{old('user_password_repeat')}}"/>
+                                <input type="password" placeholder="Nhập Lại Mật khẩu " class="form-control form-control-appended" name="admin_password_repeat" value="{{old('admin_password_repeat')}}"/>
+                                <span style="color: red" class="error_admin_password_repeat error"></span>
                             </div>
                             {{-- label thông báo lỗi --}}
-                            @error('user_password_repeat')
-                                <label style="color: red">{{$message}}</label>
-                            @enderror
-                        </div>
-                        
-                        {{-- Mật khẩu --}}
-                        <div id="i4x74" class="form-group mt-2 mb-2">
-                            <div id="icrqh" class="row">
-                                <div id="iwfuf" class="col">
-                                    <!-- Label -->
-                                    <label id="ipd68">ĐỊA CHỈ</label>
-                                </div>
-                            </div> 
-                            <!-- / .row -->
-                            <!-- Input group -->
-                            <div class="input-group input-group-merge">
-                                <!-- Input -->
-                                <input type="text" placeholder="Số nhà, tên đường" class="form-control form-control-appended" name="user_address" value="{{old('user_address')}}"/>
-                            </div>
-                            {{-- label thông báo lỗi --}}
-                            @error('user_address')
-                                <label style="color: red">{{$message}}</label>
-                            @enderror
+                           
                         </div>
                         <!-- Submit -->
                         <p class="text-center">
@@ -222,4 +196,38 @@
         </div>
     </div> <!-- / .container -->
 </section>
+@stop
+
+@section('scripts')
+    {{-- <script> 
+    $(document).ready(function(){
+        $('#register').on('submit', function(e){
+            // toastr["success"]("Thêm Thành Công", "Thông Báo")     
+            e.preventDefault();                  
+            $('.error').text('');
+            $.ajax({
+                url: 'register',
+                method: 'POST', 
+                data: new FormData(this),
+                // dataType: 'json',                
+                cache: false,
+                contentType: false,
+                processData: false,                
+                success:function(response){    
+                    // console.log("Dung");               
+                    toastr["success"]("Thêm "+ " thành công!!!", "Thông Báo")  ;                  
+                },
+                error:function(error){ 
+                    // console.log(error);             
+                    let tb = error.responseJSON.errors;
+                    for(var i in tb){
+                        $('.error_' + i).text(tb[i][0]);
+                    }
+                },
+                            
+            });
+            
+        });
+    })
+    </script> --}}
 @stop

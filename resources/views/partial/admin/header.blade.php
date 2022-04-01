@@ -84,8 +84,21 @@
                                 <li><a href="#"><i class="fa fa-user"></i>Tài Khoản Của Tôi</a></li>
                                 {{-- <li><a href="#"><i class="fa fa-heart"></i>Wishlist</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-check-square-o"></i>Checkout</a></li> --}}
-                                <li><a href="#"><i class="fa fa-lock"></i>Đăng Nhập</a></li>
-                                <li><a href="#"><i class="fa fa-pencil-square-o"></i>Đăng Ký</a></li>
+                                @if(session('id_admin'))                                    
+                                    <li>
+                                        <a href="#" style="color: #85ff85"><i class="fa fa-user"></i>Xin Chào {{session('admin_name')}} !!!</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{route('admin_logout')}}"><i class="fa fa-user-times"></i> Đăng Xuất </a>
+                                    </li>
+                                @else
+                                    <li>
+                                        <a href="{{route('adminLogin')}}"> <i class="fa fa-lock"></i>Đăng Nhập </a>                                    
+                                    </li>
+                                    <li>
+                                        <a href="{{route('form_Register')}}"><i class="fa fa-pencil-square-o"></i>Đăng Ký</a>
+                                    </li> 
+                                @endif 
                             </ul>
                         </div>
                     </div>

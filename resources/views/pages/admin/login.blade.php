@@ -94,7 +94,7 @@
                     <p class="text-muted text-center mb-5"></p>
                     <!-- Form -->
                                       
-                    <form type="form"  method="POST" action="{{route('post_login')}}">
+                    <form type="form"  method="POST" action="{{route('adminLogin')}}">
                         @csrf
                         <!-- tài khoản -->
                         <div class="form-group">
@@ -108,7 +108,7 @@
                             <!-- Input group -->
                             <div class="input-group input-group-merge">
                                 <!-- Input -->
-                                <input type="text" placeholder="Tên đăng nhập" class="form-control form-control-appended" name="user_email" value="{{old('user_email')}}"/><!-- Icon -->
+                                <input type="text" placeholder="Tên đăng nhập" class="form-control form-control-appended" name="admin_mail" value="{{old('user_email')}}"/><!-- Icon -->
                                 
                             </div>
                             <!-- thông báo lỗi -->
@@ -128,7 +128,7 @@
                             <!-- Input group -->
                             <div class="input-group input-group-merge">
                                 <!-- Input -->
-                                <input type="password" placeholder="Mật khẩu " class="form-control form-control-appended" name="user_password"/>
+                                <input type="password" placeholder="Mật khẩu " class="form-control form-control-appended" name="admin_password"/>
                             </div>
                             <!-- thong bao loi -->
                             @error('user_password')

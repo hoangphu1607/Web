@@ -27,24 +27,30 @@ Route::get('home', function(){
     return view("pages.top-page.index");
 })->name('home');
 
-Route::prefix('admin')->group(function(){
+Route::prefix('admin')->group( function(){
+    //login admin
+    Route::get('/', [manageController::class,'form_login'])->name('adminLogin');
+    Route::post('/', [manageController::class,'login_admin'])->name('adminLogin');
+    //register Admin
+    Route::get('register', [manageController::class,'form_register'])->name('form_Register');
+    Route::post('register', [manageController::class,'register_admin'])->name('adminRegister');
+    //admin logout
+    Route::get('logout', [manageController::class,'adminLogout'])->name('admin_logout');  
     // Thêm sản phẩm
-    Route::get('form-addProduct',[manageController::class, 'form_addProduct'])->name('form_addProduct');
-    Route::post('form-addProduct',[manageController::class, 'addProduct'])->name('addProduct');
+    Route::get('form-addProduct',[manageController::class, 'form_addProduct'])->middleware('checkLogin')->name('form_addProduct');
+    Route::post('form-addProduct',[manageController::class, 'addProduct'])->middleware('checkLogin')->name('addProduct');
 
-    Route::get('/', function(){
-        return view('pages.admin.login');
-    });
-    Route::get('register', function(){
-        return view('pages.admin.register');
-    });
     // Thêm loại sản phẩm
-    Route::get('manageCategories', [manageController::class,'manageCategories'])->name('manageCategories');
-    Route::post('addCategories', [manageController::class,'addCategories'])->name('addCategories');
+    Route::get('manageCategories', [manageController::class,'manageCategories'])->middleware('checkLogin')->name('manageCategories');
+    Route::post('addCategories', [manageController::class,'addCategories'])->middleware('checkLogin')->name('addCategories');
     // Thêm nhà cung cấp
-    Route::get('form-addSuppliers', [manageController::class,'form_addSuppliers'])->name('form_addSuppliers');
-    Route::post('form-addSuppliers', [manageController::class,'addSuppliers'])->name('addSuppliers');    
-   
+    Route::get('form-addSuppliers', [manageController::class,'form_addSuppliers'])->middleware('checkLogin')->name('form_addSuppliers');
+    Route::post('form-addSuppliers', [manageController::class,'addSuppliers'])->middleware('checkLogin')->name('addSuppliers');    
+    //edit sản Phẩm
+    Route::get('form-editCategories',[manageController::class,'form_editCategories'])->middleware('checkLogin')->name('form_editCategories');
+    //Lấy 1 loại sản phẩm
+    Route::post('getOneCategories/{id}',[manageController::class,'getOneCategori'])->middleware('checkLogin')->name('getOneCategories');
+        
 });
 
 Route::get('login',[Process_accout::class,'index_login'])->name('login');
@@ -60,9 +66,6 @@ Route::get('add-img-product', function(){
 
 Route::get('details', function(){
     return view("pages.users.details");
-});
-Route::get('edit', function(){
-    return view("pages.admin.edit");
 });
 
 
