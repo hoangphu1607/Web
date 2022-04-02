@@ -127,8 +127,8 @@
             <tr>
               <th scope="row">{{ $n++ }}</th>
               <td>{{$c->c_name }}</td>
-              <td>{{$c->c_avatar }}</td>              
-              <td><button id="{{$c->id}}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Sửa Thông Tin</button></td>
+              <td><img src="{{asset($c->c_avatar)}}" alt="" width="80px" height="100px"></td>              
+              <td><button data-id="{{$c->id}}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="editCategories">Sửa Thông Tin</button></td>
               <td><a href="" style="color: red"><b>Xóa</b></a></td>
             </tr>
           {{-- </form> --}}
@@ -158,15 +158,24 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          {{-- Form cập nhật  --}}
+          <form method="post" >
+            @csrf
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Recipient:</label>
-              <input type="text" class="form-control" id="recipient-name">
+              <label for="categories_name-name" class="col-form-label">Tên Loại Hàng Hóa:</label>
+              <input type="text" class="form-control" id="categories_name">
             </div>
+
             <div class="form-group">
-              <label for="message-text" class="col-form-label">Message:</label>
-              <textarea class="form-control" id="message-text"></textarea>
+              <label for="categories_image" class="col-form-label">Hình Ảnh:</label>
+              <img src="Hi" alt="" id="categories_image" width="80px" height="100px">
             </div>
+
+            <div class="form-group">
+              <label for="categories_image" class="col-form-label">Chọn Ảnh Mới:</label>
+              <input type="file" name="new_img">
+            </div>
+
           </form>
         </div>
         <div class="modal-footer">
@@ -213,44 +222,32 @@
       var span = document.getElementsByClassName("close")[0];
       // When the user clicks on the button, open the modal
       //Xử lý bằng ajax       
-      $(document).ready(function() {
-        $("button").click(function(e) {
-            console.log(this.id); // or alert($(this).attr('id'));               
-            e.preventDefault(); 
-            let id = this.id;
-            let form_data = $("form").serialize()
-            console.log(form_data);
-            $.ajaxSetup({
-              headers: {
-                  'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-              }
-            });
-            $.ajax({
-                  url: 'getOneCategories/2',
-                  method: 'POST', 
-                  data: {
-                    id:id,
-                    _token: "{{ csrf_token() }}"
-                  },
-                  // dataType: 'json',                
-                  cache: false,
-                  contentType: false,
-                  processData: false,                
-                  success:function(response){ 
-                    console.log("Dung");                  
-                      // toastr["success"]("Thêm "+ categories_name+ " thành công!!!", "Thông Báo")  ;                  
-                  },
-                  error:function(error){  
-                    console.log(error);             
-                      // let tb = error.responseJSON.errors;
-                      // for(var i in tb){
-                      //     $('.error_' + i).text(tb[i][0]);
-                      // }
-                  },
-                              
-              });
-            modal = "block"; //modal.style.display
-        }); 
+      $(document).on('click', '#editCategories',function(e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        console.log(id);
+        $.ajax({
+          url: 'getOneCategories',
+          method: 'POST',
+          data: {
+            id:id,
+            _token: "{{ csrf_token() }}",
+          },
+          success: function(data) {     
+            let url = '{{ URL::asset('') }}';
+            let avatar = url + data.categories[0].c_avatar;
+                      
+            $('#categories_name').val(data.categories[0].c_name);
+            $("#categories_image").attr("src",avatar);
+            
+          },
+          error: function(error){
+            console.log(error);
+          }
+        });
+       
+        //     modal = "block"; //modal.style.display
+        
       });
       // When the user clicks on <span> (x), close the modal
       span.onclick = function() {

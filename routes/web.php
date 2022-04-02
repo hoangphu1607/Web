@@ -49,7 +49,7 @@ Route::prefix('admin')->group( function(){
     //edit sản Phẩm
     Route::get('form-editCategories',[manageController::class,'form_editCategories'])->middleware('checkLogin')->name('form_editCategories');
     //Lấy 1 loại sản phẩm
-    Route::post('getOneCategories/{id}',[manageController::class,'getOneCategori'])->middleware('checkLogin')->name('getOneCategories');
+    Route::post('getOneCategories',[manageController::class,'getOneCategori'])->middleware('checkLogin')->name('getOneCategories');
         
 });
 

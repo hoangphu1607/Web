@@ -235,9 +235,9 @@ class manageController extends Controller
         $categories = DB::table('categories')
         ->where('id',$request->id)
         ->get();
-        dd($categories);
+        // dd($categories);
         return response()->json([
-            'categories' => true
+            'categories' => $categories
         ]);
     }
 
