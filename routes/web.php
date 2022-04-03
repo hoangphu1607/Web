@@ -6,6 +6,9 @@ use App\Http\Controllers\Process_accout;
 use App\Http\Controllers\Admin\manageController;
 use App\Models\Users\Process;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\user;
+use App\Http\Controllers\user\HomeController;
+
 // use App\Http\Controllers\Process_accout;
 
 /*
@@ -23,9 +26,9 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('home', function(){
-    return view("pages.top-page.index");
-})->name('home');
+Route::prefix('home')->group( function(){
+    Route::get('/' , [HomeController::class,'get_product'])->name('home');
+});
 
 Route::prefix('admin')->group( function(){
     //login admin
@@ -67,6 +70,5 @@ Route::get('add-img-product', function(){
 Route::get('details', function(){
     return view("pages.users.details");
 });
-
 
 

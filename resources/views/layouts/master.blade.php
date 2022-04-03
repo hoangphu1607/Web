@@ -14,6 +14,10 @@
     @yield('style-libraries')
     {{--Styles custom--}}
     @yield('styles')
+    {{-- my styles --}}
+    <style>
+        font-variant-numeric: normal;
+    </style>
 </head>
 <body class="home-one">
     @include('partial.users.header')

@@ -241,5 +241,4 @@ class manageController extends Controller
         ]);
     }
 
-
 }
