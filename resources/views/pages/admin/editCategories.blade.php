@@ -285,8 +285,12 @@
             //Đổi tên loại sản phẩm khi cập nhật
             $('#'+item).text(data.name);
             //Đổi Ảnh khi cập nhật
-            // $("#"+idImages).attr("src",data.url);
-            console.log(data);
+            if(data.url){
+              var url = '{{ URL::asset('') }}'+ data.url;
+              $("#"+idImages).attr("src",url);
+              console.log("Có Ảnh");
+            }           
+            console.log("Không Có Ảnh");
             toastr["success"]("Cập Nhật Thành Công", "Thông Báo")
           },
           error: function(error){

@@ -246,27 +246,51 @@ class manageController extends Controller
     {
         $rules = [  
             'c_name' => 'required',
-            'new_img' => 'required'  
+            'new_img' => 'file|max:500000|image'  
         ];
         $messages = [
             'c_name.required' => 'Phải đặt tên loại sản phẩm',  
-            'new_img.required' => 'Chưa có hình'          
+            'new_img.file' => 'Định dạng ảnh không đúng',
+            'new_img.size' => 'Tệp tin quá lớn',
+            'new_img.image' => 'Định dạng ảnh không đúng' 
         ];
 
         $check = Validator::make($request->all(),$rules,$messages);
         $check->validate(); 
-        if(!$check->fails()){    
+        if(!$check->fails()){  
+            //lấy tên loại
+            $name = $request->c_name;
             if($request->hasFile('new_img')){
-                $file = $request->file('new_img')->move('test','Phu.jpg');
+                $path = 'img\categories\\'; //nơi lưu ảnh
+
+                $imageName = time().'.'.$request->new_img->extension(); //đổi tên ảnh
+
+                $fullPath = $path . $imageName; // lấy full path
+
+                $file = $request->file('new_img')->move( $path , $imageName);
                 
+                //Update dữ liệu
+                
+                $update = DB::table('categories')
+                ->where('id', $request->id)
+                ->update([
+                    'c_name' => $name,
+                    'c_avatar' => $fullPath
+                ]);
                 return response()->json([
-                   "true" => $request->has('id')
+                   "name" => $name,
+                   "url" => $fullPath
                 ]);
             }      
             else{
+                $update = DB::table('categories')
+                ->where('id', $request->id)
+                ->update([
+                    'c_name' => $name,                    
+                ]);
                 return response()->json([
-                    "true" => false
-                 ]);
+                   "name" => $name,                   
+                ]);
             }  
              //Lấy file từ form sang -- image là dữ liệu nhập vào  
             // // $fileName =  $request->categories_name .'.'. $file->getClientOriginalExtension();//$request->categories_name đổi tên hình theo tên loại sản phẩm
@@ -275,12 +299,7 @@ class manageController extends Controller
             // $file->move('img\categories', $file); //chuyển file đến thư mục mong muốn 
             // $path_img = 'img\categories\\'. $imageName; //lấy đường dẫn file đang tồn tại (img\categories\)
             
-            // $update = DB::table('categories')
-            // ->where('id', $request->id)
-            // ->update([
-            //     'c_name' => $request->c_name,
-            //     // 'c_avatar' => $path_img
-            // ]);
+            
            
             
             // return response()->json([
