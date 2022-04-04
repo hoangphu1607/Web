@@ -124,12 +124,12 @@
           @foreach($dataCategories as $c)
           {{-- <form action="{{route('getOneCategories')}}" method="post" id="form-editCategories" name="contact" data-netlify="true"> --}}
             @csrf
-            <tr>
+            <tr class="listContent">
               <th scope="row">{{ $n++ }}</th>
-              <td>{{$c->c_name }}</td>
-              <td><img src="{{asset($c->c_avatar)}}" alt="" width="80px" height="100px"></td>              
-              <td><button data-id="{{$c->id}}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="editCategories">Sửa Thông Tin</button></td>
-              <td><a href="" style="color: red"><b>Xóa</b></a></td>
+              <td id="item_{{$c->id}}" >{{$c->c_name }}</td>
+              <td><img src="{{asset($c->c_avatar)}}" alt="" width="80px" height="100px" id="img_categories_{{$c->id}}"></td>              
+              <td><button data-id="{{$c->id}}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="editCategories"  >Sửa Thông Tin</button></td>
+              <td><button data-id="{{$c->id}}" type="button" class="btn btn-danger" id="del_{{$c->id}}" ><b>Xóa</b></button></td>
             </tr>
           {{-- </form> --}}
           @endforeach
@@ -157,13 +157,15 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        <form method="post" action="{{ route('updateCategories') }}" name="contact" method="POST" 
+        data-netlify="true" enctype="multipart/form-data" id="categoriesUpdate_form">
         <div class="modal-body">
-          {{-- Form cập nhật  --}}
-          <form method="post" >
+          {{-- Form cập nhật  --}}          
             @csrf
             <div class="form-group">
               <label for="categories_name-name" class="col-form-label">Tên Loại Hàng Hóa:</label>
-              <input type="text" class="form-control" id="categories_name">
+              <input type="text" class="form-control" id="categories_name" name="c_name">
+              <span style="color: red" class="error_c_name error"></span>
             </div>
 
             <div class="form-group">
@@ -172,16 +174,16 @@
             </div>
 
             <div class="form-group">
-              <label for="categories_image" class="col-form-label">Chọn Ảnh Mới:</label>
-              <input type="file" name="new_img">
+              <label for="categories_image" class="col-form-label">Đổi Ảnh Mới:</label>
+              <input type="file" name="new_img" id="new_img">
+              <span style="color: red" class="error_new_img error"></span>
             </div>
-
-          </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Send message</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="Cancel">Close</button>
+          <button type="submit" class="btn btn-primary" id="Update">Send message</button>
         </div>
+      </form>
       </div>
     </div>
   </div>
@@ -197,20 +199,15 @@
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
     <script>
+      var id_global;
+      var idName ;
+      var url = '{{ URL::asset('') }}';
+      var idImages;
       $(function () {
           // your custom javascript
       });
       
-      // star edit record
-      // var table  = $(#dataTable).DataTable();
-      // table.on('click', '.edit', function(){
-      //   $tr = $(this).closest('tr');
-      //   if($($tr).hasClass('child')){
-      //     $tr = $tr.prev('.parent');
-      //   }
-      //   var data = table.row($tr).data();
-      //   console.log(data);
-      // });
+    
       //end edit record
       // Get the modal
       var modal = document.getElementById("myModal");
@@ -222,10 +219,17 @@
       var span = document.getElementsByClassName("close")[0];
       // When the user clicks on the button, open the modal
       //Xử lý bằng ajax       
-      $(document).on('click', '#editCategories',function(e) {
+      $(document).on('click','#editCategories',function(e) {
         e.preventDefault();
         var id = $(this).data('id');
-        console.log(id);
+        id_global = id;
+        //lấy tên loại sản phẩm theo  id
+        var getName = $(this).closest('.listContent').find('#item_'+id); 
+        //lấy class tên loại sản phẩm
+        idName = getName[0].id;
+        //lấy id image
+        getIdImage = $("#img_categories_"+id);
+        idImages = getIdImage[0].id;
         $.ajax({
           url: 'getOneCategories',
           method: 'POST',
@@ -233,22 +237,79 @@
             id:id,
             _token: "{{ csrf_token() }}",
           },
-          success: function(data) {     
-            let url = '{{ URL::asset('') }}';
+          success: function(data) {    
+            
             let avatar = url + data.categories[0].c_avatar;
-                      
+                    
             $('#categories_name').val(data.categories[0].c_name);
             $("#categories_image").attr("src",avatar);
+            // console.log(data.file);
             
           },
           error: function(error){
             console.log(error);
           }
-        });
-       
-        //     modal = "block"; //modal.style.display
-        
+        });       
+        //     modal = "block"; //modal.style.display        
       });
+      // Update data
+      $('#categoriesUpdate_form').on('submit', function(e){
+        e.preventDefault();
+        //lấy tên
+        var c_name = $(this).find('input[name="c_name"]').val();
+        //lấy images
+        let new_img = $(this).find('input[name="new_img"]').val();
+        // console.log(new_img);
+        //test
+        // var file = document.querySelector("#new_img").files[0];
+        // var reader = new FileReader();
+        // reader.onload = function(e) {
+        //   // binary data
+        //   console.log(e.target.result);
+        // };
+        $('.error').text('');
+        
+        //biến item là tên của loại sản phẩm, khi update ta sẽ đổi tên luôn
+        var item = idName;
+        var a = new FormData(this);
+        a.append('id',id_global);
+
+        $.ajax({          
+          url: 'updateCategories',
+          method: 'POST',
+          data: a,     
+          contentType: false,
+          cache: false,
+          processData: false,     
+          success: function(data) {  
+            //Đổi tên loại sản phẩm khi cập nhật
+            $('#'+item).text(data.name);
+            //Đổi Ảnh khi cập nhật
+            // $("#"+idImages).attr("src",data.url);
+            console.log(data);
+            toastr["success"]("Cập Nhật Thành Công", "Thông Báo")
+          },
+          error: function(error){
+            console.log(error);
+            let tb = error.responseJSON.errors;
+            for(var i in tb){
+                $('.error_' + i).text(tb[i][0]);
+            }
+          }
+        });
+      });
+
+      //Delete categories
+      // $("button").click(function() {
+      //     console.log(this.id); // or alert($(this).attr('id'));
+      // });
+      // $.ajax({
+      //   url: '',
+      //   method:post,
+      //   data:{
+      //     id:
+      //   }
+      // });
       // When the user clicks on <span> (x), close the modal
       span.onclick = function() {
         modal = "none";

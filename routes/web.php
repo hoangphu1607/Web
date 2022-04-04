@@ -53,7 +53,8 @@ Route::prefix('admin')->group( function(){
     Route::get('form-editCategories',[manageController::class,'form_editCategories'])->middleware('checkLogin')->name('form_editCategories');
     //Lấy 1 loại sản phẩm
     Route::post('getOneCategories',[manageController::class,'getOneCategori'])->middleware('checkLogin')->name('getOneCategories');
-        
+    //Update loại sản phẩm
+    Route::post('updateCategories',[manageController::class,'updateCategories'])->middleware('checkLogin')->name('updateCategories');    
 });
 
 Route::get('login',[Process_accout::class,'index_login'])->name('login');

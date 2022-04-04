@@ -241,4 +241,55 @@ class manageController extends Controller
         ]);
     }
 
+    //Update categories
+    public function updateCategories(Request $request)
+    {
+        $rules = [  
+            'c_name' => 'required',
+            'new_img' => 'required'  
+        ];
+        $messages = [
+            'c_name.required' => 'Phải đặt tên loại sản phẩm',  
+            'new_img.required' => 'Chưa có hình'          
+        ];
+
+        $check = Validator::make($request->all(),$rules,$messages);
+        $check->validate(); 
+        if(!$check->fails()){    
+            if($request->hasFile('new_img')){
+                $file = $request->file('new_img')->move('test','Phu.jpg');
+                
+                return response()->json([
+                   "true" => $request->has('id')
+                ]);
+            }      
+            else{
+                return response()->json([
+                    "true" => false
+                 ]);
+            }  
+             //Lấy file từ form sang -- image là dữ liệu nhập vào  
+            // // $fileName =  $request->categories_name .'.'. $file->getClientOriginalExtension();//$request->categories_name đổi tên hình theo tên loại sản phẩm
+            // $imageName = time().'.'.$request->new_img->extension();      // nên làm cách này cho ko trùng tên ảnh      
+            // $path = $file->store('public');
+            // $file->move('img\categories', $file); //chuyển file đến thư mục mong muốn 
+            // $path_img = 'img\categories\\'. $imageName; //lấy đường dẫn file đang tồn tại (img\categories\)
+            
+            // $update = DB::table('categories')
+            // ->where('id', $request->id)
+            // ->update([
+            //     'c_name' => $request->c_name,
+            //     // 'c_avatar' => $path_img
+            // ]);
+           
+            
+            // return response()->json([
+            //     "name" => $request->c_name,
+            //     "fileName" => $file,
+            // ]);
+        }
+        
+    }
+
+
 }
