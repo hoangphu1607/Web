@@ -51,6 +51,8 @@ Route::prefix('admin')->group( function(){
     Route::post('form-addSuppliers', [manageController::class,'addSuppliers'])->middleware('checkLogin')->name('addSuppliers');    
     //edit sản Phẩm
     Route::get('form-editCategories',[manageController::class,'form_editCategories'])->middleware('checkLogin')->name('form_editCategories');
+    //Lấy tất cả loại sản Phẩm
+    Route::get('allCategories', [manageController::class,'getAllCategories'])->middleware('checkLogin')->name('allCategories');
     //Lấy 1 loại sản phẩm
     Route::post('getOneCategories',[manageController::class,'getOneCategori'])->middleware('checkLogin')->name('getOneCategories');
     //Update loại sản phẩm

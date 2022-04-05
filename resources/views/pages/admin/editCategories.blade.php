@@ -99,7 +99,7 @@
       <div class="col-sm"></div>
     </div>
 
-    <table class="table table-hover datatable" id="myTable">      
+    <table class="table table-hover datatable cell-border compact stripe" id="myTable">      
       <thead>
         <tr>
           <th scope="col">STT</th>
@@ -109,30 +109,12 @@
           <th scope="col">Xóa</th>
         </tr>
       </thead>
-      <tbody>
-        {{-- <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td colspan="2">Larry the Bird</td>
-          <td>@twitter</td>
-        </tr> --}}
-        @if(!empty($dataCategories))
+      {{-- <tbody> --}}
+        {{-- @if(!empty($dataCategories))
           @php
             $n = 1;
           @endphp
           @foreach($dataCategories as $c)
-          {{-- <form action="{{route('getOneCategories')}}" method="post" id="form-editCategories" name="contact" data-netlify="true"> --}}
             @csrf
             <tr class="listContent">
               <th scope="row">{{ $n++ }}</th>
@@ -141,7 +123,6 @@
               <td><button data-id="{{$c->id}}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="editCategories"  >Sửa Thông Tin</button></td>
               <td><button data-id="{{$c->id}}" type="button" class="btn btn-danger" data-id="del_{{$c->id}}" id="delete" data-toggle="modal" data-target="#confirmModal"><b>Xóa</b></button></td>
             </tr>
-          {{-- </form> --}}
           @endforeach
         @else
           <tr>
@@ -150,9 +131,8 @@
             <td>nulll</td>
             <td>null</td>
           </tr>
-        @endif
-      </tbody>
-      </form>
+        @endif --}}
+      {{-- </tbody>       --}}
     </table>
   </div>
   
@@ -180,9 +160,33 @@
       var idImages;
       var idDel;
       var temp = 1 ;
-      $(document).ready( function () {
-          $('#myTable').DataTable();
-      } );
+
+      $('#myTable').DataTable({
+        "ajax": 'allCategories',
+        "columns" : [
+          {data: "id"},
+          {
+            data: 'c_name',
+            render: function(data, type, row){
+              return '<b id="item_'+row.id+'">'+data+'</b>'
+            }
+          },
+          {
+            data: 'c_avatar',
+            render: function(data, type, row){
+              return '<img src="{{asset('')}}'+data+'" alt="" width="80px" height="100px" id="img_categories_{{'row.id'}}">'
+            }
+          },
+          {
+            data: 'c_active',
+            render: function(data, type, row){
+              return '<button data-id="'+ row.id +'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="editCategories">Edit</button>'
+            }
+          },
+          {data: 'c_active'},
+        ],            
+      });
+
       //end edit record
       // Get the modal
       var modal = document.getElementById("myModal");
@@ -199,10 +203,12 @@
         //lấy tên loại sản phẩm theo  id
         var getName = $(this).closest('.listContent').find('#item_'+id); 
         //lấy class tên loại sản phẩm
-        idName = getName[0].id;
+        // idName = getName[0].id;
         //lấy id image
-        getIdImage = $("#img_categories_"+id);
-        idImages = getIdImage[0].id;
+        getIdImage = $("#img_categories_"+id);       
+        // idImages = getIdImage[0].id;
+
+        console.log(getName);
         $.ajax({
           url: 'getOneCategories',
           method: 'POST',
