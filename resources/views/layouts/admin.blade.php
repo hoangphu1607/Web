@@ -21,14 +21,19 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     
-
+    {{-- Datatable --}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+  
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    
     @yield('styles')
 </head>
 <body class="home-one">
     @include('partial.admin.header')
     @yield('ckeditor')
     @yield('content')
-
+    
+    @include('partial.modal.confirm')
     @include('partial.users.footer')
 
     {{--Scripts js common--}}

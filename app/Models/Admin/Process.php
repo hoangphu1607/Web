@@ -13,7 +13,9 @@ class Process extends Model
     //lấy loại sản phẩm
     public function getCategories()
     {
-        $lists = DB::table($this->categories)->get();
+        $lists = DB::table($this->categories)
+        ->where('c_active',1)
+        ->get();
         // dd($lists);
         return $lists;
     }

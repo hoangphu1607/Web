@@ -55,6 +55,8 @@ Route::prefix('admin')->group( function(){
     Route::post('getOneCategories',[manageController::class,'getOneCategori'])->middleware('checkLogin')->name('getOneCategories');
     //Update loại sản phẩm
     Route::post('updateCategories',[manageController::class,'updateCategories'])->middleware('checkLogin')->name('updateCategories');    
+    //delete categories
+    Route::post('deleteCategories', [manageController::class,'deleteCategories'])->middleware('checkLogin')->name('deleteCategories');
 });
 
 Route::get('login',[Process_accout::class,'index_login'])->name('login');

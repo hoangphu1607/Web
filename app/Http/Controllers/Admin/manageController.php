@@ -111,7 +111,7 @@ class manageController extends Controller
             $dataInsert = [
                 $c_name = $request->categories_name,
                 $c_avatar = $path_img,
-                $c_active = 0
+                $c_active = 1
             ];            
             DB::insert('insert into categories (c_name, c_avatar, c_active) values (?, ?, ?)', $dataInsert);
             return response()->json([
@@ -291,24 +291,25 @@ class manageController extends Controller
                 return response()->json([
                    "name" => $name,                   
                 ]);
-            }  
-             //Lấy file từ form sang -- image là dữ liệu nhập vào  
-            // // $fileName =  $request->categories_name .'.'. $file->getClientOriginalExtension();//$request->categories_name đổi tên hình theo tên loại sản phẩm
-            // $imageName = time().'.'.$request->new_img->extension();      // nên làm cách này cho ko trùng tên ảnh      
-            // $path = $file->store('public');
-            // $file->move('img\categories', $file); //chuyển file đến thư mục mong muốn 
-            // $path_img = 'img\categories\\'. $imageName; //lấy đường dẫn file đang tồn tại (img\categories\)
-            
-            
-           
-            
-            // return response()->json([
-            //     "name" => $request->c_name,
-            //     "fileName" => $file,
-            // ]);
+            }            
         }
         
     }
+
+    //delete categories 
+    public function deleteCategories(Request $request)  
+    {
+        // $delete = DB::table('categories')
+        // ->where('id', $request->id)
+        // ->update([
+        //     'c_active' => 0,                    
+        // ]);
+        return response()->json([
+            'success' => $request->id,
+            // 'sl' => $delete
+        ]);
+    }
+
 
 
 }
