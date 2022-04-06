@@ -313,11 +313,11 @@ class manageController extends Controller
     //delete categories 
     public function deleteCategories(Request $request)  
     {
-        // $delete = DB::table('categories')
-        // ->where('id', $request->id)
-        // ->update([
-        //     'c_active' => 0,                    
-        // ]);
+        $delete = DB::table('categories')
+        ->where('id', $request->id)
+        ->update([
+            'c_active' => 0,                    
+        ]);
         return response()->json([
             'success' => $request->id,
             // 'sl' => $delete

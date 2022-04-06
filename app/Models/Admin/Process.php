@@ -15,6 +15,7 @@ class Process extends Model
     {
         $lists = DB::table($this->categories)
         ->where('c_active',1)
+        ->orderBy('id', 'DESC')
         ->get();
         // dd($lists);
         return $lists;

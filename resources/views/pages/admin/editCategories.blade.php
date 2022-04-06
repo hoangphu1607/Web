@@ -152,7 +152,7 @@
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
 
-    <script src="{{asset('js/custum/categories.js')}}"></script>
+    {{-- <script src="{{asset('js/custum/categories.js')}}"></script> --}}
     <script>
       var id_global;
       var idName ;
@@ -161,10 +161,12 @@
       var idDel;
       var temp = 1 ;
 
-      $('#myTable').DataTable({
+      var table = $('#myTable').DataTable({
         "ajax": 'allCategories',
         "columns" : [
-          {data: "id"},
+          {data: "id",
+            render: (data, type, row, meta) => meta.row + 1
+          },
           {
             data: 'c_name',
             render: function(data, type, row){
@@ -183,8 +185,18 @@
               return '<button data-id="'+ row.id +'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="editCategories">Edit</button>'
             }
           },
-          {data: 'c_active'},
-        ],            
+          {data: 'c_active',
+            render: function(data, type, row){
+              return '<button data-id="'+ row.id +'" type="button" class="btn btn-danger" data-id="del_'+row.id+'" id="delete" data-toggle="modal" data-target="#confirmModal">Xóa</button>'
+            }
+          },
+        ], 
+        columnDefs: [
+          {
+              targets: [2,3,4],
+              className: 'dt-body-center'
+          }
+        ]           
       });
 
       //end edit record
@@ -241,7 +253,7 @@
         //biến item là tên của loại sản phẩm, khi update ta sẽ đổi tên luôn
         var item = idName;
         var a = new FormData(this);
-        a.append('id',id_global);
+        a.append('id',id_global);        
         $.ajax({          
           url: 'updateCategories',
           method: 'POST',
@@ -251,15 +263,16 @@
           processData: false,     
           success: function(data) {  
             //Đổi tên loại sản phẩm khi cập nhật
-            $('#'+item).text(data.name);
+            // $('#'+item).text(data.name);
             //Đổi Ảnh khi cập nhật
-            if(data.url){
-              var url = '{{ URL::asset('') }}'+ data.url;
-              $("#"+idImages).attr("src",url);
-              console.log("Có Ảnh");
-            }           
-            console.log("Không Có Ảnh");
-            toastr["success"]("Cập Nhật Thành Công", "Thông Báo")
+            // if(data.url){
+            //   var url = '{{ URL::asset('') }}'+ data.url;
+            //   $("#"+idImages).attr("src",url);
+            //   console.log("Có Ảnh");
+            // }           
+            // console.log("Không Có Ảnh");
+            toastr["success"]("Cập Nhật Thành Công", "Thông Báo");
+            table.ajax.reload();  
           },
           error: function(error){
             console.log(error);
@@ -269,6 +282,7 @@
             }
           }
         });
+                
       });
 
       //Get ID Delete categories
@@ -288,9 +302,9 @@
           // contentType: false,
           // cache: false,
           // processData: false,  
-          success: function(data){ 
-            
+          success: function(data){             
             toastr["success"]("Xóa Thành Công", "Thông Báo");
+            table.ajax.reload();  
           },
           error:function(error){
             console.log(error);
@@ -309,7 +323,45 @@
           modal.style.display = "none";
         }
       }
-      
+
+      $(document).ready(function() {
+        $('#categoriesAdd_form').on('submit', function(e){
+            // toastr["success"]("Thêm Thành Công", "Thông Báo")     
+            e.preventDefault();                    
+            let actionUrl = $(this).attr('action');
+            let categories_name = $(this).find('input[name="categories_name"]').val();
+            let image = $(this).find('input[name="image"]').val();
+            let _token = $(this).find('input[name="_token"]').val();
+            // console.log(categories_name);
+            // $.ajaxSetup({
+            //     headers: {
+            //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //     }
+            // });
+            $('.error').text('');
+            $.ajax({
+                url: 'addCategories',
+                method: 'POST', 
+                data: new FormData(this),
+                // dataType: 'json',                
+                cache: false,
+                contentType: false,
+                processData: false,                
+                success:function(response){                   
+                    toastr["success"]("Thêm "+ categories_name+ " thành công!!!", "Thông Báo");   
+                    table.ajax.reload();               
+                },
+                error:function(error){              
+                    let tb = error.responseJSON.errors;
+                    for(var i in tb){
+                        $('.error_' + i).text(tb[i][0]);
+                    }
+                },
+                            
+            });
+            // alert(categoriesAvatar);
+        });
+      });
    </script>
 @stop
 
