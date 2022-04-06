@@ -59,6 +59,14 @@ Route::prefix('admin')->group( function(){
     Route::post('updateCategories',[manageController::class,'updateCategories'])->middleware('checkLogin')->name('updateCategories');    
     //delete categories
     Route::post('deleteCategories', [manageController::class,'deleteCategories'])->middleware('checkLogin')->name('deleteCategories');
+    //show manage suppliers page get
+    Route::get('manageSuppliers',[manageController::class,'manageSuppliers'])->middleware('checkLogin')->name('getmanageSuppliers');
+    //show manage suppliers page get
+    Route::post('manageSuppliers',[manageController::class,'manageSuppliers'])->middleware('checkLogin')->name('postmanageSuppliers');
+    //get all suppliers get
+    Route::get('showSuppliers',[manageController::class,'showSuppliers'])->middleware('checkLogin')->name('showSuppliers');
+    //get supplier by it's id
+    Route::get('showEditSupplier/{id}',[manageController::class,'showEditSupplier'])->middleware('checkLogin')->name('showEditSupplier');
 });
 
 Route::get('login',[Process_accout::class,'index_login'])->name('login');

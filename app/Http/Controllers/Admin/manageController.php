@@ -162,10 +162,22 @@ class manageController extends Controller
                 "s_name" => $request->suppliers_name
             ]);
         }
-        else
+        else{
+            $dataInsert = [
+                $s_name = $request->suppliers_name,
+                $s_mail = $request->suppliers_mail,
+                $s_phonenumber = $request->suppliers_phonenumber,               
+            ];
+
+            DB::insert('insert into suppliers (s_name, s_email, s_phone) values (?, ?, ?)', $dataInsert);  
             return response()->json([
-                "mess" => "false"
+                "mess" => "true"
             ]);
+        }
+        return response()->json([
+            "mess" => "false"
+        ]);
+            
     }
     //show form add Product
     public function form_addProduct()
@@ -321,6 +333,30 @@ class manageController extends Controller
         return response()->json([
             'success' => $request->id,
             // 'sl' => $delete
+        ]);
+    }
+
+    //manage suppliers page
+    public function manageSuppliers(){
+        return view('pages.admin.manageSupplier');
+    }
+
+    public function showSuppliers(){
+        $data = DB::table('suppliers')
+        ->where('s_status',1)
+        ->orderBy('id','desc')
+        ->get();
+        return response()->json([
+            'data' => $data 
+        ]);       
+    }
+    
+    public function showEditSupplier($id){
+        $data = DB::table('suppliers')
+        ->where('id', $id)
+        ->first();
+        return response() ->json([
+            'data' => $data        
         ]);
     }
 
