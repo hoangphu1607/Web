@@ -226,14 +226,33 @@
         });
       });
       //Update
-      // $('productUpdate_form').on('submit', function(e){
-      //   e.preventDefault();
-      //   var myData = new FormData(this);
-      //   myData.append('id',idProduct);  
-      //   $('.error').text('');
-      //   // console.log(myData);
-         
-      // });
+      $('#productUpdate_form').on('submit', function(e){
+        e.preventDefault();
+        var myData = new FormData(this);
+        myData.append('id',idProduct);  
+        $('.error').text('');
+        // console.log(myData);
+        $.ajax({          
+          url: 'updateProduct',
+          method: 'POST',
+          data: myData,     
+          cache: false,
+          contentType: false,
+          processData: false,
+          success: function(data) { 
+            console.log(data );  
+            toastr["success"]("Thêm thành công!!!", "Thông Báo");   
+            table.ajax.reload();            
+          },
+          error: function(error){
+            console.log(error);
+            let tb = error.responseJSON.errors;
+            for(var i in tb){
+                $('.error_' + i).text(tb[i][0]);
+            }
+          }
+        });   
+      });
       
    </script>
 @stop

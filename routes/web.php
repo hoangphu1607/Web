@@ -59,6 +59,8 @@ Route::prefix('admin')->group( function(){
     Route::post('getOneProduct', [manageController::class,'getOneProduct'])->middleware('checkLogin')->name('getOneProduct');
     //Lấy tất cả loại sản Phẩm
     Route::get('allCategories', [manageController::class,'getAllCategories'])->middleware('checkLogin')->name('allCategories');
+    //Update Sản Phẩm
+    Route::post('updateProduct', [manageController::class,'updateProduct'])->middleware('checkLogin')->name('updateProduct');
     //Lấy 1 loại sản phẩm
     Route::post('getOneCategories',[manageController::class,'getOneCategori'])->middleware('checkLogin')->name('getOneCategories');
     //Update loại sản phẩm

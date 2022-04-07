@@ -232,7 +232,6 @@ class manageController extends Controller
             ]); 
         }
     }
-
     //show form edit
     public function form_editCategories()
     {
@@ -266,7 +265,6 @@ class manageController extends Controller
             'categories' => $categories
         ]);
     }
-
     //Update categories
     public function updateCategories(Request $request)
     {
@@ -321,7 +319,6 @@ class manageController extends Controller
         }
         
     }
-
     //delete categories 
     public function deleteCategories(Request $request)  
     {
@@ -335,12 +332,10 @@ class manageController extends Controller
             // 'sl' => $delete
         ]);
     }
-
     //manage suppliers page
     public function manageSuppliers(){
         return view('pages.admin.manageSupplier');
     }
-
     public function showSuppliers(){
         $data = DB::table('suppliers')
         ->where('s_status',1)
@@ -359,7 +354,6 @@ class manageController extends Controller
             'data' => $data        
         ]);
     }
-
     //quản lý sản Phẩm
     public function editProduct()
     {
@@ -367,7 +361,6 @@ class manageController extends Controller
         $dataSuppliers = $this->admin->getSuppliers();
         return view('pages.admin.editProduct',compact('dataCategories','dataSuppliers'));
     }
-
     //lấy tất cả sản phẩm ra
     public function getAllProduct()
     {
@@ -391,6 +384,54 @@ class manageController extends Controller
         return response()->json([
             'product' => $product
         ]);
+    }
+    //update product
+    public function updateProduct(Request $request )
+    {
+        $rules = [
+            'pro_name' => 'required',
+            'pro_price' => 'required',
+            'pro_content' => 'required',
+        ];
+        $message = [
+            'pro_name.required' => 'Phải đặt tên sản phẩm',
+            'pro_price.required' => 'Phải có giá tiền',
+            'pro_content.required' => 'Phải có đơn vị tính'
+        ];
+        $check = Validator::make($request->all(),$rules,$message);
+        $check->validate(); 
+        if(!$check->fails()){
+            if($request->hasFile('image')){
+                $file = $request->image; //Lấy file từ form sang -- image là dữ liệu nhập vào  
+                $imageName = time().'.'.$request->image->extension();      // nên làm cách này cho ko trùng tên ảnh      
+                $file->move('img\product', $imageName); //chuyển file đến thư mục mong muốn 
+                $path_img = 'img\product\\'. $imageName; //lấy đường dẫn file đang tồn tại (img\categories\)
+                $update = DB::table('product')
+                ->where('id', $request->id)
+                ->update([
+                    'pro_name' => $request->pro_name,
+                    'pro_price' => $request->pro_price,
+                    'pro_content' => $request->pro_content,
+                    'pro_category_id' => $request->pro_categories_id,
+                    'supplier_id' => $request->pro_suppliers_id,
+                    'pro_avatar' => $path_img,                    
+                ]);
+            }else{                
+                $update = DB::table('product')
+                ->where('id', $request->id)
+                ->update([
+                    'pro_name' => $request->pro_name,
+                    'pro_price' => $request->pro_price,
+                    'pro_content' => $request->pro_content,
+                    'pro_category_id' => $request->pro_categories_id,
+                    'supplier_id' => $request->pro_suppliers_id,
+                ]);
+            }            
+            return response()->json([
+                "success" => $update,
+                "name" => "Phu"          
+            ]); 
+        }
     }
 
 
