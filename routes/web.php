@@ -49,8 +49,14 @@ Route::prefix('admin')->group( function(){
     // Thêm nhà cung cấp
     Route::get('form-addSuppliers', [manageController::class,'form_addSuppliers'])->middleware('checkLogin')->name('form_addSuppliers');
     Route::post('form-addSuppliers', [manageController::class,'addSuppliers'])->middleware('checkLogin')->name('addSuppliers');    
-    //edit sản Phẩm
+    //edit loại sản Phẩm
     Route::get('form-editCategories',[manageController::class,'form_editCategories'])->middleware('checkLogin')->name('form_editCategories');
+    //edit sản Phẩm
+    Route::get('form-editProduct',[manageController::class,'editProduct'])->middleware('checkLogin')->name('form-editProduct');
+    //lất tất cả sản phẩm
+    Route::get('getAllProduct', [manageController::class,'getAllProduct'])->middleware('checkLogin')->name('getAllProduct');
+    //Lấy 1 sản Phẩm
+    Route::post('getOneProduct', [manageController::class,'getOneProduct'])->middleware('checkLogin')->name('getOneProduct');
     //Lấy tất cả loại sản Phẩm
     Route::get('allCategories', [manageController::class,'getAllCategories'])->middleware('checkLogin')->name('allCategories');
     //Lấy 1 loại sản phẩm

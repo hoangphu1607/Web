@@ -25,7 +25,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-    
+    {{-- Icon --}}
+    <script src="https://kit.fontawesome.com/0bd4a877f8.js" crossorigin="anonymous"></script>    
     @yield('styles')
 </head>
 <body class="home-one">

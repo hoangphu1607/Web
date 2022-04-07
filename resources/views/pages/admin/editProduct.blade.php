@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Quản lý nhà phân phối')
+@section('title', 'Quản Lý Sản Phẩm')
 
 @section('style-libraries')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css">
@@ -92,8 +92,8 @@
     <div class="row">
       <div class="col-sm"></div>
       <div class="col-sm">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addSuppliers_modals">
-          THÊM NHÀ PHÂN PHỐI
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProduct_modals">
+          THÊM SẢN PHẨM MỚI
         </button>
       </div>
       <div class="col-sm"></div>
@@ -103,17 +103,22 @@
       <thead>
         <tr>
           <th scope="col">STT</th>
-          <th scope="col">Tên Nhà Phân Phối</th>
-          <th scope="col">Email</th>
-          <th scope="col">SĐT</th>
-          <th scope="col">Ảnh</th>          
-          <th scope="col">Cập nhật</th>
+          <th scope="col">Tên Sản Phẩm</th>
+          <th scope="col">Hình Ảnh</th>
+          <th scope="col">Loại Sản Phẩm</th>          
+          <th scope="col">Nhà Cung Cấp</th>
+          <th scope="col">Giá Cả</th>
+          <th scope="col">Đơn Vị Tính</th>
+          <th scope="col">Chỉnh Sửa</th>
           <th scope="col">Xóa</th>
         </tr>
-      </thead>      
+      </thead>
+      
     </table>
   </div>
-  @include('partial.modal.addSuppliers')
+  
+  @include('partial.modal.edit_product')
+  @include('partial.modal.addProduct') 
 @stop
 
   
@@ -130,101 +135,106 @@
 
     {{-- <script src="{{asset('js/custum/categories.js')}}"></script> --}}
     <script>
+      var idProduct;
       var table = $('#myTable').DataTable({
-        "ajax": 'showSuppliers',
+        "ajax": 'getAllProduct',
         "columns" : [
-          {
-            data:'id',
+          {data: "id",
             render: (data, type, row, meta) => meta.row + 1
           },
-          {
-            data:'s_name'
+          {data:"pro_name"},
+          {data:"pro_avatar",
+            render: function(data, type, row, meta) {
+              return '<img src="{{asset('')}}'+data+'" alt="'+row.pro_name+'" width="80px" height="100px"">'
+            }
           },
-          {
-            data:'s_email'
-          },
-          {
-            data:'s_phone'
-          },
-          {
-            data:'s_avt',
+          {data:"c_name"},
+          {data:"s_name"},
+          {data:"pro_price"},
+          {data:"pro_content"},
+          {data:"id",
             render: function(data, type, row){
-              return '<img src="{{asset('')}}'+data+'" alt="" width="80px" height="100px" id="img_categories_{{'row.id'}}">'
+              return '<button data-id="'+ row.id +'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#productModal" id="editProduct"><i class="fa-solid fa-pen-to-square"></i></button>'
             }
           },
           {
-            data:'id',
-            render: function(data, type, row){
-              return '<button data-id="'+ row.id +'" type="button" onclick="get_id_suppliers('+row.id+')" class="btn btn-primary" data-toggle="modal" data-target="#edit_supplier" ><i class="fa-solid fa-pen-to-square"></i></button>'
-            }
-          },
-          {
-            data:'id',
+            data:"id",
             render: function(data, type, row){
               return '<button data-id="'+ row.id +'" type="button" class="btn btn-danger" data-id="del_'+row.id+'" id="delete" data-toggle="modal" data-target="#confirmModal"><i class="fa-solid fa-trash-can"></i></button>'
             }
-          },
-        ], 
-        // columnDefs: [
-        //   {
-        //       targets: [2,3,4],
-        //       className: 'dt-body-center'
-        //   }
-        // ]           
+          }         
+        ] ,
+        columnDefs: [
+          {
+              targets: [3,4,5,6,7],
+              className: 'dt-body-center'
+          }
+        ]           
       });
-
+      //Add product
       $(document).ready(function() {
-        $('#addSuppliers_form').on('submit', function(e){     
-            e.preventDefault();                               
+        $('#Product_form').on('submit', function(e){
+            e.preventDefault();                    
             $('.error').text('');
             $.ajax({
-                url: 'form-addSuppliers',
+                url: 'form-addProduct',
                 method: 'POST', 
-                data: new FormData(this),           
+                data: new FormData(this),
+                // dataType: 'json',                
                 cache: false,
                 contentType: false,
                 processData: false,                
                 success:function(response){                   
-                    toastr["success"]("Thêm thành công", "Thông Báo");
-                    console.log(response);
+                    toastr["success"]("Thêm thành công!!!", "Thông Báo");   
                     table.ajax.reload();               
                 },
-                error:function(error){              
+                error:function(error){  
+                  console.log(error);            
                     let tb = error.responseJSON.errors;
                     for(var i in tb){
                         $('.error_' + i).text(tb[i][0]);
                     }
-                },
-                            
-            });           
+                },                            
+            });
         });
       });
-
-      function get_id_suppliers(id){     
-        $.ajax({
-                url: 'showEditSupplier/'+id,
-                method: 'GET', 
-                //data: new FormData(this),           
-                cache: false,
-                contentType: false,
-                processData: false,                
-                success:function(response){                   
-                    // toastr["success"]("Cập nhật thành công", "Thông Báo");
-                    console.log(response.data.s_name);
-                    $("#edit_suppliers_name").val(response.data.s_name);
-                    $("#edit_suppliers_mail").val(response.data.s_mail);
-                    $("#edit_uppliers_phone").val(response.data.s_phone);
-                    //table.ajax.reload();               
-                },
-                error:function(error){              
-                    let tb = error.responseJSON.errors;
-                    for(var i in tb){
-                        $('.error_' + i).text(tb[i][0]);
-                    }
-                },
-                            
-            });    
-      }
+      //Get Id and data Product for Update
+      $(document).on('click','#editProduct',function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
+        idProduct = id;
+        $.ajax({          
+          url: 'getOneProduct',
+          method: 'POST',
+          data: {
+            id:idProduct,
+            _token: "{{ csrf_token() }}"
+          },     
+          success: function(data) { 
+            // console.log( );
+            var cate_id = data.product[0].pro_category_id;
+            var sup_id = data.product[0].supplier_id;
+            $('#pro_name').val(data.product[0].pro_name);
+            $('#pro_price').val(data.product[0].pro_price);
+            $('#pro_content').val(data.product[0].pro_content);
+            $('#cate_id'+ cate_id).attr('selected','true');
+            $('#sup_id'+ sup_id).attr('selected','true');
+          },
+          error: function(error){
+            console.log(error);
+          }
+        });
+      });
+      //Update
+      // $('productUpdate_form').on('submit', function(e){
+      //   e.preventDefault();
+      //   var myData = new FormData(this);
+      //   myData.append('id',idProduct);  
+      //   $('.error').text('');
+      //   // console.log(myData);
+         
+      // });
+      
    </script>
 @stop
 

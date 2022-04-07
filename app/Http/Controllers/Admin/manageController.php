@@ -194,14 +194,14 @@ class manageController extends Controller
         $rules = [  
             'pro_name' => 'required',        
             'pro_price' => 'required',
-            'pro_descriptions' => 'required',
+            // 'pro_descriptions' => 'required',
             'pro_content' => 'required',
             'image' => 'required',
         ];
         $messages = [
             'image.required' => 'Cần phải có ảnh',
             'pro_content.required' => 'Phải có nội dung',
-            'pro_descriptions.required' => 'Phải có nội dung',
+            // 'pro_descriptions.required' => 'Phải có nội dung',
             'pro_name.required' => 'Phải đặt tên',
             'pro_price.required' => 'Phải có giá tiền'
         ];
@@ -220,7 +220,7 @@ class manageController extends Controller
                 $pro_categories_id = $request->pro_categories,
                 $pro_price = $request->pro_price,
                 $suppliers_id = $request->pro_suppliers,
-                $pro_descriptions = $request->pro_descriptions,
+                $pro_descriptions = "",
                 $pro_content = $request->pro_content,
                 $image = $path_img              
             ];  
@@ -360,6 +360,38 @@ class manageController extends Controller
         ]);
     }
 
+    //quản lý sản Phẩm
+    public function editProduct()
+    {
+        $dataCategories = $this->admin->getCategories();
+        $dataSuppliers = $this->admin->getSuppliers();
+        return view('pages.admin.editProduct',compact('dataCategories','dataSuppliers'));
+    }
+
+    //lấy tất cả sản phẩm ra
+    public function getAllProduct()
+    {
+        $dataTable = DB::table('product')
+        ->join('categories','product.pro_category_id','=','categories.id')
+        ->join('suppliers','product.supplier_id','=','suppliers.id')
+        ->select('product.*','categories.c_name','suppliers.s_name')
+        ->orderBy('id','desc')
+        ->get();
+        // dd($dataTable);
+        return response()->json([
+            'data' => $dataTable
+        ]);
+    }
+    //Get 1 product
+    public function getOneProduct(Request $request)
+    {
+        $product = DB::table('product')
+        ->where('id',$request->id)
+        ->get();
+        return response()->json([
+            'product' => $product
+        ]);
+    }
 
 
 }

@@ -182,12 +182,12 @@
           {
             data: 'c_active',
             render: function(data, type, row){
-              return '<button data-id="'+ row.id +'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="editCategories">Edit</button>'
+              return '<button data-id="'+ row.id +'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="editCategories"><i class="fa-solid fa-pen-to-square"></i></button>'
             }
           },
           {data: 'c_active',
             render: function(data, type, row){
-              return '<button data-id="'+ row.id +'" type="button" class="btn btn-danger" data-id="del_'+row.id+'" id="delete" data-toggle="modal" data-target="#confirmModal">Xóa</button>'
+              return '<button data-id="'+ row.id +'" type="button" class="btn btn-danger" data-id="del_'+row.id+'" id="delete" data-toggle="modal" data-target="#confirmModal"><i class="fa-solid fa-trash-can"></i></button>'
             }
           },
         ], 
@@ -261,16 +261,7 @@
           contentType: false,
           cache: false,
           processData: false,     
-          success: function(data) {  
-            //Đổi tên loại sản phẩm khi cập nhật
-            // $('#'+item).text(data.name);
-            //Đổi Ảnh khi cập nhật
-            // if(data.url){
-            //   var url = '{{ URL::asset('') }}'+ data.url;
-            //   $("#"+idImages).attr("src",url);
-            //   console.log("Có Ảnh");
-            // }           
-            // console.log("Không Có Ảnh");
+          success: function(data) { 
             toastr["success"]("Cập Nhật Thành Công", "Thông Báo");
             table.ajax.reload();  
           },
