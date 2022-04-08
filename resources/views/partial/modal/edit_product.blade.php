@@ -49,7 +49,7 @@
             {{-- Image --}}
             <div class="form-group">
               <label for="categories_image" class="col-form-label">Hình Ảnh Mới:</label>
-              <input type="file" name="image">
+              <input type="file" name="image" id="image">
             </div>
             {{-- Price --}}
             <div class="form-group">

@@ -34,7 +34,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" id="Cancel">Close</button>
-          <button type="submit" class="btn btn-primary" id="Update">Send message</button>
+          <button type="submit" class="btn btn-primary" id="Update" >Send message</button>
         </div>
       </form>
       </div>

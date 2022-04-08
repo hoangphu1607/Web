@@ -368,6 +368,7 @@ class manageController extends Controller
         ->join('categories','product.pro_category_id','=','categories.id')
         ->join('suppliers','product.supplier_id','=','suppliers.id')
         ->select('product.*','categories.c_name','suppliers.s_name')
+        ->where('pro_status',1)
         ->orderBy('id','desc')
         ->get();
         // dd($dataTable);
@@ -433,6 +434,18 @@ class manageController extends Controller
             ]); 
         }
     }
-
+    //delete Product
+    public function deleteProduct(Request $request)
+    {
+        $delete = DB::table('product')
+        ->where('id', $request->id)
+        ->update([
+            'pro_status' => 0,                    
+        ]);
+        return response()->json([
+            'success' => $request->id,
+            // 'sl' => $delete
+        ]);
+    }
 
 }

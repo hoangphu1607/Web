@@ -166,8 +166,12 @@
         ] ,
         columnDefs: [
           {
-              targets: [3,4,5,6,7],
+              targets: [2,3,4,5,6,7],
               className: 'dt-body-center'
+          },
+          {
+              "targets": 0,
+              "className": "dt-body-center",
           }
         ]           
       });
@@ -241,8 +245,9 @@
           processData: false,
           success: function(data) { 
             console.log(data );  
-            toastr["success"]("Thêm thành công!!!", "Thông Báo");   
-            table.ajax.reload();            
+            toastr["success"]("Thay Đổi thành công!!!", "Thông Báo");   
+            table.ajax.reload();
+            $("#image").val("");           
           },
           error: function(error){
             console.log(error);
@@ -253,7 +258,34 @@
           }
         });   
       });
-      
+      //get Id for Delete
+      $(document).on('click','#delete',function(e){
+        e.preventDefault();
+        idDel = $(this).data('id');  
+      });
+      //Delete product
+      $(document).on('click','#xacnhan',function(e){
+        $.ajax({
+          url: 'deleteProduct',
+          method: 'POST',
+          data: {
+            id:idDel,
+            _token: "{{ csrf_token() }}"
+          },
+          // contentType: false,
+          // cache: false,
+          // processData: false,  
+          success: function(data){             
+            toastr["success"]("Xóa Thành Công", "Thông Báo");
+            $('#confirmModal').modal('hide');
+            table.ajax.reload();  
+          },
+          error:function(error){
+            console.log(error);
+          }
+        });
+      });
+
    </script>
 @stop
 
