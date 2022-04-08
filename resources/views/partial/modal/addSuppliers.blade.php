@@ -85,8 +85,8 @@
           </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="Cancel">ĐÓNG</button>
-        <button type="submit" class="btn btn-primary" id="Update">THÊM MỚI</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="Cancel">Đóng</button>
+        <button type="submit" class="btn btn-primary" id="Update">Cập Nhật</button>
       </div>
     </form>
 

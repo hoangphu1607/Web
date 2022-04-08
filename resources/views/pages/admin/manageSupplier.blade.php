@@ -155,7 +155,7 @@
           {
             data:'id',
             render: function(data, type, row){
-              return '<button data-id="'+ row.id +'" type="button" onclick="get_id_suppliers('+row.id+')" class="btn btn-primary" data-toggle="modal" data-target="#edit_supplier" ><i class="fa-solid fa-pen-to-square"></i></button>'
+              return '<button data-id="'+ row.id +'" type="button" onclick="editSuppliers('+row.id+')" class="btn btn-primary" data-toggle="modal" data-target="#edit_supplier" ><i class="fa-solid fa-pen-to-square"></i></button>'
             }
           },
           {
@@ -200,7 +200,7 @@
         });
       });
 
-      function get_id_suppliers(id){     
+      function editSuppliers(id){     
         $.ajax({
                 url: 'showEditSupplier/'+id,
                 method: 'GET', 
@@ -225,6 +225,8 @@
                             
             });    
       }
+
+      
    </script>
 @stop
 
