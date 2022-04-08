@@ -16,6 +16,8 @@
             font-variant-numeric : normal;
         }
     </style>
+    <script src="https://kit.fontawesome.com/0bd4a877f8.js" crossorigin="anonymous"></script>    
+
 </head>
 <body class="home-one">
     @include('partial.users.header')

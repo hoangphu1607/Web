@@ -92,113 +92,29 @@
 					<div class="col-md-3 col-sm-4">
 						<div class="product-catagori-area">
 							<div class="product-categeries">
-								<h2>Categeries</h2>
+								<h2>CÁC LOẠI HẢI SẢN</h2>
 								<div class="panel-group" id="accrodian">
+									{{-- START CATEGORIES --}}
+									@if(!empty($dataCategories))
+									@foreach ($dataCategories as $cate)
 									<div class="panel panel-default">
 										<div class="panel-heading">
 											<h4 class="panel-title">
-												<i class="fa fa-heart"></i> Cua Tươi Ngon
+												<i class="fa-solid fa-fish-fins"></i> {{$cate->c_name}}
 												<a class="collapsed" data-toggle="collapse" href="#colOne" data-parent="#accrodian"></a>
 											</h4>
 										</div>
-										<div class="panel-collapse collapse" id="colOne">
+										{{-- <div class="panel-collapse collapse" id="colOne">
 											<div class="panel-body">
 												<a href="#"><i class="fa fa-angle-double-right"></i> Categori-1</a>
 												<a href="#"><i class="fa fa-angle-double-right"></i> Categori-2</a>
 												<a href="#"><i class="fa fa-angle-double-right"></i> Categori-3</a>
 											</div>
-										</div>
+										</div> --}}
 									</div>
-									<div class="panel panel-default">
-										<div class="panel-heading">
-											<h4 class="panel-title">
-												<i class="fa fa-male"></i> Men
-												<a class="collapsed" data-toggle="collapse" href="#colTwo" data-parent="#accrodian"></a>
-											</h4>
-										</div>
-										<div class="panel-collapse collapse" id="colTwo">
-											<div class="panel-body">
-												<a href="#"><i class="fa fa-angle-double-right"></i> Categori-1</a>
-												<a href="#"><i class="fa fa-angle-double-right"></i> Categori-2</a>
-												<a href="#"><i class="fa fa-angle-double-right"></i> Categori-3</a>
-											</div>
-										</div>
-									</div>
-									<div class="panel panel-default">
-										<div class="panel-heading">
-											<h4 class="panel-title">
-												<i class="fa fa-female"></i> Women
-												<a class="collapsed" data-toggle="collapse" href="#colThree" data-parent="#accrodian"></a>
-											</h4>
-										</div>
-										<div class="panel-collapse collapse" id="colThree">
-											<div class="panel-body">
-												<a href="#"><i class="fa fa-angle-double-right"></i> Categori-1</a>
-												<a href="#"><i class="fa fa-angle-double-right"></i> Categori-2</a>
-												<a href="#"><i class="fa fa-angle-double-right"></i> Categori-3</a>
-											</div>
-										</div>
-									</div>
-									<div class="panel panel-default">
-										<div class="panel-heading">
-											<h4 class="panel-title">
-												<i class="fa fa-odnoklassniki"></i> Kids
-												<a class="collapsed" data-toggle="collapse" href="#colFour" data-parent="#accrodian"></a>
-											</h4>
-										</div>
-										<div class="panel-collapse collapse" id="colFour">
-											<div class="panel-body">
-												<a href="#"><i class="fa fa-angle-double-right"></i> Categori-1</a>
-												<a href="#"><i class="fa fa-angle-double-right"></i> Categori-2</a>
-												<a href="#"><i class="fa fa-angle-double-right"></i> Categori-3</a>
-											</div>
-										</div>
-									</div>
-									<div class="panel panel-default">
-										<div class="panel-heading">
-											<h4 class="panel-title">
-												<i class="fa fa-gift"></i> Gift
-												<a class="collapsed" data-toggle="collapse" href="#colFive" data-parent="#accrodian"></a>
-											</h4>
-										</div>
-										<div class="panel-collapse collapse" id="colFive">
-											<div class="panel-body">
-												<a href="#"><i class="fa fa-angle-double-right"></i> Categori-1</a>
-												<a href="#"><i class="fa fa-angle-double-right"></i> Categori-2</a>
-												<a href="#"><i class="fa fa-angle-double-right"></i> Categori-3</a>
-											</div>
-										</div>
-									</div>
-									<div class="panel panel-default">
-										<div class="panel-heading">
-											<h4 class="panel-title">
-												<i class="fa fa-bitbucket"></i> Accessories
-												<a class="collapsed" data-toggle="collapse" href="#colSix" data-parent="#accrodian"></a>
-											</h4>
-										</div>
-										<div class="panel-collapse collapse" id="colSix">
-											<div class="panel-body">
-												<a href="#"><i class="fa fa-angle-double-right"></i> Categori-1</a>
-												<a href="#"><i class="fa fa-angle-double-right"></i> Categori-2</a>
-												<a href="#"><i class="fa fa-angle-double-right"></i> Categori-3</a>
-											</div>
-										</div>
-									</div>
-									<div class="panel panel-default">
-										<div class="panel-heading">
-											<h4 class="panel-title">
-												<i class="fa fa-coffee"></i> Offer
-												<a class="collapsed" data-toggle="collapse" href="#colSeven" data-parent="#accrodian"></a>
-											</h4>
-										</div>
-										<div class="panel-collapse collapse" id="colSeven">
-											<div class="panel-body">
-												<a href="#"><i class="fa fa-angle-double-right"></i> Categori-1</a>
-												<a href="#"><i class="fa fa-angle-double-right"></i> Categori-2</a>
-												<a href="#"><i class="fa fa-angle-double-right"></i> Categori-3</a>
-											</div>
-										</div>
-									</div>
+									@endforeach
+									@endif
+									{{-- END CATEGORIES --}}
 								</div>
 							</div>
 							<div class="best-seller-area">
@@ -308,12 +224,15 @@
 							<div class="arrivals-area single-add">
 								<a href="#"> <img src="img/banner/cua-tuoi-ngon.jpg" alt="arrivals"> </a>
 							</div>
+							{{-- Start Product --}}
+							@if(!empty($dataCategories) && !empty($dataProduct))
+							@foreach ($dataCategories as $cate)
 							<div class="product-items">
-								<h2 class="product-header">CUA TƯƠI NGON</h2>
+								<h2 class="product-header">{{$cate->c_name}}</h2>
 								<div class="row">
 									<div id="product-slider" class="owl-carousel">
-										@if (!empty($data))	
-										@foreach ($data as $item)				
+									@foreach ($dataProduct as $item)
+										@if($cate->id == $item->pro_category_id)
 										<div class="col-md-4">
 											<div class="single-product">
 												<div class="single-product-img">
@@ -341,481 +260,19 @@
 												</div>
 											</div>
 										</div>
-										@endforeach	
 										@endif
+									@endforeach	
 									</div>
 								</div>
 							</div>
-
-							<div class="product-items">
-								<h2 class="product-header">CÁ TƯƠI SỐNG</h2>
-								<div class="row">
-									<div id="product-slider-two" class="owl-carousel">
-										<div class="col-md-4">
-											<div class="single-product">
-												<div class="single-product-img">
-													<a href="#">
-														{{-- Ảnh Sản Phẩm  --}}
-														<img class="primary-img" src="{{asset('img\product\cua\cua.webp')}}" alt="product">
-														{{-- <img class="primary-img" src="img/product/men-1.jpg" alt="product">
-														<img class="secondary-img" src="img/product/single-product-3.jpg" alt="product"> --}}
-													</a>
-													<div class="single-product-action">
-														<a href="#"><i class="fa fa-external-link"></i></a>
-														<a href="#"><i class="fa fa-shopping-cart"></i></a>
-													</div>
-												</div>
-												<div class="single-product-content">
-													<div class="product-content-left">
-														<h2><a href="#">EXCLUSIVE STYLE</a></h2>
-														<p>Jacket’s</p>
-													</div>
-													<div class="product-content-right">
-														<h3>$27.00</h3>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="single-product">
-												<div class="single-product-img">
-													<a href="#">
-														{{-- Ảnh Sản Phẩm  --}}
-														<img class="primary-img" src="{{asset('img\product\cua\cua.webp')}}" alt="product">
-														{{-- <img class="primary-img" src="img/product/men-2.jpg" alt="product">
-														<img class="secondary-img" src="img/product/single-product-3.jpg" alt="product"> --}}
-													</a>
-													<div class="single-product-action">
-														<a href="#"><i class="fa fa-external-link"></i></a>
-														<a href="#"><i class="fa fa-shopping-cart"></i></a>
-													</div>
-												</div>
-												<div class="single-product-content">
-													<div class="product-content-left">
-														<h2><a href="#">EXCLUSIVE STYLE</a></h2>
-														<p>Jacket’s</p>
-													</div>
-													<div class="product-content-right">
-														<h3>$27.00</h3>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="single-product">
-												<div class="single-product-img">
-													<a href="#">
-														{{-- Ảnh Sản Phẩm  --}}
-														<img class="primary-img" src="{{asset('img\product\cua\cua.webp')}}" alt="product">
-														{{-- <img class="primary-img" src="img/product/men-3.jpg" alt="product">
-														<img class="secondary-img" src="img/product/single-product-3.jpg" alt="product"> --}}
-													</a>
-													<div class="single-product-action">
-														<a href="#"><i class="fa fa-external-link"></i></a>
-														<a href="#"><i class="fa fa-shopping-cart"></i></a>
-													</div>
-												</div>
-												<div class="single-product-content">
-													<div class="product-content-left">
-														<h2><a href="#">EXCLUSIVE STYLE</a></h2>
-														<p>Jacket’s</p>
-													</div>
-													<div class="product-content-right">
-														<h3>$27.00</h3>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="single-product">
-												<div class="single-product-img">
-													<a href="#">
-														{{-- Ảnh Sản Phẩm  --}}
-														<img class="primary-img" src="{{asset('img\product\cua\cua.webp')}}" alt="product">
-														{{-- <img class="primary-img" src="img/product/men-1.jpg" alt="product">
-														<img class="secondary-img" src="img/product/single-product-3.jpg" alt="product"> --}}
-													</a>
-													<div class="single-product-action">
-														<a href="#"><i class="fa fa-external-link"></i></a>
-														<a href="#"><i class="fa fa-shopping-cart"></i></a>
-													</div>
-												</div>
-												<div class="single-product-content">
-													<div class="product-content-left">
-														<h2><a href="#">EXCLUSIVE STYLE</a></h2>
-														<p>Jacket’s</p>
-													</div>
-													<div class="product-content-right">
-														<h3>$27.00</h3>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="single-product">
-												<div class="single-product-img">
-													<a href="#">
-														{{-- Ảnh Sản Phẩm  --}}
-														<img class="primary-img" src="{{asset('img\product\cua\cua.webp')}}" alt="product">
-														{{-- <img class="primary-img" src="img/product/men-2.jpg" alt="product">
-														<img class="secondary-img" src="img/product/single-product-3.jpg" alt="product"> --}}
-													</a>
-													<div class="single-product-action">
-														<a href="#"><i class="fa fa-external-link"></i></a>
-														<a href="#"><i class="fa fa-shopping-cart"></i></a>
-													</div>
-												</div>
-												<div class="single-product-content">
-													<div class="product-content-left">
-														<h2><a href="#">EXCLUSIVE STYLE</a></h2>
-														<p>Jacket’s</p>
-													</div>
-													<div class="product-content-right">
-														<h3>$27.00</h3>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="single-product">
-												<div class="single-product-img">
-													<a href="#">
-														{{-- Ảnh Sản Phẩm  --}}
-														<img class="primary-img" src="{{asset('img\product\cua\cua.webp')}}" alt="product">
-														{{-- <img class="primary-img" src="img/product/men-3.jpg" alt="product">
-														<img class="secondary-img" src="img/product/single-product-3.jpg" alt="product"> --}}
-													</a>
-													<div class="single-product-action">
-														<a href="#"><i class="fa fa-external-link"></i></a>
-														<a href="#"><i class="fa fa-shopping-cart"></i></a>
-													</div>
-												</div>
-												<div class="single-product-content">
-													<div class="product-content-left">
-														<h2><a href="#">EXCLUSIVE STYLE</a></h2>
-														<p>Jacket’s</p>
-													</div>
-													<div class="product-content-right">
-														<h3>$27.00</h3>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+							@endforeach
+							@endif
+							{{-- End Product --}}
+							{{-- banner --}}
 							<div class="arrivals-area single-add">
 								<a href="#"> <img src="img/banner/arrivals.jpg" alt="arrivals"> </a>
 							</div>
-							<div class="product-items">
-								<h2 class="product-header">NGAO, SÒ, ỐC</h2>
-								<div class="row">
-									<div id="product-slider-women" class="owl-carousel">
-										<div class="col-md-4">
-											<div class="single-product">
-												<div class="single-product-img">
-													<a href="#">
-														<img class="primary-img" src="{{asset('img\product\cua\cua.webp')}}" alt="product">
-														{{-- Ảnh nền sau khi đưa chuột vào ảnh --}}
-														{{-- <img class="secondary-img" src="img/product/single-product-2.jpg" alt="product"> --}}
-														
-													</a>
-													<div class="single-product-action">
-														<a href="#"><i class="fa fa-external-link"></i></a>
-														<a href="#"><i class="fa fa-shopping-cart"></i></a>
-													</div>
-												</div>
-												<div class="single-product-content">
-													<div class="product-content-left">
-														<h2><a href="#">EXCLUSIVE STYLE</a></h2>
-														<p>Jacket’s</p>
-													</div>
-													<div class="product-content-right">
-														<h3>$27.00</h3>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="single-product">
-												<div class="single-product-img">
-													<a href="#">
-														{{-- <img class="primary-img" src="img/product/women-2.jpg" alt="product"> --}}
-														<img class="primary-img" src="{{asset('img\product\cua\cua.webp')}}" alt="product">
-														{{-- <img class="secondary-img" src="img/product/single-product-2.jpg" alt="product"> --}}
-													</a>
-													<div class="single-product-action">
-														<a href="#"><i class="fa fa-external-link"></i></a>
-														<a href="#"><i class="fa fa-shopping-cart"></i></a>
-													</div>
-												</div>
-												<div class="single-product-content">
-													<div class="product-content-left">
-														<h2><a href="#">EXCLUSIVE STYLE</a></h2>
-														<p>Jacket’s</p>
-													</div>
-													<div class="product-content-right">
-														<h3>$27.00</h3>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="single-product">
-												<div class="single-product-img">
-													<a href="#">
-														<img class="primary-img" src="{{asset('img\product\cua\cua.webp')}}" alt="product">
-														{{-- <img class="primary-img" src="img/product/women-3.jpg" alt="product">
-														<img class="secondary-img" src="img/product/single-product-2.jpg" alt="product"> --}}
-													</a>
-													<div class="single-product-action">
-														<a href="#"><i class="fa fa-external-link"></i></a>
-														<a href="#"><i class="fa fa-shopping-cart"></i></a>
-													</div>
-												</div>
-												<div class="single-product-content">
-													<div class="product-content-left">
-														<h2><a href="#">EXCLUSIVE STYLE</a></h2>
-														<p>Jacket’s</p>
-													</div>
-													<div class="product-content-right">
-														<h3>$27.00</h3>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="single-product">
-												<div class="single-product-img">
-													<a href="#">
-														<img class="primary-img" src="{{asset('img\product\cua\cua.webp')}}" alt="product">
-														{{-- <img class="primary-img" src="img/product/single-product-2.jpg" alt="product">
-														<img class="secondary-img" src="img/product/single-product-2.jpg" alt="product"> --}}
-													</a>
-													<div class="single-product-action">
-														<a href="#"><i class="fa fa-external-link"></i></a>
-														<a href="#"><i class="fa fa-shopping-cart"></i></a>
-													</div>
-												</div>
-												<div class="single-product-content">
-													<div class="product-content-left">
-														<h2><a href="#">EXCLUSIVE STYLE</a></h2>
-														<p>Jacket’s</p>
-													</div>
-													<div class="product-content-right">
-														<h3>$27.00</h3>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="single-product">
-												<div class="single-product-img">
-													<a href="#">
-														<img class="primary-img" src="{{asset('img\product\cua\cua.webp')}}" alt="product">
-														{{-- <img class="primary-img" src="img/product/women-2.jpg" alt="product">
-														<img class="secondary-img" src="img/product/single-product-2.jpg" alt="product"> --}}
-													</a>
-													<div class="single-product-action">
-														<a href="#"><i class="fa fa-external-link"></i></a>
-														<a href="#"><i class="fa fa-shopping-cart"></i></a>
-													</div>
-												</div>
-												<div class="single-product-content">
-													<div class="product-content-left">
-														<h2><a href="#">EXCLUSIVE STYLE</a></h2>
-														<p>Jacket’s</p>
-													</div>
-													<div class="product-content-right">
-														<h3>$27.00</h3>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="single-product">
-												<div class="single-product-img">
-													<a href="#">
-														<img class="primary-img" src="{{asset('img\product\cua\cua.webp')}}" alt="product">
-														{{-- <img class="primary-img" src="img/product/women-3.jpg" alt="product">
-														<img class="secondary-img" src="img/product/single-product-2.jpg" alt="product"> --}}
-													</a>
-													<div class="single-product-action">
-														<a href="#"><i class="fa fa-external-link"></i></a>
-														<a href="#"><i class="fa fa-shopping-cart"></i></a>
-													</div>
-												</div>
-												<div class="single-product-content">
-													<div class="product-content-left">
-														<h2><a href="#">EXCLUSIVE STYLE</a></h2>
-														<p>Jacket’s</p>
-													</div>
-													<div class="product-content-right">
-														<h3>$27.00</h3>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="product-items">
-								<h2 class="product-header">LẨU HẢI SẢN</h2>
-								<div class="row">
-									<div id="product-slider-kids" class="owl-carousel">
-										<div class="col-md-4">
-											<div class="single-product">
-												<div class="single-product-img">
-													<a href="#">
-														{{-- Ảnh Sản Phẩm  --}}
-														<img class="primary-img" src="{{asset('img\product\lau\lau.webp')}}" alt="product">
-														{{-- <img class="primary-img" src="img/product/kids-1.jpg" alt="product">
-														<img class="secondary-img" src="img/product/single-product-1.jpg" alt="product"> --}}
-													</a>
-													<div class="single-product-action">
-														<a href="#"><i class="fa fa-external-link"></i></a>
-														<a href="#"><i class="fa fa-shopping-cart"></i></a>
-													</div>
-												</div>
-												<div class="single-product-content">
-													<div class="product-content-left">
-														<h2><a href="#">EXCLUSIVE STYLE</a></h2>
-														<p>Jacket’s</p>
-													</div>
-													<div class="product-content-right">
-														<h3>$27.00</h3>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="single-product">
-												<div class="single-product-img">
-													<a href="#">
-														{{-- Ảnh Sản Phẩm  --}}
-														<img class="primary-img" src="{{asset('img\product\lau\lau.webp')}}" alt="product">
-														{{-- <img class="primary-img" src="img/product/kids-2.jpg" alt="product">
-														<img class="secondary-img" src="img/product/single-product-1.jpg" alt="product"> --}}
-													</a>
-													<div class="single-product-action">
-														<a href="#"><i class="fa fa-external-link"></i></a>
-														<a href="#"><i class="fa fa-shopping-cart"></i></a>
-													</div>
-												</div>
-												<div class="single-product-content">
-													<div class="product-content-left">
-														<h2><a href="#">EXCLUSIVE STYLE</a></h2>
-														<p>Jacket’s</p>
-													</div>
-													<div class="product-content-right">
-														<h3>$27.00</h3>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="single-product">
-												<div class="single-product-img">
-													<a href="#">
-														{{-- Ảnh Sản Phẩm  --}}
-														<img class="primary-img" src="{{asset('img\product\lau\lau.webp')}}" alt="product">
-														{{-- <img class="primary-img" src="img/product/kids-3.jpg" alt="product">
-														<img class="secondary-img" src="img/product/single-product-1.jpg" alt="product"> --}}
-													</a>
-													<div class="single-product-action">
-														<a href="#"><i class="fa fa-external-link"></i></a>
-														<a href="#"><i class="fa fa-shopping-cart"></i></a>
-													</div>
-												</div>
-												<div class="single-product-content">
-													<div class="product-content-left">
-														<h2><a href="#">EXCLUSIVE STYLE</a></h2>
-														<p>Jacket’s</p>
-													</div>
-													<div class="product-content-right">
-														<h3>$27.00</h3>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="single-product">
-												<div class="single-product-img">
-													<a href="#">
-														{{-- Ảnh Sản Phẩm  --}}
-														<img class="primary-img" src="{{asset('img\product\lau\lau.webp')}}" alt="product">
-														{{-- <img class="primary-img" src="img/product/kids-1.jpg" alt="product">
-														<img class="secondary-img" src="img/product/single-product-1.jpg" alt="product"> --}}
-													</a>
-													<div class="single-product-action">
-														<a href="#"><i class="fa fa-external-link"></i></a>
-														<a href="#"><i class="fa fa-shopping-cart"></i></a>
-													</div>
-												</div>
-												<div class="single-product-content">
-													<div class="product-content-left">
-														<h2><a href="#">EXCLUSIVE STYLE</a></h2>
-														<p>Jacket’s</p>
-													</div>
-													<div class="product-content-right">
-														<h3>$27.00</h3>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="single-product">
-												<div class="single-product-img">
-													<a href="#">
-														{{-- Ảnh Sản Phẩm  --}}
-														<img class="primary-img" src="{{asset('img\product\lau\lau.webp')}}" alt="product">
-														{{-- <img class="primary-img" src="img/product/kids-2.jpg" alt="product">
-														<img class="secondary-img" src="img/product/single-product-1.jpg" alt="product"> --}}
-													</a>
-													<div class="single-product-action">
-														<a href="#"><i class="fa fa-external-link"></i></a>
-														<a href="#"><i class="fa fa-shopping-cart"></i></a>
-													</div>
-												</div>
-												<div class="single-product-content">
-													<div class="product-content-left">
-														<h2><a href="#">EXCLUSIVE STYLE</a></h2>
-														<p>Jacket’s</p>
-													</div>
-													<div class="product-content-right">
-														<h3>$27.00</h3>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="single-product">
-												<div class="single-product-img">
-													<a href="#">
-														{{-- Ảnh Sản Phẩm  --}}
-														<img class="primary-img" src="{{asset('img\product\lau\lau.webp')}}" alt="product">
-														{{-- <img class="primary-img" src="img/product/kids-3.jpg" alt="product">
-														<img class="secondary-img" src="img/product/single-product-1.jpg" alt="product"> --}}
-													</a>
-													<div class="single-product-action">
-														<a href="#"><i class="fa fa-external-link"></i></a>
-														<a href="#"><i class="fa fa-shopping-cart"></i></a>
-													</div>
-												</div>
-												<div class="single-product-content">
-													<div class="product-content-left">
-														<h2><a href="#">EXCLUSIVE STYLE</a></h2>
-														<p>Jacket’s</p>
-													</div>
-													<div class="product-content-right">
-														<h3>$27.00</h3>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+							{{-- end banner --}}
 						</div>
 					</div>
 				</div>

@@ -10,10 +10,16 @@ class HomeController extends Controller
 {
     public function get_product()
     {
-        $data = DB::table('product')
-        ->where('pro_category_id', '2')
+        $dataProduct = DB::table('product')
+        ->where('pro_status', '1')
+        ->orderBy('id','desc')
+        ->get();
+        $dataCategories = DB::table('categories')
+        ->where('c_active','1')
         ->get();
         // dd($data);
-        return view('pages.top-page.index', compact('data'));
+        // dd($dataProduct);
+        // dd($dataCategories);
+        return view('pages.top-page.index', compact('dataProduct','dataCategories'));
     }
 }
