@@ -1,55 +1,4 @@
-{{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid"><a href="#" class="navbar-brand"><img type="img" src="https://cdn.gridbox.io/assets/gb-92x92.png" width="40" /></a><button type="button"
-            data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span
-                class="navbar-toggler-icon"></span></button>
-        <div id="navbarColor03" class="collapse navbar-collapse">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item active"><a aria-current="page" href="#" class="nav-link active"><i class="bi-speedometer2 mr-2"></i>
-                        Dashboard
-                    </a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-clipboard-data mr-2"></i>
-                        Orders
-                    </a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-bag-check mr-2"></i>
-                        Products
-                    </a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-people-fill mr-2"></i>
-                        Customers
-                    </a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-file-earmark-bar-graph mr-2"></i>
-                        Reports
-                    </a></li>
-            </ul>
-            <div class="d-lg-flex align-items-center">
-                <form type="form" class="d-flex ms-auto mb-2 mb-md-0"><input type="search" placeholder="Search" aria-label="Search" class="form-control me-2" /><button type="submit"
-                        class="btn btn-outline-light"> <i class="bi bi-search"></i></button></form>
-                <ul id="io85l" class="navbar-nav ms-auto">
-                    <li id="ivscp" class="nav-item"><a href="#" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true"
-                            class="text-decoration-none dropdown-toggle px-2 line-white text-white"><img type="img" src="https://github.com/mdo.png" alt="mdo" id="i3q2a" width="32" height="32"
-                                class="rounded-circle" /></a>
-                        <ul aria-labelledby="dropdownUser2" id="irimy" class="dropdown-menu dropdown-menu-end text-small shadow">
-                            <li><a href="#" class="dropdown-item">New project...</a></li>
-                            <li><a href="#" class="dropdown-item">Settings</a></li>
-                            <li><a href="#" class="dropdown-item">Profile</a></li>
-                            <li>
-                                <hr class="dropdown-divider" />
-                            </li>
-                            <li><a href="#" class="dropdown-item">Sign out</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</nav> --}}
 <body class="home-one">
-    <!--[if lt IE 8]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-           
     <!-- HEADER AREA -->
     <div class="header-area">
         <div class="header-top-bar">
@@ -96,17 +45,6 @@
                                         <a href="{{route('register')}}"><i class="fa fa-pencil-square-o"></i>Đăng Ký</a>
                                     </li> 
                                 @endif 
-
-                                {{-- <li><a href="#"><i class="fa fa-user"></i>Tài Khoản Của Tôi</a></li> --}}
-                                {{-- <li><a href="#"><i class="fa fa-heart"></i>Wishlist</a></li>
-                                <li><a href="checkout.html"><i class="fa fa-check-square-o"></i>Checkout</a></li> --}}
-                                {{-- <li><a href="{{route('login')}}"><i class="fa fa-lock"></i>Đăng Nhập 
-                                    @if(session('user_email'))                                       
-                                            <b>{{session('user_email')}}</b>
-                                                             
-                                    @endif 
-                                </a></li> --}}
-                                
                             </ul> 
                         </div>
                     </div>
@@ -189,7 +127,7 @@
         </div>
     </div>
     <!-- MAIN MENU AREA -->
-    <div class="main-menu-area">
+    {{-- <div class="main-menu-area">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -212,24 +150,6 @@
                                 </li>
                                 
                                 <li><a href="shop.html">Sushi & Sashimi</a></li>
-                                
-                                {{-- <li><a href="#">Pages</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="shop.html">Shop</a></li>
-                                        <li><a href="shop.html">Men</a></li>
-                                        <li><a href="shop.html">Women</a></li>
-                                        <li><a href="shop.html">Kids</a></li>
-                                        <li><a href="shop.html">Gift</a></li>
-                                        <li><a href="about-us.html">About Us</a></li>
-                                        <li><a href="single-product.html">Single Product</a></li>
-                                        <li><a href="cart.html">Cart</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="look-book.html">Look Book</a></li>
-                                        <li><a href="404.html">Error 404</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.html">contact</a></li>
-                            </ul> --}}
                         </nav>
                     </div>
                     <!-- Mobile MENU AREA -->
@@ -297,7 +217,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- SUPPORT AREA -->
     <div class="support-area">
         <div class="container">

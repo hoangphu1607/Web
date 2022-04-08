@@ -319,7 +319,7 @@
 												<div class="single-product-img">
 													<a href="#">
 														{{-- Ảnh Sản Phẩm  --}}
-														<img class="primary-img" src="{{asset('img\product\cua\cua.webp')}}" alt="product">
+														<img class="primary-img" src="{{asset('')}}{{$item->pro_avatar}}" alt="product">
 														{{-- <img class="primary-img" src="img/product/single-product-1.jpg" alt="product">
 														<img class="secondary-img" src="img/product/kids-1.jpg" alt="product"> --}}
 													</a>
