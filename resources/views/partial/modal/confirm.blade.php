@@ -12,7 +12,7 @@
           <h1><b>Xác Nhận Xóa</b> </h1>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close" value="close" >Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close" value="close" >Đóng</button>
           <button type="button" class="btn btn-primary" id="xacnhan" value="xacnhan">Xác Nhận</button>
         </div>
       </div>

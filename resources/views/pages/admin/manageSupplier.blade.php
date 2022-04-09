@@ -113,7 +113,9 @@
       </thead>      
     </table>
   </div>
+  {{-- include modal --}}
   @include('partial.modal.addSuppliers')
+  @include('partial.modal.editSupplier')
 @stop
 
   
@@ -149,13 +151,13 @@
           {
             data:'s_avt',
             render: function(data, type, row){
-              return '<img src="{{asset('')}}'+data+'" alt="" width="80px" height="100px" id="img_categories_{{'row.id'}}">'
+              return '<img src="{{asset('')}}'+data+'" alt="" width="80px" height="100px" id="img_supplier_{{'row.id'}}">'
             }
           },
           {
             data:'id',
             render: function(data, type, row){
-              return '<button data-id="'+ row.id +'" type="button" onclick="editSuppliers('+row.id+')" class="btn btn-primary" data-toggle="modal" data-target="#edit_supplier" ><i class="fa-solid fa-pen-to-square"></i></button>'
+              return '<button data-id="'+ row.id +'" type="button" id="editsupplier" class="btn btn-primary" data-toggle="modal" data-target="#edit_supplier" ><i class="fa-solid fa-pen-to-square"></i></button>'
             }
           },
           {
@@ -172,7 +174,7 @@
         //   }
         // ]           
       });
-
+      //add a new supplier
       $(document).ready(function() {
         $('#addSuppliers_form').on('submit', function(e){     
             e.preventDefault();                               
@@ -199,32 +201,95 @@
             });           
         });
       });
-
-      function editSuppliers(id){     
+      var id_supplier;
+      //get id for edit 
+      $(document).on('click','#editsupplier',function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
+        id_supplier = id;
+        console.log(id);
+        $.ajax({          
+          url: 'getSupplierById',
+          method: 'GET',
+          data: {
+            id:id_supplier,
+            // _token: "{{ csrf_token() }}"
+          },     
+          success: function(data) { 
+            // console.log(data);
+            var supplier_name = data.supplier[0].s_name;
+            var supplier_email = data.supplier[0].s_email;
+            var supplier_phone = data.supplier[0].s_phone;
+            $('#edit_suppliers_name').val(supplier_name);
+            $('#edit_suppliers_mail').val(supplier_email);
+            $('#edit_uppliers_phone').val(supplier_phone);
+            $('.error').text('');
+           
+          },
+          error: function(error){
+            console.log(error);
+          }
+        });
+      });
+      //update
+      $('#editSuppliers_form').on('submit', function(e){
+        e.preventDefault();
+        var myData = new FormData(this);
+        myData.append('id',id_supplier);  
+        $('.error').text('');
+        // console.log(myData);
+        $.ajax({          
+          url: 'updateSupplierById',
+          method: 'POST',
+          data: myData,     
+          cache: false,
+          contentType: false,
+          processData: false,
+          success: function(data) { 
+            console.log(data );  
+            toastr["success"]("Thay đổi thành công", "Thông Báo");               
+            table.ajax.reload();     
+            $("#suppliers_image").val("");                  
+          },
+          error: function(error){
+            console.log(error);
+            let tb = error.responseJSON.errors;
+            for(var i in tb){
+                $('.error_' + i).text(tb[i][0]);
+            }
+          }
+        });   
+      });
+      var id_del;
+      //get id for edit 
+      $(document).on('click','#delete',function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
+        id_del = id;
+        console.log(id);
+        
+      });
+      
+      $(document).on('click','#xacnhan',function(e){
         $.ajax({
-                url: 'showEditSupplier/'+id,
-                method: 'GET', 
-                //data: new FormData(this),           
-                cache: false,
-                contentType: false,
-                processData: false,                
-                success:function(response){                   
-                    // toastr["success"]("Cập nhật thành công", "Thông Báo");
-                    console.log(response.data.s_name);
-                    $("#edit_suppliers_name").val(response.data.s_name);
-                    $("#edit_suppliers_mail").val(response.data.s_mail);
-                    $("#edit_uppliers_phone").val(response.data.s_phone);
-                    //table.ajax.reload();               
-                },
-                error:function(error){              
-                    let tb = error.responseJSON.errors;
-                    for(var i in tb){
-                        $('.error_' + i).text(tb[i][0]);
-                    }
-                },
-                            
-            });    
-      }
+          url: 'deleteSupplierById',
+          method: 'GET',
+          data: {
+            id:id_del,       
+          },
+          // contentType: false,
+          // cache: false,
+          // processData: false,  
+          success: function(data){             
+            toastr["success"]("Xóa Thành Công", "Thông Báo");
+            $('#confirmModal').modal('hide');
+            table.ajax.reload();  
+          },
+          error:function(error){
+            console.log(error);
+          }
+        });
+      });
 
       
    </script>

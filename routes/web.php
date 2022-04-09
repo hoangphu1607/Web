@@ -76,7 +76,11 @@ Route::prefix('admin')->group( function(){
     //get all suppliers get
     Route::get('showSuppliers',[manageController::class,'showSuppliers'])->middleware('checkLogin')->name('showSuppliers');
     //get supplier by it's id
-    Route::get('showEditSupplier/{id}',[manageController::class,'showEditSupplier'])->middleware('checkLogin')->name('showEditSupplier');
+    Route::get('getSupplierById',[manageController::class,'getSupplierById'])->middleware('checkLogin')->name('getSupplierById');
+    //update supplier
+    Route::post('updateSupplierById',[manageController::class,'updateSupplierById'])->middleware('checkLogin')->name('updateSupplierById');
+    //delele
+    Route::get('deleteSupplierById',[manageController::class,'deleteSupplierById'])->middleware('checkLogin')->name('deleteSupplierById');
 });
 
 Route::get('login',[Process_accout::class,'index_login'])->name('login');
