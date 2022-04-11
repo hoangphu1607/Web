@@ -87,13 +87,13 @@
         <div class="top-page"> 
 		<!-- this is content -->           
 		<!-- Product AREA -->
-		<div class="product-area">
+		<div class="product-area" >
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3 col-sm-4">
-						<div class="product-catagori-area">
+						<div class="product-catagori-area" >
 							<div class="product-categeries">
-								<h2>CÁC LOẠI HẢI SẢN</h2>
+								<h2>DANH MỤC</h2>
 								<div class="panel-group" id="accrodian">
 									{{-- START CATEGORIES --}}
 									@if(!empty($dataCategories))
@@ -119,7 +119,7 @@
 								</div>
 							</div>
 							<div class="best-seller-area">
-								<h2 class="header-title">Best seller</h2>
+								<h2 class="header-title">BEST SELLER</h2>
 								<div class="best-sell-product">
 									<div class="best-product-img">
 										{{-- Ảnh của phần best sale!! nên đặt chiều cao và rộng là: 80 71 --}}
