@@ -57,11 +57,11 @@
                 <input type="text" class="form-control" id="pro_price" name="pro_price">
                 <span style="color: red" class="error_pro_price error"></span>
             </div>
-            {{-- Content --}}
+            {{-- Desription --}}
             <div class="form-group">
                 <label for="categories_name-name" class="col-form-label">Đơn Vị Tính: </label>
-                <input type="text" class="form-control" id="pro_content" name="pro_content" placeholder="Kg,Con,Khay,Túi..." value="Kg">
-                <span style="color: red" class="error_pro_content error"></span>
+                <input type="text" class="form-control" id="pro_description" name="pro_description" placeholder="Kg,Con,Khay,Túi..." value="Kg">
+                <span style="color: red" class="error_pro_description error"></span>
             </div>
         </div>
         <div class="modal-footer">

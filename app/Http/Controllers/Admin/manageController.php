@@ -194,14 +194,14 @@ class manageController extends Controller
         $rules = [  
             'pro_name' => 'required',        
             'pro_price' => 'required',
-            // 'pro_descriptions' => 'required',
-            'pro_content' => 'required',
+            'pro_description' => 'required',
+            // 'pro_content' => 'required',
             'image' => 'required',
         ];
         $messages = [
             'image.required' => 'Cần phải có ảnh',
-            'pro_content.required' => 'Phải có nội dung',
-            // 'pro_descriptions.required' => 'Phải có nội dung',
+            // 'pro_content.required' => 'Phải có nội dung',
+            'pro_description.required' => 'Phải có nội dung',
             'pro_name.required' => 'Phải đặt tên',
             'pro_price.required' => 'Phải có giá tiền'
         ];
@@ -220,8 +220,8 @@ class manageController extends Controller
                 $pro_categories_id = $request->pro_categories,
                 $pro_price = $request->pro_price,
                 $suppliers_id = $request->pro_suppliers,
-                $pro_descriptions = "",
-                $pro_content = $request->pro_content,
+                $pro_description = $request->pro_description,
+                $pro_content = "",
                 $image = $path_img              
             ];  
             DB::insert('insert into product (pro_name, 	pro_category_id, pro_price, supplier_id, pro_description, pro_content, pro_avatar) 
@@ -392,12 +392,12 @@ class manageController extends Controller
         $rules = [
             'pro_name' => 'required',
             'pro_price' => 'required',
-            'pro_content' => 'required',
+            'pro_description' => 'required',
         ];
         $message = [
             'pro_name.required' => 'Phải đặt tên sản phẩm',
             'pro_price.required' => 'Phải có giá tiền',
-            'pro_content.required' => 'Phải có đơn vị tính'
+            'pro_description.required' => 'Phải có đơn vị tính'
         ];
         $check = Validator::make($request->all(),$rules,$message);
         $check->validate(); 
@@ -412,7 +412,7 @@ class manageController extends Controller
                 ->update([
                     'pro_name' => $request->pro_name,
                     'pro_price' => $request->pro_price,
-                    'pro_content' => $request->pro_content,
+                    'pro_description' => $request->pro_description,
                     'pro_category_id' => $request->pro_categories_id,
                     'supplier_id' => $request->pro_suppliers_id,
                     'pro_avatar' => $path_img,                    
@@ -423,7 +423,7 @@ class manageController extends Controller
                 ->update([
                     'pro_name' => $request->pro_name,
                     'pro_price' => $request->pro_price,
-                    'pro_content' => $request->pro_content,
+                    'pro_description' => $request->pro_description,
                     'pro_category_id' => $request->pro_categories_id,
                     'supplier_id' => $request->pro_suppliers_id,
                 ]);

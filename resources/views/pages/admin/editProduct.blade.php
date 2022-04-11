@@ -151,7 +151,7 @@
           {data:"c_name"},
           {data:"s_name"},
           {data:"pro_price"},
-          {data:"pro_content"},
+          {data:"pro_description"},
           {data:"id",
             render: function(data, type, row){
               return '<button data-id="'+ row.id +'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#productModal" id="editProduct"><i class="fa-solid fa-pen-to-square"></i></button>'
@@ -220,7 +220,7 @@
             var sup_id = data.product[0].supplier_id;
             $('#pro_name').val(data.product[0].pro_name);
             $('#pro_price').val(data.product[0].pro_price);
-            $('#pro_content').val(data.product[0].pro_content);
+            $('#pro_description').val(data.product[0].pro_description);
             $('#cate_id'+ cate_id).attr('selected','true');
             $('#sup_id'+ sup_id).attr('selected','true');
           },

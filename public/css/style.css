@@ -2087,7 +2087,7 @@ body.home-2{
   border: none !important;
 }
 .product-item-tab .nav-tabs  li{
-  margin-right: 14px;
+  margin-right: 0px;
 }
 .product-item-tab .nav-tabs  li:last-child{
   margin-right: 0px;
@@ -2096,7 +2096,7 @@ body.home-2{
   border: 0px solid transparent;
   border-radius: 4px 4px 0 0;
   line-height: 1.42857;
-  margin-right: 2px;
+  margin-right: 0px;
 }
 .single-tab-img{
 	margin: 20px 0 30px;

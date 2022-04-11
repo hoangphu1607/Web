@@ -76,10 +76,11 @@
 @section('breadcrumb')
     @include('partial.users.breadcrumb')
 @stop
+
 @section('sidebar')
     @include('partial.users.sidebar')
 @stop
-
+	
 @section('content')
 @yield('sidebar');
     <div class="main-content" >
@@ -243,8 +244,8 @@
 														<img class="secondary-img" src="img/product/kids-1.jpg" alt="product"> --}}
 													</a>
 													<div class="single-product-action">
-														<a href="#"><i class="fa fa-external-link"></i></a>
-														<a href="#"><i class="fa fa-shopping-cart"></i></a>
+														<button href="#" class="btn btn-outline-warning"><i class="fa fa-external-link"></i></button>
+														<button data-id="{{$item->id}}" class="btn btn-outline-warning" id="productItem" data-toggle="modal" data-target="#quick_view_product"><i class="fa fa-shopping-cart"></i></button>
 													</div>
 												</div>
 												<div class="single-product-content">
@@ -282,14 +283,16 @@
    </div>
 @stop
 
+@section('modal')
+	@include('partial.modal.quickViewProduct')
+@stop
+
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
     {{--jquery.autocomplete.js--}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     {{--quick defined--}}
     <script>
-      $(function () {
-          // your custom javascript
-      });
-   </script>
+  	</script>
+   	<script src="{{asset('js/custum/home.js')}}"></script>
 @stop

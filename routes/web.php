@@ -8,7 +8,7 @@ use App\Models\Users\Process;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\user;
 use App\Http\Controllers\user\HomeController;
-
+use App\Http\Controllers\user\Order;
 // use App\Http\Controllers\Process_accout;
 
 /*
@@ -27,7 +27,10 @@ use App\Http\Controllers\user\HomeController;
 // });
 
 Route::prefix('home')->group( function(){
+    //page main
     Route::get('/' , [HomeController::class,'get_product'])->name('home');
+    //get Product by id
+    Route::get('getProductById', [Order::class,'getProductById'])->name('getProductById');
 });
 
 Route::prefix('admin')->group( function(){

@@ -18,18 +18,23 @@
         <div class="row">
             <div class="col-md-3 col-sm-3">	
                 <div class="slider-left">
-                    <h2>Today’s Offer</h2>
+                    <h2>TIÊU BIỂU</h2>
                     <div id="owl-slider-left" class="owl-carousel">
+                        {{-- STAR OFFER --}}
+                        @if(!empty($offer))
+                        @foreach ($offer as $item)
                         <div class="slider-left-carousel">
                             <div class="slider-left-product">
-                                <a href="#"><img src="{{asset('img/product/cua thit ca mau.webp')}}" alt="product"></a>
+                                <a href="#"><img src="{{asset('')}}{{$item->pro_avatar}}" alt="product"></a>
                                 <div class="slider-product-button">
                                     <p class="add-chart"><a href="#">Add To Cart</a></p>
                                 </div>
                             </div>
                             <p class="view-details"><a href="#">View details</a></p>
                         </div>
-                        <div class="slider-left-carousel">
+                        @endforeach
+                        @endif
+                        {{-- <div class="slider-left-carousel">
                             <div class="slider-left-product">
                                 <a href="#"><img src="{{asset('img/product/chacua.webp')}}" alt="product"></a>
                                 <div class="slider-product-button">
@@ -37,7 +42,8 @@
                                 </div>
                             </div>
                             <p class="view-details"><a href="#">View details</a></p>
-                        </div>
+                        </div> --}}
+                        {{-- END OFFER --}}
                     </div>
                 </div>
             </div>
