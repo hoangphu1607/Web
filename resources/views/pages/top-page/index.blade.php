@@ -232,8 +232,14 @@
 								<h2 class="product-header">{{$cate->c_name}}</h2>
 								<div class="row">
 									<div id="product-slider" class="owl-carousel">
+										@php
+											$idOld = "";
+										@endphp
 									@foreach ($dataProduct as $item)
-										@if($cate->id == $item->pro_category_id)
+										@if($cate->id == $item->pro_category_id && $item->product_id != $idOld)
+										@php
+											$idOld = $item->product_id;
+										@endphp
 										<div class="col-md-4">
 											<div class="single-product">
 												<div class="single-product-img">
@@ -251,8 +257,8 @@
 												<div class="single-product-content">
 													<div class="product-content-left">
 														<h5><a href="#" style="color:black">{{$item->pro_name}}</a></h5>														
-														<span style="color: #129FD8">{{$item->pro_price}}đ/
-															<span style="color: #7A7A7A; font-size: 10px">{{$item->pro_description}}</span>
+														<span style="color: #129FD8">{{$item->price}}đ/ {{$item->type}}
+															<span style="color: #7A7A7A; font-size: 10px"></span>
 														</span>
 													</div>
 													{{-- <div class="product-content-right">

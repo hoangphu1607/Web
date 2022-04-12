@@ -13,9 +13,13 @@ class HomeController extends Controller
     {
         //product
         $dataProduct = DB::table('product')
+        ->join('description_detail','product.id','=','description_detail.product_id')
+        ->select('product.*','description_detail.type','description_detail.price','description_detail.product_id')
         ->where('pro_status', '1')
-        ->orderBy('id','desc')
+        ->where('status','1')
+        ->orderBy('product.id','desc')
         ->get();
+        // dd($dataProduct);
         //categories
         $dataCategories = DB::table('categories')
         ->where('c_active','1')
@@ -25,7 +29,7 @@ class HomeController extends Controller
         $today = $date->toDateString();
         $offer = DB::table('offer')
         ->join('product','product.id','=','offer.product_id')
-        ->select('product.id', 'day_offer', 'product.pro_avatar' )
+        ->select('product.id', 'day_offer', 'product.pro_avatar')
         ->where('day_offer',$today)
         ->get();
         // dd($offer);

@@ -20,7 +20,10 @@ class Order extends Controller
     public function getProductById (Request $request)
     {
         $dataProduct = DB::table($this->table)
-        ->where('id', '=', $request->id)
+        ->join('description_detail','product.id','=','description_detail.product_id')
+        ->select('product.*','description_detail.*','description_detail.id as idDes')
+        ->where('description_detail.status','1')
+        ->where('product.id', '=', $request->id)
         ->get();
         return response()->json([
             'product' => $dataProduct
@@ -35,4 +38,16 @@ class Order extends Controller
         // dd($data_query);
         return view("pages.users.details",compact('data_query'));
     }
+    //Get a description by id
+    public function getDesById(Request $request)
+    {   
+        $dataDes = DB::table('description_detail')
+        ->where('id','=',$request->id)
+        ->first();
+        return response()->json([
+            'product' => $dataDes
+        ]);
+    }
+
+    
 }

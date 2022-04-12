@@ -51,8 +51,7 @@
                           {{-- <p>Item Code  :   #897896</p> --}}
                           <p id="pro_status" >Tình Trạng :  Còn Hàng</p>
                       </div>
-                      <div class="product-item-details">
-                          <p>Nulla quis lorem ut libero malesuada feugiat. Donec sollicitudin molestie malesuada. Mauris. </p>
+                      <div class="product-item-details" id="content">
                       </div>
                       <div class="size-chart">
                           <p>Size Chart: <i class="fa fa-plus"></i></p>
@@ -66,8 +65,12 @@
                           -->
                       </div>
                       <div class="available-option">
-                          <h2>Available Options:</h2>
-                          <div class="color-option fix">
+                          <h2 >Chọn:</h2>
+                          <div id="optional">
+
+                          </div>
+                          {{-- <button type="button" class="btn btn-outline-danger" id="op1" >Danger</button>                           --}}
+                          {{-- <div class="color-option fix">
                               <p>Color:</p>
                               <a href="#" class="color-1"></a>
                               <a href="#" class="color-2"></a>
@@ -94,7 +97,7 @@
                                   <a href="#"><i class="fa fa-signal"></i></a>
                                   <p>Compare</p>
                               </div>
-                          </div>
+                          </div> --}}
                       </div> 
                   </div>
               </div>

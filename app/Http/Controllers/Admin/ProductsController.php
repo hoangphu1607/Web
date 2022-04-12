@@ -190,4 +190,29 @@ class ProductsController extends Controller
             // 'sl' => $delete
         ]);
     }
+
+    //Update content
+    public function updateContent(Request $request)
+    {
+        $rules = [
+            'pro_content' => 'required',
+        ];
+        $mess = [
+            'pro_content.required' => 'Nội dung không được trống',
+        ];
+        $check = Validator::make($request->all(),$rules,$mess);
+        $check->validate(); 
+        if(!$check->fails()){            
+            $updateContent = DB::table('product')
+            ->where('id',$request->id)
+            ->update([
+                'pro_content' => $request->pro_content,
+            ]); 
+            return response()->json([
+                'success' => true,
+                'content' => $request->pro_content,
+            ]);    
+        }
+        
+    }
 }

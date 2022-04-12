@@ -36,6 +36,8 @@ Route::prefix('home')->group( function(){
     Route::get('getProductById', [Order::class,'getProductById'])->name('getProductById');
     //show product detail by id
     Route::get('chi-tiet-san-pham/{id}', [Order::class,'showProductDetailById'])->name('showProductDetailById');
+
+    Route::get('getDesById',[Order::class,'getDesById'])->name('getDesById');
 });
 
 Route::prefix('admin')->group( function(){
@@ -47,6 +49,7 @@ Route::prefix('admin')->group( function(){
     Route::post('register', [manageController::class,'register_admin'])->name('adminRegister');
     //admin logout
     Route::get('logout', [manageController::class,'adminLogout'])->name('admin_logout');  
+
     // Thêm loại sản phẩm
     Route::get('manageCategories', [CategoriesController::class,'manageCategories'])->middleware('checkLogin')->name('manageCategories');
     Route::post('addCategories', [CategoriesController::class,'addCategories'])->middleware('checkLogin')->name('addCategories');
@@ -92,6 +95,8 @@ Route::prefix('admin')->group( function(){
     // Thêm sản phẩm
     Route::get('form-addProduct',[ProductsController::class, 'form_addProduct'])->middleware('checkLogin')->name('form_addProduct');
     Route::post('form-addProduct',[ProductsController::class, 'addProduct'])->middleware('checkLogin')->name('addProduct');
+    //update content
+    Route::POST('updateContent',[ProductsController::class, 'updateContent'])->middleware('checkLogin')->name('updateContent');
 });
 
 Route::get('login',[Process_accout::class,'index_login'])->name('login');

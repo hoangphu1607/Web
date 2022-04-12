@@ -109,6 +109,7 @@
           <th scope="col">Nhà Cung Cấp</th>
           <th scope="col">Giá Cả</th>
           <th scope="col">Đơn Vị Tính</th>
+          <th scope="col">Nội Dung</th>
           <th scope="col">Chỉnh Sửa</th>
           <th scope="col">Xóa</th>
         </tr>
@@ -119,6 +120,7 @@
   
   @include('partial.modal.edit_product')
   @include('partial.modal.addProduct') 
+  @include('partial.modal.ckeditor')
 @stop
 
   
@@ -132,9 +134,13 @@
     {{-- Datatable --}}
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
-
+    <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
     {{-- <script src="{{asset('js/custum/categories.js')}}"></script> --}}
-    <script>
+    <script>    
+    ClassicEditor.create(document.querySelector('#editor1'))
+    .catch(error =>{
+        console.error(error)
+    });
       var idProduct;
       var table = $('#myTable').DataTable({
         "ajax": 'getAllProduct',
@@ -152,6 +158,11 @@
           {data:"s_name"},
           {data:"price"},
           {data:"type"},
+          {data:"id",
+            render: function(data, type, row){
+              return '<button data-id="'+data+'" type="button" class="btn btn-success" data-toggle="modal" data-target="#contentModal" id="editContent"><i class="fa-solid fa-comment-dots"></i></button>'
+            }
+          },
           {data:"des_id",
             render: function(data, type, row){
               return '<button data-id="'+ row.id +"-"+data+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#productModal" id="editProduct"><i class="fa-solid fa-pen-to-square"></i></button>'
@@ -166,7 +177,7 @@
         ] ,
         columnDefs: [
           {
-              targets: [0,2,3,4,5,6,7],
+              targets: [0,2,3,4,5,6,7,8,9],
               className: 'dt-body-center'
           },          
         ]           
@@ -295,7 +306,41 @@
           }
         });
       });
-
+      //get Id for Content
+      var idContent;
+      $(document).on('click','#editContent',function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
+        idContent = id;
+      });
+      //update content product
+      $('#updateContent_form').on('submit', function(e){
+        e.preventDefault();
+        var myData = new FormData(this);
+        myData.append('id',idContent);
+        $('.error').text('');
+        // console.log(myData);
+        $.ajax({          
+          url: 'updateContent',
+          method: 'POST',
+          data: myData,     
+          cache: false,
+          contentType: false,
+          processData: false,
+          success: function(data) { 
+            console.log(data );  
+            toastr["success"]("Thay Đổi thành công!!!", "Thông Báo");   
+            table.ajax.reload();
+          },
+          error: function(error){
+            console.log(error);
+            let tb = error.responseJSON.errors;
+            for(var i in tb){
+                $('.error_' + i).text(tb[i][0]);
+            }
+          }
+        });   
+      });
    </script>
 @stop
 
