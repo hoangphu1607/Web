@@ -237,7 +237,7 @@
 										<div class="col-md-4">
 											<div class="single-product">
 												<div class="single-product-img">
-													<a href="#">
+													<a href="{{route('showProductDetailById',['id'=>$item->id])}}">
 														{{-- Ảnh Sản Phẩm  --}}
 														<img class="primary-img" src="{{asset('')}}{{$item->pro_avatar}}" alt="product">
 														{{-- <img class="primary-img" src="img/product/single-product-1.jpg" alt="product">

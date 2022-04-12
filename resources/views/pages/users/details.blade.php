@@ -143,7 +143,7 @@
                             <!-- Tab panes -->
                             <div class="single-tab-content">
                                 <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane active" id="img-one"><img src="img/single-product/single-product-1.jpg" alt="tab-img"></div>
+                                    <div role="tabpanel" class="tab-pane active" id="img-one"><img src="{{asset('')}}{{$data_query->pro_avatar}}" alt="tab-img"></div>
                                     <div role="tabpanel" class="tab-pane" id="img-two"><img src="img/single-product/single-product-2.jpg" alt="tab-img"></div>
                                     <div role="tabpanel" class="tab-pane" id="img-three"><img src="img/single-product/single-product-1.jpg" alt="tab-img"></div>
                                 </div>
@@ -161,7 +161,7 @@
                     <div class="col-md-7 col-sm-7">
                         <div class="product-tab-content">
                             <div class="product-tab-header">
-                                <h1>Baby New Style Jackets</h1>
+                                <h1>{{$data_query->pro_name}}</h1>
                                 <div class="best-product-rating">
                                     <a href="#"><i class="fa fa-star"></i></a>
                                     <a href="#"><i class="fa fa-star"></i></a>
@@ -170,7 +170,7 @@
                                     <a href="#"><i class="fa fa-star"></i></a>
                                     <p>(3 costomar review)</p>
                                 </div>
-                                <h3>$52.00</h3>
+                                <h3 style="color: red">{{$data_query->pro_price}}đ</h3>
                             </div>
                             <div class="product-item-code">
                                 <p>Item Code  :   #897896</p>

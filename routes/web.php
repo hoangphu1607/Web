@@ -31,6 +31,8 @@ Route::prefix('home')->group( function(){
     Route::get('/' , [HomeController::class,'get_product'])->name('home');
     //get Product by id
     Route::get('getProductById', [Order::class,'getProductById'])->name('getProductById');
+    //show product detail by id
+    Route::get('chi-tiet-san-pham/{id}', [Order::class,'showProductDetailById'])->name('showProductDetailById');
 });
 
 Route::prefix('admin')->group( function(){

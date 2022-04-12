@@ -26,4 +26,13 @@ class Order extends Controller
             'product' => $dataProduct
         ]);
     }
+
+    public function showProductDetailById($id)
+    {    
+        $data_query = DB::table($this->table)
+        ->where('id','=',$id)
+        ->first();
+        // dd($data_query);
+        return view("pages.users.details",compact('data_query'));
+    }
 }
