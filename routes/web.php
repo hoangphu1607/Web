@@ -4,6 +4,9 @@
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Process_accout;
 use App\Http\Controllers\Admin\manageController;
+use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\SuppliersController;
+use App\Http\Controllers\Admin\CategoriesController;
 use App\Models\Users\Process;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\user;

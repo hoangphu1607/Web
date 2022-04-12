@@ -6,9 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-
+use App\Models\Admin\Process;
 class ProductsController extends Controller
 {
+    private $admin;
+    public function __construct()
+    {        
+        $this->admin = new Process();        
+    }
     //show form add Product
     public function form_addProduct()
     {

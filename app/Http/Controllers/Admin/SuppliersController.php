@@ -6,9 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-
+use App\Models\Admin\Process;
 class SuppliersController extends Controller
 {
+    private $admin;
+    public function __construct()
+    {        
+        $this->admin = new Process();        
+    }
     public function form_addSuppliers()
     {
         return view('pages.admin.add_suppliers');
