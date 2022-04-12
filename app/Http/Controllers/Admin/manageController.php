@@ -88,6 +88,57 @@ class manageController extends Controller
             
     
     
+    
+    
+    
+    // //show form edit
+    // public function form_editCategories()
+    // {
+    //     //lấy dữ liệu từ model qua nè
+    //     $dataCategories = $this->admin->getCategories();    
+    //     return view("pages.admin.editCategories",compact('dataCategories'));
+    // }
+    // //get All Categories
+    // public function getAllCategories()
+    // {
+    //     //lấy dữ liệu từ model qua nè
+    //     $dataCategories = $this->admin->getCategories();      
+    //     // $json_data['data'] = $dataCategories;  
+    //     // dd($dataCategories);
+    //     $button = [
+    //         'test' => 'button'
+    //     ];
+    //     return response()->json([
+    //         'data' => $dataCategories,
+    //         'button' => $button
+    //     ]);
+    // }
+    // //get 1 Categories
+    // public function getOneCategori(Request $request)
+    // {
+    //     $categories = DB::table('categories')
+    //     ->where('id',$request->id)
+    //     ->get();
+    //     // dd($categories);
+    //     return response()->json([
+    //         'categories' => $categories
+    //     ]);
+    // }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+    
 
     
 

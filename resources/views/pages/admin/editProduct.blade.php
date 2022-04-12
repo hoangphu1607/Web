@@ -150,32 +150,29 @@
           },
           {data:"c_name"},
           {data:"s_name"},
-          {data:"pro_price"},
-          {data:"pro_description"},
-          {data:"id",
+          {data:"price"},
+          {data:"type"},
+          {data:"des_id",
             render: function(data, type, row){
-              return '<button data-id="'+ row.id +'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#productModal" id="editProduct"><i class="fa-solid fa-pen-to-square"></i></button>'
+              return '<button data-id="'+ row.id +"-"+data+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#productModal" id="editProduct"><i class="fa-solid fa-pen-to-square"></i></button>'
             }
           },
           {
-            data:"id",
+            data:"des_id",
             render: function(data, type, row){
-              return '<button data-id="'+ row.id +'" type="button" class="btn btn-danger" data-id="del_'+row.id+'" id="delete" data-toggle="modal" data-target="#confirmModal"><i class="fa-solid fa-trash-can"></i></button>'
+              return '<button data-id="'+ data +'" type="button" class="btn btn-danger" data-id="del_'+row.id+'" id="delete" data-toggle="modal" data-target="#confirmModal"><i class="fa-solid fa-trash-can"></i></button>'
             }
           }         
         ] ,
         columnDefs: [
           {
-              targets: [2,3,4,5,6,7],
+              targets: [0,2,3,4,5,6,7],
               className: 'dt-body-center'
-          },
-          {
-              "targets": 0,
-              "className": "dt-body-center",
-          }
+          },          
         ]           
       });
       //Add product
+      var idDes;
       $(document).ready(function() {
         $('#Product_form').on('submit', function(e){
             e.preventDefault();                    
@@ -188,12 +185,20 @@
                 cache: false,
                 contentType: false,
                 processData: false,                
-                success:function(response){                   
+                success:function(response){      
+                  // console.log(response);   
+                  if(response.success){
                     toastr["success"]("Thêm thành công!!!", "Thông Báo");   
-                    table.ajax.reload();               
+                    table.ajax.reload();  
+                    // console.log(response.arr1);   
+                    // console.log(response.arr2);   
+                  }else{
+                    // console.log(response.success);      
+                    toastr["error"]("Dữ Liệu Sai!!!", "Thất Bại");   
+                  }  
                 },
                 error:function(error){  
-                  console.log(error);            
+                  // console.log(error);            
                     let tb = error.responseJSON.errors;
                     for(var i in tb){
                         $('.error_' + i).text(tb[i][0]);
@@ -206,21 +211,25 @@
       $(document).on('click','#editProduct',function(e){
         e.preventDefault();
         var id = $(this).data('id');
-        idProduct = id;
+        id = id.split('-');
+        idProduct = id[0];
+        // console.log(id);
+        idDes = id[1];
         $.ajax({          
           url: 'getOneProduct',
           method: 'POST',
           data: {
             id:idProduct,
+            idDes:id[1],
             _token: "{{ csrf_token() }}"
           },     
           success: function(data) { 
-            // console.log( );
+            // console.log(data);
             var cate_id = data.product[0].pro_category_id;
             var sup_id = data.product[0].supplier_id;
             $('#pro_name').val(data.product[0].pro_name);
-            $('#pro_price').val(data.product[0].pro_price);
-            $('#pro_description').val(data.product[0].pro_description);
+            $('#pro_price').val(data.product[0].price);
+            $('#pro_description').val(data.product[0].type);
             $('#cate_id'+ cate_id).attr('selected','true');
             $('#sup_id'+ sup_id).attr('selected','true');
           },
@@ -233,7 +242,8 @@
       $('#productUpdate_form').on('submit', function(e){
         e.preventDefault();
         var myData = new FormData(this);
-        myData.append('id',idProduct);  
+        myData.append('id',idProduct);
+        myData.append('idDes',idDes);  
         $('.error').text('');
         // console.log(myData);
         $.ajax({          

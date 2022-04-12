@@ -100,6 +100,19 @@ class SuppliersController extends Controller
         ]);       
     }
 
+    
+
+    public function deleteSupplierById(Request $request)
+    {
+        $delete = DB::table('suppliers')
+        ->where('id', $request->id)
+        ->update([
+            's_status' => 0,                    
+        ]);
+        return response()->json([
+            'success' => $request->id,
+        ]);     
+    }
     public function updateSupplierById(Request $request)
     {
         $rules = [  
@@ -147,18 +160,6 @@ class SuppliersController extends Controller
                 "success" => $update,                
             ]); 
         }
-    }
-
-    public function deleteSupplierById(Request $request)
-    {
-        $delete = DB::table('suppliers')
-        ->where('id', $request->id)
-        ->update([
-            's_status' => 0,                    
-        ]);
-        return response()->json([
-            'success' => $request->id,
-        ]);     
     }
 
 }

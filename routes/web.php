@@ -44,48 +44,51 @@ Route::prefix('admin')->group( function(){
     Route::post('register', [manageController::class,'register_admin'])->name('adminRegister');
     //admin logout
     Route::get('logout', [manageController::class,'adminLogout'])->name('admin_logout');  
-    // Thêm sản phẩm
-    Route::get('form-addProduct',[manageController::class, 'form_addProduct'])->middleware('checkLogin')->name('form_addProduct');
-    Route::post('form-addProduct',[manageController::class, 'addProduct'])->middleware('checkLogin')->name('addProduct');
-
     // Thêm loại sản phẩm
-    Route::get('manageCategories', [manageController::class,'manageCategories'])->middleware('checkLogin')->name('manageCategories');
-    Route::post('addCategories', [manageController::class,'addCategories'])->middleware('checkLogin')->name('addCategories');
-    // Thêm nhà cung cấp
-    Route::get('form-addSuppliers', [manageController::class,'form_addSuppliers'])->middleware('checkLogin')->name('form_addSuppliers');
-    Route::post('form-addSuppliers', [manageController::class,'addSuppliers'])->middleware('checkLogin')->name('addSuppliers');    
+    Route::get('manageCategories', [CategoriesController::class,'manageCategories'])->middleware('checkLogin')->name('manageCategories');
+    Route::post('addCategories', [CategoriesController::class,'addCategories'])->middleware('checkLogin')->name('addCategories');
     //edit loại sản Phẩm
-    Route::get('form-editCategories',[manageController::class,'form_editCategories'])->middleware('checkLogin')->name('form_editCategories');
-    //edit sản Phẩm
-    Route::get('form-editProduct',[manageController::class,'editProduct'])->middleware('checkLogin')->name('form-editProduct');
-    //lất tất cả sản phẩm
-    Route::get('getAllProduct', [manageController::class,'getAllProduct'])->middleware('checkLogin')->name('getAllProduct');
-    //Lấy 1 sản Phẩm
-    Route::post('getOneProduct', [manageController::class,'getOneProduct'])->middleware('checkLogin')->name('getOneProduct');
+    Route::get('form-editCategories',[CategoriesController::class,'form_editCategories'])->middleware('checkLogin')->name('form_editCategories');
+        //Lấy tất cả loại sản Phẩm
+    Route::get('allCategories', [CategoriesController::class,'getAllCategories'])->middleware('checkLogin')->name('allCategories');
     //Lấy tất cả loại sản Phẩm
-    Route::get('allCategories', [manageController::class,'getAllCategories'])->middleware('checkLogin')->name('allCategories');
-    //Update Sản Phẩm
-    Route::post('updateProduct', [manageController::class,'updateProduct'])->middleware('checkLogin')->name('updateProduct');
-    //Delete product
-    Route::post('deleteProduct',[manageController::class,'deleteProduct'])->middleware('checkLogin')->name('deleteProduct');
+    Route::get('allCategories', [CategoriesController::class,'getAllCategories'])->middleware('checkLogin')->name('allCategories');
     //Lấy 1 loại sản phẩm
-    Route::post('getOneCategories',[manageController::class,'getOneCategori'])->middleware('checkLogin')->name('getOneCategories');
+    Route::post('getOneCategories',[CategoriesController::class,'getOneCategori'])->middleware('checkLogin')->name('getOneCategories');
     //Update loại sản phẩm
-    Route::post('updateCategories',[manageController::class,'updateCategories'])->middleware('checkLogin')->name('updateCategories');    
+    Route::post('updateCategories',[CategoriesController::class,'updateCategories'])->middleware('checkLogin')->name('updateCategories');    
     //delete categories
-    Route::post('deleteCategories', [manageController::class,'deleteCategories'])->middleware('checkLogin')->name('deleteCategories');
+    Route::post('deleteCategories', [CategoriesController::class,'deleteCategories'])->middleware('checkLogin')->name('deleteCategories');
+
+    // Thêm nhà cung cấp
+    Route::get('form-addSuppliers', [SuppliersController::class,'form_addSuppliers'])->middleware('checkLogin')->name('form_addSuppliers');
+    Route::post('form-addSuppliers', [SuppliersController::class,'addSuppliers'])->middleware('checkLogin')->name('addSuppliers');    
     //show manage suppliers page get
-    Route::get('manageSuppliers',[manageController::class,'manageSuppliers'])->middleware('checkLogin')->name('getmanageSuppliers');
+    Route::get('manageSuppliers',[SuppliersController::class,'manageSuppliers'])->middleware('checkLogin')->name('getmanageSuppliers');
     //show manage suppliers page get
-    Route::post('manageSuppliers',[manageController::class,'manageSuppliers'])->middleware('checkLogin')->name('postmanageSuppliers');
+    Route::post('manageSuppliers',[SuppliersController::class,'manageSuppliers'])->middleware('checkLogin')->name('postmanageSuppliers');
     //get all suppliers get
-    Route::get('showSuppliers',[manageController::class,'showSuppliers'])->middleware('checkLogin')->name('showSuppliers');
+    Route::get('showSuppliers',[SuppliersController::class,'showSuppliers'])->middleware('checkLogin')->name('showSuppliers');
     //get supplier by it's id
-    Route::get('getSupplierById',[manageController::class,'getSupplierById'])->middleware('checkLogin')->name('getSupplierById');
+    Route::get('getSupplierById',[SuppliersController::class,'getSupplierById'])->middleware('checkLogin')->name('getSupplierById');
     //update supplier
-    Route::post('updateSupplierById',[manageController::class,'updateSupplierById'])->middleware('checkLogin')->name('updateSupplierById');
-    //delele
-    Route::get('deleteSupplierById',[manageController::class,'deleteSupplierById'])->middleware('checkLogin')->name('deleteSupplierById');
+    Route::post('updateSupplierById',[SuppliersController::class,'updateSupplierById'])->middleware('checkLogin')->name('updateSupplierById');
+    //delele supplier
+    Route::get('deleteSupplierById',[SuppliersController::class,'deleteSupplierById'])->middleware('checkLogin')->name('deleteSupplierById');
+    
+    //edit sản Phẩm
+    Route::get('form-editProduct',[ProductsController::class,'editProduct'])->middleware('checkLogin')->name('form-editProduct');
+    //lất tất cả sản phẩm
+    Route::get('getAllProduct', [ProductsController::class,'getAllProduct'])->middleware('checkLogin')->name('getAllProduct');
+    //Lấy 1 sản Phẩm
+    Route::post('getOneProduct', [ProductsController::class,'getOneProduct'])->middleware('checkLogin')->name('getOneProduct');
+    //Update Sản Phẩm
+    Route::post('updateProduct', [ProductsController::class,'updateProduct'])->middleware('checkLogin')->name('updateProduct');
+    //Delete product
+    Route::post('deleteProduct',[ProductsController::class,'deleteProduct'])->middleware('checkLogin')->name('deleteProduct');
+    // Thêm sản phẩm
+    Route::get('form-addProduct',[ProductsController::class, 'form_addProduct'])->middleware('checkLogin')->name('form_addProduct');
+    Route::post('form-addProduct',[ProductsController::class, 'addProduct'])->middleware('checkLogin')->name('addProduct');
 });
 
 Route::get('login',[Process_accout::class,'index_login'])->name('login');

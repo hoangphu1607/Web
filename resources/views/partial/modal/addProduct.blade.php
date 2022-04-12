@@ -51,17 +51,17 @@
               <input type="file" name="image" id="image">
               <span style="color: red" class="error_image error"></span>
             </div>
+            {{-- Description --}}
+            <div class="form-group">
+              <label for="categories_name-name" class="col-form-label">Đơn Vị Tính: </label>
+              <input type="text" class="form-control" id="pro_description" name="pro_description" placeholder="Kg,Con - Nếu muốn nhiều lựa chọn thì nhập cách nhau dấu ," >
+              <span style="color: red" class="error_pro_description error"></span>
+            </div>
             {{-- Price --}}
             <div class="form-group">
                 <label for="categories_name-name" class="col-form-label">Giá Tiền: </label>
-                <input type="text" class="form-control" id="pro_price" name="pro_price">
+                <input type="text" class="form-control" id="pro_price" name="pro_price" placeholder="VNĐ - Nếu có nhiều lựa chọn thì nhập cách nhau dấu ,">
                 <span style="color: red" class="error_pro_price error"></span>
-            </div>
-            {{-- Content --}}
-            <div class="form-group">
-                <label for="categories_name-name" class="col-form-label">Đơn Vị Tính: </label>
-                <input type="text" class="form-control" id="pro_description" name="pro_description" placeholder="Kg,Con,Khay,Túi..." value="Kg">
-                <span style="color: red" class="error_pro_description error"></span>
             </div>
         </div>
         <div class="modal-footer">
