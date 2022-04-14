@@ -16,6 +16,8 @@ $(document).on('click','#productItem',function(e){
             console.log(data);
             // Xóa content cũ
             $('#content_child').remove();
+            $('.op').remove();
+
             $('#img_main').attr('src',data.product[0].pro_avatar);
             $('#name_product').text(data.product[0].pro_name);
             // conver price vnd
@@ -24,7 +26,7 @@ $(document).on('click','#productItem',function(e){
             $('#pro_price').text(price +" / "+data.product[0].type);
             var node = $('#optional');
             for(var i = 0; i< data.product.length; i++) {
-                node.append('<button data-id="'+data.product[i].idDes+'" type="button" class="btn btn-danger" id="op" >'+data.product[i].type+'</button> ');
+                node.append('<button data-id="'+data.product[i].idDes+'" type="button" class="btn btn-danger op" id="op" >'+data.product[i].type+'</button> ');
             }
             //tạo div child bời vì khi ấn vào lần nữa sẽ xóa nó
             $('#content').append('<div id="content_child">'+data.product[0].pro_content+'</div>');
@@ -56,5 +58,8 @@ $(document).on('click','#op',function(e){
         }
     })
 });
+
+//order product
+
 
 

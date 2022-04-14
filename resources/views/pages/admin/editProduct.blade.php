@@ -108,9 +108,10 @@
           <th scope="col">Loại Sản Phẩm</th>          
           <th scope="col">Nhà Cung Cấp</th>
           <th scope="col">Giá Cả</th>
-          <th scope="col">Đơn Vị Tính</th>
+          <th scope="col">Đơn Vị</th>
           <th scope="col">Nội Dung</th>
-          <th scope="col">Chỉnh Sửa</th>
+          <th scope="col">Ảnh Liên Quan</th>
+          <th scope="col">Thay Đổi</th>
           <th scope="col">Xóa</th>
         </tr>
       </thead>
@@ -163,6 +164,12 @@
               return '<button data-id="'+data+'" type="button" class="btn btn-success" data-toggle="modal" data-target="#contentModal" id="editContent"><i class="fa-solid fa-comment-dots"></i></button>'
             }
           },
+          {data:"id",
+            render: function(data, type, row){
+              return '<button data-id="'+data+'" type="button" class="btn btn-success" data-toggle="modal" data-target="#contentModal" id="editContent"><i class="fa-regular fa-images"></i></button>'
+            }
+          },
+
           {data:"des_id",
             render: function(data, type, row){
               return '<button data-id="'+ row.id +"-"+data+'" type="button" class="btn btn-primary" data-toggle="modal" data-target="#productModal" id="editProduct"><i class="fa-solid fa-pen-to-square"></i></button>'
