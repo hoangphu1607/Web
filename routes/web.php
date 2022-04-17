@@ -38,6 +38,8 @@ Route::prefix('home')->group( function(){
     Route::get('chi-tiet-san-pham/{id}', [Order::class,'showProductDetailById'])->name('showProductDetailById');
 
     Route::get('getDesById',[Order::class,'getDesById'])->name('getDesById');
+
+    Route::post('orderProduct',[Order::class,'orderProduct'])->name('orderProduct');
 });
 
 Route::prefix('admin')->group( function(){

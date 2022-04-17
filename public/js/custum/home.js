@@ -1,11 +1,12 @@
 var idItem;
 var url = 'home/';
+//price global when not selected
+var price;
 //show quick view product
 $(document).on('click','#productItem',function(e){
     e.preventDefault();
     var id = $(this).data('id'); 
     idItem = id;
-    console.log(id);
     $.ajax({
         url:url+'getProductById',
         method: 'GET',
@@ -13,17 +14,19 @@ $(document).on('click','#productItem',function(e){
             id:idItem
         },
         success: function(data){
-            console.log(data);
+            // console.log(data);
             // Xóa content cũ
             $('#content_child').remove();
+            //refresh option 
             $('.op').remove();
-
+            console.log(data.product[0].id);
+            $('#OrderProduct').attr('data-id',data.product[0].id);
             $('#img_main').attr('src',data.product[0].pro_avatar);
             $('#name_product').text(data.product[0].pro_name);
             // conver price vnd
-            var price = data.product[0].price;
-            price = price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
-            $('#pro_price').text(price +" / "+data.product[0].type);
+            price = data.product[0].price;
+            priceConver = price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+            $('#pro_price').text(priceConver +" / "+data.product[0].type);
             var node = $('#optional');
             for(var i = 0; i< data.product.length; i++) {
                 node.append('<button data-id="'+data.product[i].idDes+'" type="button" class="btn btn-danger op" id="op" >'+data.product[i].type+'</button> ');
@@ -36,6 +39,7 @@ $(document).on('click','#productItem',function(e){
         }
     })
 });
+
 //quick option
 $(document).on('click','#op',function(e){
     e.preventDefault();
@@ -49,17 +53,76 @@ $(document).on('click','#op',function(e){
         },
         success: function(data){
             // console.log(data);
-            var price = data.product.price;
-            price = price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
-            $('#pro_price').text(price +" / "+data.product.type);
+            price = data.product.price;
+            priceConver = price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+            $('#pro_price').text(priceConver +" / "+data.product.type);
         },
         error: function(error){
             console.log(error);
         }
     })
 });
-
+// $(document).on('click',function(e){
+//     e.preventDefault();
+//     var id = $(this).data('id')
+// })
 //order product
+$('#formOrder').on('submit', function(e){
+    e.preventDefault();
+    // console.log(idItem);
+    var data = new FormData();
+    var amount = $('#quantity').val();
+    // console.log(data);
+    data.append('id', idItem);
+    data.append('_token',_token);
+    data.append('price',price);
+    data.append('amount',amount);
 
+    $.ajax({
+        url: url+'orderProduct',
+        method: 'POST',
+        data:data,
+        contentType: false,
+        cache: false,
+        processData: false,  
+        success: function(data){
+            console.log(data);
+            toastr["success"]("Đặt hàng thành công!!!", "Thông Báo");   
+            // var price = data.product.price;
+            // price = price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+            // $('#pro_price').text(price +" / "+data.product.type);
+        },
+        error: function(error){
+            console.log(error);
+        }
+    })
+})  	
+
+
+//button option number
+$(document).ready(function(){
+    var quantitiy=0;
+       $('.quantity-right-plus').click(function(e){
+            // Stop acting like a button
+            e.preventDefault();
+            // Get the field name
+            var quantity = parseInt($('#quantity').val());
+            // If is not undefined
+                $('#quantity').val(quantity + 1);
+                // Increment
+        });
+         $('.quantity-left-minus').click(function(e){
+            // Stop acting like a button
+            e.preventDefault();
+            // Get the field name
+            var quantity = parseInt($('#quantity').val());
+            // If is not undefined
+                // Increment
+                if(quantity>0){
+                $('#quantity').val(quantity - 1);
+                }
+        });
+        
+    });
 
 
