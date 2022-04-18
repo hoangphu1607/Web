@@ -70,19 +70,23 @@ class Process_accout extends Controller
             'user_password.required' => 'Mật khẩu không được trống',
         ]);
         
-        $dataInsert=[           
-            $request->user_email,
-            sha1($request->user_password), //mã hóa bằng sha1           
-        ];
-        $query = $this->user->userLogin($dataInsert);  
-           
+        $email = $request->user_email;
+        $pass = sha1($request->user_password);//mã hóa bằng sha1           
+        $query = $this->user->userLogin($email, $pass);  
+        // dd($query);
         // save session login          
         $dataUser = [
             "user_id" => $query[0]->id,
             "user_email" => $query[0]->u_email,
-            "user_name" => $query[0]->u_name
+            "user_name" => $query[0]->u_name,
+            "user_phone" => $query[0]->u_phone,
+            "city" => $query[0]->city_name,
+            "city_id" => $query[0]->city_code,
+            "district" => $query[0]->district_name,
+            "district_id" => $query[0]->district_code,
+            "wards" => $query[0]->wards_name,
+            "wards_id" => $query[0]->wards_code
         ];
-        
         if(!empty($query)){
             session($dataUser);
             return redirect()->route('home');  

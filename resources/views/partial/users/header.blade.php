@@ -85,7 +85,7 @@
                             <div class="header-chart">
                                 <ul class="list-inline">
                                     <li><a href="#"><i class="fa fa-cart-arrow-down"></i></a></li>
-                                    <li class="chart-li"><a href="#">My cart</a>
+                                    <li class="chart-li"><a href="{{route('showBill')}}">ĐƠN HÀNG</a>
                                         <ul>
                                             <li>
                                                 <div class="header-chart-dropdown">

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\user;
 use App\Http\Controllers\user\HomeController;
 use App\Http\Controllers\user\Order;
+use App\Http\Controllers\user\Bill;
 // use App\Http\Controllers\Process_accout;
 
 /*
@@ -38,8 +39,11 @@ Route::prefix('home')->group( function(){
     Route::get('chi-tiet-san-pham/{id}', [Order::class,'showProductDetailById'])->name('showProductDetailById');
 
     Route::get('getDesById',[Order::class,'getDesById'])->name('getDesById');
-
+    //user order product
     Route::post('orderProduct',[Order::class,'orderProduct'])->name('orderProduct');
+    // show bill
+    Route::get('bill',[Bill::class,'showBill'])->name('showBill');
+    Route::get('checkout',[Bill::class,'showCheckOut'])->name('showCheckOut');
 });
 
 Route::prefix('admin')->group( function(){

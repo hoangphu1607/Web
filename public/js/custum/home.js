@@ -2,6 +2,7 @@ var idItem;
 var url = 'home/';
 //price global when not selected
 var price;
+var description_detail_id;
 //show quick view product
 $(document).on('click','#productItem',function(e){
     e.preventDefault();
@@ -19,12 +20,14 @@ $(document).on('click','#productItem',function(e){
             $('#content_child').remove();
             //refresh option 
             $('.op').remove();
-            console.log(data.product[0].id);
+            // console.log(data.product[0].id);
             $('#OrderProduct').attr('data-id',data.product[0].id);
             $('#img_main').attr('src',data.product[0].pro_avatar);
             $('#name_product').text(data.product[0].pro_name);
             // conver price vnd
             price = data.product[0].price;
+            description_detail_id = data.product[0].id;
+            // console.log('description_detail_id: ' + description_detail_id);
             priceConver = price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
             $('#pro_price').text(priceConver +" / "+data.product[0].type);
             var node = $('#optional');
@@ -52,8 +55,10 @@ $(document).on('click','#op',function(e){
             id:id
         },
         success: function(data){
-            // console.log(data);
+            console.log(data);
             price = data.product.price;
+            description_detail_id = data.product.id;
+            // console.log(description_detail_id);
             priceConver = price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
             $('#pro_price').text(priceConver +" / "+data.product.type);
         },
@@ -77,7 +82,7 @@ $('#formOrder').on('submit', function(e){
     data.append('_token',_token);
     data.append('price',price);
     data.append('amount',amount);
-
+    data.append('description_detail_id',description_detail_id)
     $.ajax({
         url: url+'orderProduct',
         method: 'POST',

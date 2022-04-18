@@ -71,6 +71,7 @@ class Order extends Controller
             $check = false;
             $price = $request->price;
             $amount = $request->amount;
+            $description_detail_id = $request->description_detail_id;
             // Cookie::get('idCookie')!== null
             if($request->session()->has('user_id')){
                 $check = true;
@@ -105,15 +106,18 @@ class Order extends Controller
                     ->insert([
                         'bd_bill_id' => $lastInsertId,
                         'bd_product_id' => $idProduct,
+                        'description_detail_id' => $description_detail_id,
                         'bd_price' => $price,
                         'bd_amount' => $amount,
                         'bd_total_amount' => $price * $amount
                     ]);
-                }else{
+                    //Has Bill
+                }else{ 
                     DB::table('bill_detail')
                     ->insert([
                         'bd_bill_id' => $getAllBillUser[0]->b_id,
                         'bd_product_id' => $idProduct,
+                        'description_detail_id' => $description_detail_id,
                         'bd_price' => $price,
                         'bd_amount' => $amount,
                         'bd_total_amount' => $price * $amount

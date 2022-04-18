@@ -14,6 +14,7 @@
     <style>
         body{
             font-variant-numeric : normal;
+            /* font-family: "Times New Roman", Times, serif; */
         }
     </style>
     <script src="https://kit.fontawesome.com/0bd4a877f8.js" crossorigin="anonymous"></script>    

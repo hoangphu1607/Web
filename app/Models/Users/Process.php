@@ -18,13 +18,16 @@ class Process extends Model
         values (?, ?, ?, ?, ? ," ")', $data);        
     }
 
-    public function userLogin($data)
+    public function userLogin($email, $pass)
     {
-        return DB::select('select * from user where u_email = ? and u_password = ?',$data);  
-        // $query = DB::select('select * from user where u_email = ? and u_password = ?',$data);       
-        // if(!empty($query)){           
-        //     return true;
-        // }         
-        // return false;
+        // dd($email, $pass);
+        return DB::table('user')
+        ->select('user.*','city.city_name','city.city_code','district.district_name','district.district_code','wards.wards_name','wards.wards_code')
+        ->join('city', 'city.city_code', '=', 'user.city_id')  
+        ->join('district', 'district.district_code', '=', 'user.district_id')
+        ->join('wards', 'wards.wards_code', '=', 'user.wards_id')
+        ->where('u_email',$email)
+        ->where('u_password',$pass)
+        ->get();
     }
 }
