@@ -13,6 +13,8 @@ use App\Http\Controllers\user;
 use App\Http\Controllers\user\HomeController;
 use App\Http\Controllers\user\Order;
 use App\Http\Controllers\user\Bill;
+use App\Http\Controllers\User\UserController;
+
 // use App\Http\Controllers\Process_accout;
 
 /*
@@ -120,4 +122,6 @@ Route::get('details', function(){
     return view("pages.users.details");
 });
 
-
+Route::group(['prefix' => 'user', 'as' => 'user.'], function(){
+    Route::get('',[UserController::class,'index'])->name('index');
+});

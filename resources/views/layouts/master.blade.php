@@ -30,7 +30,6 @@
 </head>
 <body class="home-one">
     @include('partial.users.header')
-    
     @yield('content')
     @yield('modal')
     @include('partial.users.footer')

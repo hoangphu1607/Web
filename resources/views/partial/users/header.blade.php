@@ -32,7 +32,7 @@
                             <ul class="list-inline">
                                 @if(session('user_id'))                                    
                                     <li>
-                                        <a href="#" style="color: #85ff85"><i class="fa fa-user"></i>Xin Chào {{session('user_name')}} !!!</a>
+                                        <a href="{{route('user.index')}}" style="color: #85ff85"><i class="fa fa-user"></i>Xin Chào {{session('user_name')}} !!!</a>
                                     </li>
                                     <li>
                                         <a href="{{route('logout')}}"><i class="fa fa-user-times"></i> Đăng Xuất </a>
