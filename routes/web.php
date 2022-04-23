@@ -45,6 +45,7 @@ Route::prefix('home')->group( function(){
     Route::post('orderProduct',[Order::class,'orderProduct'])->name('orderProduct');
     // show bill
     Route::get('bill',[Bill::class,'showBill'])->name('showBill');
+    //show check out
     Route::get('checkout',[Bill::class,'showCheckOut'])->name('showCheckOut');
 });
 
@@ -112,7 +113,10 @@ Route::post('login',[Process_accout::class,'login'])->name('post_login');
 Route::get('register', [Process_accout::class,'index_register'])->name('register');
 Route::post('register', [Process_accout::class,'register'])->name('post_register');
 Route::get('logout', [Process_accout::class,'logout'])->name('logout');
-
+//get data district
+Route::get('dataDistrict',[Process_accout::class,'districtByIdCity'])->name('dataDistrict');
+//get data wards
+Route::get('dataWards',[Process_accout::class,'wardsByIdDistrict'])->name('dataWards');
 
 Route::get('add-img-product', function(){
     return view("pages.admin.add_img_product");

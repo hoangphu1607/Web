@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Users\Process;
+use DB;
 class Process_accout extends Controller
 {
     private $user;
@@ -15,7 +16,39 @@ class Process_accout extends Controller
     //display interface register
     public function index_register()
     {
-        return view('pages.users.register');
+        //city data
+        $dataCity = DB::table('city')
+        ->get();
+
+        //district data by city data id first
+        $dataDistrict = DB::table('district')
+        ->where('city_code',$dataCity[0]->id)
+        ->get();
+        //wards data by district data id first
+        $dataWards = DB::table('wards')
+        ->where('district_code',$dataDistrict[0]->id)
+        ->get();
+        // dd($dataWards);
+        return view('pages.users.register',compact('dataCity','dataDistrict','dataWards'));
+    }
+    //option city to district 
+    public function districtByIdCity(Request $request)
+    {
+        $dataDistrict = DB::table('district')
+        ->where('city_code',$request->id_city)
+        ->get();
+        return response()->json([
+            'district' => $dataDistrict
+        ]);
+    }
+    public function wardsByIdDistrict(Request $request)
+    {
+        $dataWards = DB::table('wards')
+        ->where('district_code',$request->district_code)
+        ->get();
+        return response()->json([
+            'wards' => $dataWards
+        ]);
     }
     // display interface login
     public function index_login()

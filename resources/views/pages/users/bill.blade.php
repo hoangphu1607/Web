@@ -118,7 +118,8 @@
                                     </td>
                                     {{-- <td class="th-edit"><a href="#">Edit</a></td> --}}
                                     <td class="th-price">
-                                        <input type="number" min="1" placeholder="1" value="{{$bill->bd_amount}}">                                        
+                                        {{$bill->bd_amount}}
+                                        {{-- <input type="number" min="1" placeholder="1" value="{{$bill->bd_amount}}">                                         --}}
                                     </td>
                                     <td class="th-price">{{$bill->bd_price}}</td>
                                     <td class="th-total">{{$bill->bd_total_amount}}</td>

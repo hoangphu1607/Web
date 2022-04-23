@@ -189,19 +189,63 @@
                             <div id="icrqh" class="row">
                                 <div id="iwfuf" class="col">
                                     <!-- Label -->
-                                    <label id="ipd68">ĐỊA CHỈ</label>
+                                    <label id="ipd68">TỈNH, THÀNH PHỐ</label>
                                 </div>
                             </div> 
                             <!-- / .row -->
-                            <!-- Input group -->
-                            <div class="input-group input-group-merge">
-                                <!-- Input -->
-                                <input type="text" placeholder="Số nhà, tên đường" class="form-control form-control-appended" name="user_address" value="{{old('user_address')}}"/>
-                            </div>
+                            <!-- Select City -->
+                            <div class="form-group" id="city_name">
+                                <select class="form-control" id="city" name="city">
+                                        @if(!empty($dataCity))                        
+                                        @foreach($dataCity as $city)
+                                            <option value="{{$city->city_code}}" class="option_city" >{{$city->city_name}}</option>
+                                        @endforeach
+                                    @else
+                                        <option value="null">Null</option>
+                                    @endif
+                                </select>
+                              </div>
                             {{-- label thông báo lỗi --}}
                             @error('user_address')
                                 <label style="color: red">{{$message}}</label>
                             @enderror
+                            {{-- Select district --}}
+                            <div id="icrqh" class="row">
+                                <div id="iwfuf" class="col">
+                                    <!-- Label -->
+                                    <label id="ipd68">QUẬN, HUYỆN</label>
+                                </div>
+                            </div> 
+                            <div class="form-group" id="district_name">
+                                <select class="form-control" id="district" name="district">
+                                        {{-- @if(!empty($dataDistrict))                        
+                                        @foreach($dataDistrict as $district)
+                                            <option value="{{$district->district_code}}"class="option_district">{{$district->district_name}}</option>
+                                        @endforeach
+                                    @else
+                                        <option value="null">Null</option>
+                                    @endif --}}
+                                </select>
+                            </div>
+                            {{-- Select wards --}}
+                            <div id="icrqh" class="row">
+                                <div id="iwfuf" class="col">
+                                    <!-- Label -->
+                                    <label id="ipd68">XÃ, PHƯỜNG, THỊ TRẤN</label>
+                                </div>
+                            </div> 
+                            <div class="form-group">
+                                <select class="form-control" id="wards" name="wards">
+                                        {{-- @if(!empty($dataWards))                        
+                                        @foreach($dataWards as $wards)
+                                            <option value="{{$wards->wards_code}}">{{$wards->wards_name}}</option>
+                                        @endforeach
+                                    @else
+                                        <option value="null">Null</option>
+                                    @endif --}}
+                                </select>
+                            </div>
+
                         </div>
                         <!-- Submit -->
                         <p class="text-center">

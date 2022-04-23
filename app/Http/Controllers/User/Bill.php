@@ -29,7 +29,7 @@ class Bill extends Controller
     {
         $user_id = $request->session()->get('user_id');
         $dataBill = DB::table('bill_detail')
-        ->select('bill_detail.*','product.pro_name', 'description_detail.type','product.pro_avatar')
+        ->select('bill_detail.*','product.pro_name', 'description_detail.type','product.pro_avatar','bill.b_total')
         ->join('description_detail','description_detail.id','=','bill_detail.description_detail_id')
         ->join('product','product.id','=','bill_detail.bd_product_id')
         ->join('bill','bill.b_id','=','bill_detail.bd_bill_id')

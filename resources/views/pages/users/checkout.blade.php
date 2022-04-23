@@ -150,40 +150,6 @@
                                         <input type="text" class="form-control" readonly value="{{$dataUser[5]}}">
                                     </div>
                                 </div>
-                                {{-- <div class="form-group">
-                                    <label class="control-label col-md-3">
-                                        Postcode <sup>*</sup>
-                                    </label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">
-                                        E-mail Address <sup>*</sup>
-                                    </label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">
-                                        Phone <sup>*</sup>
-                                    </label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12">
-                                        <input type="checkbox"> Create an account?
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-12">
-                                        <input type="checkbox"> Ship a billing address?
-                                    </label>
-                                </div> --}}
                                 <div class="form-group">
                                     <label class="control-label col-md-3">
                                         Thông Tin Khác
@@ -220,8 +186,8 @@
                     </div>
                     <div class="subtotal-area">
                         <div class="subtotal-content fix">
-                            <h2 class="floatleft">Subtotal</h2>
-                            <h2 class="floatright">$450</h2>
+                            <h2 class="floatleft">Tổng Cộng</h2>
+                            <h2 class="floatright">{{$bill->b_total}}</h2>
                         </div>
                         <div class="subtotal-content fix">
                             <h2 class="floatleft">Shipping & Handling </h2>
@@ -233,15 +199,15 @@
                         </div>
                     </div>
                     <div class="payment-method">
-                        <h2>PAYMENT METHOD</h2>
+                        <h2>PHƯƠNG THỨC THANH TOÁN</h2>
                         <div class="payment-checkbox">
-                            <input type="checkbox" checked> Direct Bank Transfer
+                            <input type="checkbox" checked> Thanh Toán Khi Nhận Hàng
                         </div>
-                        <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order wont be shipped until the funds have cleared in our account.</p>
-                        <div class="payment-checkbox">
+                        <p>Nhân Viên DVKH sẽ xác nhận lại đơn hàng của Bạn trước khi giao hàng.</p>
+                        {{-- <div class="payment-checkbox">
                             <input type="checkbox"> Chaque Payment <br>
                             <input type="checkbox"> Paypal
-                        </div>
+                        </div> --}}
                         <button type="button" class="btn">Place Order</button>
                     </div>
 
