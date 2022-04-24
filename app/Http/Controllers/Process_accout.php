@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Users\Process;
 use DB;
+use Illuminate\Support\Facades\Validator;
 class Process_accout extends Controller
 {
     private $user;
@@ -58,39 +59,71 @@ class Process_accout extends Controller
     // process register
     public function register(Request $request)
     {
-        $request->validate([
+
+
+        $rules = [
             'user_name' => 'required|min:8',
             'user_mail' => 'required|email|unique:user,u_email',
-            'user_phone' => 'required|digits:10',
+            'user_phone' => 'required|digits:10|unique:user,u_phone',
             'user_password' => 'required|min:8',
             'user_password_repeat' => 'required|min:8|same:user_password',
-            'user_address' => 'required'
-        ],[
+            'city' => 'required',
+            'district' => 'required',
+            'wards' => 'required'
+        ];
+        $mess = [
             'user_name.required' => 'Họ và tên không được trống',
             'user_name.min' => 'Họ và tên không dưới :min ký tự',
             'user_mail.required'=> 'Email không được trống',
             'user_mail.email' => 'Email không đúng định dạng',
             'user_mail.unique' => 'Email đã tồn tại',
             'user_phone.digits' => 'Số Điện Thoại không hợp lệ',
-            'user_phone.required' => 'Số Điện Thoạt bắt buộc nhập',
+            'user_phone.required' => 'Số Điện Thoạt bắt buộc nhập',            
+            'user_phone.unique' => 'Số điện thoại đã tồn tại',
             'user_password.required' => 'Mật Khẩu bắt buộc nhập',
             'user_password.min' => 'Mật Khẩu phải từ :min ký tự trở lên',
             'user_password_repeat.required' => 'Mật Khẩu bắt buộc nhập',
             'user_password_repeat.min' => 'Mật Khẩu phải từ :min ký tự trở lên',
-            'user_address.required' => 'Địa chỉ không được trống',
-            
-        ]);
-
-        $dataInsert=[
-            $request->user_name,
-            $request->user_mail,
-            sha1($request->user_password), //mã hóa bằng sha1
-            $request->user_phone,
-            $request->user_address
+            'user_password_repeat.same' =>'Mật khẩu không khớp'
         ];
-        $this->user->register($dataInsert);
-        
-        return redirect()->route('home');
+        $check = Validator::make($request->all(),$rules,$mess);
+        $check->validate(); 
+        if (!$check->fails()) {
+            $dataUser = [
+                'u_name' => $request->user_name,
+                'u_email' => $request->user_mail,
+                'u_password' => $request->user_password,
+                'u_phone' => $request->user_phone,
+                'city_id' => $request->city,
+                'district_id' => $request->district,
+                'wards_id' => $request->wards,
+                'u_avatar' => ''
+            ];
+            // insert data user
+            DB::table('user')
+            ->insert($dataUser);
+            //get last insert id
+            $lastInsertId = DB::getPdo()->lastInsertId();
+            $query = $this->user->userLogin($request->user_mail, $request->user_password);  
+            // save session login          
+            $dataUser = [
+                "user_id" => $query[0]->id,
+                "user_email" => $query[0]->u_email,
+                "user_name" => $query[0]->u_name,
+                "user_phone" => $query[0]->u_phone,
+                "city" => $query[0]->city_name,
+                "city_id" => $query[0]->city_code,
+                "district" => $query[0]->district_name,
+                "district_id" => $query[0]->district_code,
+                "wards" => $query[0]->wards_name,
+                "wards_id" => $query[0]->wards_code
+            ];
+            if(!empty($query)){
+                session($dataUser);
+                return redirect()->route('home');  
+            }
+        }
+        // return redirect()->route('home');
     }
 
     public function login(Request $request)
@@ -106,7 +139,6 @@ class Process_accout extends Controller
         $email = $request->user_email;
         $pass = sha1($request->user_password);//mã hóa bằng sha1           
         $query = $this->user->userLogin($email, $pass);  
-        // dd($query);
         // save session login          
         $dataUser = [
             "user_id" => $query[0]->id,

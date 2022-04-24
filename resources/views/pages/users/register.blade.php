@@ -89,7 +89,8 @@
                         
                     @endif --}}
                     <!-- Form -->
-                    <form type="form" action="{{route('post_register')}}" method="POST">
+                    <form type="form" action="{{route('post_register')}}" method="POST" id="from_register" 
+                    data-netlify="true" enctype="multipart/form-data">
                         @csrf
                         <!-- tên người dùng -->
                         <div class="form-group mt-2 mb-2">
@@ -101,12 +102,12 @@
                             <!-- Input group -->
                             <div class="input-group input-group-merge">
                                 <!-- Input -->
-                                <input type="text" placeholder="Họ và Tên phải nhiều hơn 6 ký tự" class="form-control form-control-appended" name="user_name" value="{{old('user_name')}}"/>
+                                <input type="text" 
+                                class="form-control form-control-appended" name="user_name" />
+                                <label style="color: red" class="error error_user_name"></label>
+
                             </div>
                             {{-- label thông báo lỗi --}}
-                            @error('user_name')
-                                <label style="color: red">{{$message}}</label>
-                            @enderror
                         </div>
                         <!-- email -->
                         <div id="i4x74" class="form-group mt-2 mb-2">
@@ -120,11 +121,9 @@
                             <!-- Input group -->
                             <div class="input-group input-group-merge">
                                 <!-- Input -->
-                                <input type="email" placeholder="Email dùng để đăng nhập" class="form-control form-control-appended" name="user_mail" value="{{old('user_mail')}}"/>
+                                <input type="email" placeholder="Email dùng để đăng nhập" class="form-control form-control-appended" name="user_mail" />
                                 {{-- label thông báo lỗi --}}
-                                @error('user_mail')
-                                    <label style="color: red">{{$message}}</label>
-                                @enderror
+                                <label style="color: red" class="error error_user_mail"></label>
                             </div>
                         </div>
                         {{-- Số Điện Thoại --}}
@@ -138,12 +137,11 @@
                             <!-- Input group -->
                             <div class="input-group input-group-merge">
                                 <!-- Input -->
-                                <input type="text" placeholder="Số điện thoại " class="form-control form-control-appended" name="user_phone" value="{{old('user_phone')}}"/>
+                                <input type="text" placeholder="Số điện thoại " class="form-control form-control-appended" name="user_phone" />
+                                <label style="color: red" class="error error_user_phone"></label>
+
                             </div>
                             {{-- label thông báo lỗi --}}
-                            @error('user_phone')
-                                <label style="color: red">{{$message}}</label>
-                            @enderror
                         </div>
                         {{-- Mật khẩu --}}
                         <div id="i4x74" class="form-group mt-2 mb-2">
@@ -157,12 +155,12 @@
                             <!-- Input group -->
                             <div class="input-group input-group-merge">
                                 <!-- Input -->
-                                <input type="password" placeholder="Mật khẩu " class="form-control form-control-appended" name="user_password" value="{{old('user_password')}}"/>
+                                <input type="password" placeholder="Mật khẩu " class="form-control form-control-appended" name="user_password" />
+                                <label style="color: red" class="error error_user_password"></label>
+
                             </div>
                             {{-- label thông báo lỗi --}}
-                            @error('user_password')
-                                <label style="color: red">{{$message}}</label>
-                            @enderror
+
                         </div>
                         {{-- Xác Nhận Mật khẩu --}}
                         <div id="i4x74" class="form-group mt-2 mb-2">
@@ -176,15 +174,14 @@
                             <!-- Input group -->
                             <div class="input-group input-group-merge">
                                 <!-- Input -->
-                                <input type="password" placeholder="Nhập Lại Mật khẩu " class="form-control form-control-appended" name="user_password_repeat" value="{{old('user_password_repeat')}}"/>
+                                <input type="password" placeholder="Nhập Lại Mật khẩu " class="form-control form-control-appended" name="user_password_repeat" />
+                                <label style="color: red" class="error error_user_password_repeat"></label>
+
                             </div>
                             {{-- label thông báo lỗi --}}
-                            @error('user_password_repeat')
-                                <label style="color: red">{{$message}}</label>
-                            @enderror
+
                         </div>
                         
-                        {{-- Mật khẩu --}}
                         <div id="i4x74" class="form-group mt-2 mb-2">
                             <div id="icrqh" class="row">
                                 <div id="iwfuf" class="col">
@@ -206,9 +203,6 @@
                                 </select>
                               </div>
                             {{-- label thông báo lỗi --}}
-                            @error('user_address')
-                                <label style="color: red">{{$message}}</label>
-                            @enderror
                             {{-- Select district --}}
                             <div id="icrqh" class="row">
                                 <div id="iwfuf" class="col">
@@ -249,7 +243,7 @@
                         </div>
                         <!-- Submit -->
                         <p class="text-center">
-                            <button id="ixxr2" class="btn btn-lg btn-block btn-primary mb-3 mt-2"> ĐĂNG KÝ </button><!-- Link -->
+                            <button type="submit" id="ixxr2" class="btn btn-lg btn-block btn-primary mb-3 mt-2"> ĐĂNG KÝ </button><!-- Link -->
                           
                         </p>
                         {{-- <div id="i4x74" class="form-group mt-2 mb-2">

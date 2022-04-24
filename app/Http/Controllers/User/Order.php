@@ -52,7 +52,7 @@ class Order extends Controller
             'product' => $dataDes
         ]);
     }
-    // user order product no login
+    // user order product login
     public function orderProduct(Request $request)
     {
         $rules = [
