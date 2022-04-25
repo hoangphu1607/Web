@@ -8,11 +8,6 @@ $('select#city').on('change', function (e) {
     selectDistrictByCity(e);
 });
 
-// $(window).on('load',function(e){
-//     district_code = $("select#district").val();
-//     // console.log(district_code);
-// });
-
 $('select#district').on('change', function (e) {
     var district_code = $("select#district").val();
     selectWardsByDistrict(district_code);    
@@ -21,7 +16,7 @@ function selectDistrictByCity(e) {
     e.preventDefault();
     city_code = $("select#city").val();
     $.ajax({
-        url:'dataDistrict',
+        url:urlDistrict,
         method:'get',
         data:{
             id_city : city_code
@@ -45,7 +40,7 @@ function selectDistrictByCity(e) {
 
 function selectWardsByDistrict(district_code) {
     $.ajax({
-        url:'dataWards',
+        url:urlWards,
         method:'get',
         data:{
             district_code : district_code

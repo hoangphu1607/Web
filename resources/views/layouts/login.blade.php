@@ -37,6 +37,8 @@
 <script src="{{asset('js/custum/address.js')}}"></script>
 <script>		
     var _token = "{{ csrf_token() }}";
+    var urlDistrict = "{{URL::to('dataDistrict')}}";
+    var urlWards = "{{URL::to('dataWards')}}";
 </script>
 <script src="{{asset('js/custum/user.js')}}"></script>
 </html>

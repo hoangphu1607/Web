@@ -101,7 +101,7 @@
                         </div>
                         <div class="checkout-form">
                             <form action="#" method="post" class="form-horizontal">
-                                @if(!empty($dataUser))
+                                @if($dataUser[0] != null)  
                                 <div class="form-group">
                                     <label class="control-label col-md-3">
                                         Họ Tên <sup>*</sup>
@@ -160,15 +160,86 @@
                                 </div>
                             </form>
                         </div>
+                        @else
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Họ Tên <sup>*</sup>
+                                </label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control"  value="" placeholder="Họ và tên">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Email <sup>*</sup>
+                                </label>
+                                <div class="col-md-9">
+                                    <input type="email" class="form-control"  value="" placeholder="Email người đặt hàng">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Số Điện Thoại <sup>*</sup>
+                                </label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control"  value="" placeholder="Số điện thoại nhận hàng">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Thành Phố, Tỉnh <sup>*</sup>
+                                </label>
+                                <div class="col-md-9" id="city_name">
+                                    <select class="form-control" id="city" name="city">
+                                        @if(!empty($dataCity))                        
+                                            @foreach($dataCity as $city)
+                                                <option value="{{$city->city_code}}" class="option_city" >{{$city->city_name}}</option>
+                                            @endforeach
+                                        @else
+                                            <option value="null">Null</option>
+                                        @endif
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                Quận, Huyện<sup>*</sup>
+                                </label>
+                                <div class="col-md-9">
+                                    <select class="form-control" id="district" name="district">
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Phường, Xã <sup>*</sup>
+                                </label>
+                                <div class="col-md-9" id="district_name">
+                                    <select class="form-control" id="wards" name="wards">
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    Thông Tin Khác
+                                </label>
+                                <div class="col-md-9">
+                                    <textarea rows="9"></textarea>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
                         @endif
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-5 ">
+                    @if(count($dataBill) != 0)
                     <div class="review-order scroll">
                         <div class="checkout-head">
                             <h2>Các Sản Phẩm Bạn Đặt</h2>
                         </div>
-                        @if(!empty($dataBill))
                         @foreach ($dataBill as $bill)                          
                         <div class="single-review">
                             <div class="single-review-img">
@@ -182,12 +253,12 @@
                             </div>
                         </div>
                         @endforeach 
-                        @endif                       
                     </div>
+
                     <div class="subtotal-area">
                         <div class="subtotal-content fix">
                             <h2 class="floatleft">Tổng Cộng</h2>
-                            <h2 class="floatright">{{$bill->b_total}}</h2>
+                            {{-- <h2 class="floatright">{{$bill->b_total}}</h2> --}}
                         </div>
                         <div class="subtotal-content fix">
                             <h2 class="floatleft">Shipping & Handling </h2>
@@ -210,6 +281,7 @@
                         </div> --}}
                         <button type="button" class="btn">Place Order</button>
                     </div>
+                    @endif                       
 
                 </div>
             </div>
@@ -222,9 +294,6 @@
     {{--jquery.autocomplete.js--}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     {{--quick defined--}}
-    <script>
-      $(function () {
-          // your custom javascript
-      });
-   </script>
+
+    <script src="{{asset('js/custum/address.js')}}"></script>
 @stop

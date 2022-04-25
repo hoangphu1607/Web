@@ -201,7 +201,7 @@
                                         <option value="null">Null</option>
                                     @endif
                                 </select>
-                              </div>
+                            </div>
                             {{-- label thông báo lỗi --}}
                             {{-- Select district --}}
                             <div id="icrqh" class="row">
@@ -212,13 +212,7 @@
                             </div> 
                             <div class="form-group" id="district_name">
                                 <select class="form-control" id="district" name="district">
-                                        {{-- @if(!empty($dataDistrict))                        
-                                        @foreach($dataDistrict as $district)
-                                            <option value="{{$district->district_code}}"class="option_district">{{$district->district_name}}</option>
-                                        @endforeach
-                                    @else
-                                        <option value="null">Null</option>
-                                    @endif --}}
+
                                 </select>
                             </div>
                             {{-- Select wards --}}
@@ -230,13 +224,7 @@
                             </div> 
                             <div class="form-group">
                                 <select class="form-control" id="wards" name="wards">
-                                        {{-- @if(!empty($dataWards))                        
-                                        @foreach($dataWards as $wards)
-                                            <option value="{{$wards->wards_code}}">{{$wards->wards_name}}</option>
-                                        @endforeach
-                                    @else
-                                        <option value="null">Null</option>
-                                    @endif --}}
+
                                 </select>
                             </div>
 

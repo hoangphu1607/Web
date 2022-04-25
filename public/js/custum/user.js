@@ -23,3 +23,4 @@ $('#from_register').on('submit', function(e){
         }
     })
 })  
+

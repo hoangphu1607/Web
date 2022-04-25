@@ -20,13 +20,26 @@ class Bill extends Controller
         ->where('b_user_id',$user_id)
         ->where('b_status',0) //lấy ra bill đang đặt
         ->get();
-        // dd($dataBill);
+        // dd(count($dataBill) == 0);
         return view('pages.users.bill',compact('dataBill'));
     }
 
     //show check out page
     public function showCheckOut(Request $request)
     {
+        //city data
+        $dataCity = DB::table('city')
+        ->get();
+
+        //district data by city data id first
+        $dataDistrict = DB::table('district')
+        ->where('city_code',$dataCity[0]->id)
+        ->get();
+        //wards data by district data id first
+        $dataWards = DB::table('wards')
+        ->where('district_code',$dataDistrict[0]->id)
+        ->get();
+        
         $user_id = $request->session()->get('user_id');
         $dataBill = DB::table('bill_detail')
         ->select('bill_detail.*','product.pro_name', 'description_detail.type','product.pro_avatar','bill.b_total')
@@ -45,7 +58,7 @@ class Bill extends Controller
             $district = $request->session()->get('district'),
             $wards = $request->session()->get('wards'),
         ];
-
-        return view('pages.users.checkout', compact('dataBill','dataUser'));
+        // dd(($dataUser[0]) != null);
+        return view('pages.users.checkout', compact('dataBill','dataUser','dataCity','dataDistrict','dataWards'));
     }
 }

@@ -98,36 +98,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(!empty($dataBill))
-                                @foreach ($dataBill as $bill)
-                                <tr>
-                                    <td class="th-img">
-                                        <a href="#"><img src="{{asset('')}}{{$bill->pro_avatar}}" alt="cart" style="width:100px;height: 100px;"></a>
-                                    </td>
-                                    <td class="th-details">
-                                        <h2><a href="#">{{$bill->pro_name}}</a></h2>
-                                        {{-- <div class="best-product-rating">
-                                            <a href="#"><i class="fa fa-star"></i></a>
-                                            <a href="#"><i class="fa fa-star"></i></a>
-                                            <a href="#"><i class="fa fa-star"></i></a>
-                                            <a href="#"><i class="fa fa-star-o"></i></a>
-                                            <a href="#"><i class="fa fa-star-o"></i></a>
-                                        </div> --}}
-                                        <p>Loại : {{$bill->type}}</p>
-                                        {{-- <p>Product Code  : 2201 RS</p> --}}
-                                    </td>
-                                    {{-- <td class="th-edit"><a href="#">Edit</a></td> --}}
-                                    <td class="th-price">
-                                        {{$bill->bd_amount}}
-                                        {{-- <input type="number" min="1" placeholder="1" value="{{$bill->bd_amount}}">                                         --}}
-                                    </td>
-                                    <td class="th-price">{{$bill->bd_price}}</td>
-                                    <td class="th-total">{{$bill->bd_total_amount}}</td>
-                                    <td class="th-delate"><a href="#"><i class="fa fa-trash"></i></a></td>
-                                </tr>
-                                @endforeach
+                                @if(count($dataBill) != 0)
+                                    @foreach ($dataBill as $bill)
+                                    <tr>
+                                        <td class="th-img">
+                                            <a href="#"><img src="{{asset('')}}{{$bill->pro_avatar}}" alt="cart" style="width:100px;height: 100px;"></a>
+                                        </td>
+                                        <td class="th-details">
+                                            <h2><a href="#">{{$bill->pro_name}}</a></h2>
+                                            <p>Loại : {{$bill->type}}</p>
+                                        </td>
+                                        <td class="th-price">
+                                            {{$bill->bd_amount}}
+                                        </td>
+                                        <td class="th-price">{{$bill->bd_price}}</td>
+                                        <td class="th-total">{{$bill->bd_total_amount}}</td>
+                                        <td class="th-delate"><a href="#"><i class="fa fa-trash"></i></a></td>
+                                    </tr>
+                                    @endforeach
                                 @else
-                                <p>No Data</p>
+                                    <tr>
+                                        <td colspan="6"><i>Không có dữ liệu</i></td>
+                                    </tr>
                                 @endif
                             </tbody>
                         </table>

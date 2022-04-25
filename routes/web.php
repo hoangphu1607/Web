@@ -14,7 +14,7 @@ use App\Http\Controllers\user\HomeController;
 use App\Http\Controllers\user\Order;
 use App\Http\Controllers\user\Bill;
 use App\Http\Controllers\User\UserController;
-
+use App\Http\Controllers\Admin\ManageOrder;
 // use App\Http\Controllers\Process_accout;
 
 /*
@@ -106,6 +106,12 @@ Route::prefix('admin')->group( function(){
     Route::post('form-addProduct',[ProductsController::class, 'addProduct'])->middleware('checkLogin')->name('addProduct');
     //update content
     Route::POST('updateContent',[ProductsController::class, 'updateContent'])->middleware('checkLogin')->name('updateContent');
+
+
+    //xử lý đặt hàng
+    Route::get('quan-ly-dat-hang',[ManageOrder::class, 'showListOrder'])->middleware('checkLogin')->name('listOrder');
+    Route::get('getBillUserOrder',[ManageOrder::class, 'allBillUserOrder'])->middleware('checkLogin')->name('getBillUserOrder');
+
 });
 
 Route::get('login',[Process_accout::class,'index_login'])->name('login');
