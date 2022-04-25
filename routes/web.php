@@ -111,6 +111,8 @@ Route::prefix('admin')->group( function(){
     //xử lý đặt hàng
     Route::get('quan-ly-dat-hang',[ManageOrder::class, 'showListOrder'])->middleware('checkLogin')->name('listOrder');
     Route::get('getBillUserOrder',[ManageOrder::class, 'allBillUserOrder'])->middleware('checkLogin')->name('getBillUserOrder');
+    //get Bill Detail by Id
+    Route::get('getBillDetailById',[ManageOrder::class, 'getBillDetailById'])->middleware('checkLogin')->name('getBillDetailById');
 
 });
 

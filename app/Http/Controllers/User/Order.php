@@ -36,7 +36,7 @@ class Order extends Controller
 
     public function showProductDetailById($id)
     {    
-        $data_query = DB::table($this->table)
+        $data_query = DB::table($this->table)        
         ->where('id','=',$id)
         ->first();
         // dd($data_query);

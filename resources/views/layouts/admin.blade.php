@@ -32,7 +32,7 @@
     @include('partial.admin.header')
     @yield('ckeditor')
     @yield('content')
-    
+    @yield('modal')
     @include('partial.modal.confirm')
     @include('partial.users.footer')
 

@@ -108,7 +108,9 @@
   </div>  
 
 @stop
-
+@section('modal')
+    @include('partial.modal.DetailListOrder')
+@stop
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
     {{--jquery.autocomplete.js--}}
@@ -116,6 +118,8 @@
     {{--quick defined--}}
     <script>
         var urlGetBillUserOrder = "{{route('getBillUserOrder')}}";
+        var urlGetBillDetailById = "{{route('getBillDetailById')}}";
+        var asset = "{{asset('')}}";
         // console.log(urlGetBillUserOrder);
     </script>
     {{-- Datatable --}}
