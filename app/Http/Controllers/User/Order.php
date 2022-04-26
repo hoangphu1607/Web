@@ -36,10 +36,11 @@ class Order extends Controller
 
     public function showProductDetailById($id)
     {    
-        $data_query = DB::table($this->table)        
-        ->where('id','=',$id)
+        $data_query = DB::table($this->table)
+        ->where('product.id','=',$id)
+        ->leftjoin('description_detail','product.id','=', 'description_detail.product_id')
         ->first();
-        // dd($data_query);
+        //dd($data_query);
         return view("pages.users.details",compact('data_query'));
     }
     //Get a description by id

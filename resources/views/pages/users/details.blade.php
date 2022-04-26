@@ -170,7 +170,7 @@
                                     <a href="#"><i class="fa fa-star"></i></a>
                                     <p>(3 costomar review)</p>
                                 </div>
-                                <h3 style="color: red">{{$data_query->pro_price}}đ</h3>
+                                <h3 style="color: red">{{$data_query->price}}đ</h3>
                             </div>
                             <div class="product-item-code">
                                 <p>Item Code  :   #897896</p>
