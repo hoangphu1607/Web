@@ -93,8 +93,9 @@
                 
                     <p class="text-muted text-center mb-5"></p>
                     <!-- Form -->
-                                      
-                    <form type="form"  method="POST" action="{{route('adminLogin')}}">
+                    <label style="color: red;" class="error error_request" ></label>
+       
+                    <form type="form" method="POST" action="{{route('adminLogin')}}" id="loginadmin">
                         @csrf
                         <!-- tài khoản -->
                         <div class="form-group">
@@ -108,8 +109,8 @@
                             <!-- Input group -->
                             <div class="input-group input-group-merge">
                                 <!-- Input -->
-                                <input type="text" placeholder="Tên đăng nhập" class="form-control form-control-appended" name="admin_mail" value="{{old('user_email')}}"/><!-- Icon -->
-                                
+                                <input type="text" placeholder="Tên đăng nhập" class="form-control form-control-appended" name="admin_name" />
+                                <label style="color: red;" class="error error_admin_name" ></label>
                             </div>
                             <!-- thông báo lỗi -->
                             @error('user_email')
@@ -129,6 +130,7 @@
                             <div class="input-group input-group-merge">
                                 <!-- Input -->
                                 <input type="password" placeholder="Mật khẩu " class="form-control form-control-appended" name="admin_password"/>
+                                <label style="color: red;" class="error error_admin_password" ></label>
                             </div>
                             <!-- thong bao loi -->
                             @error('user_password')
@@ -145,4 +147,8 @@
         </div>
     </div> <!-- / .container -->
 </section>
+@stop
+
+@section('scripts')
+    <script src="{{asset('js/custom/admin/admin_login.js')}}"></script>
 @stop

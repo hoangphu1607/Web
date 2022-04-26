@@ -23,18 +23,42 @@ class manageController extends Controller
     }
     //đăng nhập quản trị
     public function login_admin(Request $request)
-    {
-        $lists = DB::table('admin')
-        ->where('a_email', $request->admin_mail)
-        ->where('a_password', sha1($request->admin_password))
-        ->get();
-        //Để dữ liệu vào session
-        $dataAdmin = [
-             'id_admin'=> $lists[0]->id,
-             'admin_name' => $lists[0]->a_name,
+    {   //validation
+        $rules = [
+            'admin_name' => 'required',
+            'admin_password' => 'required',
         ];
-        session($dataAdmin);
-        return redirect()->route('form_addProduct');
+        $messages = [
+            'admin_name.required' => 'Tên tài khoản không được bỏ trống',
+            'admin_password.required' => 'Mật khẩu không được bỏ trống',
+        ];
+
+        $check = Validator::make($request->all(),$rules,$messages);
+        $check->validate(); 
+        if(!$check->fails()){
+            $lists = DB::table('admin')
+            ->where('a_email', $request->admin_name)
+            ->where('a_password', sha1($request->admin_password))
+            ->get();
+            //Để dữ liệu vào session
+            if(count($lists) != 0){
+                $dataAdmin = [
+                    'id_admin'=> $lists[0]->id,
+                    'admin_name' => $lists[0]->a_name,
+                ];
+                session($dataAdmin);
+                return response()->json([
+                    'success' => true,
+                ]);
+            }else{
+                return response()->json([
+                    'fail' => false,
+                ]);
+            }
+
+            // return redirect()->route('form_addProduct');
+        }
+        
     }
     //Xóa đăng nhập admin
     public function adminLogout()
