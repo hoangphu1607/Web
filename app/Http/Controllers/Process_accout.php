@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Users\Process;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 class Process_accout extends Controller
 {
@@ -156,8 +156,8 @@ class Process_accout extends Controller
             session($dataUser);
             return redirect()->route('home');  
         }               
-        else
-            return redirect()->route('post_login')->with('message','Tên Đăng Nhập hoặc Mật Khẩu không chính xác');
+        // else
+        //     return redirect()->route('post_login')->with('message','Tên Đăng Nhập hoặc Mật Khẩu không chính xác');
     }
     //logout
     public function logout()

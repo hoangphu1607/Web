@@ -116,8 +116,8 @@ Route::prefix('admin')->group( function(){
 
 });
 
-Route::get('login',[Process_accout::class,'index_login'])->name('login');
-Route::post('login',[Process_accout::class,'login'])->name('post_login');
+
+
 Route::get('register', [Process_accout::class,'index_register'])->name('register');
 Route::post('register', [Process_accout::class,'register'])->name('post_register');
 Route::get('logout', [Process_accout::class,'logout'])->name('logout');
@@ -136,4 +136,6 @@ Route::get('details', function(){
 
 Route::group(['prefix' => 'user', 'as' => 'user.'], function(){
     Route::get('',[UserController::class,'index'])->name('index');
+    Route::get('dang-nhap',[Process_accout::class,'index_login'])->name('login');
+    Route::post('dang-nhap',[Process_accout::class,'login'])->name('post_login');
 });

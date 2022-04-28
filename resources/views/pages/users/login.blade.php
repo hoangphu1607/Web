@@ -94,7 +94,7 @@
                     <p class="text-muted text-center mb-5"></p>
                     <!-- Form -->
                                       
-                    <form type="form"  method="POST" action="{{route('post_login')}}">
+                    <form type="form"  method="POST" action="user.post_login" id = "loginuser">
                         @csrf
                         <!-- tài khoản -->
                         <div class="form-group">
@@ -109,7 +109,7 @@
                             <div class="input-group input-group-merge">
                                 <!-- Input -->
                                 <input type="text" placeholder="Tên đăng nhập" class="form-control form-control-appended" name="user_email" value="{{old('user_email')}}"/><!-- Icon -->
-                                
+                                <label style="color: red;" class="error error_name" ></label>
                             </div>
                             <!-- thông báo lỗi -->
                             @error('user_email')
@@ -129,6 +129,7 @@
                             <div class="input-group input-group-merge">
                                 <!-- Input -->
                                 <input type="password" placeholder="Mật khẩu " class="form-control form-control-appended" name="user_password"/>
+                                <label style="color: red;" class="error error_password" ></label>
                             </div>
                             <!-- thong bao loi -->
                             @error('user_password')
@@ -145,4 +146,7 @@
         </div>
     </div> <!-- / .container -->
 </section>
+@stop
+@section('scripts')
+    <script src="{{asset('js/custom/admin/admin_login.js')}}"></script>
 @stop

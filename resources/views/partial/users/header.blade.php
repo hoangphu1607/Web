@@ -39,7 +39,7 @@
                                     </li>
                                 @else
                                     <li>
-                                        <a href="{{route('login')}}"> <i class="fa fa-lock"></i>Đăng Nhập </a>                                    
+                                        <a href="{{route('user.login')}}"> <i class="fa fa-lock"></i>Đăng Nhập </a>                                    
                                     </li>
                                     <li>
                                         <a href="{{route('register')}}"><i class="fa fa-pencil-square-o"></i>Đăng Ký</a>
