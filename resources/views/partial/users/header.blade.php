@@ -30,7 +30,7 @@
                     <div class="col-md-8 col-sm-8 col-xs-12">
                         <div class="header-top-right">
                             <ul class="list-inline">
-                                @if(session('user_id'))                                    
+                                @if(session('id_user'))                                    
                                     <li>
                                         <a href="{{route('user.index')}}" style="color: #85ff85"><i class="fa fa-user"></i>Xin Chào {{session('user_name')}} !!!</a>
                                     </li>

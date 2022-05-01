@@ -84,17 +84,11 @@
                 <div class="card p-md-5 p-2">
                     <h1 class="display-4 text-center mb-3"> ĐĂNG NHẬP </h1>
                     <!-- Subheading -->
-                    @if(session('message'))
-                        <div style="color: red; text-align: center">
-                            <b>{{session('message')}}</b>
-                        </div>                        
-                    @endif 
-                                          
-                
+                    <label style="color: red;" class="error error_request" ></label>                                                        
                     <p class="text-muted text-center mb-5"></p>
                     <!-- Form -->
                                       
-                    <form type="form"  method="POST" action="user.post_login" id = "loginuser">
+                    <form type="form"  method="POST" action="{{route('user.post_login')}}" id = "loginuser">
                         @csrf
                         <!-- tài khoản -->
                         <div class="form-group">
@@ -108,8 +102,8 @@
                             <!-- Input group -->
                             <div class="input-group input-group-merge">
                                 <!-- Input -->
-                                <input type="text" placeholder="Tên đăng nhập" class="form-control form-control-appended" name="user_email" value="{{old('user_email')}}"/><!-- Icon -->
-                                <label style="color: red;" class="error error_name" ></label>
+                                <input type="text" placeholder="Tên đăng nhập" class="form-control form-control-appended" name="user_email" /><!-- Icon -->
+                                <label style="color: red;" class="error error_user_email" ></label>
                             </div>
                             <!-- thông báo lỗi -->
                             @error('user_email')
@@ -129,7 +123,7 @@
                             <div class="input-group input-group-merge">
                                 <!-- Input -->
                                 <input type="password" placeholder="Mật khẩu " class="form-control form-control-appended" name="user_password"/>
-                                <label style="color: red;" class="error error_password" ></label>
+                                <label style="color: red;" class="error error_user_password" ></label>
                             </div>
                             <!-- thong bao loi -->
                             @error('user_password')
@@ -148,5 +142,9 @@
 </section>
 @stop
 @section('scripts')
-    <script src="{{asset('js/custom/admin/admin_login.js')}}"></script>
+    <script src="{{asset('js\custom\user\login.js')}}"></script>
+    <script>
+        var url_home = "{{route('home')}}";
+        console.log(url_home);
+    </script>
 @stop

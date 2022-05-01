@@ -128,41 +128,52 @@ class Process_accout extends Controller
 
     public function login(Request $request)
     {
-        $request->validate([
+        // $request->validate([
+        //     'user_email' => 'required',
+        //     'user_password' => 'required',
+        // ],[
+        //     'user_email.required' => 'Tên đăng nhập không được trống',
+        //     'user_password.required' => 'Mật khẩu không được trống',
+        // ]);
+        $rules = [
             'user_email' => 'required',
             'user_password' => 'required',
-        ],[
-            'user_email.required' => 'Tên đăng nhập không được trống',
-            'user_password.required' => 'Mật khẩu không được trống',
-        ]);
-        
-        $email = $request->user_email;
-        $pass = sha1($request->user_password);//mã hóa bằng sha1           
-        $query = $this->user->userLogin($email, $pass);  
-        // save session login          
-        $dataUser = [
-            "user_id" => $query[0]->id,
-            "user_email" => $query[0]->u_email,
-            "user_name" => $query[0]->u_name,
-            "user_phone" => $query[0]->u_phone,
-            "city" => $query[0]->city_name,
-            "city_id" => $query[0]->city_code,
-            "district" => $query[0]->district_name,
-            "district_id" => $query[0]->district_code,
-            "wards" => $query[0]->wards_name,
-            "wards_id" => $query[0]->wards_code
         ];
-        if(!empty($query)){
-            session($dataUser);
-            return redirect()->route('home');  
-        }               
-        // else
-        //     return redirect()->route('post_login')->with('message','Tên Đăng Nhập hoặc Mật Khẩu không chính xác');
+        $messages = [
+            'user_email.required' => 'Tên tài khoản không được bỏ trống',
+            'user_password.required' => 'Mật khẩu không được bỏ trống',
+        ];
+        $check = Validator::make($request->all(),$rules,$messages);
+        $check->validate(); 
+        if(!$check->fails()){
+            $lists = DB::table('user')
+            ->where('u_email', $request->user_email)
+            ->where('u_password', sha1($request->user_password))
+            ->get();
+            //Để dữ liệu vào session
+            if(count($lists) != 0){
+                $data = [
+                    'id_user'=> $lists[0]->id,
+                    'user_name' => $lists[0]->u_name,
+                ];
+                session($data);
+                return response()->json([
+                    'success' => true,
+                    'data' => $data,
+                    'count' => count($lists),
+                ]);
+            }
+            else{
+                return response()->json([
+                    'fail' => false,
+                ]);
+            }  
     }
+}
     //logout
     public function logout()
     {
-        session()->pull('user_id');        
+        session()->pull('id_user');        
         return redirect()->route('home');
     }
 }
