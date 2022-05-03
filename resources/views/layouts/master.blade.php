@@ -16,6 +16,12 @@
             font-variant-numeric : normal;
             /* font-family: "Times New Roman", Times, serif; */
         }
+        div.list-data {
+            /* background-color: lightblue;
+            width: 250px; */
+            height: 500px;
+            overflow: scroll;
+            }
     </style>
     <script src="https://kit.fontawesome.com/0bd4a877f8.js" crossorigin="anonymous"></script>    
     {{-- quantity bootstrap --}}
@@ -41,6 +47,8 @@
     <script>
         var urlDistrict = "{{URL::to('dataDistrict')}}";
         var urlWards = "{{URL::to('dataWards')}}";
+        var _token = "{{ csrf_token() }}";
+        var home = "{{route('home')}}"
    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

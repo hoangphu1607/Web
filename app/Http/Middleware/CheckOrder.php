@@ -16,7 +16,7 @@ class CheckOrder
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!$request->session()->has('user_id')){
+        if(!$request->session()->has('id_user')){
             return redirect()->route('login');
         }
         return $next($request);

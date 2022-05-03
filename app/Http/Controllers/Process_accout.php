@@ -92,7 +92,7 @@ class Process_accout extends Controller
             $dataUser = [
                 'u_name' => $request->user_name,
                 'u_email' => $request->user_mail,
-                'u_password' => $request->user_password,
+                'u_password' => sha1($request->user_password),
                 'u_phone' => $request->user_phone,
                 'city_id' => $request->city,
                 'district_id' => $request->district,
@@ -104,10 +104,10 @@ class Process_accout extends Controller
             ->insert($dataUser);
             //get last insert id
             $lastInsertId = DB::getPdo()->lastInsertId();
-            $query = $this->user->userLogin($request->user_mail, $request->user_password);  
+            $query = $this->user->userLogin($request->user_mail,sha1($request->user_password) );  
             // save session login          
             $dataUser = [
-                "user_id" => $query[0]->id,
+                "id_user" => $query[0]->id,
                 "user_email" => $query[0]->u_email,
                 "user_name" => $query[0]->u_name,
                 "user_phone" => $query[0]->u_phone,
@@ -147,14 +147,26 @@ class Process_accout extends Controller
         $check->validate(); 
         if(!$check->fails()){
             $lists = DB::table('user')
-            ->where('u_email', $request->user_email)
-            ->where('u_password', sha1($request->user_password))
+            ->select('user.*','city.city_name','city.city_code','district.district_name','district.district_code','wards.wards_name','wards.wards_code')
+            ->join('city', 'city.city_code', '=', 'user.city_id')  
+            ->join('district', 'district.district_code', '=', 'user.district_id')
+            ->join('wards', 'wards.wards_code', '=', 'user.wards_id')
+            ->where('u_email',$request->user_email)
+            ->where('u_password',sha1($request->user_password))
             ->get();
             //Để dữ liệu vào session
             if(count($lists) != 0){
                 $data = [
-                    'id_user'=> $lists[0]->id,
-                    'user_name' => $lists[0]->u_name,
+                    "id_user" => $lists[0]->id,
+                    "user_email" => $lists[0]->u_email,
+                    "user_name" => $lists[0]->u_name,
+                    "user_phone" => $lists[0]->u_phone,
+                    "city" => $lists[0]->city_name,
+                    "city_id" => $lists[0]->city_code,
+                    "district" => $lists[0]->district_name,
+                    "district_id" => $lists[0]->district_code,
+                    "wards" => $lists[0]->wards_name,
+                    "wards_id" => $lists[0]->wards_code
                 ];
                 session($data);
                 return response()->json([

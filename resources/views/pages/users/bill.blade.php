@@ -111,8 +111,8 @@
                                         <td class="th-price">
                                             {{$bill->bd_amount}}
                                         </td>
-                                        <td class="th-price">{{$bill->bd_price}}</td>
-                                        <td class="th-total">{{$bill->bd_total_amount}}</td>
+                                        <td class="th-price">{{number_format($bill->bd_price,0,',','.') . " vnđ"}}</td>
+                                        <td class="th-total">{{number_format($bill->bd_total_amount,0,',','.') . " vnđ"}}</td>
                                         <td class="th-delate"><a href="#"><i class="fa fa-trash"></i></a></td>
                                     </tr>
                                     @endforeach

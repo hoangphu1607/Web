@@ -126,6 +126,6 @@
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
     <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
-    <script src="{{asset('js/custum/listOrder.js')}}"></script>
+    <script src="{{asset('js/custom/listOrder.js')}}"></script>
 
 @stop

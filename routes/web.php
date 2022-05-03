@@ -47,6 +47,8 @@ Route::prefix('home')->group( function(){
     Route::get('bill',[Bill::class,'showBill'])->name('showBill');
     //show check out
     Route::get('checkout',[Bill::class,'showCheckOut'])->name('showCheckOut');
+    //order confirmation
+    Route::post('orderConfirm',[Bill::class,'orderConfirm'])->name('orderConfirm');
 });
 
 Route::prefix('admin')->group( function(){

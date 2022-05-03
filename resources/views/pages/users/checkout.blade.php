@@ -249,7 +249,7 @@
                                 <h2><a href="#">{{$bill->pro_name}}</a></h2>
                                 <p><span>Loại :</span> {{$bill->type}}</p>
                                 <p><span>Số Lượng :</span> {{$bill->bd_amount}}</p>
-                                <h3>Tổng: {{$bill->bd_total_amount}}</h3>
+                                <h3>Tổng: {{number_format($bill->bd_total_amount,0,',','.'). " vnđ"}}</h3>
                             </div>
                         </div>
                         @endforeach 
@@ -258,15 +258,17 @@
                     <div class="subtotal-area">
                         <div class="subtotal-content fix">
                             <h2 class="floatleft">Tổng Cộng</h2>
-                            {{-- <h2 class="floatright">{{$bill->b_total}}</h2> --}}
+                            <h2 class="floatright">{{number_format($bill->b_total, 0,',','.'). " vnđ"}}</h2>
+                            {{-- <h2>{{$wordPrice}}</h2> --}}
                         </div>
-                        <div class="subtotal-content fix">
+                        {{-- <div class="subtotal-content fix">
                             <h2 class="floatleft">Shipping & Handling </h2>
                             <h2 class="floatright">$15</h2>
-                        </div>
+                        </div> --}}
                         <div class="subtotal-content fix">
-                            <h2 class="floatleft">Grand Total</h2>
-                            <h2 class="floatright">$465</h2>
+                            <h2 class="">Bằng Chữ</h2>
+                            <h2 class="">{{$wordPrice}}</h2>
+
                         </div>
                     </div>
                     <div class="payment-method">
@@ -279,7 +281,7 @@
                             <input type="checkbox"> Chaque Payment <br>
                             <input type="checkbox"> Paypal
                         </div> --}}
-                        <button type="button" class="btn">Place Order</button>
+                        <button type="button" class="btn" onclick="confirOrder({{$bill->b_id}},{{session('id_user')}})" >Đặt Hàng</button>
                     </div>
                     @endif                       
 
@@ -294,6 +296,10 @@
     {{--jquery.autocomplete.js--}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     {{--quick defined--}}
+    <script>
+        var urlOrderConfirm = "{{route('orderConfirm')}}";
+    </script>
+    <script src="{{asset('js/custom/user/order.js')}}"></script>
 
-    <script src="{{asset('js/custum/address.js')}}"></script>
+    <script src="{{asset('js/custom/address.js')}}"></script>
 @stop

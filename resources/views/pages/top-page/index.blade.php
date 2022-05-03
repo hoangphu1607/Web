@@ -257,7 +257,7 @@
 												<div class="single-product-content">
 													<div class="product-content-left">
 														<h5><a href="#" style="color:black">{{$item->pro_name}}</a></h5>														
-														<span style="color: #129FD8">{{$item->price}}đ/ {{$item->type}}
+														<span style="color: #129FD8">{{number_format($item->price, 0, ',', '.') . " vnđ"}}/ {{$item->type}}
 															<span style="color: #7A7A7A; font-size: 10px"></span>
 														</span>
 													</div>
@@ -298,7 +298,7 @@
     {{--jquery.autocomplete.js--}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     {{--quick defined--}}
-   	<script src="{{asset('js/custum/home.js')}}"></script>
+   	<script src="{{asset('js/custom/home.js')}}"></script>
 	<script>
 		var _token = "{{ csrf_token() }}";
 

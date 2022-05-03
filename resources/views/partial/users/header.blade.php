@@ -85,39 +85,46 @@
                             <div class="header-chart">
                                 <ul class="list-inline">
                                     <li><a href="#"><i class="fa fa-cart-arrow-down"></i></a></li>
-                                    <li class="chart-li"><a href="{{route('showBill')}}">ĐƠN HÀNG</a>
+                                    <li class="chart-li list-data"><a href="{{route('showBill')}}">ĐƠN HÀNG</a>
                                         <ul>
                                             <li>
-                                                <div class="header-chart-dropdown">
-                                                    <div class="header-chart-dropdown-list">
-                                                        <div class="dropdown-chart-left floatleft">
-                                                            <a href="#"><img src="img/product/best-product-1.png" alt="list"></a>
+                                                @isset($numberOrder)
+                                                    
+                                                @if ($numberOrder != 0)                                                    
+                                                    @if($numberOrder <= 3)
+                                                    <div class="header-chart-dropdown" >
+                                                    @else
+                                                    <div class="header-chart-dropdown list-data" >
+                                                    @endif
+                                                        @foreach ($dataOrder as $item)
+                                                        <div class="header-chart-dropdown-list ">
+                                                            <div class="dropdown-chart-left floatleft">
+                                                                <a href="#"><img src="{{asset("$item->pro_avatar")}}" alt="list" style="width:80px;height: 80px;"></a>
+                                                            </div>
+                                                            <div class="dropdown-chart-right">
+                                                                <h2><a href="#">{{$item->pro_name}}</a></h2>
+                                                                <h3>Số Lượng: {{$item->bd_amount}}</h3>
+                                                                <h4>{{number_format($item->bd_total_amount, 0, ',', '.') . " vnđ"}}</h4>
+                                                            </div>
                                                         </div>
-                                                        <div class="dropdown-chart-right">
-                                                            <h2><a href="#">Feugiat justo lacinia</a></h2>
-                                                            <h3>Qty: 1</h3>
-                                                            <h4>£80.00</h4>
+                                                        @endforeach
+                                                        <div class="chart-checkout">
+                                                            <p>TỔNG CỘNG<span>{{number_format($item->b_total, 0, ',', '.') . " vnđ"}}</span></p>
+                                                            <button type="button" class="btn btn-default">THANH TOÁN</button>
                                                         </div>
-                                                    </div>
-                                                    <div class="header-chart-dropdown-list">
-                                                        <div class="dropdown-chart-left floatleft">
-                                                            <a href="#"><img src="img/product/best-product-2.png" alt="list"></a>
-                                                        </div>
-                                                        <div class="dropdown-chart-right">
-                                                            <h2><a href="#">Aenean eu tristique</a></h2>
-                                                            <h3>Qty: 1</h3>
-                                                            <h4>£70.00</h4>
-                                                        </div>
-                                                    </div>
-                                                    <div class="chart-checkout">
-                                                        <p>subtotal<span>£150.00</span></p>
-                                                        <button type="button" class="btn btn-default">Chckout</button>
-                                                    </div>
-                                                </div> 
+                                                    </div> 
+                                                @else
+                                                <div class="header-chart-dropdown" style="text-align: center; color:blue">
+                                                    No Data
+                                                </div>
+                                                @endif
+
                                             </li> 
                                         </ul> 
                                     </li>
-                                    <li><a href="#">2 items</a></li>
+                                    <li><a href="#">{{$numberOrder}} Sản phẩm</a></li>
+                                    @endisset
+
                                 </ul>
                             </div>
                         </div>

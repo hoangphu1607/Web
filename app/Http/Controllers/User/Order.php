@@ -74,9 +74,9 @@ class Order extends Controller
             $amount = $request->amount;
             $description_detail_id = $request->description_detail_id;
             // Cookie::get('idCookie')!== null
-            if($request->session()->has('user_id')){
+            if($request->session()->has('id_user')){
                 $check = true;
-                $user_id = $request->session()->get('user_id');
+                $user_id = $request->session()->get('id_user');
                 //get data user
                 $dataUser = DB::table('user')
                 ->where('id',$user_id)
