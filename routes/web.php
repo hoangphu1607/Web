@@ -51,7 +51,8 @@ Route::prefix('home')->group( function(){
     Route::post('orderConfirm',[Bill::class,'orderConfirm'])->name('orderConfirm');
     //get quantity order
     Route::get('getQuantityOrder',[Order::class,'getQuantityOrder'])->name('getQuantityOrder');
-    
+    //transfer data order
+    Route::get('transferDataOrder',[Order::class,'transferDataOrder'])->name('transferDataOrder');
 });
 
 Route::prefix('admin')->group( function(){

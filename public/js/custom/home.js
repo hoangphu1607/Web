@@ -84,6 +84,7 @@ $('#formOrder').on('submit', function(e){
     data.append('price',price);
     data.append('amount',amount);
     data.append('description_detail_id',description_detail_id)
+    $('.header-chart-dropdown').remove();
     $.ajax({
         url: url+'orderProduct',
         method: 'POST',
@@ -94,6 +95,9 @@ $('#formOrder').on('submit', function(e){
         success: function(data){
             toastr["success"]("Đặt hàng thành công!!!", "Thông Báo");  
             $('#quatityOrder').text(data.num + " Sản phẩm");
+            $('#header-order').append(data.dataTranfer);
+            // console.log(data);
+            // transferDataOrder();
         },
         error: function(error){
             console.log(error);
@@ -128,23 +132,6 @@ $(document).ready(function(){
         
 });
 
-function getQuantityOrder() {
-    var num;
-    $.ajax({
-        url:urlGetQuantityOrder,
-        data:{
-            "idOrder":idOrder
-        },
-        method: 'GET',
-        success: function(data){           
-            num =  data.idOrder;
-        },
-        error: function(error){
-            console.log(error);
-        }
-    });
-    return num;
-}
 
 
 

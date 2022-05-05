@@ -37,6 +37,27 @@ class HomeController extends Controller
         // dd($idUser);
         $dataOrder = $this->getDataUserOrder($idUser);
         $numberOrder = count($dataOrder);
+        // $mp = '';
+        // if(isset($numberOrder) && $numberOrder != 0){
+        //     if($numberOrder < 3){
+        //         $mp .= '<div class="header-chart-dropdown" >';
+        //     }else{
+        //         $mp .= '<div class="header-chart-dropdown list-data" >';
+        //     }
+        //     foreach($dataOrder as $item){
+        //         $mp .= '<div class="header-chart-dropdown-list ">
+        //                     <div class="dropdown-chart-left floatleft">
+        //                         <a href="#"><img src="{{asset("$item->pro_avatar")}}" alt="list" style="width:80px;height: 80px;"></a>
+        //                     </div>
+        //                     <div class="dropdown-chart-right">
+        //                         <h2><a href="#">{{$item->pro_name}}</a></h2>
+        //                         <h3>Số Lượng: {{$item->bd_amount}}</h3>
+        //                         <h4>{{number_format($item->bd_total_amount, 0, ",", ".") . " vnđ"}}</h4>
+        //                     </div>
+        //                 </div>';
+        //     }
+        //     $mp .= '</div>';
+        // }
         // dd(count($dataOrder));
         return view('pages.top-page.index', compact('dataProduct','dataCategories','offer','dataOrder','numberOrder'));
     }
@@ -55,4 +76,5 @@ class HomeController extends Controller
         ->get();
         return $dataBill;
     }
+    
 }

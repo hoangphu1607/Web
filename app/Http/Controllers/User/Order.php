@@ -125,7 +125,9 @@ class Order extends Controller
                         'bd_total_amount' => $price * $amount
                     ]);
                     $num = $this->getQuantityOrder($getAllBillUser[0]->b_id);
-                }                
+                }
+                $dataBill = $this->getDataUserOrder($user_id); 
+                $dataTranfer = $this->transferDataOrder($dataBill,$num);               
             }else{
                 $check = false;
                 // Cookie::queue('idCookie', $idCookie, $minutes);        
@@ -133,7 +135,9 @@ class Order extends Controller
             }
             return response()->json([
                 'idProduct' => $request->id,
-                'num' => $num
+                'num' => $num,
+                'dataBill' => $dataBill,
+                'dataTranfer'=> $dataTranfer,
             ]);
         }
     }
@@ -150,5 +154,53 @@ class Order extends Controller
         return DB::table('bill_detail')
         ->where('bd_bill_id', $id_bill)
         ->count();
+    }
+    //order data transfer
+    public function transferDataOrder($dataBill,$numberOrder)
+    {
+        $mp = '';
+        if(isset($numberOrder) && $numberOrder != 0){
+            if($numberOrder < 3){
+                $mp .= '<div class="header-chart-dropdown" >';
+            }else{
+                $mp .= '<div class="header-chart-dropdown list-data" >';
+            }
+            foreach($dataBill as $item){
+                $mp .= '<div class="header-chart-dropdown-list ">
+                            <div class="dropdown-chart-left floatleft">
+                                <a href="#"><img src="'.asset("$item->pro_avatar").'" alt="list" style="width:80px;height: 80px;"></a>
+                            </div>
+                            <div class="dropdown-chart-right">
+                                <h2><a href="#">'.$item->pro_name .'</a></h2>
+                                <h3>Số Lượng: '.$item->bd_amount .'</h3>
+                                <h4>'. number_format($item->bd_total_amount, 0, ",", ".") . " vnđ" .'</h4>
+                            </div>
+                        </div>';
+            }
+            $mp .= '<div class="chart-checkout">
+                        <p>TỔNG CỘNG<span>'. number_format($item->b_total, 0, ',', '.') . " vnđ". '</span></p>
+                        <button type="button" class="btn btn-default">THANH TOÁN</button>
+                    </div>';
+            $mp .= '</div>';
+        }else{
+            $mp .= '<div class="header-chart-dropdown" style="text-align: center; color:blue">
+                        No Data
+                    </div>';
+        }
+        return $mp;
+    }
+    //get data bill user order
+    public function getDataUserOrder($idUser)
+    {
+        $user_id = $idUser;
+        $dataBill = DB::table('bill_detail')
+        ->select('bill_detail.*','product.pro_name', 'description_detail.type','product.pro_avatar','bill.b_total')
+        ->join('description_detail','description_detail.id','=','bill_detail.description_detail_id')
+        ->join('product','product.id','=','bill_detail.bd_product_id')
+        ->join('bill','bill.b_id','=','bill_detail.bd_bill_id')
+        ->where('b_user_id',$user_id)
+        ->where('b_status',0) //lấy ra bill đang đặt
+        ->get();
+        return $dataBill;
     }
 }

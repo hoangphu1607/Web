@@ -302,6 +302,8 @@
 	<script>
 		var _token = "{{ csrf_token() }}";
 		var urlGetQuantityOrder = "{{route('getQuantityOrder')}}";
+		var urlTransferDataOrder = "{{route('transferDataOrder')}}";
+		
 	</script>
 
 @stop
