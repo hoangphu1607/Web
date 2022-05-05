@@ -64,6 +64,7 @@ class Order extends Controller
             'amount.required' => 'Phải có dữ liệu',
             'amount.between' => 'Dữ liệu sai'
         ];
+        
         $check = Validator::make($request->all(),$rules,$mess);
         $check->validate(); 
         if(!$check->fails()){
@@ -112,8 +113,8 @@ class Order extends Controller
                         'bd_amount' => $amount,
                         'bd_total_amount' => $price * $amount
                     ]);
-                    //Has Bill
-                }else{ 
+                    $num = $this->getQuantityOrder($lastInsertId);
+                }else{ //Has Bill
                     DB::table('bill_detail')
                     ->insert([
                         'bd_bill_id' => $getAllBillUser[0]->b_id,
@@ -123,6 +124,7 @@ class Order extends Controller
                         'bd_amount' => $amount,
                         'bd_total_amount' => $price * $amount
                     ]);
+                    $num = $this->getQuantityOrder($getAllBillUser[0]->b_id);
                 }                
             }else{
                 $check = false;
@@ -130,20 +132,23 @@ class Order extends Controller
                 // DB::ww
             }
             return response()->json([
-                // 'a' => time()+$request->id,
-                // 'cookie' => Cookie::get('idCookie'),
-                'check' => $check,
-                'getAllBillUser' => $getAllBillUser,
-                'dataUser' => $dataUser,
-                '$getAllBillUser[0]->id' => $getAllBillUser[0]->b_id,                
+                'idProduct' => $request->id,
+                'num' => $num
             ]);
         }
     }
-    //user order product has login
+    //user order product no login
     public function OrderProductHasLogin()
     {
         return response()->json([
             'a' => 'Hi'
         ]);
+    }
+    //get quantity order
+    public function getQuantityOrder($id_bill)
+    {
+        return DB::table('bill_detail')
+        ->where('bd_bill_id', $id_bill)
+        ->count();
     }
 }

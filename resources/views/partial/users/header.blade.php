@@ -122,7 +122,7 @@
                                             </li> 
                                         </ul> 
                                     </li>
-                                    <li><a href="#">{{$numberOrder}} Sản phẩm</a></li>
+                                    <li ><a href="#" id="quatityOrder">{{$numberOrder}} Sản phẩm</a></li>
                                     @endisset
 
                                 </ul>

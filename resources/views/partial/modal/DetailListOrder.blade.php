@@ -15,7 +15,6 @@
                 <div class="checkout-head">
                     <h2>Các Sản Phẩm Bạn Đặt</h2>
                 </div>
-                {{-- @foreach ($dataBill as $bill)--}}
                 {{-- <div class="single-review">
                     <div class="single-review-img">
                         <a href="#"><img src="" alt="review" style="width:100px;height: 100px;" class="img_product" ></a>
@@ -28,7 +27,6 @@
                     </div>
                 </div> --}}
                 
-                {{-- @endforeach  --}}
             </div>
         </div>
         <div class="modal-footer">

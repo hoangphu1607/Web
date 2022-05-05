@@ -39,6 +39,7 @@ $(document).on('click', '#showListOrder', function(e){
     e.preventDefault();
     id_bill = $(this).data('id');
     console.log(id_bill);
+    $('.single-review').remove();
     $.ajax({
         url:urlGetBillDetailById,
         data:{
@@ -52,12 +53,13 @@ $(document).on('click', '#showListOrder', function(e){
             // $('.product_amount').text('Số Lượng : '+ data.pd[0].bd_amount); 
                   
             $('.checkout-head').append(data.pd)
-            console.log(data);
         },
         error: function(error){
             console.log(error);
 
         }
     })
-})
+});
+
+
 

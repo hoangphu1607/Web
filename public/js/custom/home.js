@@ -3,6 +3,7 @@ var url = 'home/';
 //price global when not selected
 var price;
 var description_detail_id;
+var numOrder;
 //show quick view product
 $(document).on('click','#productItem',function(e){
     e.preventDefault();
@@ -75,7 +76,7 @@ $(document).on('click','#op',function(e){
 $('#formOrder').on('submit', function(e){
     e.preventDefault();
     // console.log(idItem);
-    var data = new FormData();
+    var data = new FormData(this);
     var amount = $('#quantity').val();
     // console.log(data);
     data.append('id', idItem);
@@ -91,11 +92,8 @@ $('#formOrder').on('submit', function(e){
         cache: false,
         processData: false,  
         success: function(data){
-            console.log(data);
-            toastr["success"]("Đặt hàng thành công!!!", "Thông Báo");   
-            // var price = data.product.price;
-            // price = price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
-            // $('#pro_price').text(price +" / "+data.product.type);
+            toastr["success"]("Đặt hàng thành công!!!", "Thông Báo");  
+            $('#quatityOrder').text(data.num + " Sản phẩm");
         },
         error: function(error){
             console.log(error);
@@ -116,7 +114,7 @@ $(document).ready(function(){
                 $('#quantity').val(quantity + 1);
                 // Increment
         });
-         $('.quantity-left-minus').click(function(e){
+        $('.quantity-left-minus').click(function(e){
             // Stop acting like a button
             e.preventDefault();
             // Get the field name
@@ -129,6 +127,24 @@ $(document).ready(function(){
         });
         
 });
+
+function getQuantityOrder() {
+    var num;
+    $.ajax({
+        url:urlGetQuantityOrder,
+        data:{
+            "idOrder":idOrder
+        },
+        method: 'GET',
+        success: function(data){           
+            num =  data.idOrder;
+        },
+        error: function(error){
+            console.log(error);
+        }
+    });
+    return num;
+}
 
 
 

@@ -301,7 +301,7 @@
    	<script src="{{asset('js/custom/home.js')}}"></script>
 	<script>
 		var _token = "{{ csrf_token() }}";
-
+		var urlGetQuantityOrder = "{{route('getQuantityOrder')}}";
 	</script>
 
 @stop
