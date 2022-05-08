@@ -10,7 +10,7 @@ function confirOrder(id_bill,id_user) {
             _token: _token            
         },
         success: function(data){
-            // console.log(data);
+            console.log(data);
             toastr["success"]("Xác Nhận Đặt Hàng!!!", "Thông Báo");   
             const myTimeout = setTimeout(backHome,2000);
             

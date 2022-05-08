@@ -1,50 +1,4 @@
-{{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid"><a href="#" class="navbar-brand"><img type="img" src="https://cdn.gridbox.io/assets/gb-92x92.png" width="40" /></a><button type="button"
-            data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span
-                class="navbar-toggler-icon"></span></button>
-        <div id="navbarColor03" class="collapse navbar-collapse">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item active"><a aria-current="page" href="#" class="nav-link active"><i class="bi-speedometer2 mr-2"></i>
-                        Dashboard
-                    </a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-clipboard-data mr-2"></i>
-                        Orders
-                    </a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-bag-check mr-2"></i>
-                        Products
-                    </a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-people-fill mr-2"></i>
-                        Customers
-                    </a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><i class="bi bi-file-earmark-bar-graph mr-2"></i>
-                        Reports
-                    </a></li>
-            </ul>
-            <div class="d-lg-flex align-items-center">
-                <form type="form" class="d-flex ms-auto mb-2 mb-md-0"><input type="search" placeholder="Search" aria-label="Search" class="form-control me-2" /><button type="submit"
-                        class="btn btn-outline-light"> <i class="bi bi-search"></i></button></form>
-                <ul id="io85l" class="navbar-nav ms-auto">
-                    <li id="ivscp" class="nav-item"><a href="#" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true"
-                            class="text-decoration-none dropdown-toggle px-2 line-white text-white"><img type="img" src="https://github.com/mdo.png" alt="mdo" id="i3q2a" width="32" height="32"
-                                class="rounded-circle" /></a>
-                        <ul aria-labelledby="dropdownUser2" id="irimy" class="dropdown-menu dropdown-menu-end text-small shadow">
-                            <li><a href="#" class="dropdown-item">New project...</a></li>
-                            <li><a href="#" class="dropdown-item">Settings</a></li>
-                            <li><a href="#" class="dropdown-item">Profile</a></li>
-                            <li>
-                                <hr class="dropdown-divider" />
-                            </li>
-                            <li><a href="#" class="dropdown-item">Sign out</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</nav> --}}
 <body class="home-one">
     <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -105,80 +59,7 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="header-bottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-2 col-sm-2 col-xs-12">
-                        <div class="header-logo">
-                            <a href="index.html"><img src="img/logo.png" alt="logo"></a>
-                        </div>
-                    </div>
-                    <div class="col-md-10 col-sm-10 col-xs-12">
-                        <div class="search-chart-list">
-                            <div class="catagori-menu">
-                                <ul class="list-inline">
-                                    <li><i class="fa fa-search"></i></li>
-                                    <li>
-                                        <select>
-                                            <option value="All Categories">All Categories</option>
-                                            <option value="Categorie One">Categorie One</option>
-                                            <option value="Categorie Two">Categorie Two</option>
-                                            <option value="Categorie Three">Categorie Three</option>
-                                            <option value="Categorie Four">Categorie Four</option>
-                                            <option value="Categorie Five">Categorie Five</option>
-                                        </select>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="header-search">
-                                <form action="#">
-                                    <input type="text" placeholder="My Search"/>
-                                    <button type="button"><i class="fa fa-search"></i></button>
-                                </form>
-                            </div>
-                            <div class="header-chart">
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fa fa-cart-arrow-down"></i></a></li>
-                                    <li class="chart-li"><a href="#">My cart</a>
-                                        <ul>
-                                            <li>
-                                                <div class="header-chart-dropdown">
-                                                    <div class="header-chart-dropdown-list">
-                                                        <div class="dropdown-chart-left floatleft">
-                                                            <a href="#"><img src="img/product/best-product-1.png" alt="list"></a>
-                                                        </div>
-                                                        <div class="dropdown-chart-right">
-                                                            <h2><a href="#">Feugiat justo lacinia</a></h2>
-                                                            <h3>Qty: 1</h3>
-                                                            <h4>£80.00</h4>
-                                                        </div>
-                                                    </div>
-                                                    <div class="header-chart-dropdown-list">
-                                                        <div class="dropdown-chart-left floatleft">
-                                                            <a href="#"><img src="img/product/best-product-2.png" alt="list"></a>
-                                                        </div>
-                                                        <div class="dropdown-chart-right">
-                                                            <h2><a href="#">Aenean eu tristique</a></h2>
-                                                            <h3>Qty: 1</h3>
-                                                            <h4>£70.00</h4>
-                                                        </div>
-                                                    </div>
-                                                    <div class="chart-checkout">
-                                                        <p>subtotal<span>£150.00</span></p>
-                                                        <button type="button" class="btn btn-default">Chckout</button>
-                                                    </div>
-                                                </div> 
-                                            </li> 
-                                        </ul> 
-                                    </li>
-                                    <li><a href="#">2 items</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
+        
     </div>
     <!-- MAIN MENU AREA -->
     <div class="main-menu-area">
@@ -189,9 +70,9 @@
                         <nav>
                             <ul>
                                 <li><a href="index.html">Trang Chủ</a></li>
-                                <li><a href="shop.html">Khuyến Mãi</a></li>
-                                <li><a href="shop.html">Ngao, Sò, Ốc</a></li>
-                                <li><a href="shop.html">Cua, Ghẹ</a></li>
+                                <li><a href="{{route('form-editProduct')}}">Sản Phẩm</a></li>
+                                <li><a href="{{route('form_editCategories')}}">Danh Mục</a></li>
+                                <li><a href="{{route('getmanageSuppliers')}}">Nhà Cung Cấp</a></li>
                                 <li><a href="shop.html">Tôm Các Loại</a></li>
                                 <li><a href="shop.html">Cá, Mực</a></li>                                
                                 <li><a href="shop.html">Gia Vị</a></li>

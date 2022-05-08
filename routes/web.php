@@ -49,10 +49,15 @@ Route::prefix('home')->group( function(){
     Route::get('checkout',[Bill::class,'showCheckOut'])->name('showCheckOut');
     //order confirmation
     Route::post('orderConfirm',[Bill::class,'orderConfirm'])->name('orderConfirm');
+    //get Data Bill Place
+    Route::get('dataBill',[Bill::class,'dataBill'])->name('dataBill');
+    //delete product placed
+    Route::get('deleteProductPlace',[Bill::class,'deleteProductPlace'])->name('deleteProductPlace');
     //get quantity order
     Route::get('getQuantityOrder',[Order::class,'getQuantityOrder'])->name('getQuantityOrder');
     //transfer data order
     Route::get('transferDataOrder',[Order::class,'transferDataOrder'])->name('transferDataOrder');
+
 });
 
 Route::prefix('admin')->group( function(){

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use NumberFormatter;
+use Carbon;
 use function PHPSTORM_META\type;
 
 class Bill extends Controller
@@ -24,6 +25,22 @@ class Bill extends Controller
         ->get();
         // dd(count($dataBill) == 0);
         return view('pages.users.bill',compact('dataBill'));
+    }
+    //data bill
+    public function dataBill(Request $request)
+    {
+        $user_id = $request->session()->get('id_user');
+        $dataBillPlaced = DB::table('bill_detail')
+        ->select('bill_detail.*','product.pro_name', 'description_detail.type','product.pro_avatar')
+        ->join('description_detail','description_detail.id','=','bill_detail.description_detail_id')
+        ->join('product','product.id','=','bill_detail.bd_product_id')
+        ->join('bill','bill.b_id','=','bill_detail.bd_bill_id')
+        ->where('b_user_id',$user_id)
+        ->where('b_status',0) //lấy ra bill đang đặt
+        ->get();
+        return response()->json([
+            'data' => $dataBillPlaced
+        ]);
     }
 
     //show check out page
@@ -68,18 +85,38 @@ class Bill extends Controller
         $wordPrice = ucwords($word->format($number));
         return view('pages.users.checkout', compact('dataBill','dataUser','dataCity','dataDistrict','dataWards','wordPrice'));
     }
-
+    
     public function orderConfirm(Request $request)
     {
         DB::table('bill')
         ->where('b_id', $request->id_bill)
         ->where('b_user_id', $request->id_user)
-        ->update(['b_status' => 1]);
+        ->update([
+            'b_status' => 1,
+            'create_at' => date('Y-d-m')
+        ]);
         return response()->json([
             // 'Hi' => $request->id_bill,
             // "b" => $request->id_user,
-            'data' => true
+            'data' => true,
+            'mytime' => date('Y-d-m')
         ]);
+    }
+
+    //delete product in bill placed
+    public function deleteProductPlace(Request $request)
+    {
+        $delete = DB::table('bill_detail')
+        ->where('bd_bill_id', $request->id_bil)
+        ->where('bd_product_id', $request->id_pd)
+        ->delete();
+
+        return response()->json([
+            'id_pd' => $request->id_pd,            
+            'id_bill' => $request->id_bil,
+            'delete' => $delete,
+        ]);
+
     }
     
 }

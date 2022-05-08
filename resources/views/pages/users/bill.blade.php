@@ -69,8 +69,11 @@
     <!-- responsive CSS
     ============================================ -->          
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
-    
+    {{-- datatable --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+
     <script src="{{asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
+
 @stop
 
 @section('breadcrumb')
@@ -85,7 +88,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="chart-item table-responsive fix">
-                        <table class="col-md-12">
+                        <table class="col-md-12" id="myTable">
                             <thead>
                                 <tr>
                                     <th class="th-img">HÌNH ẢNH</th>
@@ -94,11 +97,11 @@
                                     <th class="th-price">ĐƠN GIÁ</th>
                                     <th class="th-total">THÀNH TIỀN</th>
                                     {{-- <th class="th-total">Sub Total</th> --}}
-                                    <th class="th-delate">Delete</th>
+                                    <th class="th-delete">Delete</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @if(count($dataBill) != 0)
+                            {{-- <tbody> --}}
+                                {{-- @if(count($dataBill) != 0)
                                     @foreach ($dataBill as $bill)
                                     <tr>
                                         <td class="th-img">
@@ -120,8 +123,8 @@
                                     <tr>
                                         <td colspan="6"><i>Không có dữ liệu</i></td>
                                     </tr>
-                                @endif
-                            </tbody>
+                                @endif --}}
+                            {{-- </tbody> --}}
                         </table>
                     </div>
                     <div class="cart-button">
@@ -194,9 +197,16 @@
     {{--jquery.autocomplete.js--}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     {{--quick defined--}}
+    {{-- Datatable --}}
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+    
     <script>
-      $(function () {
-          // your custom javascript
-      });
+        var urlDataBill = "{{route('dataBill')}}";
+        // console.log(urlDataBill);
+        var asset = "{{asset('')}}";
+        var urlDelectProduct = "{{route('deleteProductPlace')}}";
+        var token = "{{ csrf_token() }}";
    </script>
+   <script src="{{asset('js/custom/user/bill.js')}}"></script>
 @stop
