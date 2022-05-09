@@ -122,6 +122,7 @@
   @include('partial.modal.edit_product')
   @include('partial.modal.addProduct') 
   @include('partial.modal.ckeditor')
+  @include('partial.modal.addMultiPhotosProduct')
 @stop
 
   
@@ -166,7 +167,7 @@
           },
           {data:"id",
             render: function(data, type, row){
-              return '<button data-id="'+data+'" type="button" class="btn btn-success" data-toggle="modal" data-target="#contentModal" id="editContent"><i class="fa-regular fa-images"></i></button>'
+              return '<button data-id="'+data+'" type="button" class="btn btn-success" data-toggle="modal" data-target="#multiphotosproduct" id="addmultiphotos"><i class="fa-regular fa-images"></i></button>'
             }
           },
 
