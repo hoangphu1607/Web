@@ -161,7 +161,7 @@
           {data:"type"},
           {data:"id",
             render: function(data, type, row){
-              return '<button data-id="'+data+'" type="button" class="btn btn-success" data-toggle="modal" data-target="#contentModal" id="editContent"><i class="fa-solid fa-comment-dots"></i></button>'
+              return '<button data-id="'+data+'" type="button" class="btn btn-info" data-toggle="modal" data-target="#contentModal" id="editContent"><i class="fa-solid fa-comment-dots"></i></button>'
             }
           },
           {data:"id",
