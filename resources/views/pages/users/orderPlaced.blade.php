@@ -92,10 +92,10 @@
                             <thead>
                                 <tr>
                                     <th class="th-img">STT</th>
-                                    <th class="th-product">CHI TIẾT ĐƠN HÀNG</th>
+                                    <th class="th-product">CHI TIẾT</th>
                                     <th class="th-price">TỔNG TIỀN</th>
                                     <th class="th-price">ĐỊA CHỈ</th>
-                                    <th class="th-price">NOTE</th>
+                                    <th class="th-price">GHI CHÚ</th>
                                     <th class="th-price">NGÀY ĐẶT</th>
 
                                     {{-- <th class="th-total">THÀNH TIỀN</th> --}}
@@ -194,7 +194,9 @@
         </div>
     </div>
 @stop
-
+@section('modal')
+    @include('partial.modal.DetailListOrder')
+@stop
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
     {{--jquery.autocomplete.js--}}
@@ -206,6 +208,7 @@
     
     <script>
         var urlDataBillPlace = "{{route('dataBillPlace')}}";
+        var urlShowBillPlaceWithIdUser = "{{route('showBillPlaceWithIdUser')}}";
         // console.log(urlDataBill);
         var asset = "{{asset('')}}";
         var token = "{{ csrf_token() }}";

@@ -38,7 +38,7 @@ var id_bill;
 $(document).on('click', '#showListOrder', function(e){
     e.preventDefault();
     id_bill = $(this).data('id');
-    console.log(id_bill);
+    // console.log(id_bill);
     $('.single-review').remove();
     $.ajax({
         url:urlGetBillDetailById,
@@ -47,11 +47,6 @@ $(document).on('click', '#showListOrder', function(e){
         },
         method: 'GET',
         success: function(data){
-            // $('.img_product').attr("src", asset+data.pd[0].pro_avatar);
-            // $('.product_name').text(data.pd[0].pro_name);
-            // $('.product_des').text('Loại : '+ data.pd[0].pro_content);
-            // $('.product_amount').text('Số Lượng : '+ data.pd[0].bd_amount); 
-                  
             $('.checkout-head').append(data.pd)
         },
         error: function(error){
