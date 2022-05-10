@@ -15,6 +15,7 @@ use App\Http\Controllers\user\Order;
 use App\Http\Controllers\user\Bill;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\ManageOrder;
+use App\Http\Controllers\Chart\ProductController;
 // use App\Http\Controllers\Process_accout;
 
 /*
@@ -31,7 +32,6 @@ use App\Http\Controllers\Admin\ManageOrder;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-
 Route::prefix('home')->group( function(){
     //page main
     Route::get('/' , [HomeController::class,'get_product'])->name('home');
@@ -53,6 +53,13 @@ Route::prefix('home')->group( function(){
     Route::get('dataBill',[Bill::class,'dataBill'])->name('dataBill');
     //delete product placed
     Route::get('deleteProductPlace',[Bill::class,'deleteProductPlace'])->name('deleteProductPlace');
+    //get data bill placed
+    Route::get('dataBillPlace',[Bill::class,'dataBillPlace'])->name('dataBillPlace');
+    //show bill placed
+    Route::get('dang-dat',[Bill::class,'showBillPlaced'])->name('showBillPlaced');
+    //show bill detail placed
+    Route::get('showBillPlaceWithIdUser',[Bill::class,'showBillPlaceWithIdUser'])->name('showBillPlaceWithIdUser');
+    
     //get quantity order
     Route::get('getQuantityOrder',[Order::class,'getQuantityOrder'])->name('getQuantityOrder');
     //transfer data order
@@ -151,4 +158,11 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function(){
     Route::get('',[UserController::class,'index'])->name('index');
     Route::get('dang-nhap',[Process_accout::class,'index_login'])->name('login');
     Route::post('dang-nhap',[Process_accout::class,'login'])->name('post_login');
+});
+
+Route::prefix('thong-ke')->group(function () {
+    Route::get('san-pham', [ProductController::class,'showChartProduct'])->middleware('checkLogin')->name('showChartProduct'); 
+    //get data product
+    Route::get('getDataProduct', [ProductController::class,'getDataProduct'])->middleware('checkLogin')->name('getDataProduct'); 
+
 });

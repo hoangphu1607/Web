@@ -42,7 +42,33 @@ class Bill extends Controller
             'data' => $dataBillPlaced
         ]);
     }
-
+    //data bill placed
+    public function dataBillPlace(Request $request)
+    {
+        $user_id = $request->session()->get('id_user');
+        $dataBillPlaced = DB::table('bill')
+        ->select('bill.*', DB::raw("CONCAT(city.city_name, ', ',district.district_name,', ',wards.wards_name )as fullAddress") )
+        ->join('city', 'city.city_code', '=','bill.city')
+        ->join('district', 'district.district_code', '=','bill.district')
+        ->join('wards', 'wards.wards_code', '=','bill.ward')
+        ->where('b_user_id',$user_id)
+        ->where('b_status',1) //lấy ra bill đã đặt
+        ->get();
+        
+        $total = DB::table('bill_detail')
+        ->join('bill','bill.b_id','=','bill_detail.bd_bill_id')
+        ->where('b_user_id',$user_id)
+        ->where('b_status',1) //lấy ra bill đã đặt
+        ->sum('bill_detail.bd_total_amount');
+        return response()->json([
+            'data' => $dataBillPlaced,
+            'total' => $total
+        ]);
+    }
+    public function showBillPlaced(Request $request)
+    {
+        return view('pages.users.orderPlaced');
+    }
     //show check out page
     public function showCheckOut(Request $request)
     {
@@ -88,18 +114,25 @@ class Bill extends Controller
     
     public function orderConfirm(Request $request)
     {
+        $select = DB::table('user')
+        ->where('id', $request->id_user)
+        ->first();
+
         DB::table('bill')
         ->where('b_id', $request->id_bill)
         ->where('b_user_id', $request->id_user)
         ->update([
             'b_status' => 1,
-            'create_at' => date('Y-d-m')
+            'create_at' => date('Y-d-m'),
+            'city' => $select->city_id,
+            'district' => $select->district_id,
+            'ward' => $select->wards_id
         ]);
         return response()->json([
             // 'Hi' => $request->id_bill,
             // "b" => $request->id_user,
             'data' => true,
-            'mytime' => date('Y-d-m')
+            'city' => $select->city_id
         ]);
     }
 
@@ -116,7 +149,37 @@ class Bill extends Controller
             'id_bill' => $request->id_bil,
             'delete' => $delete,
         ]);
+    }
+    public function showBillPlaceWithIdUser(Request $request)
+    {
+        $Bill_id = $request->bill_id;
+        $user_id = $request->user_id;
+        $dataBillDetail = DB::table('bill')
+        ->join('bill_detail','bill_detail.bd_bill_id','=','bill.b_id')
+        ->join('product','product.id','=','bill_detail.bd_product_id')
+        ->join('description_detail','description_detail.id','=','bill_detail.description_detail_id')
+        ->where('bill_detail.bd_bill_id',$Bill_id)
+        ->where('bill.b_user_id',$user_id)
+        ->get();
 
+        $modal = '';
+        foreach($dataBillDetail as $item){
+            $modal .= '<div class="single-review">
+                            <div class="single-review-img">
+                                <a href="#"><img src="'.asset('').$item->pro_avatar.'" alt="review" style="width:90px;height: 90px;" class="img_product" ></a>
+                            </div>
+                            <div class="single-review-content fix">
+                                <h2 class="product_name" ><a href="#"> Tên Sản Phẩm: '.$item->pro_name .'</a></h2>
+                                <p class="product_des" > Giá: '. number_format($item->bd_price, 0, ',', '.'). " vnđ"  .'<span></span></p>
+                                <p class="product_amount"> Loại: '. $item->type . '<span></span> </p>
+                                <h3>Tổng: '.number_format($item->bd_total_amount, 0, ',', '.'). " vnđ"  .' </h3>
+                            </div>
+                        </div>';
+        }
+
+        return response()->json([
+            'pd' => $modal
+        ]);
     }
     
 }
