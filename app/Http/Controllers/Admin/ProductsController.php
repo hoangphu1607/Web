@@ -177,6 +177,28 @@ class ProductsController extends Controller
             ]); 
         }
     }
+    //add detail images of product
+    public function addProductDetailImages(Request $request)
+    {   
+        $str = '';
+        if ($request->hasFile('file')) {
+            $images = $request->file('file');
+            foreach ($images as $image) {
+                $imageName = time().'.'.$image->extension();
+                $image->move(public_path('img\product\test'),$imageName);
+                $img_path = 'img\product\test\\'.$imageName;
+                $str += $img_path . ' '; 
+            }
+            $sql  = DB::table('product')
+            ->where('id',82)
+            ->update([
+                'pro_detail_images'=>$str,
+            ]);
+        }
+        return response()->json([
+            "success" => $sql,
+        ]);
+    }
     //delete Product
     public function deleteProduct(Request $request)
     {

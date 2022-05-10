@@ -14,6 +14,12 @@
         /* The Modal (background) */
         
     </style>
+   <!-- Thu vien dropzonejs
+    ============================================ -->  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css"
+    integrity="sha512-jU/7UFiaW5UBGODEopEqnbIAHOI8fO6T99m7Tsmqs2gkdujByJfkCbbfPSN4Wlqlb9TGnsuC0YgUgWkRBK7B9A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,700,600,500,300,800,900' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,300,300italic,500italic,700' rel='stylesheet' type='text/css'>
@@ -128,7 +134,17 @@
   
 
 @section('scripts')
+    <script>
+      var _token = "{{ csrf_token() }}";
+      var urlStoreImages = '{{route("productimages")}}';
+      // console.log(_token);
+    </script>
+    {{-- Thu vien dropzonejs --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"
+    integrity="sha512-oQq8uth41D+gIH/NJvSJvVB85MFk1eWpMK6glnkg6I7EdMqC1XVkW7RxLheXwmFdG03qScCM7gKS/Cx3FYt7Tg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
+    <script src="{{asset('js/custom/admin/product.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
     {{--jquery.autocomplete.js--}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -152,7 +168,7 @@
           },
           {data:"pro_name"},
           {data:"pro_avatar",
-            render: function(data, type, row, meta) {
+            render: function(data, type, row, meta){
               return '<img src="{{asset('')}}'+data+'" alt="'+row.pro_name+'" width="80px" height="100px"">'
             }
           },
@@ -167,7 +183,7 @@
           },
           {data:"id",
             render: function(data, type, row){
-              return '<button data-id="'+data+'" type="button" class="btn btn-success" data-toggle="modal" data-target="#multiphotosproduct" id="addmultiphotos"><i class="fa-regular fa-images"></i></button>'
+              return '<button data-id="'+data+'" onclick="addImages('+data+')" type="button" class="btn btn-success" data-toggle="modal" data-target="#multiphotosproduct" id="addmultiphotos"><i class="fa-regular fa-images"></i></button>'
             }
           },
 
@@ -349,6 +365,7 @@
           }
         });   
       });
+
    </script>
 @stop
 

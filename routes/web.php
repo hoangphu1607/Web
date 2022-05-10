@@ -117,6 +117,8 @@ Route::prefix('admin')->group( function(){
     Route::post('form-addProduct',[ProductsController::class, 'addProduct'])->middleware('checkLogin')->name('addProduct');
     //update content
     Route::POST('updateContent',[ProductsController::class, 'updateContent'])->middleware('checkLogin')->name('updateContent');
+    //store product' detail images
+    Route::POST('store-product-detail-images',[ProductsController::class, 'addProductDetailImages'])->middleware('checkLogin')->name('productimages');
 
 
     //xử lý đặt hàng
