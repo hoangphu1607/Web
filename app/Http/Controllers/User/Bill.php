@@ -42,7 +42,33 @@ class Bill extends Controller
             'data' => $dataBillPlaced
         ]);
     }
-
+    //data bill placed
+    public function dataBillPlace(Request $request)
+    {
+        $user_id = $request->session()->get('id_user');
+        $dataBillPlaced = DB::table('bill')
+        ->select('bill.*', DB::raw("CONCAT(city.city_name, ', ',district.district_name,', ',wards.wards_name )as fullAddress") )
+        ->join('city', 'city.city_code', '=','bill.city')
+        ->join('district', 'district.district_code', '=','bill.district')
+        ->join('wards', 'wards.wards_code', '=','bill.ward')
+        ->where('b_user_id',$user_id)
+        ->where('b_status',1) //lấy ra bill đã đặt
+        ->get();
+        
+        $total = DB::table('bill_detail')
+        ->join('bill','bill.b_id','=','bill_detail.bd_bill_id')
+        ->where('b_user_id',$user_id)
+        ->where('b_status',1) //lấy ra bill đã đặt
+        ->sum('bill_detail.bd_total_amount');
+        return response()->json([
+            'data' => $dataBillPlaced,
+            'total' => $total
+        ]);
+    }
+    public function showBillPlaced(Request $request)
+    {
+        return view('pages.users.orderPlaced');
+    }
     //show check out page
     public function showCheckOut(Request $request)
     {
@@ -88,18 +114,25 @@ class Bill extends Controller
     
     public function orderConfirm(Request $request)
     {
+        $select = DB::table('user')
+        ->where('id', $request->id_user)
+        ->first();
+
         DB::table('bill')
         ->where('b_id', $request->id_bill)
         ->where('b_user_id', $request->id_user)
         ->update([
             'b_status' => 1,
-            'create_at' => date('Y-d-m')
+            'create_at' => date('Y-d-m'),
+            'city' => $select->city_id,
+            'district' => $select->district_id,
+            'ward' => $select->wards_id
         ]);
         return response()->json([
             // 'Hi' => $request->id_bill,
             // "b" => $request->id_user,
             'data' => true,
-            'mytime' => date('Y-d-m')
+            'city' => $select->city_id
         ]);
     }
 

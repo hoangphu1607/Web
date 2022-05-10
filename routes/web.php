@@ -31,7 +31,6 @@ use App\Http\Controllers\Admin\ManageOrder;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-
 Route::prefix('home')->group( function(){
     //page main
     Route::get('/' , [HomeController::class,'get_product'])->name('home');
@@ -53,6 +52,10 @@ Route::prefix('home')->group( function(){
     Route::get('dataBill',[Bill::class,'dataBill'])->name('dataBill');
     //delete product placed
     Route::get('deleteProductPlace',[Bill::class,'deleteProductPlace'])->name('deleteProductPlace');
+    //get data bill placed
+    Route::get('dataBillPlace',[Bill::class,'dataBillPlace'])->name('dataBillPlace');
+    //show bill placed
+    Route::get('dang-dat',[Bill::class,'showBillPlaced'])->name('showBillPlaced');
     //get quantity order
     Route::get('getQuantityOrder',[Order::class,'getQuantityOrder'])->name('getQuantityOrder');
     //transfer data order
