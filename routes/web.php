@@ -16,6 +16,7 @@ use App\Http\Controllers\user\Bill;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\ManageOrder;
 use App\Http\Controllers\Chart\ProductController;
+use App\Http\Controllers\Admin\OfferController;
 // use App\Http\Controllers\Process_accout;
 
 /*
@@ -127,7 +128,8 @@ Route::prefix('admin')->group( function(){
     //store product' detail images
     Route::POST('store-product-detail-images',[ProductsController::class, 'addProductDetailImages'])->middleware('checkLogin')->name('productimages');
 
-    
+    //show page offer
+    Route::get('showOffer',[OfferController::class,'showOffer'])->middleware('checkLogin')->name('showOffer');
 
     //xử lý đặt hàng
     Route::get('quan-ly-dat-hang',[ManageOrder::class, 'showListOrder'])->middleware('checkLogin')->name('listOrder');
