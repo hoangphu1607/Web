@@ -131,7 +131,9 @@ $(document).ready(function(){
         });
         
 });
-
+function nextPageProduct(url) {
+    window.location= url;
+}
 
 
 

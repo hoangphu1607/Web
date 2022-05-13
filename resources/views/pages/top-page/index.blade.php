@@ -250,7 +250,7 @@
 														<img class="secondary-img" src="img/product/kids-1.jpg" alt="product"> --}}
 													</a>
 													<div class="single-product-action">
-														<button href="#" class="btn btn-outline-warning"><i class="fa fa-external-link"></i></button>
+														<button onclick="nextPageProduct('{{route('showProductDetailById',['id'=>$item->id])}}')" class="btn btn-outline-warning"><i class="fa fa-external-link"></i></button>
 														<button data-id="{{$item->id}}" class="btn btn-outline-warning" id="productItem" data-toggle="modal" data-target="#quick_view_product"><i class="fa fa-shopping-cart"></i></button>
 													</div>
 												</div>

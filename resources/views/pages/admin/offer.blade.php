@@ -1,7 +1,6 @@
-@extends('layouts.login')
+@extends('layouts.admin')
 
-@section('title', 'Thống kê sản phẩm')
-
+@section('title', 'Quản Lý Sản Phẩm')
 
 @section('style-libraries')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css">
@@ -12,7 +11,15 @@
     {{--custom css item suggest search--}}
     <style>
         .autocomplete-group { padding: 2px 5px; }
+        /* The Modal (background) */
+        
     </style>
+   <!-- Thu vien dropzonejs
+    ============================================ -->  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css"
+    integrity="sha512-jU/7UFiaW5UBGODEopEqnbIAHOI8fO6T99m7Tsmqs2gkdujByJfkCbbfPSN4Wlqlb9TGnsuC0YgUgWkRBK7B9A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,700,600,500,300,800,900' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,300,300italic,500italic,700' rel='stylesheet' type='text/css'>
@@ -69,39 +76,77 @@
     
     <!-- responsive CSS
     ============================================ -->          
-    <link rel="stylesheet" href="{{asset('css/responsive.css')}}">  
+    <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
     
+    {{-- datatable --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
     <script src="{{asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
+
 @stop
+
+@section('breadcrumb')
+    @include('partial.users.breadcrumb')
+@stop
+@section('sidebar')
+    @include('partial.users.sidebar')
+@stop
+
 @section('content')
-<section class="d-flex align-items-center">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="d-inline-flex p-2">
-                <button type="button" class="btn btn-primary" style="max-height: 200px">
-                    Tổng Số Sản Phẩm <span class="badge badge-light" id="total_product">{{$total->soluong}}</span>
-                </button>
-            </div>
-            <div width="200px" height="200px">
-                <canvas id="myChart" style="max-width: 1000px;max-height: 300px"></canvas>
-            </div>
-            {{-- <div class="d-inline-flex p-2">
-                <button type="button" class="btn btn-primary" style="max-height: 200px">
-                    Tổng Số Sản Phẩm <span class="badge badge-light" id="total_product">{{$total->soluong}}</span>
-                </button>
-            </div> --}}
-        </div>
-    </div> 
-    <!-- / .container -->
-</section>
+{{-- @yield('sidebar'); --}}
+  <div class="container py-5">
+    
+    <div class="row">
+      <div class="col-sm"></div>
+      <div class="col-sm">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProduct_modals">
+          THÊM SẢN PHẨM MỚI
+        </button>
+      </div>
+      <div class="col-sm"></div>
+    </div>
+
+    <table class="table table-hover datatable cell-border compact stripe" id="myTable">      
+      <thead>
+        <tr>
+          <th scope="col">STT</th>
+          <th scope="col">Tên Sản Phẩm</th>
+          <th scope="col">Hình Ảnh</th>
+          <th scope="col">Loại Sản Phẩm</th>          
+          <th scope="col">Nhà Cung Cấp</th>
+          <th scope="col">Giá Cả</th>
+          <th scope="col">Đơn Vị</th>
+          <th scope="col">Nội Dung</th>
+          <th scope="col">Ảnh Liên Quan</th>
+          <th scope="col">Thay Đổi</th>
+          <th scope="col">Xóa</th>
+        </tr>
+      </thead>
+      
+    </table>
+  </div>
+  
+  {{-- @include('partial.modal.edit_product')
+  @include('partial.modal.addProduct') 
+  @include('partial.modal.ckeditor')
+  @include('partial.modal.addMultiPhotosProduct') --}}
 @stop
+
+  
 
 @section('scripts')
     <script>
-        var getDataProduct = "{{route('getDataProduct')}}";
-    </script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="{{asset('js/custom/chart/product.js')}}"></script>
+    </script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
+    {{--jquery.autocomplete.js--}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    {{--quick defined--}}
+    {{-- Datatable --}}
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+    <script>      
 
+   </script>
 @stop
+
+
