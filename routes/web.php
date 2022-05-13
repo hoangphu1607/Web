@@ -127,6 +127,7 @@ Route::prefix('admin')->group( function(){
     //store product' detail images
     Route::POST('store-product-detail-images',[ProductsController::class, 'addProductDetailImages'])->middleware('checkLogin')->name('productimages');
 
+    
 
     //xử lý đặt hàng
     Route::get('quan-ly-dat-hang',[ManageOrder::class, 'showListOrder'])->middleware('checkLogin')->name('listOrder');
