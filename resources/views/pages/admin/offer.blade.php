@@ -94,17 +94,6 @@
 @section('content')
 {{-- @yield('sidebar'); --}}
   <div class="container py-5">
-    
-    <div class="row">
-      <div class="col-sm"></div>
-      <div class="col-sm">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProduct_modals">
-          THÊM SẢN PHẨM MỚI
-        </button>
-      </div>
-      <div class="col-sm"></div>
-    </div>
-
     <table class="table table-hover datatable cell-border compact stripe" id="myTable">      
       <thead>
         <tr>
@@ -115,13 +104,9 @@
           <th scope="col">Nhà Cung Cấp</th>
           <th scope="col">Giá Cả</th>
           <th scope="col">Đơn Vị</th>
-          <th scope="col">Nội Dung</th>
-          <th scope="col">Ảnh Liên Quan</th>
-          <th scope="col">Thay Đổi</th>
-          <th scope="col">Xóa</th>
+          <th scope="col">Chọn</th>
         </tr>
       </thead>
-      
     </table>
   </div>
   
@@ -144,6 +129,8 @@
     {{-- Datatable --}}
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+
+    <script src="{{asset('js/custom/admin/offer.js')}}"></script>
     <script>      
 
    </script>
