@@ -14,11 +14,6 @@
         /* The Modal (background) */
         
     </style>
-   <!-- Thu vien dropzonejs
-    ============================================ -->  
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css"
-    integrity="sha512-jU/7UFiaW5UBGODEopEqnbIAHOI8fO6T99m7Tsmqs2gkdujByJfkCbbfPSN4Wlqlb9TGnsuC0YgUgWkRBK7B9A=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,700,600,500,300,800,900' rel='stylesheet' type='text/css'>
@@ -139,10 +134,6 @@
       var urlStoreImages = '{{route("productimages")}}';
       // console.log(_token);
     </script>
-    {{-- Thu vien dropzonejs --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"
-    integrity="sha512-oQq8uth41D+gIH/NJvSJvVB85MFk1eWpMK6glnkg6I7EdMqC1XVkW7RxLheXwmFdG03qScCM7gKS/Cx3FYt7Tg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
     <script src="{{asset('js/custom/admin/product.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
@@ -278,7 +269,7 @@
         e.preventDefault();
         var myData = new FormData(this);
         myData.append('id',idProduct);
-        myData.append('idDes',idDes);  
+        myData.append('idDes',idDes);
         $('.error').text('');
         // console.log(myData);
         $.ajax({          

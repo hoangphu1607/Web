@@ -8,31 +8,23 @@
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <section>
-                    <div class="card">
-                        <div class="card-header">
-                            Kéo và thả hình ảnh vào đây
-                        </div>
-                        <div class="card-body">
-                            <form action="{{route('productimages')}}" method="post" enctype="multipart/form-data" class="dropzone dz-clickable"
-                                id="image-upload">
-                                @csrf
-                                <div>
-                                    <h3 class="text-center">
-                                        Upload Image By Click On Box
-                                    </h3>
-                                </div>
-                        </div>
-                        </form>
-                    </div>                   
-            </section>
+                <form action="{{route('productimages')}}" data-netlify="true" enctype="multipart/form-data" id="proImages" method="POST">
+                    @csrf
+                    <div id="hidden"></div>
+                    <label for="files">Chọn hình</label>
+                    <input type="file" id="files" name="files[]" multiple><br><br>    
+                    <button type="submit" class="btn btn-primary" >Save changes</button>
+                    
+                    
           </div>
+          
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
                 Close
             </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            {{-- <button type="submit" class="btn btn-primary" >Save changes</button> --}}
+        </form>
         </div>
     </div>
 </div>

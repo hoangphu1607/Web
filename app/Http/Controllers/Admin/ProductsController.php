@@ -179,25 +179,37 @@ class ProductsController extends Controller
     }
     //add detail images of product
     public function addProductDetailImages(Request $request)
-    {   
-        $str = '';
-        if ($request->hasFile('file')) {
-            $images = $request->file('file');
-            foreach ($images as $image) {
-                $imageName = time().'.'.$image->extension();
-                $image->move(public_path('img\product\test'),$imageName);
-                $img_path = 'img\product\test\\'.$imageName;
-                $str += $img_path . ' '; 
-            }
-            $sql  = DB::table('product')
-            ->where('id',82)
-            ->update([
-                'pro_detail_images'=>$str,
-            ]);
+    {        
+        $str = DB::table('product')
+        ->where('id', $request->pro_id)
+        ->select('pro_detail_images')
+        ->first();
+        foreach ($str as $key => $value) {
+            $imgs[] = $value;
         }
-        return response()->json([
-            "success" => $sql,
-        ]);
+        $str = implode("",$imgs);
+        if ($request->hasFile('files')) {
+            $files = $request->file('files');
+            foreach ($files as $key => $value) {
+                $typeFile = $value->extension();
+                if ($typeFile != 'jpg' && $typeFile != 'png' && $typeFile != 'jpeg') {
+                    return false;
+                }
+            }
+            foreach ($files as $key => $value) {
+                $imgName = $value->hashName();
+                $value->move('img/product/test',$imgName);
+                $path_img = 'img/product/test'. $imgName;
+                $str .= $path_img.' '; 
+            }
+           
+            $sql = DB::table('product')
+                ->where('id', $request->pro_id)
+                ->update([
+                    'pro_detail_images' => $str                
+                ]);
+        }
+        return view('pages.admin.editProduct');
     }
     //delete Product
     public function deleteProduct(Request $request)
