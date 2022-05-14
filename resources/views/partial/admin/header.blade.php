@@ -76,7 +76,7 @@
                                 <li><a href="shop.html">Tôm Các Loại</a></li>
                                 <li><a href="shop.html">Cá, Mực</a></li>                                
                                 <li><a href="shop.html">Gia Vị</a></li>
-                                <li><a href="shop.html">Đông Lạnh</a></li>
+                                <li><a href="{{route('showChartProduct')}}">Thống Kê</a></li>
                                 <li><a href="shop.html">Lẩu</a>
                                     <ul class="sub-menu">
                                         <li><a href="blog-right-sidebar.html">Lẩu This</a></li>
