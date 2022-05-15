@@ -14,17 +14,17 @@
                     <label for="files">Chọn hình</label>
                     <input type="file" id="files" name="files[]" multiple><br><br>    
                     <button type="submit" class="btn btn-primary" >Save changes</button>
-                    
-                    
+                    <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
+                        Close
+                    </button>
+                </form>   
           </div>
           
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">
-                Close
-            </button>
+            
             {{-- <button type="submit" class="btn btn-primary" >Save changes</button> --}}
-        </form>
+        
         </div>
     </div>
 </div>

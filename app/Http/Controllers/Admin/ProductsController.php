@@ -209,7 +209,9 @@ class ProductsController extends Controller
                     'pro_detail_images' => $str                
                 ]);
         }
-        return view('pages.admin.editProduct');
+        $dataCategories = $this->admin->getCategories();
+        $dataSuppliers = $this->admin->getSuppliers();
+        return view('pages.admin.editProduct',compact('dataCategories','dataSuppliers'));
     }
     //delete Product
     public function deleteProduct(Request $request)
