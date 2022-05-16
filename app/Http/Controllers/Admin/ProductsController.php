@@ -207,28 +207,25 @@ class ProductsController extends Controller
             ->where('id', $request->pro_id)
             ->select('pro_detail_images')
             ->first(); 
-            $arr = explode(" ", trim($str->pro_detail_images));            
+            // $arr = explode(" ", trim($str->pro_detail_images));
+            $url = $str->pro_detail_images;     
             //get files input
             $files = $request->file('files');            
-            $url = "";
             $extension = array();
             if($request->hasFile('files'))
             {
                 foreach ($files as $file) {                    
                     $name = $file->getClientOriginalName();
-                    // $extension[] = $file->getClientOriginalExtension();
                     $file->move('img/product/test',$name);
                     $path_img = 'img/product/test/'. $name;
-                    $url .= $path_img.' ';                     
+                    $url .= $path_img.' ';  
                 }                
             }     
-     
             $sql = DB::table('product')
                 ->where('id', $request->pro_id)
                 ->update([
-                    'pro_detail_images' => trim($url)              
+                    'pro_detail_images' => $url           
             ]);
-            
         }
         return response()->json([
             'data'=> 'Không Có Ảnh',
