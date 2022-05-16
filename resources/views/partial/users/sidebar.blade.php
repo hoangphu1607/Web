@@ -25,12 +25,12 @@
                         @foreach ($offer as $item)
                         <div class="slider-left-carousel">
                             <div class="slider-left-product">
-                                <a href="#"><img src="{{asset('')}}{{$item->pro_avatar}}" alt="product"></a>
+                                <a href="{{route('showProductDetailById',['id'=>$item->id])}}"><img src="{{asset('')}}{{$item->pro_avatar}}" alt="product"></a>
                                 <div class="slider-product-button">
-                                    <p class="add-chart"><a href="#">Add To Cart</a></p>
+                                    <p class="add-chart"><a href="{{route('showProductDetailById',['id'=>$item->id])}}">Add To Cart</a></p>
                                 </div>
                             </div>
-                            <p class="view-details"><a href="#">View details</a></p>
+                            <p class="view-details"><a href="{{route('showProductDetailById',['id'=>$item->id])}}">View details</a></p>
                         </div>
                         @endforeach
                         @endif

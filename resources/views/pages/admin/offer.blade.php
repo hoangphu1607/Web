@@ -129,11 +129,15 @@
     {{-- Datatable --}}
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
-
-    <script src="{{asset('js/custom/admin/offer.js')}}"></script>
+    {{-- Define --}}
     <script>      
+      var urlProduct = "{{route('dataProductOffer')}}";
+      var asset = "{{asset('')}}";
+      var _token = "{{ csrf_token() }}"; 
+      var urlSetOffer = "{{route('setOffer')}}";
+    </script>
+    <script src="{{asset('js/custom/admin/offer.js')}}"></script>
 
-   </script>
 @stop
 
 

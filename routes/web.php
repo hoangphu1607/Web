@@ -130,7 +130,10 @@ Route::prefix('admin')->group( function(){
 
     //show page offer
     Route::get('showOffer',[OfferController::class,'showOffer'])->middleware('checkLogin')->name('showOffer');
-
+    Route::get('dataProductOffer',[OfferController::class,'getDataProduct'])->middleware('checkLogin')->name('dataProductOffer');
+    //set offer Product
+    Route::post('setOffer',[OfferController::class,'setOffer'])->middleware('checkLogin')->name('setOffer');
+    
     //xử lý đặt hàng
     Route::get('quan-ly-dat-hang',[ManageOrder::class, 'showListOrder'])->middleware('checkLogin')->name('listOrder');
     Route::get('getBillUserOrder',[ManageOrder::class, 'allBillUserOrder'])->middleware('checkLogin')->name('getBillUserOrder');

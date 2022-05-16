@@ -262,7 +262,7 @@
 														</span>
 													</div>
 													{{-- <div class="product-content-right">
-													// 	<h3>$27.00</h3>
+													 	<h3>$27.00</h3>
 													</div> --}}
 												</div>
 											</div>
