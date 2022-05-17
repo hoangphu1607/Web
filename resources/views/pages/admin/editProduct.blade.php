@@ -135,7 +135,8 @@
       var urlProductImages = "{{route('productimages')}}";
       // console.log(_token);
       var id_Product = "";
-      var ListImgProduct = "{{route('ListImgProduct')}}"
+      var ListImgProduct = "{{route('ListImgProduct')}}";
+      var updateProductImagesDetail="{{route('updateProductImagesDetail')}}";
     </script>
     
     <script src="{{asset('js/custom/admin/product.js')}}"></script>

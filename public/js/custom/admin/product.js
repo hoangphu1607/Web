@@ -2,8 +2,9 @@
 //     e.preventDefault();
 //     console.log('hi');
 // })
-
+var id_glo;
 function addImages(id) {
+    id_glo = id;
     $('#files').val('');
     var html = '<input type="hidden" name="pro_id" required value='+id+'></input>';
     $('#hidden').html(html);
@@ -26,4 +27,23 @@ function addImages(id) {
 
 function delImgDetail(str) {
     console.log(str);
+    // console.log(id_glo);
+    $.ajax({
+        url:updateProductImagesDetail,
+        method: 'POST',
+        // cache: false,
+        // contentType: false,
+        // processData: false,
+        data:{
+            id:id_glo,
+            img_path:str,
+            _token:_token,
+        },
+        success: function (data) {
+            console.log(data);
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    })
 }

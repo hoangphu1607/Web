@@ -131,7 +131,8 @@ Route::prefix('admin')->group( function(){
     Route::POST('store-product-detail-images',[ProductsController::class, 'addProductDetailImages'])->middleware('checkLogin')->name('productimages');
     //get list img product detail 
     Route::get('ListImgProduct',[ProductsController::class, 'ListImgProduct'])->middleware('checkLogin')->name('ListImgProduct');
-    
+    //update hình ảnh chi tiết sản phẩm
+    Route::POST('updateProductImagesDetail',[ProductsController::class, 'updateProductImagesDetail'])->middleware('checkLogin')->name('updateProductImagesDetail');
     //show page offer
     Route::get('showOffer',[OfferController::class,'showOffer'])->middleware('checkLogin')->name('showOffer');
     Route::get('dataProductOffer',[OfferController::class,'getDataProduct'])->middleware('checkLogin')->name('dataProductOffer');

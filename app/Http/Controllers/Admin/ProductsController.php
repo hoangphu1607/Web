@@ -184,19 +184,32 @@ class ProductsController extends Controller
             ->where('id', $request->pro_id)
             ->select('pro_detail_images')
             ->first();
-        $img = "";
-        $arr = explode(" ", trim($str->pro_detail_images));
-        for ($i=0; $i < count($arr); $i++) {
-            $val = trim($arr[$i]); 
-            $img .= "<div class='d-flex'>
-                        <div class='p-2'><img src='".asset($arr[$i])."' class='img_detail' width='100px' height='100px' ></div>
-                        <div class='p-2'><button class='btn btn-danger' onclick=delImgDetail('$val')>Xóa</button></div>
-                    </div>";
-        }
-        return response()->json([
-            'data'=> $img,
-            'arr' => $arr
-        ]);
+            $img = "";
+            $arr = explode(" ", trim($str->pro_detail_images));
+            if ($arr[0]!='') {
+                for ($i=0; $i < count($arr); $i++) {
+                    $val = trim($arr[$i]); 
+                    $img .= "<div class='d-flex' id='$arr[$i]'>
+                                <div class='p-2'><img src='".asset($arr[$i])."' class='img_detail' width='100px' height='100px' ></div>
+                                <div class='p-2'><button class='btn btn-danger' onclick=delImgDetail('$val')>Xóa</button></div>
+                            </div>";
+                }
+                return response()->json([
+                    'data'=> $img,
+                    'arr' => $arr,
+    
+                ]); 
+            }
+            else{
+                $img = "<div class='d-flex'>
+                                <div class='p-2'>Chưa có hình ảnh</div>               
+                        </div>";
+                return response()->json([
+                    'data'=>$img,
+                    'message'=>'Chưa có hình',
+                ]);
+            }
+              
     } 
     //add detail images of product
     public function addProductDetailImages(Request $request)    
@@ -215,7 +228,7 @@ class ProductsController extends Controller
             if($request->hasFile('files'))
             {
                 foreach ($files as $file) {                    
-                    $name = $file->getClientOriginalName();
+                    $name = $file->hashName();
                     $file->move('img/product/test',$name);
                     $path_img = 'img/product/test/'. $name;
                     $url .= $path_img.' ';  
@@ -231,6 +244,26 @@ class ProductsController extends Controller
             'data'=> 'Không Có Ảnh',
             'id' => $request->pro_id
         ]);
+    }
+    public function updateProductImagesDetail(Request $request)
+    {
+        $select = DB::table('product')
+        ->where('id',$request->id)
+        ->select('pro_detail_images')
+        ->first();
+        $path = explode(" ", trim($select->pro_detail_images));
+        if (($key = array_search($request->img_path, $path)) !== false) {
+            unset($path[$key]);}
+        $str = implode(" ",$path);
+        $update = DB::table('product')
+        ->where('id',$request->id)
+        ->update([
+            'pro_detail_images' => $str,
+        ]);
+        return response()->json([
+            'success'=>$str,
+        ]);
+
     }
     //delete Product
     public function deleteProduct(Request $request)
