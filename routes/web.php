@@ -65,7 +65,9 @@ Route::prefix('home')->group( function(){
     Route::get('getQuantityOrder',[Order::class,'getQuantityOrder'])->name('getQuantityOrder');
     //transfer data order
     Route::get('transferDataOrder',[Order::class,'transferDataOrder'])->name('transferDataOrder');
-
+    //get Price By Id
+    Route::get('getPriceById',[Order::class,'getPriceById'])->name('getPriceById');
+    
 });
 
 Route::prefix('admin')->group( function(){

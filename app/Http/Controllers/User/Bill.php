@@ -114,6 +114,7 @@ class Bill extends Controller
     
     public function orderConfirm(Request $request)
     {
+
         $select = DB::table('user')
         ->where('id', $request->id_user)
         ->first();
@@ -129,10 +130,8 @@ class Bill extends Controller
             'ward' => $select->wards_id
         ]);
         return response()->json([
-            // 'Hi' => $request->id_bill,
-            // "b" => $request->id_user,
             'data' => true,
-            'city' => $select->city_id
+            'city' => $select->city_id,
         ]);
     }
 

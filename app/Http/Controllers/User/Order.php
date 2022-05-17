@@ -40,6 +40,7 @@ class Order extends Controller
         ->where('product.id','=',$id)
         ->leftjoin('description_detail','product.id','=', 'description_detail.product_id')
         ->first();
+        // dd($data_query);
         $details = DB::table('description_detail')
         ->select('price','type','id')
         ->where('product_id',$id)
@@ -60,6 +61,7 @@ class Order extends Controller
     // user order product login
     public function orderProduct(Request $request)
     {
+
         $rules = [
             'amount' =>'required',
             'amount' => 'between:1,100'
@@ -206,5 +208,15 @@ class Order extends Controller
         ->where('b_status',0) //lấy ra bill đang đặt
         ->get();
         return $dataBill;
+    }
+    //get price by id
+    public function getPriceById(Request $request)
+    {
+        $details = DB::table('description_detail')
+        ->where('id',$request->id)
+        ->first();
+        return response()->json([
+            'data' => $details
+        ]);
     }
 }

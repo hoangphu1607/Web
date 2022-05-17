@@ -11,30 +11,6 @@
     {{--custom css item suggest search--}}
     <style>
         .autocomplete-group { padding: 2px 5px; }
-        .my-btn {
-        position: relative;
-        display: inline-block;
-        }
-        .buttoner {
-        background-color: #66bb6a;
-        border: none;
-        cursor: pointer;
-        height: 48px;
-        border-radius: 3px;
-        width: 120px;
-        text-align: center;
-        color: white;
-        line-height: 48px;
-        font-size: 14px;
-        font-weight: bold;
-        }
-        .my-btn .fa-check {
-        position: absolute;
-        top: 5px;
-        right: 10px;
-        color: #fff;
-        font-weight: normal;
-        }
     </style>
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,700,600,500,300,800,900' rel='stylesheet' type='text/css'>
@@ -194,7 +170,7 @@
                                     <a href="#"><i class="fa fa-star"></i></a>
                                     <p>(3 costomar review)</p>
                                 </div>
-                                <h3 style="color: red">{{$data_query->price}}đ</h3>
+                                <h3 style="color: red" id="text-Price">{{number_format($data_query->price, 0, ',', '.')}} VND</h3>
                             </div>
                             {{-- <div class="product-item-code">
                                 <p>Item Code  :   #897896</p>
@@ -205,7 +181,15 @@
                                 <p>@php echo $data_query->pro_content @endphp</p>
                             </div>
                             <div class="size-chart">
-                                <p>Các Loại: </p>
+                                <p>Các Loại: 
+                                @for ($i = 0; $i <count($details); $i++)
+                                    @if($i == 0)
+                                        <button class="btn btn-danger " onclick="pickPrice(this,{{$details[$i]->id}})" >{{$details[$i]->type}} <i class="fa-solid fa-check"></i></button>
+                                    @else
+                                        <button class="btn btn-danger " onclick="pickPrice(this,{{$details[$i]->id}})" >{{$details[$i]->type}} </button>
+                                    @endif
+                                @endfor
+                                </p>
                                 <!--
                                 <select name="" id="">
                                     <option value="">Size Chart: <i class="fa fa-plus"></i></option>
@@ -215,16 +199,35 @@
                                 </select>
                                 -->
                             </div>
-                            <div class="available-option">
-                                @for ($i = 0; $i <count($details); $i++)
-                                    @if($i == 0)
-                                        <button class="btn btn-danger " onclick="pickPrice(this)" >{{$details[$i]->type}} <i class="fa-solid fa-check"></i></button>
-                                    @else
-                                        <button class="btn btn-danger " onclick="pickPrice(this)" >{{$details[$i]->type}} </button>
-                                    @endif
-                                @endfor
-                                {{-- <h2>Available Options:</h2>
-                                <div class="color-option fix">
+                            <div class="product-item-code"> 
+                                <p>Số Lượng:
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                <div class="input-group">
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+                                                            <span class="glyphicon glyphicon-minus"></span>
+                                                        </button>
+                                                    </span>
+                                                    <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+                                                            <span class="glyphicon glyphicon-plus"></span>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </p>   
+                                <div class="product-item-details">
+                                    <button class="btn btn-warning" style="padding: 15px 32px;margin: 4px 2px;" onclick="OrderProductDetail()">
+                                        Thêm Vào Giỏ Hàng
+                                    </button>
+                                </div>
+                                                    
+                                {{-- <div class="color-option fix">
                                     <p>Color:</p>
                                     <a href="#" class="color-1"></a>
                                     <a href="#" class="color-2"></a>
@@ -449,7 +452,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     {{--quick defined--}}
     <script>
-
+        var orderProduct = "{{route('orderProduct')}}";
+        var id_productByType;
+        var first_Price;
+        var id_Product = "{{$data_query->product_id}}";
+        var _token = "{{ csrf_token() }}";
+        window.onload = function(){
+            id_productByType = "{{$details[0]->id}}";
+            first_Price = "{{$data_query->price}}";
+        }
+        var getPriceById = "{{route('getPriceById')}}";
     </script>
     <script src="{{asset('js/custom/user/order.js')}}"></script>
 @stop
