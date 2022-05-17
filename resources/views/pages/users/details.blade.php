@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Trang Chủ')
+@section('title','Sản Phẩm')
 
 @section('style-libraries')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.css">
@@ -11,6 +11,30 @@
     {{--custom css item suggest search--}}
     <style>
         .autocomplete-group { padding: 2px 5px; }
+        .my-btn {
+        position: relative;
+        display: inline-block;
+        }
+        .buttoner {
+        background-color: #66bb6a;
+        border: none;
+        cursor: pointer;
+        height: 48px;
+        border-radius: 3px;
+        width: 120px;
+        text-align: center;
+        color: white;
+        line-height: 48px;
+        font-size: 14px;
+        font-weight: bold;
+        }
+        .my-btn .fa-check {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        color: #fff;
+        font-weight: normal;
+        }
     </style>
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,700,600,500,300,800,900' rel='stylesheet' type='text/css'>
@@ -172,15 +196,16 @@
                                 </div>
                                 <h3 style="color: red">{{$data_query->price}}đ</h3>
                             </div>
-                            <div class="product-item-code">
+                            {{-- <div class="product-item-code">
                                 <p>Item Code  :   #897896</p>
                                 <p>Availability :   In stock</p>
-                            </div>
+                            </div> --}}
                             <div class="product-item-details">
-                                <p>Nulla quis lorem ut libero malesuada feugiat. Donec sollicitudin molestie malesuada. Mauris. </p>
+                                <p>Mô Tả</p>
+                                <p>@php echo $data_query->pro_content @endphp</p>
                             </div>
                             <div class="size-chart">
-                                <p>Size Chart: <i class="fa fa-plus"></i></p>
+                                <p>Các Loại: </p>
                                 <!--
                                 <select name="" id="">
                                     <option value="">Size Chart: <i class="fa fa-plus"></i></option>
@@ -191,7 +216,14 @@
                                 -->
                             </div>
                             <div class="available-option">
-                                <h2>Available Options:</h2>
+                                @for ($i = 0; $i <count($details); $i++)
+                                    @if($i == 0)
+                                        <button class="btn btn-danger " onclick="pickPrice(this)" >{{$details[$i]->type}} <i class="fa-solid fa-check"></i></button>
+                                    @else
+                                        <button class="btn btn-danger " onclick="pickPrice(this)" >{{$details[$i]->type}} </button>
+                                    @endif
+                                @endfor
+                                {{-- <h2>Available Options:</h2>
                                 <div class="color-option fix">
                                     <p>Color:</p>
                                     <a href="#" class="color-1"></a>
@@ -219,7 +251,7 @@
                                         <a href="#"><i class="fa fa-signal"></i></a>
                                         <p>Compare</p>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div> 
                         </div>
                     </div>
@@ -417,8 +449,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     {{--quick defined--}}
     <script>
-      $(function () {
-          // your custom javascript
-      });
-   </script>
+
+    </script>
+    <script src="{{asset('js/custom/user/order.js')}}"></script>
 @stop

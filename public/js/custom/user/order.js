@@ -24,3 +24,6 @@ function confirOrder(id_bill,id_user) {
 function backHome() {
     window.location = home
 }
+function pickPrice(el) {
+    el.append('<i class="fa-solid fa-check">');
+}

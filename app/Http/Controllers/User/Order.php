@@ -40,8 +40,12 @@ class Order extends Controller
         ->where('product.id','=',$id)
         ->leftjoin('description_detail','product.id','=', 'description_detail.product_id')
         ->first();
-        //dd($data_query);
-        return view("pages.users.details",compact('data_query'));
+        $details = DB::table('description_detail')
+        ->select('price','type','id')
+        ->where('product_id',$id)
+        ->get();
+        // dd(count($details));
+        return view("pages.users.details",compact('data_query','details'));
     }
     //Get a description by id
     public function getDesById(Request $request)
