@@ -132,7 +132,10 @@
     <script>
       var _token = "{{ csrf_token() }}";
       var urlStoreImages = '{{route("productimages")}}';
+      var urlProductImages = "{{route('productimages')}}";
       // console.log(_token);
+      var id_Product = "";
+      var ListImgProduct = "{{route('ListImgProduct')}}"
     </script>
     
     <script src="{{asset('js/custom/admin/product.js')}}"></script>
@@ -356,7 +359,26 @@
           }
         });   
       });
-
+      $('#formAddImages').on('submit',function(e) {
+        e.preventDefault();
+        var data = new FormData(this);
+        data.append('pro_id',id_Product)
+        $.ajax({
+          url:urlProductImages,
+          data:data,
+          method: 'POST',    
+          cache: false,
+          contentType: false,
+          processData: false,
+          success: function(data) { 
+            console.log(data );  
+            toastr["success"]("Thêm Ảnh Thành Công!!!", "Thông Báo");             
+          },
+          error: function(error){
+            console.log(error);
+          }
+        });
+      });
    </script>
 @stop
 

@@ -177,41 +177,63 @@ class ProductsController extends Controller
             ]); 
         }
     }
-    //add detail images of product
-    public function addProductDetailImages(Request $request)
-    {        
+    // get list data img
+    public function ListImgProduct(Request $request)
+    {   
         $str = DB::table('product')
-        ->where('id', $request->pro_id)
-        ->select('pro_detail_images')
-        ->first();
-        foreach ($str as $key => $value) {
-            $imgs[] = $value;
+            ->where('id', $request->pro_id)
+            ->select('pro_detail_images')
+            ->first();
+        $img = "";
+        $arr = explode(" ", trim($str->pro_detail_images));
+        for ($i=0; $i < count($arr); $i++) {
+            $val = trim($arr[$i]); 
+            $img .= "<div class='d-flex'>
+                        <div class='p-2'><img src='".asset($arr[$i])."' class='img_detail' width='100px' height='100px' ></div>
+                        <div class='p-2'><button class='btn btn-danger' onclick=delImgDetail('$val')>Xóa</button></div>
+                    </div>";
         }
-        $str = implode("",$imgs);
+        return response()->json([
+            'data'=> $img,
+            'arr' => $arr
+        ]);
+    } 
+    //add detail images of product
+    public function addProductDetailImages(Request $request)    
+    {
         if ($request->hasFile('files')) {
-            $files = $request->file('files');
-            foreach ($files as $key => $value) {
-                $typeFile = $value->extension();
-                if ($typeFile != 'jpg' && $typeFile != 'png' && $typeFile != 'jpeg') {
-                    return false;
-                }
-            }
-            foreach ($files as $key => $value) {
-                $imgName = $value->hashName();
-                $value->move('img/product/test',$imgName);
-                $path_img = 'img/product/test'. $imgName;
-                $str .= $path_img.' '; 
-            }
-           
+            //get data product when add img
+            $str = DB::table('product')
+            ->where('id', $request->pro_id)
+            ->select('pro_detail_images')
+            ->first(); 
+            $arr = explode(" ", trim($str->pro_detail_images));            
+            //get files input
+            $files = $request->file('files');            
+            $url = "";
+            $extension = array();
+            if($request->hasFile('files'))
+            {
+                foreach ($files as $file) {                    
+                    $name = $file->getClientOriginalName();
+                    // $extension[] = $file->getClientOriginalExtension();
+                    $file->move('img/product/test',$name);
+                    $path_img = 'img/product/test/'. $name;
+                    $url .= $path_img.' ';                     
+                }                
+            }     
+     
             $sql = DB::table('product')
                 ->where('id', $request->pro_id)
                 ->update([
-                    'pro_detail_images' => $str                
-                ]);
+                    'pro_detail_images' => trim($url)              
+            ]);
+            
         }
-        $dataCategories = $this->admin->getCategories();
-        $dataSuppliers = $this->admin->getSuppliers();
-        return view('pages.admin.editProduct',compact('dataCategories','dataSuppliers'));
+        return response()->json([
+            'data'=> 'Không Có Ảnh',
+            'id' => $request->pro_id
+        ]);
     }
     //delete Product
     public function deleteProduct(Request $request)
