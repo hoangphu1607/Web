@@ -108,7 +108,7 @@
           <th scope="col">SĐT</th>
           <th scope="col">Ảnh</th>          
           <th scope="col">Cập nhật</th>
-          <th scope="col">Xóa</th>
+          {{-- <th scope="col">Xóa</th> --}}
         </tr>
       </thead>      
     </table>
@@ -160,12 +160,12 @@
               return '<button data-id="'+ row.id +'" type="button" id="editsupplier" class="btn btn-primary" data-toggle="modal" data-target="#edit_supplier" ><i class="fa-solid fa-pen-to-square"></i></button>'
             }
           },
-          {
-            data:'id',
-            render: function(data, type, row){
-              return '<button data-id="'+ row.id +'" type="button" class="btn btn-danger" data-id="del_'+row.id+'" id="delete" data-toggle="modal" data-target="#confirmModal"><i class="fa-solid fa-trash-can"></i></button>'
-            }
-          },
+          // {
+          //   data:'id',
+          //   render: function(data, type, row){
+          //     return '<button data-id="'+ row.id +'" type="button" class="btn btn-danger" data-id="del_'+row.id+'" id="delete" data-toggle="modal" data-target="#confirmModal"><i class="fa-solid fa-trash-can"></i></button>'
+          //   }
+          // },
         ], 
         // columnDefs: [
         //   {

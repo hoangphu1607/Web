@@ -108,6 +108,7 @@ class ProductsController extends Controller
         ->select('product.*','categories.c_name','suppliers.s_name','description_detail.price','description_detail.type','description_detail.id as des_id')
         ->where('pro_status',1)
         ->where('description_detail.status',1)
+        ->where('categories.c_active',1)
         ->orderBy('id','desc')
         ->get();
         // dd($dataTable);

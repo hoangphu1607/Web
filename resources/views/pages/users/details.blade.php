@@ -151,9 +151,15 @@
                             <!-- Nav tabs -->
                             <div class="single-tab-img">
                                 <ul class="nav nav-tabs" role="tablist">
-                                    <li role="presentation" class="active"><a href="#img-one" role="tab" data-toggle="tab"><img src="img/single-product/s1.jpg" alt="tab-img"></a></li>
-                                    <li role="presentation"><a href="#img-two" role="tab" data-toggle="tab"><img src="img/single-product/s2.jpg" alt="tab-img"></a></li>
-                                    <li role="presentation" class="tab-last-li"><a href="#img-three" role="tab" data-toggle="tab"><img src="img/single-product/s3.jpg" alt="tab-img"></a></li>
+                                    @if(count($arr)!=0)
+                                        @for ($i = 0; $i < count($arr); $i++)
+                                            <li role="presentation"><a href="" role="tab" data-toggle="tab"><img src="{{asset($arr[$i])}}" alt="tab-img"></a></li>
+                                        @endfor
+                                    @else
+
+                                    @endif
+                                    {{-- <li role="presentation" class="active"><a href="#img-one" role="tab" data-toggle="tab"><img src="img/single-product/s1.jpg" alt="tab-img"></a></li>
+                                    <li role="presentation" class="tab-last-li"><a href="#img-three" role="tab" data-toggle="tab"><img src="img/single-product/s3.jpg" alt="tab-img"></a></li> --}}
                                 </ul>
                             </div>
                         </div>

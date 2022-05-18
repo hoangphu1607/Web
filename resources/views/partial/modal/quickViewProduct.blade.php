@@ -28,10 +28,10 @@
                       </div>
                       <!-- Nav tabs -->
                         <div class="single-tab-img">
-                            <ul class="nav nav-tabs" role="tablist">
+                            <ul class="nav nav-tabs" role="tablist" id="single-img">
+                                {{-- <li role="presentation" class="active"><a href="#img-one" role="tab" data-toggle="tab"><img src="img/single-product/s1.jpg" alt="tab-img"></a></li>
                                 <li role="presentation" class="active"><a href="#img-one" role="tab" data-toggle="tab"><img src="img/single-product/s1.jpg" alt="tab-img"></a></li>
-                                <li role="presentation" class="active"><a href="#img-one" role="tab" data-toggle="tab"><img src="img/single-product/s1.jpg" alt="tab-img"></a></li>
-                                <li role="presentation" class="active"><a href="#img-one" role="tab" data-toggle="tab"><img src="img/single-product/s1.jpg" alt="tab-img"></a></li>
+                                <li role="presentation" class="active"><a href="#img-one" role="tab" data-toggle="tab"><img src="img/single-product/s1.jpg" alt="tab-img"></a></li> --}}
                             </ul>
                         </div>
                     </div>

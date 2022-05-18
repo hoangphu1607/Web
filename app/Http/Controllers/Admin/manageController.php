@@ -95,15 +95,22 @@ class manageController extends Controller
         $check->validate(); 
         if(!$check->fails()){
             $dataInsert = [
-                $a_name = $request->admin_name,
-                $a_email = $request->admin_mail,
-                $a_phone = $request->admin_phone,
-                $a_password	= sha1($request->admin_password),
-                $a_active = 1
+                'a_name' => $request->admin_name,
+                'a_email' => $request->admin_mail,
+                'a_phone' => $request->admin_phone,
+                'a_password'	=> sha1($request->admin_password),
+                'a_active' => 1,
+                'permission_id' => 2,
             ];
-            DB::insert('insert into admin (a_name, a_email, a_phone, a_password, a_active) values (?, ?, ?, ?, ?)', $dataInsert);
-            // session($dataInsert);
-            return redirect()->route('adminLogin');  
+            DB::table('admin')
+            ->insert($dataInsert);
+            $lastInsertId = DB::getPdo()->lastInsertId();
+            $dataAdmin = [
+                'id_admin'=> $lastInsertId,
+                'admin_name' => $request->admin_name,
+            ];
+            session($dataAdmin);
+            return redirect()->route('form-editProduct');  
         }
     }
     

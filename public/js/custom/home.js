@@ -9,6 +9,7 @@ $(document).on('click','#productItem',function(e){
     e.preventDefault();
     var id = $(this).data('id'); 
     idItem = id;
+    $('.single-img-detail').remove();
     $.ajax({
         url:url+'getProductById',
         method: 'GET',
@@ -16,7 +17,7 @@ $(document).on('click','#productItem',function(e){
             id:idItem
         },
         success: function(data){
-            // console.log(data);
+            console.log(data);
             // Xóa content cũ
             $('#content_child').remove();
             //refresh option 
@@ -37,6 +38,8 @@ $(document).on('click','#productItem',function(e){
             }
             //tạo div child bời vì khi ấn vào lần nữa sẽ xóa nó
             $('#content').append('<div id="content_child">'+data.product[0].pro_content+'</div>');
+            //add img
+            $('#single-img').append(data.arr);
         },
         error: function(error){
             console.log(error);

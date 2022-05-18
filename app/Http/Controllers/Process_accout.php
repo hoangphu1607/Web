@@ -59,8 +59,6 @@ class Process_accout extends Controller
     // process register
     public function register(Request $request)
     {
-
-
         $rules = [
             'user_name' => 'required|min:8',
             'user_mail' => 'required|email|unique:user,u_email',
