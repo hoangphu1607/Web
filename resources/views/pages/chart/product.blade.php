@@ -83,13 +83,16 @@
                 </button>
             </div>
             <div width="200px" height="200px">
-                <canvas id="myChart" style="max-width: 1000px;max-height: 300px"></canvas>
+                <canvas id="Cate" style="max-width: 1000px;max-height: 300px"></canvas>
             </div>
-            {{-- <div class="d-inline-flex p-2">
+            <div class="d-inline-flex p-2">
                 <button type="button" class="btn btn-primary" style="max-height: 200px">
-                    Tổng Số Sản Phẩm <span class="badge badge-light" id="total_product">{{$total->soluong}}</span>
+                    Số sản phẩm bán trong tháng <span class="badge badge-light" id="total_product"></span>
                 </button>
-            </div> --}}
+            </div>
+            <div width="200px" height="200px">
+                <canvas id="Product-Sold-Month" style="max-width: 1000px;max-height: 300px"></canvas>
+            </div>
         </div>
     </div> 
     <!-- / .container -->

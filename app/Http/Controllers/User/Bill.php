@@ -124,7 +124,7 @@ class Bill extends Controller
         ->where('b_user_id', $request->id_user)
         ->update([
             'b_status' => 1,
-            'create_at' => date('Y-d-m'),
+            'create_at' => date('Y-m-d'),
             'city' => $select->city_id,
             'district' => $select->district_id,
             'ward' => $select->wards_id
