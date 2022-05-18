@@ -339,6 +339,7 @@
         myData.append('id',idContent);
         $('.error').text('');
         // console.log(myData);
+        
         $.ajax({          
           url: 'updateContent',
           method: 'POST',
