@@ -74,17 +74,17 @@
                                 <li><a href="{{route('form_editCategories')}}">Danh Mục</a></li>
                                 <li><a href="{{route('getmanageSuppliers')}}">Nhà Cung Cấp</a></li>
                                 <li><a href="{{route('listOrder')}}">QL Đặt Hàng</a></li>
-                                <li><a href="shop.html">Cá, Mực</a></li>                                
-                                <li><a href="shop.html">Gia Vị</a></li>
+                                {{-- <li><a href="shop.html">Cá, Mực</a></li>                                
+                                <li><a href="shop.html">Gia Vị</a></li> --}}
                                 <li><a href="{{route('showChartProduct')}}">Thống Kê</a></li>
-                                <li><a href="shop.html">Lẩu</a>
-                                    <ul class="sub-menu">
+                                {{-- <li><a href="shop.html">Lẩu</a> --}}
+                                    {{-- <ul class="sub-menu">
                                         <li><a href="blog-right-sidebar.html">Lẩu This</a></li>
                                         <li><a href="blog-single.html">Lẩu That</a></li>
                                     </ul>
-                                </li>
+                                </li> --}}
                                 
-                                <li><a href="shop.html">Sushi & Sashimi</a></li>
+                                {{-- <li><a href="shop.html">Sushi & Sashimi</a></li> --}}
                                 {{-- <li><a href="blog-left-sidebar.html">Blog</a>
                                     <ul class="sub-menu">
                                         <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>

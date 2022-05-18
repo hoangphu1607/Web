@@ -62,19 +62,19 @@
                     <div class="col-md-10 col-sm-10 col-xs-12">
                         <div class="search-chart-list">
                             <div class="catagori-menu">
-                                <ul class="list-inline">
+                                {{-- <ul class="list-inline">
                                     <li><i class="fa fa-search"></i></li>
                                     <li>
                                         <select>
-                                            <option value="All Categories">All Categories</option>
-                                            <option value="Categorie One">Categorie One</option>
-                                            <option value="Categorie Two">Categorie Two</option>
-                                            <option value="Categorie Three">Categorie Three</option>
-                                            <option value="Categorie Four">Categorie Four</option>
-                                            <option value="Categorie Five">Categorie Five</option>
+                                            <option value="All Categories">Danh mục</option>
+                                            <option value="Categorie One">Cá</option>
+                                            <option value="Categorie Two">Cua-Ghẹ</option>
+                                            <option value="Categorie Three">Ngao-Sò-Ốc</option>
+                                            <option value="Categorie Four">Tôm các loại</option>
+                                            <option value="Categorie Five">Mực</option>
                                         </select>
                                     </li>
-                                </ul>
+                                </ul> --}}
                             </div>
                             <div class="header-search">
                                 <form action="#">

@@ -119,15 +119,15 @@
 								</div>
 							</div>
 							<div class="best-seller-area">
-								<h2 class="header-title">BEST SELLER</h2>
+								<h2 class="header-title">SẢN PHẨM BÁN CHẠY</h2>
 								<div class="best-sell-product">
 									<div class="best-product-img">
 										{{-- Ảnh của phần best sale!! nên đặt chiều cao và rộng là: 80 71 --}}
-										<a href="#"><img src="{{asset('img/product/lau/lau.webp')}}" alt="product" style="max-width: 71px; height: 80px"></a>
+										<a href="#"><img src="{{asset('img\product\1649396112.webp')}}" alt="product" style="max-width: 71px; height: 80px"></a>
 									</div>
 									<div class="best-product-content">
-										<h2><a href="#">Et harum quidem red T-shirt</a></h2>
-										<h3>$45.00</h3>
+										<h2><a href="#">Cá hồi nguyên con</a></h2>
+										<h3>640.000VNĐ</h3>
 										<div class="best-product-rating">
 											<a href="#"><i class="fa fa-star"></i></a>
 											<a href="#"><i class="fa fa-star"></i></a>
@@ -139,11 +139,11 @@
 								</div>
 								<div class="best-sell-product">
 									<div class="best-product-img">
-										<a href="#"><img src="{{asset('img/product/lau/lau.webp')}}" alt="product" style="max-width: 71px; height: 80px"></a>
+										<a href="#"><img src="{{asset('img\product\1649396112.webp')}}" alt="product" style="max-width: 71px; height: 80px"></a>
 									</div>
 									<div class="best-product-content">
-										<h2><a href="#">Et harum quidem red T-shirt</a></h2>
-										<h3>$45.00</h3>
+										<h2><a href="#">Cá hồi nguyên con</a></h2>
+										<h3>640.000VNĐ</h3>
 										<div class="best-product-rating">
 											<a href="#"><i class="fa fa-star"></i></a>
 											<a href="#"><i class="fa fa-star"></i></a>
@@ -155,11 +155,11 @@
 								</div>
 								<div class="best-sell-product">
 									<div class="best-product-img">
-										<a href="#"><img src="{{asset('img/product/lau/lau.webp')}}" alt="product" style="max-width: 71px; height: 80px"></a>
+										<a href="#"><img src="{{asset('img\product\1649396112.webp')}}" alt="product" style="max-width: 71px; height: 80px"></a>
 									</div>
 									<div class="best-product-content">
-										<h2><a href="#">Et harum quidem red T-shirt</a></h2>
-										<h3>$45.00</h3>
+										<h2><a href="#">Cá hồi nguyên con</a></h2>
+										<h3>640.000VNĐ</h3>
 										<div class="best-product-rating">
 											<a href="#"><i class="fa fa-star"></i></a>
 											<a href="#"><i class="fa fa-star"></i></a>
@@ -171,11 +171,11 @@
 								</div>
 								<div class="best-sell-product">
 									<div class="best-product-img">
-										<a href="#"><img src="{{asset('img/product/lau/lau.webp')}}" alt="product" style="max-width: 71px; height: 80px"></a>
+										<a href="#"><img src="{{asset('img\product\1649396112.webp')}}" alt="product" style="max-width: 71px; height: 80px"></a>
 									</div>
 									<div class="best-product-content">
-										<h2><a href="#">Et harum quidem red T-shirt</a></h2>
-										<h3>$45.00</h3>
+										<h2><a href="#">Cá hồi nguyên con</a></h2>
+										<h3>640.000VNĐ</h3>
 										<div class="best-product-rating">
 											<a href="#"><i class="fa fa-star"></i></a>
 											<a href="#"><i class="fa fa-star"></i></a>
@@ -186,13 +186,13 @@
 									</div>
 								</div>
 								<p class="view-details">
-									<a href="#">View details</a>
+									<a href="#">Xem chi tiết</a>
 								</p>
 							</div>
-							<div class="add-kids single-add">
+							{{-- <div class="add-kids single-add">
 								<a href="#"><img src="{{asset('img/product/tom/tom.jpg')}}" alt="add"></a>
-							</div>
-							<div class="testmonial-area fix">
+							</div> --}}
+							{{-- <div class="testmonial-area fix">
 								<h2 class="header-title">Testimonial</h2>
 								<div id="owl-testmonial" class="owl-carousel">
 									<div class="testmonial fix">
@@ -208,8 +208,8 @@
 										<img src="img/testmonial.jpg" alt="">
 									</div>
 								</div>
-							</div>
-							<div class="subscribe-area">
+							</div> --}}
+							{{-- <div class="subscribe-area">
 								<h2>Subscribe Letter</h2>
 								<form action="#">
 									<div class="input-group">
@@ -217,7 +217,7 @@
 										<button type="button" class="btn"><i class="fa fa-envelope-o"></i></button>
 									</div>
 								</form>
-							</div>
+							</div> --}}
 						</div>
 					</div>					
 					<div class="col-md-9 col-sm-8">
