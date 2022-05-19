@@ -1,5 +1,10 @@
 var table = $('#myTable').DataTable({
-    "ajax": urlGetBillUserOrder,
+    "ajax": {
+        url:urlGetBillUserOrder,
+        data: {
+           code : code
+        }
+    },
     "columns" : [
         // {data: "b_id",
         //     render: (data, type, row, meta) => meta.row + 1
@@ -13,13 +18,16 @@ var table = $('#myTable').DataTable({
         render: function(data, type, row){
             return '<button data-id="'+data+'" type="button" class="btn btn-info" data-toggle="modal" data-target="#listOrderDetail" id="showListOrder"><i class="fa-solid fa-bars"></i></button>'
         }},
-        {data:"b_total", // ghi chu
+        {data:"b_id", // ghi chu
         render: function(data, type, row){
-            return '<button data-id="'+data+'" type="button" class="btn btn-warning" data-toggle="modal" data-target="#contentModal" id="editContent"><i class="fa-solid fa-comment-dots"></i></button>'
+            return '<button data-id="'+data+'" type="button" class="btn btn-warning" onclick="showNote('+data+')" data-toggle="modal" data-target="#noteOrder" ><i class="fa-solid fa-comment-dots"></i></button>'
         }},
-        {data:"b_total",// xac nhan
+        {data:"b_id",// xac nhan
         render: function(data, type, row){
-            return '<button data-id="'+data+'" type="button" class="btn btn-success" data-toggle="modal" data-target="#contentModal" id="editContent"><i class="fa-regular fa-circle-check"></i></button>'
+            if(row.b_status == 1){
+                return '<button data-id="'+data+'" type="button" class="btn btn-success" onclick="delivery('+data+')" >Giao Hàng <i class="fa-regular fa-circle-check"></i></button>'
+            }else
+                return '<button data-id="'+data+'" type="button" class="btn btn-success" onclick="delivery('+data+')" >Đã Nhận Hàng <i class="fa-regular fa-circle-check"></i></button>'
         }},
         {data:"b_total", // xoa
         render: function(data, type, row){
@@ -47,7 +55,7 @@ $(document).on('click', '#showListOrder', function(e){
         },
         method: 'GET',
         success: function(data){
-            $('.checkout-head').append(data.pd)
+            $('.img-content').append(data.pd)
         },
         error: function(error){
             console.log(error);
@@ -55,6 +63,45 @@ $(document).on('click', '#showListOrder', function(e){
         }
     })
 });
+
+function showNote(idBill) {
+    $('.note-body').remove();
+    $.ajax({
+        url:getDataNoteById,
+        data:{
+            id:idBill,
+            "action": "getNote",
+        },
+        method: 'GET',
+        success: function(data){
+            $('.note-main').append(data.note)
+        },
+        error: function(error){
+            console.log(error);
+
+        }
+    })
+}
+
+function delivery(idBill) {
+    $.ajax({
+        url:getDataNoteById,
+        data:{
+            id:idBill,
+            "action": "updateStatus",
+            code:code
+        },
+        method: 'GET',
+        success: function(data){
+            toastr["success"]("Thành Công", "Thông Báo")  ;                  
+            table.ajax.reload();       
+        },
+        error: function(error){
+            console.log(error);
+
+        }
+    })
+}
 
 
 

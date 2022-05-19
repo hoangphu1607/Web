@@ -110,6 +110,7 @@
 @stop
 @section('modal')
     @include('partial.modal.DetailListOrder')
+    @include('partial.modal.note')
 @stop
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
@@ -120,6 +121,14 @@
         var urlGetBillUserOrder = "{{route('getBillUserOrder')}}";
         var urlGetBillDetailById = "{{route('getBillDetailById')}}";
         var asset = "{{asset('')}}";
+        var getDataNoteById = "{{route('getDataNoteById')}}";
+        var code = "{{$code}}" ;
+        if(code == 1){
+            console.log('1');
+        }else if(code == 2){
+            console.log('2');
+        }
+        // console.log(code);
         // console.log(urlGetBillUserOrder);
     </script>
     {{-- Datatable --}}

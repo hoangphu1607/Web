@@ -95,7 +95,7 @@ Route::prefix('admin')->group( function(){
     Route::post('updateCategories',[CategoriesController::class,'updateCategories'])->middleware('checkLogin')->name('updateCategories');    
     //delete categories
     Route::post('deleteCategories', [CategoriesController::class,'deleteCategories'])->middleware('checkLogin')->name('deleteCategories');
-
+    
     // Thêm nhà cung cấp
     Route::get('form-addSuppliers', [SuppliersController::class,'form_addSuppliers'])->middleware('checkLogin')->name('form_addSuppliers');
     Route::post('form-addSuppliers', [SuppliersController::class,'addSuppliers'])->middleware('checkLogin')->name('addSuppliers');    
@@ -144,7 +144,10 @@ Route::prefix('admin')->group( function(){
     Route::get('getBillUserOrder',[ManageOrder::class, 'allBillUserOrder'])->middleware('checkLogin')->name('getBillUserOrder');
     //get Bill Detail by Id
     Route::get('getBillDetailById',[ManageOrder::class, 'getBillDetailById'])->middleware('checkLogin')->name('getBillDetailById');
-
+    //get note by id
+    Route::get('getDataNoteById',[ManageOrder::class, 'processBillById'])->middleware('checkLogin')->name('getDataNoteById');
+    //show page đang giao hàng
+    Route::get('dang-giao-hang',[ManageOrder::class, 'showDelivery'])->middleware('checkLogin')->name('showDelivery');
 });
 
 

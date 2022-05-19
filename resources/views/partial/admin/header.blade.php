@@ -73,7 +73,13 @@
                                 <li><a href="{{route('form-editProduct')}}">Sản Phẩm</a></li>
                                 <li><a href="{{route('form_editCategories')}}">Danh Mục</a></li>
                                 <li><a href="{{route('getmanageSuppliers')}}">Nhà Cung Cấp</a></li>
-                                <li><a href="{{route('listOrder')}}">QL Đặt Hàng</a></li>
+                                <li><a href="{{route('listOrder')}}">QL Đặt Hàng</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="{{route('listOrder')}}">Chờ Duyệt</a></li>
+                                        <li><a href="{{route('showDelivery')}}">Đang Giao</a></li>
+                                        <li><a href="blog-single.html">Xác Nhận Giao Hàng</a></li>
+                                    </ul>
+                                </li>
                                 {{-- <li><a href="shop.html">Cá, Mực</a></li>                                
                                 <li><a href="shop.html">Gia Vị</a></li> --}}
                                 <li><a href="{{route('showChartProduct')}}">Thống Kê</a></li>
