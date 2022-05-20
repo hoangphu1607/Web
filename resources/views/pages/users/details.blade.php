@@ -69,8 +69,10 @@
     <!-- responsive CSS
     ============================================ -->          
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
+    <link rel="stylesheet" href="{{asset('css/product/product details/slideshowproduct.css')}}">
     
     <script src="{{asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
+    <script src="{{asset('js/custom/user/product/product details/slideshow.js')}}"></script>
 @stop
 
 @section('breadcrumb')
@@ -143,13 +145,50 @@
                             <!-- Tab panes -->
                             <div class="single-tab-content">
                                 <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane active" id="img-one"><img src="{{asset('')}}{{$data_query->pro_avatar}}" alt="tab-img"></div>
-                                    <div role="tabpanel" class="tab-pane" id="img-two"><img src="img/single-product/single-product-2.jpg" alt="tab-img"></div>
-                                    <div role="tabpanel" class="tab-pane" id="img-three"><img src="img/single-product/single-product-1.jpg" alt="tab-img"></div>
+                                    {{-- <div role="tabpanel" class="tab-pane active" id="img-one"><img src="{{asset('')}}{{$data_query->pro_avatar}}" alt="tab-img"></div> --}}
+                                    {{-- <div role="tabpanel" class="tab-pane" id="img-two"><img src="img/single-product/single-product-2.jpg" alt="tab-img"></div>
+                                    <div role="tabpanel" class="tab-pane" id="img-three"><img src="img/single-product/single-product-1.jpg" alt="tab-img"></div> --}}
+                                    <div class="mySlides">
+                                        <div class="numbertext">1 / 3</div>
+                                          <img src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%">
+                                      </div>
+                                    
+                                      <div class="mySlides">
+                                        <div class="numbertext">2 / 3</div>
+                                          <img src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%">
+                                      </div>
+                                    
+                                      <div class="mySlides">
+                                        <div class="numbertext">3 / 3</div>
+                                          <img src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%">
+                                      </div>                               
+                                    
+                                      <!-- Next and previous buttons -->
+                                      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                                      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                                    
+                                      <!-- Image text -->
+                                      <div class="caption-container">
+                                        <p id="caption"></p>
+                                      </div>
+                                    
+                                      <!-- Thumbnail images -->
+                                      <div class="row">
+                                        <div class="column">
+                                          <img class="demo cursor" src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%" onclick="currentSlide(1)" >
+                                        </div>
+                                        <div class="column">
+                                          <img class="demo cursor" src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%" onclick="currentSlide(2)" >
+                                        </div>
+                                        <div class="column">
+                                          <img class="demo cursor" src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%" onclick="currentSlide(3)" >
+                                        </div>                             
+                                    </div>
+
                                 </div>
                             </div>
                             <!-- Nav tabs -->
-                            <div class="single-tab-img">
+                            {{-- <div class="single-tab-img">
                                 <ul class="nav nav-tabs" role="tablist">
                                     @if(count($arr)!=0)
                                         @for ($i = 0; $i < count($arr); $i++)
@@ -160,8 +199,8 @@
                                     @endif
                                     {{-- <li role="presentation" class="active"><a href="#img-one" role="tab" data-toggle="tab"><img src="img/single-product/s1.jpg" alt="tab-img"></a></li>
                                     <li role="presentation" class="tab-last-li"><a href="#img-three" role="tab" data-toggle="tab"><img src="img/single-product/s3.jpg" alt="tab-img"></a></li> --}}
-                                </ul>
-                            </div>
+                                {{--</ul>--}}
+                           {{-- </div> --}}
                         </div>
                     </div>
                     <div class="col-md-7 col-sm-7">
