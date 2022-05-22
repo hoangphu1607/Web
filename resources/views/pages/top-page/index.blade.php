@@ -69,7 +69,16 @@
     <!-- responsive CSS
     ============================================ -->          
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
-    
+    <style>
+		.bdsale{
+			border: 1px solid #ff424e;
+			background-color: #fff0f1;
+			color: #ff424e;
+			line-height: 18px;
+			font-size: 14px;
+			padding: 0px 4px;
+		}
+	</style>
     <script src="{{asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
 
 @stop
@@ -350,6 +359,7 @@
 		var _token = "{{ csrf_token() }}";
 		var urlGetQuantityOrder = "{{route('getQuantityOrder')}}";
 		var urlTransferDataOrder = "{{route('transferDataOrder')}}";
+		var getProductById = "{{route('getProductById')}}"
 	</script>
 
 @stop

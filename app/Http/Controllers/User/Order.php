@@ -23,25 +23,52 @@ class Order extends Controller
     //get a product by id
     public function getProductById (Request $request)
     {
-        $dataProduct = DB::table($this->table)
-        ->join('description_detail','product.id','=','description_detail.product_id')
-        ->select('product.*','description_detail.*','description_detail.id as idDes')
-        ->where('description_detail.status','1')
-        ->where('product.id', '=', $request->id)
+        $sale = DB::table('sale')
+        ->where('sale.product_id',$request->id)
         ->get();
-        $img = '';
-        $arr = explode(" ", trim($dataProduct[0]->pro_detail_images));
-        for ($i=0; $i < count($arr); $i++) { 
-            $img .= "<li role='presentation' class='active single-img-detail'><a href='#img-one' role='tab' data-toggle='tab'><img src='".asset($arr[$i])."' alt='tab-img'></a></li>";
+        if(count($sale) == 0){
+            $dataProduct = DB::table($this->table)
+            ->join('description_detail','product.id','=','description_detail.product_id')
+            ->select('product.*','description_detail.*','description_detail.id as idDes')
+            ->where('description_detail.status','1')
+            ->where('product.id', '=', $request->id)
+            ->get();
+            $img = '';
+            $arr = explode(" ", trim($dataProduct[0]->pro_detail_images));
+            for ($i=0; $i < count($arr); $i++) { 
+                $img .= "<li role='presentation' class='active single-img-detail'><a href='#img-one' role='tab' data-toggle='tab'><img src='".asset($arr[$i])."' alt='tab-img'></a></li>";
+            }
+            return response()->json([
+                'product' => $dataProduct,
+                'arr' => $img,
+                'sale' => count($sale)
+            ]);
+        }else{
+            $dataProduct = DB::table($this->table)
+            ->join('description_detail','product.id','=','description_detail.product_id')
+            ->join('sale','sale.product_id','=','product.id')
+            ->select('product.*','description_detail.*','description_detail.id as idDes','sale.discount')
+            ->where('description_detail.status','1')
+            ->where('product.id', '=', $request->id)
+            ->where('sale.status',1)
+            ->get();
+            $img = '';
+            $arr = explode(" ", trim($dataProduct[0]->pro_detail_images));
+            for ($i=0; $i < count($arr); $i++) { 
+                $img .= "<li role='presentation' class='active single-img-detail'><a href='#img-one' role='tab' data-toggle='tab'><img src='".asset($arr[$i])."' alt='tab-img'></a></li>";
+            }
+            return response()->json([
+                'product' => $dataProduct,
+                'arr' => $img,
+                'sale' => $sale,
+                'count' => count($sale)
+            ]);
         }
-        return response()->json([
-            'product' => $dataProduct,
-            'arr' => $img,
-        ]);
+        
     }
 
     public function showProductDetailById($id)
-    {    
+    {        
         $data_query = DB::table($this->table)
         ->where('product.id','=',$id)
         ->leftjoin('description_detail','product.id','=', 'description_detail.product_id')

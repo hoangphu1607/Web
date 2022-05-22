@@ -11,13 +11,13 @@ $(document).on('click','#productItem',function(e){
     idItem = id;
     $('.single-img-detail').remove();
     $.ajax({
-        url:url+'getProductById',
+        url:getProductById,
         method: 'GET',
         data:{
             id:idItem
         },
         success: function(data){
-            console.log(data);
+            // console.log(data.count);
             // Xóa content cũ
             $('#content_child').remove();
             //refresh option 
@@ -27,11 +27,21 @@ $(document).on('click','#productItem',function(e){
             $('#img_main').attr('src',data.product[0].pro_avatar);
             $('#name_product').text(data.product[0].pro_name);
             // conver price vnd
-            price = data.product[0].price;
+            price = data.product[0].price;            
             description_detail_id = data.product[0].id;
             // console.log('description_detail_id: ' + description_detail_id);
             priceConver = price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
-            $('#pro_price').text(priceConver +" / "+data.product[0].type);
+            // $('#pro_price').text(priceConver +" / "+data.product[0].type);
+            if(typeof data.count === "undefined"){
+                $('#pro_price').empty();
+                $('#pro_price').append("<span style='color:red; margin-right:8px'>"+priceConver+" / "+data.product[0].type+"</span>");    
+            }else{
+                var sale = data.product[0].discount;
+                var price_sale = (price*(100-sale))/100;
+                var price_sale_cv = price_sale.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+                $('#pro_price').empty();
+                $('#pro_price').append("<p style='color:red;  margin-right:8px'>"+ price_sale_cv +" / "+data.product[0].type+"</p>"+" <del style='font-size:13px'> "+priceConver+ " </del> <span class='bdsale'>-"+sale+"%</span>" );  
+            }
             var node = $('#optional');
             for(var i = 0; i< data.product.length; i++) {
                 node.append('<button data-id="'+data.product[i].idDes+'" type="button" class="btn btn-danger op" id="op" >'+data.product[i].type+'</button> ');

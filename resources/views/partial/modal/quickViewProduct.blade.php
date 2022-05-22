@@ -48,7 +48,7 @@
                                 <a href="#"><i class="fa fa-star"></i></a>
                                 <p>(3 costomar review)</p>
                             </div>
-                            <h3 id="pro_price">$52.00</h3>
+                            <h3 id="pro_price"></h3>
                         </div>
                         <div class="product-item-code">
                             {{-- <p>Item Code  :   #897896</p> --}}
