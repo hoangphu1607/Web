@@ -69,10 +69,11 @@
     <!-- responsive CSS
     ============================================ -->          
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
+    {{-- Slideshow --}}
     <link rel="stylesheet" href="{{asset('css/product/product details/slideshowproduct.css')}}">
     
     <script src="{{asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
-    <script src="{{asset('js/custom/user/product/product details/slideshow.js')}}"></script>
+    
 @stop
 
 @section('breadcrumb')
@@ -147,44 +148,42 @@
                                 <div class="tab-content">
                                     {{-- <div role="tabpanel" class="tab-pane active" id="img-one"><img src="{{asset('')}}{{$data_query->pro_avatar}}" alt="tab-img"></div> --}}
                                     {{-- <div role="tabpanel" class="tab-pane" id="img-two"><img src="img/single-product/single-product-2.jpg" alt="tab-img"></div>
-                                    <div role="tabpanel" class="tab-pane" id="img-three"><img src="img/single-product/single-product-1.jpg" alt="tab-img"></div> --}}
-                                    <div class="mySlides">
+                                    <div role="tabpanel" class="tab-pane" id="img-three"><img src="img/single-product/single-product-1.jpg" alt="tab-img"></div> --}}                            
+                                    <!-- Container for the image gallery -->                                
+                                        <!-- Full-width images with number text -->
+                                        <div class="mySlides">
                                         <div class="numbertext">1 / 3</div>
-                                          <img src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%">
-                                      </div>
+                                            <img src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%">
+                                        </div>
                                     
-                                      <div class="mySlides">
+                                        <div class="mySlides">
                                         <div class="numbertext">2 / 3</div>
-                                          <img src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%">
-                                      </div>
+                                            <img src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%">
+                                        </div>
                                     
-                                      <div class="mySlides">
+                                        <div class="mySlides">
                                         <div class="numbertext">3 / 3</div>
-                                          <img src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%">
-                                      </div>                               
-                                    
-                                      <!-- Next and previous buttons -->
-                                      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                                      <a class="next" onclick="plusSlides(1)">&#10095;</a>
-                                    
-                                      <!-- Image text -->
-                                      <div class="caption-container">
-                                        <p id="caption"></p>
-                                      </div>
-                                    
-                                      <!-- Thumbnail images -->
-                                      <div class="row">
-                                        <div class="column">
-                                          <img class="demo cursor" src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%" onclick="currentSlide(1)" >
+                                            <img src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%">
                                         </div>
-                                        <div class="column">
-                                          <img class="demo cursor" src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%" onclick="currentSlide(2)" >
-                                        </div>
-                                        <div class="column">
-                                          <img class="demo cursor" src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%" onclick="currentSlide(3)" >
-                                        </div>                             
-                                    </div>
 
+                                        <!-- Next and previous buttons -->
+                                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+                                        <!-- Thumbnail images -->
+                                        <div class="row">
+                                        <div class="column">
+                                            <img class="demo cursor" src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%" onclick="currentSlide(1)" >
+                                        </div>
+                                        <div class="column">
+                                            <img class="demo cursor" src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%" onclick="currentSlide(2)" >
+                                        </div>
+                                        <div class="column">
+                                            <img class="demo cursor" src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%" onclick="currentSlide(3)" >
+                                        </div>
+
+                                        </div>
+                                        
                                 </div>
                             </div>
                             <!-- Nav tabs -->
@@ -496,6 +495,8 @@
     {{--jquery.autocomplete.js--}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     {{--quick defined--}}
+    {{-- slideshow --}}
+    <script src="{{asset('js/custom/user/product/product details/slideshow.js')}}"></script>
     <script>
         var orderProduct = "{{route('orderProduct')}}";
         var id_productByType;
