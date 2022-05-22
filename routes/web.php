@@ -148,6 +148,9 @@ Route::prefix('admin')->group( function(){
     Route::get('getDataNoteById',[ManageOrder::class, 'processBillById'])->middleware('checkLogin')->name('getDataNoteById');
     //show page đang giao hàng
     Route::get('dang-giao-hang',[ManageOrder::class, 'showDelivery'])->middleware('checkLogin')->name('showDelivery');
+    //show page xác nhận giao hàng
+    Route::get('xac-nhan-giao-hang',[ManageOrder::class, 'delivery_confirmation'])->middleware('checkLogin')->name('delivery_confirmation');
+
 });
 
 

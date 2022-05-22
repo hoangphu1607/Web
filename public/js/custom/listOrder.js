@@ -25,9 +25,11 @@ var table = $('#myTable').DataTable({
         {data:"b_id",// xac nhan
         render: function(data, type, row){
             if(row.b_status == 1){
-                return '<button data-id="'+data+'" type="button" class="btn btn-success" onclick="delivery('+data+')" >Giao Hàng <i class="fa-regular fa-circle-check"></i></button>'
-            }else
+                return '<button data-id="'+data+'" type="button" class="btn btn-success" onclick="delivery('+data+')" >Giao Hàng <i class="fa-solid fa-truck"></i></button>'
+            }else if(row.b_status == 2)
                 return '<button data-id="'+data+'" type="button" class="btn btn-success" onclick="delivery('+data+')" >Đã Nhận Hàng <i class="fa-regular fa-circle-check"></i></button>'
+            else
+                return '<button data-id="'+data+'" type="button" class="btn btn-success" onclick="Confirm('+data+')">Hoàn Tất Giao Dịch <i class="fa-solid fa-people-carry-box"></i></button>'
         }},
         {data:"b_total", // xoa
         render: function(data, type, row){

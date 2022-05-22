@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-md-3 col-sm-3">	
                 <div class="slider-left">
-                    <h2>KHUYẾN MÃI</h2>
+                    <h2>GIỚI THIỆU SẢN PHẨM</h2>
                     <div id="owl-slider-left" class="owl-carousel">
                         {{-- STAR OFFER --}}
                         @if(!empty($offer))

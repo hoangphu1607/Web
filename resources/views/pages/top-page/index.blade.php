@@ -71,6 +71,7 @@
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
     
     <script src="{{asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
+
 @stop
 
 @section('breadcrumb')
@@ -220,11 +221,57 @@
 							</div> --}}
 						</div>
 					</div>					
-					<div class="col-md-9 col-sm-8">
+					<div class="col-md-9 col-sm-8 ">
 						<div class="product-items-area">
 							<div class="arrivals-area single-add">
 								<a href="#"> <img src="img/banner/cua-tuoi-ngon.jpg" alt="arrivals"> </a>
 							</div>
+							{{-- START SALE --}}
+							@if (!empty($product_sale))
+							<div class="product-items">
+								<h2 class="product-header">KHUYẾN MÃI KHỦNG</h2>
+								<div class="row">
+									<div id="product-slider" class="owl-carousel ">
+										@foreach ($product_sale as $item)
+										<div class="col-md-4 ">
+											<div class="single-product bgimg">
+												<div class="single-product-img ">
+													<a href="{{route('showProductDetailById',['id'=>$item->id])}}">
+														{{-- Ảnh Sản Phẩm  --}}
+														<img class="primary-img " src="{{asset('')}}{{$item->pro_avatar}}" alt="product" >
+														{{-- <img class="primary-img" src="img/product/single-product-1.jpg" alt="product">
+														<img class="secondary-img" src="img/product/kids-1.jpg" alt="product"> --}}
+													</a>
+													<div class="single-product-action">
+														<button onclick="nextPageProduct('{{route('showProductDetailById',['id'=>$item->id])}}')" class="btn btn-outline-warning"><i class="fa fa-external-link"></i></button>
+														<button data-id="{{$item->id}}" class="btn btn-outline-warning" id="productItem" data-toggle="modal" data-target="#quick_view_product"><i class="fa fa-shopping-cart"></i></button>
+													</div>
+												</div>
+												<div class="single-product-content">
+													<div class="product-content-left">
+														<h5><a href="#" style="color:black">{{$item->pro_name}} </a></h5>	
+														<span style="color: #129FD8 ;font-size: 16px">{{number_format(($item->price*(100-$item->discount))/100, 0, ',', '.') . "đ"}}/ 
+															<span style="color: #7A7A7A; font-size: 10px">{{$item->type}}</span>
+														</span>
+														<br>
+														<del>
+															<span style="color: #129FD8 ;font-size: 16px">{{number_format($item->price, 0, ',', '.') . "đ"}}/ 
+																<span style="color: #7A7A7A; font-size: 10px">{{$item->type}}</span>
+															</span>
+														</del>
+														
+													</div>
+													<div class="product-content-right" style="float: right; text-align: right-bottom">
+														<span style=" color: white; background-color: red; padding: 3px"><b>- {{$item->discount}}%</b></span>
+													</div>
+												</div>
+											</div>
+										</div>
+										@endforeach
+									</div>
+								</div>
+							</div>							
+							@endif
 							{{-- Start Product --}}
 							@if(!empty($dataCategories) && !empty($dataProduct))
 							@foreach ($dataCategories as $cate)
@@ -233,7 +280,7 @@
 								<div class="row">
 									<div id="product-slider" class="owl-carousel">
 										@php
-											$idOld = "";
+											$idOld = ""; 	
 										@endphp
 									@foreach ($dataProduct as $item)
 										@if($cate->id == $item->pro_category_id && $item->product_id != $idOld)
@@ -303,7 +350,6 @@
 		var _token = "{{ csrf_token() }}";
 		var urlGetQuantityOrder = "{{route('getQuantityOrder')}}";
 		var urlTransferDataOrder = "{{route('transferDataOrder')}}";
-		
 	</script>
 
 @stop

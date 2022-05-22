@@ -93,4 +93,11 @@ class ManageOrder extends Controller
         $code = 2;
         return view('pages.admin.list_order',compact('code'));
     }
+
+    //show xác nhận giao Hàng
+    public function delivery_confirmation()
+    {
+        $code = 3;
+        return view('pages.admin.list_order',compact('code'));
+    }
 }

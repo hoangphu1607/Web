@@ -77,11 +77,11 @@
                                     <ul class="sub-menu">
                                         <li><a href="{{route('listOrder')}}">Chờ Duyệt</a></li>
                                         <li><a href="{{route('showDelivery')}}">Đang Giao</a></li>
-                                        <li><a href="blog-single.html">Xác Nhận Giao Hàng</a></li>
+                                        <li><a href="{{route('delivery_confirmation')}}">Xác Nhận Giao Hàng</a></li>
                                     </ul>
                                 </li>
-                                {{-- <li><a href="shop.html">Cá, Mực</a></li>                                
-                                <li><a href="shop.html">Gia Vị</a></li> --}}
+                                <li><a href="{{route('showOffer')}}">Giới Thiệu Sản Phẩm</a></li>                                
+                                {{-- <li><a href="shop.html">Gia Vị</a></li> --}}
                                 <li><a href="{{route('showChartProduct')}}">Thống Kê</a></li>
                                 {{-- <li><a href="shop.html">Lẩu</a> --}}
                                     {{-- <ul class="sub-menu">

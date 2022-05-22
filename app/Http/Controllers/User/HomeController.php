@@ -15,8 +15,13 @@ class HomeController extends Controller
         $dataProduct = DB::table('product')
         ->join('description_detail','product.id','=','description_detail.product_id')
         ->select('product.*','description_detail.type','description_detail.price','description_detail.product_id')
-        ->where('pro_status', '1')
-        ->where('status','1')
+        ->where('product.pro_status', '1')
+        ->where('description_detail.status','1')
+        ->whereNotExists(function($query){  
+            $query->from('sale')
+            ->select('*')
+            ->where('sale.product_id','=',DB::raw('product.id'));           
+        })
         ->orderBy('product.id','desc')
         ->get();
         // dd($dataProduct);
@@ -32,34 +37,23 @@ class HomeController extends Controller
         ->select('product.id', 'day_offer', 'product.pro_avatar')
         ->where('day_offer',$today)
         ->get();
-        
+        //sale
+        $product_sale = DB::table('product')
+        ->join('sale','sale.product_id','=','product.id')
+        ->join('description_detail','product.id','=','description_detail.product_id')
+        ->select('product.*','description_detail.type','description_detail.price','description_detail.product_id','sale.status','sale.discount')
+        ->where('product.pro_status', '1')
+        ->where('description_detail.status','1')
+        ->where('sale.start_sale','<=',$today)
+        ->where('sale.end_sale','>=',$today)
+        ->where('sale.status',1)
+        ->get();
+        // dd($product_sale);
         $idUser = session('id_user');
-        // dd($idUser);
         $dataOrder = $this->getDataUserOrder($idUser);
         $numberOrder = count($dataOrder);
-        // $mp = '';
-        // if(isset($numberOrder) && $numberOrder != 0){
-        //     if($numberOrder < 3){
-        //         $mp .= '<div class="header-chart-dropdown" >';
-        //     }else{
-        //         $mp .= '<div class="header-chart-dropdown list-data" >';
-        //     }
-        //     foreach($dataOrder as $item){
-        //         $mp .= '<div class="header-chart-dropdown-list ">
-        //                     <div class="dropdown-chart-left floatleft">
-        //                         <a href="#"><img src="{{asset("$item->pro_avatar")}}" alt="list" style="width:80px;height: 80px;"></a>
-        //                     </div>
-        //                     <div class="dropdown-chart-right">
-        //                         <h2><a href="#">{{$item->pro_name}}</a></h2>
-        //                         <h3>Số Lượng: {{$item->bd_amount}}</h3>
-        //                         <h4>{{number_format($item->bd_total_amount, 0, ",", ".") . " vnđ"}}</h4>
-        //                     </div>
-        //                 </div>';
-        //     }
-        //     $mp .= '</div>';
-        // }
-        // dd(count($dataOrder));
-        return view('pages.top-page.index', compact('dataProduct','dataCategories','offer','dataOrder','numberOrder'));
+        
+        return view('pages.top-page.index', compact('dataProduct','dataCategories','offer','dataOrder','numberOrder','product_sale'));
     }
 
     //get data bill user order
