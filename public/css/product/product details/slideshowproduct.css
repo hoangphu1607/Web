@@ -48,11 +48,14 @@
 
 /* Number text (1/3 etc) */
 .numbertext {
-  color: #000000;
+  color: #f8f8f8;
   font-size: 12px;
   padding: 8px 12px;
   position: absolute;
   top: 0;
+  background-color: #000;
+  background-color: rgba(0,0,0,.34);
+  border-radius: 4px;
 }
 
 /* Container for image text */
