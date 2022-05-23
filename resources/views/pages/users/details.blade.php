@@ -151,12 +151,15 @@
                                     <div role="tabpanel" class="tab-pane" id="img-three"><img src="img/single-product/single-product-1.jpg" alt="tab-img"></div> --}}                            
                                     <!-- Container for the image gallery -->                                
                                         <!-- Full-width images with number text -->
-                                        <div class="mySlides">
-                                        <div class="numbertext">1 / 3</div>
-                                            <img src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%">
-                                        </div>
+                                        @for ($i = 0; $i < count($arr); $i++)
+                                            <div class="mySlides">
+                                            <div class="numbertext">{{$i+1}} / {{count($arr)}}</div>
+                                                <img src="{{asset('')}}{{$arr[$i]}}" style="width:100%">
+                                            </div>
+                                        @endfor
+                                        
                                     
-                                        <div class="mySlides">
+                                        {{-- <div class="mySlides">
                                         <div class="numbertext">2 / 3</div>
                                             <img src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%">
                                         </div>
@@ -164,7 +167,7 @@
                                         <div class="mySlides">
                                         <div class="numbertext">3 / 3</div>
                                             <img src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%">
-                                        </div>
+                                        </div> --}}
 
                                         <!-- Next and previous buttons -->
                                         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -172,15 +175,18 @@
 
                                         <!-- Thumbnail images -->
                                         <div class="row">
-                                        <div class="column">
-                                            <img class="demo cursor" src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%" onclick="currentSlide(1)" >
-                                        </div>
-                                        <div class="column">
+                                        @for ($i = 0; $i < count($arr); $i++)
+                                            <div class="column">
+                                                <img class="demo cursor" src="{{asset('')}}{{$arr[$i]}}" style="width:100%" onclick="currentSlide({{$i+1}})" >
+                                            </div>
+                                        @endfor       
+                                        
+                                        {{-- <div class="column">
                                             <img class="demo cursor" src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%" onclick="currentSlide(2)" >
                                         </div>
                                         <div class="column">
                                             <img class="demo cursor" src="{{asset('')}}{{$data_query->pro_avatar}}" style="width:100%" onclick="currentSlide(3)" >
-                                        </div>
+                                        </div> --}}
 
                                         </div>
                                         

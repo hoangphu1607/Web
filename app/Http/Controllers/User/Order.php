@@ -74,6 +74,7 @@ class Order extends Controller
         ->leftjoin('description_detail','product.id','=', 'description_detail.product_id')
         ->first();
         $arr = explode(" ",trim($data_query->pro_detail_images));
+        array_unshift($arr,$data_query->pro_avatar);
         $details = DB::table('description_detail')
         ->select('price','type','id')
         ->where('product_id',$id)
