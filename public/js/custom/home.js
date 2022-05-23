@@ -63,18 +63,33 @@ $(document).on('click','#op',function(e){
     var id = $(this).data('id'); 
     // idItem = id;
     $.ajax({
-        url:url+'getDesById',
+        url:getDesById,
         method: 'GET',
         data:{
             id:id
         },
         success: function(data){
-            console.log(data);
-            price = data.product.price;
-            description_detail_id = data.product.id;
-            // console.log(description_detail_id);
-            priceConver = price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
-            $('#pro_price').text(priceConver +" / "+data.product.type);
+            console.log(data.sale);
+            if(data.count==0){
+                price = data.product.price;
+                description_detail_id = data.product.id;
+                // console.log(description_detail_id);
+                priceConver = price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+                // $('#pro_price').text(priceConver +" / "+data.product.type);
+                $('#pro_price').empty();
+                $('#pro_price').append("<span style='color:red; margin-right:8px'>"+priceConver+" / "+data.product.type+"</span>");    
+            }else{
+                $('#pro_price').empty();
+                price = data.product.price;
+                description_detail_id = data.product.id;
+                // console.log(description_detail_id);
+                priceConver = price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+                var sale = data.sale[0].discount;
+                var price_sale = (price*(100-sale))/100;
+                var price_sale_cv = price_sale.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+                $('#pro_price').append("<p style='color:red;  margin-right:8px'>"+ price_sale_cv +" / "+data.product.type+"</p>"+" <del style='font-size:13px'> "+priceConver+ " </del> <span class='bdsale'>-"+sale+"%</span>" );  
+            }
+            
         },
         error: function(error){
             console.log(error);
@@ -99,7 +114,7 @@ $('#formOrder').on('submit', function(e){
     data.append('description_detail_id',description_detail_id)
     $('.header-chart-dropdown').remove();
     $.ajax({
-        url: url+'orderProduct',
+        url:orderProduct,
         method: 'POST',
         data:data,
         contentType: false,

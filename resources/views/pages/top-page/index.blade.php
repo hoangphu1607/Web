@@ -241,7 +241,14 @@
 								<h2 class="product-header">KHUYẾN MÃI KHỦNG</h2>
 								<div class="row">
 									<div id="product-slider" class="owl-carousel ">
+										@php
+											$idOld = ""; 	
+										@endphp
 										@foreach ($product_sale as $item)
+										@if($item->id != $idOld)
+										@php
+											$idOld = $item->id;	
+										@endphp
 										<div class="col-md-4 ">
 											<div class="single-product bgimg">
 												<div class="single-product-img ">
@@ -276,6 +283,7 @@
 												</div>
 											</div>
 										</div>
+										@endif
 										@endforeach
 									</div>
 								</div>
@@ -356,6 +364,8 @@
     {{--quick defined--}}
    	<script src="{{asset('js/custom/home.js')}}"></script>
 	<script>
+		var orderProduct = "{{route('orderProduct')}}"
+		var getDesById = "{{route('getDesById')}}";
 		var _token = "{{ csrf_token() }}";
 		var urlGetQuantityOrder = "{{route('getQuantityOrder')}}";
 		var urlTransferDataOrder = "{{route('transferDataOrder')}}";

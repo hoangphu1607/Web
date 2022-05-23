@@ -11,16 +11,22 @@ class HomeController extends Controller
 {
     public function get_product()
     {
+        
         //product
         $dataProduct = DB::table('product')
         ->join('description_detail','product.id','=','description_detail.product_id')
         ->select('product.*','description_detail.type','description_detail.price','description_detail.product_id')
         ->where('product.pro_status', '1')
         ->where('description_detail.status','1')
-        ->whereNotExists(function($query){  
+        ->whereNotExists(function($query){ 
+            $date = Carbon::now();
+            $today = $date->toDateString(); 
             $query->from('sale')
             ->select('*')
-            ->where('sale.product_id','=',DB::raw('product.id'));           
+            ->where('sale.product_id','=',DB::raw('product.id'))
+            ->where('sale.start_sale','<=',$today)
+            ->where('sale.end_sale','>=',$today)
+            ->where('sale.status',1);           
         })
         ->orderBy('product.id','desc')
         ->get();
