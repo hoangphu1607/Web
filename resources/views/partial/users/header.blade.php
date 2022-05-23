@@ -109,7 +109,7 @@
                                                         @endforeach
                                                         <div class="chart-checkout">
                                                             <p>TỔNG CỘNG<span>{{number_format($item->b_total, 0, ',', '.') . " vnđ"}}</span></p>
-                                                            <button type="button" class="btn btn-default">THANH TOÁN</button>
+                                                            <button type="button" onclick="window.location.href='{{route('showBill')}}'" class="btn btn-default">THANH TOÁN</button>
                                                         </div>
                                                     </div> 
                                                 @else

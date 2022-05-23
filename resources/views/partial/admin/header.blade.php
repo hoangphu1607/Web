@@ -77,7 +77,7 @@
                                     <ul class="sub-menu">
                                         <li><a href="{{route('listOrder')}}">Chờ Duyệt</a></li>
                                         <li><a href="{{route('showDelivery')}}">Đang Giao</a></li>
-                                        <li><a href="{{route('delivery_confirmation')}}">Xác Nhận Giao Hàng</a></li>
+                                        <li><a href="{{route('delivery_confirmation')}}">HOÀN TẤT GIAO DỊCH</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="{{route('showOffer')}}">Giới Thiệu Sản Phẩm</a></li>                                

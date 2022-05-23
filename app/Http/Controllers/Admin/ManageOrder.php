@@ -25,6 +25,7 @@ class ManageOrder extends Controller
         DB::raw("CONCAT(city.city_name,', ', district.district_name,', ', wards.wards_name) as address"),
         )
         ->where('bill.b_status',$request->code)
+        ->orderBy('bill.b_id','DESC')
         ->get();        
         return response()->json([
             'data' =>  $dataBill,

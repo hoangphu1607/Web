@@ -29,7 +29,7 @@ var table = $('#myTable').DataTable({
             }else if(row.b_status == 2)
                 return '<button data-id="'+data+'" type="button" class="btn btn-success" onclick="delivery('+data+')" >Đã Nhận Hàng <i class="fa-regular fa-circle-check"></i></button>'
             else
-                return '<button data-id="'+data+'" type="button" class="btn btn-success" onclick="Confirm('+data+')">Hoàn Tất Giao Dịch <i class="fa-solid fa-people-carry-box"></i></button>'
+                return 'Hoàn Tất Giao Dịch';
         }},
         {data:"b_total", // xoa
         render: function(data, type, row){

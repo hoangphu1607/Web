@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Carbon;
 // use Illuminate\Http\Response;
 class Order extends Controller
 {
@@ -23,8 +23,13 @@ class Order extends Controller
     //get a product by id
     public function getProductById (Request $request)
     {
+        $date = Carbon::now();
+        $today = $date->toDateString();
         $sale = DB::table('sale')
         ->where('sale.product_id',$request->id)
+        ->where('sale.start_sale','<=',$today)
+        ->where('sale.end_sale','>=',$today)
+        ->where('sale.status',1)
         ->get();
         if(count($sale) == 0){
             $dataProduct = DB::table($this->table)
@@ -84,18 +89,29 @@ class Order extends Controller
     }
     //Get a description by id
     public function getDesById(Request $request)
-    {   
+    {  
+        $date = Carbon::now();
+        $today = $date->toDateString();
         $dataDes = DB::table('description_detail')
         ->where('id','=',$request->id)
         ->first();
+        $product_sale = DB::table('sale')
+        ->where('sale.product_id',$dataDes->product_id)
+        ->where('sale.start_sale','<=',$today)
+        ->where('sale.end_sale','>=',$today)
+        ->where('sale.status',1)
+        ->get();
         return response()->json([
-            'product' => $dataDes
+            'product' => $dataDes,
+            'count' => count($product_sale),
+            'sale' => $product_sale,
         ]);
     }
     // user order product login
     public function orderProduct(Request $request)
     {
-
+        $date = Carbon::now();
+        $today = $date->toDateString();
         $rules = [
             'amount' =>'required',
             'amount' => 'between:1,100'
@@ -144,26 +160,68 @@ class Order extends Controller
                         'cookie'        => 1
                     ]);
                     $lastInsertId = DB::getPdo()->lastInsertId();
-                    DB::table('bill_detail')
-                    ->insert([
-                        'bd_bill_id' => $lastInsertId,
-                        'bd_product_id' => $idProduct,
-                        'description_detail_id' => $description_detail_id,
-                        'bd_price' => $price,
-                        'bd_amount' => $amount,
-                        'bd_total_amount' => $price * $amount
-                    ]);
+                    $sale = DB::table('sale')
+                    ->where('sale.product_id', $idProduct)
+                    ->where('sale.start_sale','<=',$today)
+                    ->where('sale.end_sale','>=',$today)
+                    ->where('sale.status',1)
+                    ->get();
+                    if(count($sale)==0){
+                        DB::table('bill_detail')
+                        ->insert([
+                            'bd_bill_id' => $lastInsertId,
+                            'bd_product_id' => $idProduct,
+                            'description_detail_id' => $description_detail_id,
+                            'bd_price' => $price,
+                            'bd_amount' => $amount,
+                            'bd_total_amount' => $price * $amount
+                        ]);
+                    }else{
+                        $discount = $sale[0]->discount;
+                        $price_sale = ($price*(100-$discount))/100;
+                        DB::table('bill_detail')
+                        ->insert([
+                            'bd_bill_id' => $lastInsertId,
+                            'bd_product_id' => $idProduct,
+                            'description_detail_id' => $description_detail_id,
+                            'bd_price' => $price_sale,
+                            'bd_amount' => $amount,
+                            'bd_total_amount' => $price_sale * $amount
+                        ]);
+                    }
+                    
                     $num = $this->getQuantityOrder($lastInsertId);
                 }else{ //Has Bill
-                    DB::table('bill_detail')
-                    ->insert([
-                        'bd_bill_id' => $getAllBillUser[0]->b_id,
-                        'bd_product_id' => $idProduct,
-                        'description_detail_id' => $description_detail_id,
-                        'bd_price' => $price,
-                        'bd_amount' => $amount,
-                        'bd_total_amount' => $price * $amount
-                    ]);
+                    $sale = DB::table('sale')
+                    ->where('sale.product_id', $idProduct)
+                    ->where('sale.start_sale','<=',$today)
+                    ->where('sale.end_sale','>=',$today)
+                    ->where('sale.status',1)
+                    ->get();
+                    if(count($sale)==0){
+                        DB::table('bill_detail')
+                        ->insert([
+                            'bd_bill_id' => $getAllBillUser[0]->b_id,
+                            'bd_product_id' => $idProduct,
+                            'description_detail_id' => $description_detail_id,
+                            'bd_price' => $price,
+                            'bd_amount' => $amount,
+                            'bd_total_amount' => $price * $amount
+                        ]);
+                    }else{
+                        $discount = $sale[0]->discount;
+                        $price_sale = ($price*(100-$discount))/100;
+                        DB::table('bill_detail')
+                        ->insert([
+                            'bd_bill_id' => $getAllBillUser[0]->b_id,
+                            'bd_product_id' => $idProduct,
+                            'description_detail_id' => $description_detail_id,
+                            'bd_price' => $price_sale,
+                            'bd_amount' => $amount,
+                            'bd_total_amount' => $price_sale * $amount
+                        ]);
+                    }
+                    
                     $num = $this->getQuantityOrder($getAllBillUser[0]->b_id);
                 }
                 $dataBill = $this->getDataUserOrder($user_id); 
