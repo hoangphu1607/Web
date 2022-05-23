@@ -190,15 +190,18 @@ class ProductsController extends Controller
             if ($arr[0]!='') {
                 for ($i=0; $i < count($arr); $i++) {
                     $val = trim($arr[$i]); 
-                    $img .= "<div class='d-flex' id='$arr[$i]'>
+                    $explode = explode('/',$val);
+                    $cuoi = $explode[count($explode)-1];
+                    $name = explode('.',$cuoi);
+                    $img .= "<div class='d-flex' id='$name[0]'>
                                 <div class='p-2'><img src='".asset($arr[$i])."' class='img_detail' width='100px' height='100px' ></div>
-                                <div class='p-2'><button class='btn btn-danger' onclick=delImgDetail('$val')>Xóa</button></div>
+                                <div class='p-2'><button class='btn btn-danger' onclick=delImgDetail('$arr[$i]','$name[0]')>Xóa</button></div>
                             </div>";
-                }
+                }                
                 return response()->json([
                     'data'=> $img,
                     'arr' => $arr,
-    
+                    'test' =>  $val,   
                 ]); 
             }
             else{
@@ -222,7 +225,7 @@ class ProductsController extends Controller
             ->select('pro_detail_images')
             ->first(); 
             // $arr = explode(" ", trim($str->pro_detail_images));
-            $url = $str->pro_detail_images;     
+            $url = $str->pro_detail_images; 
             //get files input
             $files = $request->file('files');            
             $extension = array();
@@ -232,7 +235,7 @@ class ProductsController extends Controller
                     $name = $file->hashName();
                     $file->move('img/product/test',$name);
                     $path_img = 'img/product/test/'. $name;
-                    $url .= $path_img.' ';  
+                    $url .= $path_img.' '; 
                 }                
             }     
             $sql = DB::table('product')
@@ -240,11 +243,14 @@ class ProductsController extends Controller
                 ->update([
                     'pro_detail_images' => $url           
             ]);
+            return response()->json([
+                'data'=> 'Không Có Ảnh',
+                'id' => $request->pro_id,
+                // 'string'=>$string,
+                // 'check'=>$check
+            ]);
         }
-        return response()->json([
-            'data'=> 'Không Có Ảnh',
-            'id' => $request->pro_id
-        ]);
+        
     }
     public function updateProductImagesDetail(Request $request)
     {
@@ -256,6 +262,7 @@ class ProductsController extends Controller
         if (($key = array_search($request->img_path, $path)) !== false) {
             unset($path[$key]);}
         $str = implode(" ",$path);
+        $str = $str .' ';
         $update = DB::table('product')
         ->where('id',$request->id)
         ->update([

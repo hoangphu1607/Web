@@ -25,8 +25,8 @@ function addImages(id) {
     })
 }
 
-function delImgDetail(str) {
-    console.log(str);
+function delImgDetail(str,name) {
+    // console.log(str);
     // console.log(id_glo);
     $.ajax({
         url:updateProductImagesDetail,
@@ -40,7 +40,8 @@ function delImgDetail(str) {
             _token:_token,
         },
         success: function (data) {
-            console.log(data);
+            $('#'+name).remove();
+            toastr["success"]("Xóa Thành Công", "Thông Báo")  ;                  
         },
         error: function (error) {
             console.log(error);
