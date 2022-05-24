@@ -140,7 +140,7 @@ class Bill extends Controller
     {
         $delete = DB::table('bill_detail')
         ->where('bd_bill_id', $request->id_bil)
-        ->where('bd_product_id', $request->id_pd)
+        ->where('bd_id', $request->bd_id)
         ->delete();
 
         return response()->json([

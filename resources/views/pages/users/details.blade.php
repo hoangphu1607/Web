@@ -220,7 +220,13 @@
                                     <a href="#"><i class="fa fa-star"></i></a>
                                     <p>(3 costomar review)</p>
                                 </div>
+                                @if($hasSale != 0)
+                                    <b><span style="color: red; font-size: 20px" id="text-Price">{{number_format(($data_query->price*(100-$sale[0]->discount))/100, 0, ',', '.')}} VND</span></b>
+                                    <del style="font-size:14px; color: rgb(75, 68, 68)" id="del-Price"> {{number_format($data_query->price, 0, ',', '.')}} VND</del>
+
+                                @else
                                 <h3 style="color: red" id="text-Price">{{number_format($data_query->price, 0, ',', '.')}} VND</h3>
+                                @endif
                             </div>
                             {{-- <div class="product-item-code">
                                 <p>Item Code  :   #897896</p>

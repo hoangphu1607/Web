@@ -14,8 +14,7 @@
             <div class="review-order scroll img-content">
                 <div class="checkout-head">
                     <h2>Các Sản Phẩm Bạn Đặt</h2>
-                </div>
-                
+                </div>                
             </div>
         </div>
         <div class="modal-footer">

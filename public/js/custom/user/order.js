@@ -25,6 +25,7 @@ function backHome() {
     window.location = home
 }
 function pickPrice(el,id) {
+    // $('#text-Price').empty();
     $('.fa-solid').remove();
     $(el).append('<i class="fa-solid fa-check"></i>');
     // console.log(id);
@@ -33,12 +34,18 @@ function pickPrice(el,id) {
         data:{
             id:id},
         success: function(data){
-            // console.log(data.data.price);
             var price = data.data.price;
+            if(data.count == 1){
+                priceConver = price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+                $('#del-Price').text(priceConver);
+                // price = (price * (100-data.sale[0].discount))/100;
+            }
             priceConver = price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
             $('#text-Price').text(priceConver);
             id_productByType = data.data.id;
             first_Price = price;
+            console.log(first_Price);
+
         },
         error: function(error){
             console.log(error);
@@ -85,7 +92,7 @@ function OrderProductDetail() {
         },
         success: function(data){
             toastr["success"]("Đặt hàng thành công!!!", "Thông Báo");  
-            // console.log(data);
+            console.log(data);
         },
         error:function(error){
             console.log(error);

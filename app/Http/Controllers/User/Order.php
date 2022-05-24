@@ -41,7 +41,8 @@ class Order extends Controller
             $img = '';
             $arr = explode(" ", trim($dataProduct[0]->pro_detail_images));
             for ($i=0; $i < count($arr); $i++) { 
-                $img .= "<li role='presentation' class='active single-img-detail'><a href='#img-one' role='tab' data-toggle='tab'><img src='".asset($arr[$i])."' alt='tab-img'></a></li>";
+                $img .= "<li role='presentation' class='active single-img-detail'><a href='#img-one' role='tab' data-toggle='tab'>
+                <img src='".asset($arr[$i])."' alt='tab-img' style='width: 100px; height:100px'></a></li>";
             }
             return response()->json([
                 'product' => $dataProduct,
@@ -60,7 +61,8 @@ class Order extends Controller
             $img = '';
             $arr = explode(" ", trim($dataProduct[0]->pro_detail_images));
             for ($i=0; $i < count($arr); $i++) { 
-                $img .= "<li role='presentation' class='active single-img-detail'><a href='#img-one' role='tab' data-toggle='tab'><img src='".asset($arr[$i])."' alt='tab-img'></a></li>";
+                $img .= "<li role='presentation' class='active single-img-detail'><a href='#img-one' role='tab' 
+                data-toggle='tab'><img src='".asset($arr[$i])."' alt='tab-img' style='width: 100px; height:100px'></a></li>";
             }
             return response()->json([
                 'product' => $dataProduct,
@@ -74,6 +76,16 @@ class Order extends Controller
 
     public function showProductDetailById($id)
     {        
+        $date = Carbon::now();
+        $today = $date->toDateString();
+        $sale = DB::table('sale')
+        ->where('sale.product_id',$id)
+        ->where('sale.start_sale','<=',$today)
+        ->where('sale.end_sale','>=',$today)
+        ->where('sale.status',1)
+        ->get();
+        // dd($sale);
+        $hasSale = count($sale);
         $data_query = DB::table($this->table)
         ->where('product.id','=',$id)
         ->leftjoin('description_detail','product.id','=', 'description_detail.product_id')
@@ -85,7 +97,7 @@ class Order extends Controller
         ->where('product_id',$id)
         ->get();
         // dd(count($details));
-        return view("pages.users.details",compact('data_query','details','arr'));
+        return view("pages.users.details",compact('data_query','details','arr','sale','hasSale'));
     }
     //Get a description by id
     public function getDesById(Request $request)
@@ -188,9 +200,8 @@ class Order extends Controller
                             'bd_amount' => $amount,
                             'bd_total_amount' => $price_sale * $amount
                         ]);
-                    }
-                    
-                    $num = $this->getQuantityOrder($lastInsertId);
+                    }                    
+                    $num = $this->getQuantityOrder($lastInsertId);                    
                 }else{ //Has Bill
                     $sale = DB::table('sale')
                     ->where('sale.product_id', $idProduct)
@@ -198,6 +209,7 @@ class Order extends Controller
                     ->where('sale.end_sale','>=',$today)
                     ->where('sale.status',1)
                     ->get();
+                    
                     if(count($sale)==0){
                         DB::table('bill_detail')
                         ->insert([
@@ -211,6 +223,7 @@ class Order extends Controller
                     }else{
                         $discount = $sale[0]->discount;
                         $price_sale = ($price*(100-$discount))/100;
+                        
                         DB::table('bill_detail')
                         ->insert([
                             'bd_bill_id' => $getAllBillUser[0]->b_id,
@@ -219,23 +232,20 @@ class Order extends Controller
                             'bd_price' => $price_sale,
                             'bd_amount' => $amount,
                             'bd_total_amount' => $price_sale * $amount
-                        ]);
-                    }
-                    
+                        ]);                        
+                    }                    
                     $num = $this->getQuantityOrder($getAllBillUser[0]->b_id);
                 }
                 $dataBill = $this->getDataUserOrder($user_id); 
                 $dataTranfer = $this->transferDataOrder($dataBill,$num);               
             }else{
                 $check = false;
-                // Cookie::queue('idCookie', $idCookie, $minutes);        
-                // DB::ww
             }
             return response()->json([
                 'idProduct' => $request->id,
                 'num' => $num,
-                'dataBill' => $dataBill,
-                'dataTranfer'=> $dataTranfer,
+                'sale' =>$sale,
+                // 'taooday' => $taooday
             ]);
         }
     }
@@ -307,8 +317,22 @@ class Order extends Controller
         $details = DB::table('description_detail')
         ->where('id',$request->id)
         ->first();
-        return response()->json([
-            'data' => $details
-        ]);
+
+        $sale = DB::table('sale')
+        ->where('product_id',$details->product_id)
+        ->get();
+        if(count($sale) != 0){
+            return response()->json([
+                'data' => $details,
+                'count' => count($sale),
+                'sale' => $sale
+            ]);
+        }else{
+            return response()->json([
+                'data' => $details,
+                'count' => count($sale)
+            ]);
+        }
+        
     }
 }

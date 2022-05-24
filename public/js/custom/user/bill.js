@@ -30,7 +30,7 @@ var table = $('#myTable').DataTable({
         },
         {data:"bd_id",
             render:function(data, type, row, meta){
-                return '<td class="th-delate"><a  onclick="deleteProduct('+ row.bd_product_id +','+ row.bd_bill_id +')"><i class="fa fa-trash"></i></a></td>';
+                return '<td class="th-delate"><a  onclick="deleteProduct('+ data +','+ row.bd_bill_id +')"><i class="fa fa-trash"></i></a></td>';
             }
         }
     ],
@@ -40,12 +40,12 @@ var table = $('#myTable').DataTable({
     }]
 });
 // urlDelectProduct in file bill.blade.php
-function deleteProduct(id_pd,id_bil) {
+function deleteProduct(bd_id,id_bil) {
     $.ajax({
         url: urlDelectProduct,
         method: "GET",
         data:{
-            id_pd:id_pd,
+            bd_id:bd_id,
             id_bil:id_bil
         },
         success: function(data){
