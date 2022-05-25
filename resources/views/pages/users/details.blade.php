@@ -349,33 +349,33 @@
                     <div class="col-md-12">
                         <div class="single-product-slider similar-product">
                             <div class="product-items">
-                                <h2 class="product-header">Similar PRODUCTS</h2>
+                                <h2 class="product-header">Sản phẩm liên quan</h2>
                                 <div class="row">
                                     <div id="singleproduct-slider" class="owl-carousel">
-                                        <div class="col-md-4">
-                                            <div class="single-product">
-                                                <div class="single-product-img">
-                                                    <a href="#">
-                                                        <img class="primary-img" src="img/product/single-product-1.jpg" alt="product">
-                                                        <img class="secondary-img" src="img/product/kids-1.jpg" alt="product">
-                                                    </a>
-                                                    <div class="single-product-action">
-                                                        <a href="#"><i class="fa fa-external-link"></i></a>
-                                                        <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                                        @foreach ($randomquery as $value)
+                                            <div class="col-md-4">
+                                                <div class="single-product">
+                                                    <div class="single-product-img">
+                                                        <a href="#">
+                                                            <img class="primary-img" src="{{asset($value->pro_avatar)}}" alt="product">                                              
+                                                        </a>
+                                                        <div class="single-product-action">
+                                                            <a href="#"><i class="fa fa-external-link"></i></a>
+                                                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="single-product-content">
-                                                    <div class="product-content-left">
-                                                        <h2><a href="#">EXCLUSIVE STYLE</a></h2>
-                                                        <p>Jacket’s</p>
-                                                    </div>
-                                                    <div class="product-content-right">
-                                                        <h3>$27.00</h3>
+                                                    <div class="single-product-content">
+                                                        <div class="product-content-left">
+                                                            <h5><a href="#" style="color:black">{{$value->pro_name}}</a></h5>														
+                                                            <span style="color: #129FD8">{{$value->price}} vnđ/ {{$value->type}}
+                                                                <span style="color: #7A7A7A; font-size: 10px"></span>
+                                                            </span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-4">
+                                        @endforeach
+                                        {{-- <div class="col-md-4">
                                             <div class="single-product">
                                                 <div class="single-product-img">
                                                     <a href="#">
@@ -489,7 +489,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>

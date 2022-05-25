@@ -84,7 +84,6 @@ class Order extends Controller
         ->where('sale.end_sale','>=',$today)
         ->where('sale.status',1)
         ->get();
-        // dd($sale);
         $hasSale = count($sale);
         $data_query = DB::table($this->table)
         ->where('product.id','=',$id)
@@ -96,8 +95,13 @@ class Order extends Controller
         ->select('price','type','id')
         ->where('product_id',$id)
         ->get();
-        // dd(count($details));
-        return view("pages.users.details",compact('data_query','details','arr','sale','hasSale'));
+        $randomquery = DB::table('product')
+        ->where('pro_category_id' , $data_query->pro_category_id)
+        ->leftjoin('description_detail','product.id','=', 'description_detail.product_id')
+        ->inRandomOrder()
+        ->limit(6)
+        ->get();
+        return view("pages.users.details",compact('data_query','details','arr','sale','hasSale','randomquery'));
     }
     //Get a description by id
     public function getDesById(Request $request)
