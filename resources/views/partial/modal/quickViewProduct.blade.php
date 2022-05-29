@@ -46,7 +46,7 @@
                                 <a href="#"><i class="fa fa-star"></i></a>
                                 <a href="#"><i class="fa fa-star"></i></a>
                                 <a href="#"><i class="fa fa-star"></i></a>
-                                <p>(3 costomar review)</p>
+                                <p>(3 Đánh Giá)</p>
                             </div>
                             <h3 id="pro_price"></h3>
                         </div>

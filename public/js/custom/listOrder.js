@@ -39,7 +39,7 @@ var table = $('#myTable').DataTable({
     ] ,
     columnDefs: [
         {
-            targets: [0, -1,-2,-3,-4],
+            targets: [0, -1,-2,-3,-4,-5],
             className: 'dt-body-center'
         },          
     ]           

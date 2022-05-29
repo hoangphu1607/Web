@@ -53,7 +53,8 @@ class ManageOrder extends Controller
                                 <h2 class="product_name" ><a href="#"> Tên Sản Phẩm: '.$item->pro_name .'</a></h2>
                                 <p class="product_des" > Giá: '. number_format($item->bd_price, 0, ',', '.'). " vnđ"  .'<span></span></p>
                                 <p class="product_amount"> Loại: '. $item->type . '<span></span> </p>
-                                <h3>Tổng: '.number_format($item->bd_total_amount, 0, ',', '.'). " vnđ"  .' </h3>
+                                <p>Số Lượng: '. $item->bd_amount .'</p>
+                                <h3 style="color: red"><b>Tổng: '.number_format($item->bd_total_amount, 0, ',', '.'). " vnđ"  .' </b></h3>
                             </div>
                         </div>';
         }

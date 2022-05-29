@@ -30,7 +30,7 @@ class ProductController extends Controller
         $order = DB::table('bill_detail')
         ->join('bill','bill.b_id','=','bd_bill_id')
         ->join('product','product.id','=','bill_detail.bd_product_id')
-        ->where('bill.b_status',1)
+        ->where('bill.b_status',3)
         ->whereMonth('create_at',$now->month)
         ->selectRaw('sum(bill_detail.bd_amount) as soluong, product.pro_name')
         ->groupBy('product.pro_name')

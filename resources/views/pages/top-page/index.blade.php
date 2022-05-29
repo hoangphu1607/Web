@@ -129,75 +129,43 @@
 								</div>
 							</div>
 							<div class="best-seller-area">
-								<h2 class="header-title">SẢN PHẨM BÁN CHẠY</h2>
+								<h2 class="header-title">ĐỀ XUẤT CHO BẠN</h2>
+								@if(!empty($dexuat))
+								@php
+									$idOld = ""; 	
+								@endphp
+								@foreach ($dexuat as $item)
+								@if($item->id != $idOld)
+								@php
+									$idOld = $item->id;	
+								@endphp
 								<div class="best-sell-product">
 									<div class="best-product-img">
 										{{-- Ảnh của phần best sale!! nên đặt chiều cao và rộng là: 80 71 --}}
-										<a href="#"><img src="{{asset('img\product\1649396112.webp')}}" alt="product" style="max-width: 71px; height: 80px"></a>
+										<a href="#"><img src="{{asset('')}}{{$item->pro_avatar}}" alt="product" style="max-width: 71px; height: 80px"></a>
 									</div>
 									<div class="best-product-content">
-										<h2><a href="#">Cá hồi nguyên con</a></h2>
-										<h3>640.000VNĐ</h3>
+										<h2><a href="#">{{$item->pro_name}}</a></h2>
+										<h3>
+											<span style="color: #129FD8 ;font-size: 16px">{{number_format($item->price, 0, ',', '.') . "đ"}}/ 
+												<span style="color: #7A7A7A; font-size: 10px">{{$item->type}}</span>
+											</span>
+										</h3>
 										<div class="best-product-rating">
 											<a href="#"><i class="fa fa-star"></i></a>
 											<a href="#"><i class="fa fa-star"></i></a>
 											<a href="#"><i class="fa fa-star"></i></a>
 											<a href="#"><i class="fa fa-star"></i></a>
-											<a href="#"><i class="fa fa-star-o"></i></a>
+											<a href="#"><i class="fa fa-star"></i></a>
 										</div>
 									</div>
 								</div>
-								<div class="best-sell-product">
-									<div class="best-product-img">
-										<a href="#"><img src="{{asset('img\product\1649396112.webp')}}" alt="product" style="max-width: 71px; height: 80px"></a>
-									</div>
-									<div class="best-product-content">
-										<h2><a href="#">Cá hồi nguyên con</a></h2>
-										<h3>640.000VNĐ</h3>
-										<div class="best-product-rating">
-											<a href="#"><i class="fa fa-star"></i></a>
-											<a href="#"><i class="fa fa-star"></i></a>
-											<a href="#"><i class="fa fa-star"></i></a>
-											<a href="#"><i class="fa fa-star"></i></a>
-											<a href="#"><i class="fa fa-star-o"></i></a>
-										</div>
-									</div>
-								</div>
-								<div class="best-sell-product">
-									<div class="best-product-img">
-										<a href="#"><img src="{{asset('img\product\1649396112.webp')}}" alt="product" style="max-width: 71px; height: 80px"></a>
-									</div>
-									<div class="best-product-content">
-										<h2><a href="#">Cá hồi nguyên con</a></h2>
-										<h3>640.000VNĐ</h3>
-										<div class="best-product-rating">
-											<a href="#"><i class="fa fa-star"></i></a>
-											<a href="#"><i class="fa fa-star"></i></a>
-											<a href="#"><i class="fa fa-star"></i></a>
-											<a href="#"><i class="fa fa-star"></i></a>
-											<a href="#"><i class="fa fa-star-o"></i></a>
-										</div>
-									</div>
-								</div>
-								<div class="best-sell-product">
-									<div class="best-product-img">
-										<a href="#"><img src="{{asset('img\product\1649396112.webp')}}" alt="product" style="max-width: 71px; height: 80px"></a>
-									</div>
-									<div class="best-product-content">
-										<h2><a href="#">Cá hồi nguyên con</a></h2>
-										<h3>640.000VNĐ</h3>
-										<div class="best-product-rating">
-											<a href="#"><i class="fa fa-star"></i></a>
-											<a href="#"><i class="fa fa-star"></i></a>
-											<a href="#"><i class="fa fa-star"></i></a>
-											<a href="#"><i class="fa fa-star"></i></a>
-											<a href="#"><i class="fa fa-star-o"></i></a>
-										</div>
-									</div>
-								</div>
-								<p class="view-details">
+								@endif
+								@endforeach
+								@endif								
+								{{-- <p class="view-details">
 									<a href="#">Xem chi tiết</a>
-								</p>
+								</p> --}}
 							</div>
 							{{-- <div class="add-kids single-add">
 								<a href="#"><img src="{{asset('img/product/tom/tom.jpg')}}" alt="add"></a>
@@ -289,6 +257,57 @@
 								</div>
 							</div>							
 							@endif
+							<div class="arrivals-area single-add">
+								<a href="#"> <img src="https://theme.hstatic.net/1000030244/1000865559/14/banner_index_2.jpg?v=407" alt="arrivals"> </a>
+							</div>
+							{{-- Ban Chay --}}
+							@if(!empty($muanhieu))
+							<div class="product-items">
+								<h2 class="product-header">MUA NHIỀU NHẤT</h2>
+								<div class="row">
+									<div id="product-slider" class="owl-carousel ">
+										@php
+											$idOld = ""; 	
+										@endphp
+										@foreach ($muanhieu as $item)
+										@if($item->id != $idOld)
+										@php
+											$idOld = $item->id;	
+										@endphp
+										<div class="col-md-4 ">
+											<div class="single-product bgimg">
+												<div class="single-product-img ">
+													<a href="{{route('showProductDetailById',['id'=>$item->id])}}">
+														{{-- Ảnh Sản Phẩm  --}}
+														<img class="primary-img " src="{{asset('')}}{{$item->pro_avatar}}" alt="product" >
+														{{-- <img class="primary-img" src="img/product/single-product-1.jpg" alt="product">
+														<img class="secondary-img" src="img/product/kids-1.jpg" alt="product"> --}}
+													</a>
+													<div class="single-product-action">
+														<button onclick="nextPageProduct('{{route('showProductDetailById',['id'=>$item->id])}}')" class="btn btn-outline-warning"><i class="fa fa-external-link"></i></button>
+														<button data-id="{{$item->id}}" class="btn btn-outline-warning" id="productItem" data-toggle="modal" data-target="#quick_view_product"><i class="fa fa-shopping-cart"></i></button>
+													</div>
+												</div>
+												<div class="single-product-content">
+													<div class="product-content-left">
+														<h5><a href="#" style="color:black">{{$item->pro_name}} </a></h5>
+														<br>
+														<span style="color: #129FD8 ;font-size: 16px">{{number_format($item->price, 0, ',', '.') . "đ"}}/ 
+															<span style="color: #7A7A7A; font-size: 10px">{{$item->type}}</span>
+														</span>
+													</div>													
+												</div>
+											</div>
+										</div>
+										@endif
+										@endforeach
+									</div>
+								</div>
+							</div>
+							@endif
+							<div class="arrivals-area single-add">
+								<a href="#"> <img src="https://theme.hstatic.net/1000030244/1000865559/14/banner_index_5.jpg?v=407" alt="arrivals"> </a>
+							</div>
 							{{-- Start Product --}}
 							@if(!empty($dataCategories) && !empty($dataProduct))
 							@foreach ($dataCategories as $cate)
@@ -341,7 +360,7 @@
 							{{-- End Product --}}
 							{{-- banner --}}
 							<div class="arrivals-area single-add">
-								<a href="#"> <img src="img/banner/arrivals.jpg" alt="arrivals"> </a>
+								<a href="#"> <img src="https://theme.hstatic.net/1000030244/1000865559/14/banner_preorder.jpg?v=407" alt="arrivals"> </a>
 							</div>
 							{{-- end banner --}}
 						</div>

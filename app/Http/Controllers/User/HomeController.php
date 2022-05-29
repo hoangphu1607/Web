@@ -43,6 +43,38 @@ class HomeController extends Controller
         ->select('product.id', 'day_offer', 'product.pro_avatar')
         ->where('day_offer',$today)
         ->get();
+        //mua nhieu
+        $muanhieu = DB::table('bill_detail')
+        ->crossJoin('product')
+        ->crossJoin('description_detail')
+        ->select('bd_amount', 'product.*', 'description_detail.price','description_detail.type','description_detail.product_id')
+        ->where('bill_detail.bd_product_id','=',DB::raw('product.id'))
+        ->where('description_detail.product_id','=',DB::raw('product.id'))
+        ->orderBy('bd_amount','desc')
+        ->limit(6)
+        ->get();
+        if(count($muanhieu)<6){
+            $muanhieu = DB::table('bill_detail')
+            ->crossJoin('product')
+            ->crossJoin('description_detail')
+            ->select('bd_amount', 'product.*', 'description_detail.price','description_detail.type','description_detail.product_id')
+            ->where('bill_detail.bd_product_id','=',DB::raw('product.id'))
+            ->where('description_detail.product_id','=',DB::raw('product.id'))
+            ->inRandomOrder()
+            ->limit(6)
+            ->get();
+        } 
+        // dd($muanhieu);  
+        //DE XUAT
+        $dexuat = DB::table('bill_detail')
+            ->crossJoin('product')
+            ->crossJoin('description_detail')
+            ->select('bd_amount', 'product.*', 'description_detail.price','description_detail.type','description_detail.product_id')
+            ->where('bill_detail.bd_product_id','=',DB::raw('product.id'))
+            ->where('description_detail.product_id','=',DB::raw('product.id'))
+            ->inRandomOrder()
+            ->limit(6)
+            ->get();   
         //sale
         $product_sale = DB::table('product')
         ->join('sale','sale.product_id','=','product.id')
@@ -59,7 +91,7 @@ class HomeController extends Controller
         $dataOrder = $this->getDataUserOrder($idUser);
         $numberOrder = count($dataOrder);
         
-        return view('pages.top-page.index', compact('dataProduct','dataCategories','offer','dataOrder','numberOrder','product_sale'));
+        return view('pages.top-page.index', compact('dataProduct','dataCategories','offer','dataOrder','numberOrder','product_sale','muanhieu','dexuat'));
     }
 
     //get data bill user order
