@@ -156,7 +156,10 @@ Route::prefix('admin')->group( function(){
     //Quản lý giảm giá
     Route::get('giam-gia',[SaleController::class,'showPageSale'])->middleware('checkLogin')->name('showPageSale');
     Route::get('getDataProductSale',[SaleController::class,'getDataProductSale'])->middleware('checkLogin')->name('getDataProductSale');
-
+    Route::post('setProductSale',[SaleController::class,'setProductSale'])->middleware('checkLogin')->name('setProductSale');
+    //Trang Quản Lý Sản Phẩm Đang Giảm Giá
+    Route::get('dang-giam-gia',[SaleController::class,'PageProductOnSale'])->middleware('checkLogin')->name('ProductOnSale');
+    Route::get('getDataProductOnSale',[SaleController::class,'ProductOnSale'])->middleware('checkLogin')->name('getDataProductOnSale');
 });
 
 

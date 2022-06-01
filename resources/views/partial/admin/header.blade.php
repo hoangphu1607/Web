@@ -35,7 +35,7 @@
                     <div class="col-md-8 col-sm-8 col-xs-12">
                         <div class="header-top-right">
                             <ul class="list-inline">
-                                <li><a href="#"><i class="fa fa-user"></i>Tài Khoản Của Tôi</a></li>
+                                {{-- <li><a href="#"><i class="fa fa-user"></i>Tài Khoản Của Tôi</a></li> --}}
                                 {{-- <li><a href="#"><i class="fa fa-heart"></i>Wishlist</a></li>
                                 <li><a href="checkout.html"><i class="fa fa-check-square-o"></i>Checkout</a></li> --}}
                                 @if(session('id_admin'))                                    
@@ -81,7 +81,13 @@
                                     </ul>
                                 </li>
                                 <li><a href="{{route('showPageSale')}}">Giới Thiệu Sản Phẩm</a></li>  
-                                <li><a href="{{route('showOffer')}}">Khuyến Mãi</a></li>                               
+                                <li>
+                                    <a href="{{route('showPageSale')}}">Khuyến Mãi</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="{{route('showPageSale')}}">Thêm Sản Phẩm Khuyến Mãi</a></li>
+                                        <li><a href="{{route('showPageSale')}}">Sản Phẩm Đang Khuyến Mãi</a></li>
+                                    </ul>
+                                </li>                               
                                 {{-- <li><a href="shop.html">Gia Vị</a></li> --}}
                                 <li><a href="{{route('showChartProduct')}}">Thống Kê</a></li>
                                 {{-- <li><a href="shop.html">Lẩu</a> --}}

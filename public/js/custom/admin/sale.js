@@ -45,11 +45,32 @@ var table = $('#myTable').DataTable({
 });
 
 function confimSale(id) {
-    console.log($("#select_sale_"+id).val()); 
-    console.log("Id Sản Phẩm: "+ id);
-}
-
-function confimSale(id) {
     var sale = $("#select_sale_"+id).val();
-    alert("ID sản phẩm: " + id);
+    var star_sale = $('#star_sale').val();
+    var end_sale = $('#end_sale').val();
+    $.ajax({
+        url:setProductSale,
+        method: 'POST',
+        data:{
+            id:id,
+            star_sale:star_sale,
+            end_sale:end_sale,
+            sale:sale,
+            _token:_token
+        },
+        success: function(data){
+            console.log(data);
+            toastr["success"]("Thành Công", "Thông Báo");
+            table.ajax.reload();                 
+        },
+        error: function(error){
+            var fail = "";
+            let tb = error.responseJSON.errors;
+            for(var i in tb){
+                fail += tb[i][0] + " ";
+            }
+            toastr["error"]("Thất Bại ("+fail+")","Lỗi");
+            console.log(error);
+        }
+    })
 }

@@ -94,11 +94,7 @@
 @section('content')
 {{-- @yield('sidebar'); --}}
   <div class="container py-5">
-    <div class="d-flex justify-content-center">
-      <label style="color: red">Ngày Bắt Đầu Khuyến Mãi </label><input onload="getDate()" type="date" name="star" id="star_sale">
-      <label style="color: red">Ngày Kết Thúc Khuyến Mãi </label><input onload="getDate()" type="date" name="end" id="end_sale">
-    </div>
-      <table class="table table-hover datatable cell-border compact stripe" id="myTable">      
+      <table class="table table-hover datatable cell-border compact stripe" id="ProductOnSale">      
       <thead>
         <tr>
           <th scope="col">STT</th>
@@ -106,8 +102,10 @@
           <th scope="col">Hình Ảnh</th>
           <th scope="col">Giá Cả</th>
           <th scope="col">Tỷ Lệ</th>
-          <th scope="col">Đơn Vị</th>
-          <th scope="col">Chọn</th>
+          <th scope="col">Giá Sale</th>
+          <th scope="col">Ngày Bắt Đầu</th>
+          <th scope="col">Ngày Kết Thúc</th>        
+          <th scope="col">Xóa</th>
         </tr>
       </thead>
     </table>
@@ -131,12 +129,11 @@
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
     {{-- Define --}}
     <script>      
-        var urlProduct = "{{route('getDataProductSale')}}";
+        var ProductOnSale = "{{route('getDataProductOnSale')}}";
         var asset = "{{asset('')}}";
         var _token = "{{ csrf_token() }}"; 
-        var setProductSale = "{{route('setProductSale')}}";
     </script>
-    <script src="{{asset('js/custom/admin/sale.js')}}"></script>
+    <script src="{{asset('js/custom/admin/on_sale.js')}}"></script>
     <script>
      
     </script>

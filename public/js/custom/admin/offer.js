@@ -38,7 +38,7 @@ function confimOffer(id) {
         },
         error: function(error){
             console.log(error);
-            toastr["error"]("Thất Bại","Lôi");
+            toastr["error"]("Thất Bại","Lỗi");
 
         }
     })
