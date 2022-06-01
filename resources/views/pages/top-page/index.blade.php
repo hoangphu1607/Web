@@ -204,7 +204,7 @@
 								<a href="#"> <img src="img/banner/cua-tuoi-ngon.jpg" alt="arrivals"> </a>
 							</div>
 							{{-- START SALE --}}
-							@if (!empty($product_sale))
+							@if (count($product_sale) != 0 )
 							<div class="product-items">
 								<h2 class="product-header">KHUYẾN MÃI KHỦNG</h2>
 								<div class="row">

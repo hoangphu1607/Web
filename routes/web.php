@@ -17,6 +17,7 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\ManageOrder;
 use App\Http\Controllers\Chart\ProductController;
 use App\Http\Controllers\Admin\OfferController;
+use App\Http\Controllers\Admin\SaleController;
 // use App\Http\Controllers\Process_accout;
 
 /*
@@ -150,6 +151,11 @@ Route::prefix('admin')->group( function(){
     Route::get('dang-giao-hang',[ManageOrder::class, 'showDelivery'])->middleware('checkLogin')->name('showDelivery');
     //show page xác nhận giao hàng
     Route::get('xac-nhan-giao-hang',[ManageOrder::class, 'delivery_confirmation'])->middleware('checkLogin')->name('delivery_confirmation');
+
+
+    //Quản lý giảm giá
+    Route::get('giam-gia',[SaleController::class,'showPageSale'])->middleware('checkLogin')->name('showPageSale');
+    Route::get('getDataProductSale',[SaleController::class,'getDataProductSale'])->middleware('checkLogin')->name('getDataProductSale');
 
 });
 
