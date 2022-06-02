@@ -76,12 +76,17 @@
                                     </li>
                                 </ul> --}}
                             </div>
-                            <div class="header-search">                                    
-                                 <input type="text" class="form-control" id="search" placeholder="Tìm kiếm sản phẩm" name="search">                                                            
-                            </div>
-                            <ul class="list-group" id="result">
+                            <div class="header-search" style="position: relative;">                                    
+                                 <div class="form-group" id="searchbar">
+                                    <input type="search" class="form-control rounded input-lg" placeholder="Tìm kiếm sản phẩm" id="search" name="search" style="padding: 5px; box-sizing: border-box"/>                             
+                                </div>
+                                <div id="result">
 
-                            </ul>
+                                </div>
+                                
+                                 {{-- <ul class="list-group" id="result">
+                                </ul>  --}}
+                            </div>
                             
                             <div class="header-chart">
                                 <ul class="list-inline">

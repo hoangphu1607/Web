@@ -167,22 +167,28 @@ function nextPageProduct(url) {
 }
 
 //live search
-// $(document).ready(function(){
-//     $("#live_search").keyup(function(e){      
-//         var input = $(this).val();
-//         alert(urlSearch);
-//         if(input !=""){
-//             $.ajax({
-//                 url:urlSearch,
-//                 method:"GET",
-//                 data:{pro_name:input},
-//                 // success:function(data){
-//                 //     $("#searchresult").html(data);
-//                 // }
-//             });
-//         }
-//         else{
+$(document).ready(function(){
+    $("#search").keyup(function(e){      
+        var input = $(this).val();
+        input = input.trim();
+        // $('#result').html('');
+        if(input !=""){
+            $.ajax({
+                url:urlSearch,
+                method:"GET",
+                data:{pro_name:input},
+                success:function(data){
+                    console.log(data);
+                    // $('#resultList').fadeIn();  
+                    $('#result').append(data);
+                },
+                error:function (error) {
+                    console.log(error);
+                }
+            });
+        }
+        else{
             
-//         }           
-//     });
-// });
+        }           
+    });
+});

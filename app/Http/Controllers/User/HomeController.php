@@ -112,27 +112,28 @@ class HomeController extends Controller
     //search bar - get data result
     public function search(Request $request)
     {
-        dd($request->pro_name);
-        // if ($request->ajax()) {
-            $render = '';
+            $render = '<div class="resultcontent">';
+            //lấy dữ liệu dựa trên chuỗi nhập vào từ thanh search bar
             $products = DB::table('product')
             ->select('product.pro_name','product.pro_avatar','description_detail.price')
-            ->join('description_detail','product.id','=','description_detail.product_id')
-            ->where('pro_name', 'LIKE', '%' . 'cá' . '%')
+            ->leftJoin('description_detail','product.id','=','description_detail.product_id')
+            ->where('pro_name', 'LIKE', '%' . $request->pro_name . '%')
             ->get();
-            // dd($products);
-            // if ($products) {
-            //     foreach ($products as $key => $value) {
-            //         $render .= '<tr>                   
-            //         <td>' . $value->pro_name . '</td>
-            //         <td>' . $value->description . '</td>
-            //         <td>' . $value->price . '</td>
-            //         </tr>';
-            //     }
-            // }
-            
-            // return Response($render);
-        // }
+            //render các thẻ html cho giao diện
+            foreach ($products as $key => $value) {
+                $render .= '<div class="result-item">
+                                <div class="item-img"><a href=""><img src="{{asset('.$value->pro_avatar.')}}" ></a></div>
+                                <div class="item-title">
+                                    <a href="">'.$value->pro_name.'</a>
+                                    <p>'.$value->price.'</p>
+                                </div>
+                            </div>';
+            }
+            $render .= "</div>";
+            //trả data về cho 
+            return response()->json([
+                "render" => $render,
+            ]);
     }
 }   
 

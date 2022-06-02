@@ -12,6 +12,7 @@
     <style>
         .autocomplete-group { padding: 2px 5px; }
     </style>
+	<link rel="stylesheet" href="{{asset('css/home/search.css')}}">
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,700,600,500,300,800,900' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,300,300italic,500italic,700' rel='stylesheet' type='text/css'>
