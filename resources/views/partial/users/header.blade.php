@@ -76,12 +76,13 @@
                                     </li>
                                 </ul> --}}
                             </div>
-                            <div class="header-search">
-                                <form action="#">
-                                    <input type="text" placeholder="My Search"/>
-                                    <button type="button"><i class="fa fa-search"></i></button>
-                                </form>
+                            <div class="header-search">                                    
+                                 <input type="text" class="form-control" id="search" placeholder="Tìm kiếm sản phẩm" name="search">                                                            
                             </div>
+                            <ul class="list-group" id="result">
+
+                            </ul>
+                            
                             <div class="header-chart">
                                 <ul class="list-inline">
                                     <li><a href="#"><i class="fa fa-cart-arrow-down"></i></a></li>

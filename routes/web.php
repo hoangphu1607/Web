@@ -48,7 +48,7 @@ Route::prefix('home')->group( function(){
     // show bill
     Route::get('bill',[Bill::class,'showBill'])->name('showBill');
     //show check out
-    Route::get('checkout',[Bill::class,'showCheckOut'])->name('showCheckOut');
+    Route::get('checkout',[Bill::class,'showCheckOut'])->name('showCheckOetBillDetailByIdut');
     //order confirmation
     Route::post('orderConfirm',[Bill::class,'orderConfirm'])->name('orderConfirm');
     //get Data Bill Place
@@ -68,6 +68,9 @@ Route::prefix('home')->group( function(){
     Route::get('transferDataOrder',[Order::class,'transferDataOrder'])->name('transferDataOrder');
     //get Price By Id
     Route::get('getPriceById',[Order::class,'getPriceById'])->name('getPriceById');
+
+    //search bar
+    Route::get('tim-kiem',[HomeController::class,'search'])->name('searchProduct');
     
 });
 

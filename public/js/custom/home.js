@@ -4,6 +4,7 @@ var url = 'home/';
 var price;
 var description_detail_id;
 var numOrder;
+
 //show quick view product
 $(document).on('click','#productItem',function(e){
     e.preventDefault();
@@ -159,10 +160,29 @@ $(document).ready(function(){
         });
         
 });
+
+
 function nextPageProduct(url) {
     window.location= url;
 }
 
-
-
-
+//live search
+// $(document).ready(function(){
+//     $("#live_search").keyup(function(e){      
+//         var input = $(this).val();
+//         alert(urlSearch);
+//         if(input !=""){
+//             $.ajax({
+//                 url:urlSearch,
+//                 method:"GET",
+//                 data:{pro_name:input},
+//                 // success:function(data){
+//                 //     $("#searchresult").html(data);
+//                 // }
+//             });
+//         }
+//         else{
+            
+//         }           
+//     });
+// });
