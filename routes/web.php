@@ -139,6 +139,8 @@ Route::prefix('admin')->group( function(){
     Route::get('dataProductOffer',[OfferController::class,'getDataProduct'])->middleware('checkLogin')->name('dataProductOffer');
     //set offer Product
     Route::post('setOffer',[OfferController::class,'setOffer'])->middleware('checkLogin')->name('setOffer');
+    //Update Quantity Product
+    Route::post('UpdateQuantityProduct',[ProductsController::class,'UpdateQuantityProduct'])->middleware('checkLogin')->name('UpdateQuantityProduct');
 
     //xử lý đặt hàng
     Route::get('quan-ly-dat-hang',[ManageOrder::class, 'showListOrder'])->middleware('checkLogin')->name('listOrder');
@@ -160,6 +162,9 @@ Route::prefix('admin')->group( function(){
     //Trang Quản Lý Sản Phẩm Đang Giảm Giá
     Route::get('dang-giam-gia',[SaleController::class,'PageProductOnSale'])->middleware('checkLogin')->name('ProductOnSale');
     Route::get('getDataProductOnSale',[SaleController::class,'ProductOnSale'])->middleware('checkLogin')->name('getDataProductOnSale');
+    Route::post('DeleteProductSale',[SaleController::class,'DeleteProductSale'])->middleware('checkLogin')->name('DeleteProductSale');
+
+    
 });
 
 

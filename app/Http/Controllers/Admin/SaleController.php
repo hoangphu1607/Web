@@ -57,14 +57,15 @@ class SaleController extends Controller
         $dataTable = DB::table('sale')
         ->join('product', 'product.id','sale.product_id')
         ->join('description_detail','description_detail.product_id','product.id')
+        ->select('product.*','description_detail.price','sale.start_sale','sale.end_sale','sale.discount')
         ->where('start_sale','<=',$today)
         ->where('end_sale','>=',$today)
+        ->where('sale.status',1)
         ->get();
         return response()->json([
             'data' => $dataTable
         ]);
     }
-
     public function setProductSale(Request $request)
     {
         $rules = [  
@@ -91,6 +92,17 @@ class SaleController extends Controller
         return response()->json([
             'star_sale'=> $request->star_sale,
             'end_sale'=> $request->end_sale
+        ]);
+    }
+    public function DeleteProductSale(Request $request)
+    {
+        DB::table('sale')
+        ->where('product_id','=',$request->id)
+        ->update([
+            'status' => 0
+        ]);
+        return response()->json([
+            'Hi' => $request->id
         ]);
     }
 }

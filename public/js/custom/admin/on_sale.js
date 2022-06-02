@@ -24,7 +24,7 @@ var table = $('#ProductOnSale').DataTable({
 
         {data:"id",
             render: function(data, type, row, meta){
-                return "<button class='btn btn-danger' onclick=confimSale('"+data+"')><i class='fa-regular fa-circle-check'></i></button>"
+                return "<button class='btn btn-danger' onclick=confimDeleteSale('"+data+"')><i class='fa-solid fa-trash-can'></i></button>"
             }
         },
     ],
@@ -35,3 +35,25 @@ var table = $('#ProductOnSale').DataTable({
         },
     ]
 });
+
+function confimDeleteSale(id) { 
+    $.ajax({
+        url:DeleteProductSale,
+        method: 'POST',
+        data:{
+            id:id,
+            _token:_token
+        },
+        success: function(data){
+            console.log(data);
+            toastr["success"]("Xóa Thành Công", "Thông Báo");
+            table.ajax.reload();                 
+
+        },
+        error: function(error){
+            toastr["error"]("Thất Bại","Lỗi");
+
+            console.log(error);
+        }
+    })
+}

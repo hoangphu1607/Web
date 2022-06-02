@@ -111,6 +111,7 @@
           <th scope="col">Giá Cả</th>
           <th scope="col">Đơn Vị</th>
           <th scope="col">Nội Dung</th>
+          <th scope="col">Số Lượng</th>
           <th scope="col">Ảnh Liên Quan</th>
           <th scope="col">Thay Đổi</th>
           <th scope="col">Xóa</th>
@@ -174,6 +175,11 @@
           {data:"id",
             render: function(data, type, row){
               return '<button data-id="'+data+'" type="button" class="btn btn-info" data-toggle="modal" data-target="#contentModal" id="editContent"><i class="fa-solid fa-comment-dots"></i></button>'
+            }
+          },
+          {data:"des_id",
+          render: function(data, type, row){
+              return '<label for="ex1">Hiện Có: '+row.quantity+'</label><input data-id="'+data+'"class="form-control" type="text">'
             }
           },
           {data:"id",
@@ -381,7 +387,37 @@
           }
         });
       });
+      var UpdateQuantityProduct = "{{route('UpdateQuantityProduct')}}"
+        $(document).on("keypress", "input", function(e){
+        if(e.which == 13){
+          var val = $(this).val();
+          var id_des = $(this).attr('data-id');
+          $.ajax({
+            url:UpdateQuantityProduct,
+            method: 'POST',
+            data:{
+              _token:_token,
+              num:val,
+              id_des:id_des
+            },
+            success: function(data){
+              console.log(data);
+              toastr["success"]("Thay Đổi Số Lượng Thành Công!!!", "Thông Báo");
+              table.ajax.reload();             
+            },
+            error:function(error){
+              toastr["error"]("Thông Tin Bị Lỗi!!!", "Lỗi");
+
+              console.log(error);
+            }
+          })
+        }
+      });
    </script>
+   <script>
+     
+   </script>
+   
 @stop
 
 
