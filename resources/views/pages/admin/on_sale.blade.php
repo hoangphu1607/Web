@@ -132,6 +132,7 @@
         var ProductOnSale = "{{route('getDataProductOnSale')}}";
         var asset = "{{asset('')}}";
         var _token = "{{ csrf_token() }}"; 
+        var DeleteProductSale = "{{route('DeleteProductSale')}}";
     </script>
     <script src="{{asset('js/custom/admin/on_sale.js')}}"></script>
     <script>

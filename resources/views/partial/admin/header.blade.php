@@ -84,8 +84,8 @@
                                 <li>
                                     <a href="{{route('showPageSale')}}">Khuyến Mãi</a>
                                     <ul class="sub-menu">
-                                        <li><a href="{{route('showPageSale')}}">Thêm Sản Phẩm Khuyến Mãi</a></li>
-                                        <li><a href="{{route('showPageSale')}}">Sản Phẩm Đang Khuyến Mãi</a></li>
+                                        <li><a href="{{route('showPageSale')}}">Thêm Sản Phẩm</a></li>
+                                        <li><a href="{{route('ProductOnSale')}}">Đang Khuyến Mãi</a></li>
                                     </ul>
                                 </li>                               
                                 {{-- <li><a href="shop.html">Gia Vị</a></li> --}}

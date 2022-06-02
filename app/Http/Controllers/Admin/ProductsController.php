@@ -105,7 +105,7 @@ class ProductsController extends Controller
         ->join('categories','product.pro_category_id','=','categories.id')
         ->join('suppliers','product.supplier_id','=','suppliers.id')
         ->join('description_detail','description_detail.product_id','=','product.id')
-        ->select('product.*','categories.c_name','suppliers.s_name','description_detail.price','description_detail.type','description_detail.id as des_id')
+        ->select('product.*','categories.c_name','suppliers.s_name','description_detail.price','description_detail.type','description_detail.id as des_id','description_detail.quantity')
         ->where('pro_status',1)
         ->where('description_detail.status',1)
         ->where('categories.c_active',1)
@@ -310,5 +310,22 @@ class ProductsController extends Controller
             ]);    
         }
         
+    }
+
+    public function UpdateQuantityProduct(Request $request)
+    {
+        $query = DB::table('description_detail')
+        ->where('id', '=', $request->id_des)
+        ->first();
+        $quantity = $query->quantity;
+        
+        DB::table('description_detail')
+        ->where('id', '=', $request->id_des)
+        ->update([
+            'quantity' => $quantity + $request->num
+        ]);
+        return response()->json([
+            'Hi' => 'Hi'
+        ]);
     }
 }
