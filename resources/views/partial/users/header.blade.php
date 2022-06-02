@@ -77,10 +77,14 @@
                                 </ul> --}}
                             </div>
                             <div class="header-search">
-                                <form action="#">
-                                    <input type="text" placeholder="My Search"/>
-                                    <button type="button"><i class="fa fa-search"></i></button>
+                                <form action="{{route('searchProduct')}}">
+                                    <input type="text" placeholder="Tìm kiếm sản phẩm" id="search" name="pro_name"/>
+                                    <button type="submit"><i class="fa fa-search"></i></button>
                                 </form>
+                                <ul class="list-group" id="result">
+
+                                </ul>
+                                
                             </div>
                             <div class="header-chart">
                                 <ul class="list-inline">
