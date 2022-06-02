@@ -112,7 +112,7 @@ class HomeController extends Controller
     //search bar - get data result
     public function search(Request $request)
     {
-        
+        dd($request->pro_name);
         // if ($request->ajax()) {
             $render = '';
             $products = DB::table('product')
@@ -120,7 +120,7 @@ class HomeController extends Controller
             ->join('description_detail','product.id','=','description_detail.product_id')
             ->where('pro_name', 'LIKE', '%' . 'cá' . '%')
             ->get();
-            
+            // dd($products);
             // if ($products) {
             //     foreach ($products as $key => $value) {
             //         $render .= '<tr>                   
@@ -133,7 +133,6 @@ class HomeController extends Controller
             
             // return Response($render);
         // }
-        dd($products);
     }
 }   
 

@@ -388,7 +388,8 @@
 		var _token = "{{ csrf_token() }}";
 		var urlGetQuantityOrder = "{{route('getQuantityOrder')}}";
 		var urlTransferDataOrder = "{{route('transferDataOrder')}}";
-		var getProductById = "{{route('getProductById')}}"
+		var getProductById = "{{route('getProductById')}}";
+		var urlSearch = "{{route('searchProduct')}}";
 	</script>
 
 @stop
