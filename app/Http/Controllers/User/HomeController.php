@@ -112,7 +112,7 @@ class HomeController extends Controller
     //search bar - get data result
     public function search(Request $request)
     {
-            $render = '<div class="resultcontent">';
+            $render = '';
             //lấy dữ liệu dựa trên chuỗi nhập vào từ thanh search bar
             $products = DB::table('product')
             ->select('product.pro_name','product.pro_avatar','description_detail.price')
@@ -122,17 +122,16 @@ class HomeController extends Controller
             //render các thẻ html cho giao diện
             foreach ($products as $key => $value) {
                 $render .= '<div class="result-item">
-                                <div class="item-img"><a href=""><img src="{{asset('.$value->pro_avatar.')}}" ></a></div>
+                                <div class="item-img"><a href=""><img img src="'.asset("$value->pro_avatar").'" width="40px" height="40px"></a></div>
                                 <div class="item-title">
                                     <a href="">'.$value->pro_name.'</a>
                                     <p>'.$value->price.'</p>
                                 </div>
                             </div>';
             }
-            $render .= "</div>";
             //trả data về cho 
             return response()->json([
-                "render" => $render,
+               'render' => $render,
             ]);
     }
 }   

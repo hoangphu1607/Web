@@ -171,15 +171,14 @@ $(document).ready(function(){
     $("#search").keyup(function(e){      
         var input = $(this).val();
         input = input.trim();
-        // $('#result').html('');
+        
         if(input !=""){
             $.ajax({
                 url:urlSearch,
                 method:"GET",
                 data:{pro_name:input},
                 success:function(data){
-                    console.log(data);
-                    // $('#resultList').fadeIn();  
+                    //console.log(data);
                     $('#result').append(data);
                 },
                 error:function (error) {

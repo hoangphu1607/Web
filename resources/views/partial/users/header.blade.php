@@ -78,11 +78,12 @@
                             </div>
                             <div class="header-search" style="position: relative;">                                    
                                  <div class="form-group" id="searchbar">
-                                    <input type="search" class="form-control rounded input-lg" placeholder="Tìm kiếm sản phẩm" id="search" name="search" style="padding: 5px; box-sizing: border-box"/>                             
+                                    <input type="search" class="form-control rounded input-lg" placeholder="Tìm kiếm sản phẩm" id="search" name="search" style="padding: 5px; box-sizing: border-box"/>
+                                <div class="resultcontent" id="result">
+                                    
                                 </div>
-                                <div id="result">
-
                                 </div>
+                                
                                 
                                  {{-- <ul class="list-group" id="result">
                                 </ul>  --}}

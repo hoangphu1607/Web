@@ -1,10 +1,16 @@
 #result {
+    padding-top: 30px;
+    margin-top: 40px;
     position: absolute;
-    width: 100%;
-    max-width:870px;
+    width: 80%;
     cursor: pointer;
     overflow-y: auto;
     max-height: 400px;
     box-sizing: border-box;
     z-index: 1001;
+    background-color: rgb(238, 6, 6);
+    display: none;
    }
+#searchbar {
+    width: 90%;
+}
