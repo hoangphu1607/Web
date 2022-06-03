@@ -168,18 +168,19 @@ function nextPageProduct(url) {
 
 //live search
 $(document).ready(function(){
-    $("#search").keyup(function(e){      
+    $("#searchbar").keyup(function(e){      
         var input = $(this).val();
         input = input.trim();
         
-        if(input !=""){
+        if(input !="" ){
             $.ajax({
                 url:urlSearch,
                 method:"GET",
                 data:{pro_name:input},
                 success:function(data){
-                    //console.log(data);
-                    $('#result').append(data);
+                    console.log(data);
+                    $("#result").css("display", "inline-block");
+                    $("#result").html(data.render);
                 },
                 error:function (error) {
                     console.log(error);
@@ -187,7 +188,7 @@ $(document).ready(function(){
             });
         }
         else{
-            
+            $("#result").css("display", "none");
         }           
     });
 });

@@ -121,13 +121,19 @@ class HomeController extends Controller
             ->get();
             //render các thẻ html cho giao diện
             foreach ($products as $key => $value) {
+                $avatar = asset("$value->pro_avatar");
+                $name = $value->pro_name;
+                $price = $value->price;
+
                 $render .= '<div class="result-item">
-                                <div class="item-img"><a href=""><img img src="'.asset("$value->pro_avatar").'" width="40px" height="40px"></a></div>
-                                <div class="item-title">
-                                    <a href="">'.$value->pro_name.'</a>
-                                    <p>'.$value->price.'</p>
+                                <div class="item-img"><a href=""><img img src="'.$avatar.'"></a></div>
+                                <div class="item-title" >
+                                    <a href="">'.$name.'</a>
+                                    <p>'.$price.'</p>
                                 </div>
                             </div>';
+                        
+                // $render .="<p>test</p>";
             }
             //trả data về cho 
             return response()->json([
