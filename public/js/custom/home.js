@@ -178,9 +178,9 @@ $(document).ready(function(){
                 method:"GET",
                 data:{pro_name:input},
                 success:function(data){
-                    console.log(data);
-                    $("#result").css("display", "inline-block");
-                    $("#result").html(data.render);
+                    console.log(data.id);
+                    $("#result").css("display", "block");
+                    $("#result").append(data.render);
                 },
                 error:function (error) {
                     console.log(error);

@@ -2,8 +2,11 @@
 .header-search {
     position: relative;
 }
-.header-search #result {
-    
+.form-group {
+    position: relative;
+}
+#result {
+    margin-top: 50px;
     padding: 10px;
     position: absolute;
     width: 100%;

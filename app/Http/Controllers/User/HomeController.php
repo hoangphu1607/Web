@@ -115,7 +115,7 @@ class HomeController extends Controller
             $render = '';
             //lấy dữ liệu dựa trên chuỗi nhập vào từ thanh search bar
             $products = DB::table('product')
-            ->select('product.pro_name','product.pro_avatar','description_detail.price')
+            ->select('product.pro_name','product.pro_avatar','description_detail.price','product.id')
             ->leftJoin('description_detail','product.id','=','description_detail.product_id')
             ->where('pro_name', 'LIKE', '%' . $request->pro_name . '%')
             ->get();
@@ -124,16 +124,16 @@ class HomeController extends Controller
                 $avatar = asset("$value->pro_avatar");
                 $name = $value->pro_name;
                 $price = $value->price;
-
-                $render .= '<div class="result-item">
-                                <div class="item-img"><a href=""><img img src="'.$avatar.'"></a></div>
+                $id = $value->id;
+                $url = route('showProductDetailById',['id'=> $id]);
+                $render .= '
+                            <div class="result-item">
+                                <div class="item-img"><a href="'.$url.'"><img img src="'.$avatar.'"></a></div>
                                 <div class="item-title" >
-                                    <a href="">'.$name.'</a>
+                                    <a href="'.$url.'"><h4>'.$name.'</h4></a>
                                     <p>'.$price.'</p>
                                 </div>
                             </div>';
-                        
-                // $render .="<p>test</p>";
             }
             //trả data về cho 
             return response()->json([
