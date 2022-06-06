@@ -89,7 +89,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-sm-4">
-                <div class="product-item-categori">
+                {{-- <div class="product-item-categori">
                     <div class="product-type">
                         <h2>Product Type</h2>
                         <ul>
@@ -105,8 +105,8 @@
                             <li><a href="#"><i class="fa fa-angle-right"></i>Bags</a></li>
                         </ul>
                     </div>
-                </div>
-                <div class="price-filter">
+                </div> --}}
+                {{-- <div class="price-filter">
                     <h2>Filter by price</h2>
                     <div id="slider-range"></div>
                     <button class="btn btn-default">Filter</button>
@@ -114,8 +114,8 @@
                       <label for="amount">Price:</label>
                       <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
                     </p>
-                </div>
-                <div class="filter-size-area">
+                </div> --}}
+                {{-- <div class="filter-size-area">
                     <h2>Filter by Size</h2>
                     <div class="filter-size">
                         <div class="filter-size-left">
@@ -129,14 +129,14 @@
                             <p>XS (10)</p>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="add-shop">
-                    <div class="add-kids single-add">
+                    {{-- <div class="add-kids single-add">
                         <a href="#"><img src="img/banner/kids-ad.jpg" alt="add"></a>
                     </div>
                     <div class="add-dress single-add">
                         <a href="#"><img src="img/banner/kids-ad-2.jpg" alt="add"></a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="col-md-9 col-sm-8">
