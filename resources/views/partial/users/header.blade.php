@@ -56,7 +56,7 @@
                 <div class="row">
                     <div class="col-md-2 col-sm-2 col-xs-12">
                         <div class="header-logo">
-                            <a href="index.html"><img src="img/logo.png" alt="logo"></a>
+                            <a href="{{route('home')}}"><img src="{{asset('img/logo.png')}}" alt="logo"></a>
                         </div>
                     </div>
                     <div class="col-md-10 col-sm-10 col-xs-12">
@@ -187,3 +187,4 @@
             </div>
         </div>
     </div>
+    

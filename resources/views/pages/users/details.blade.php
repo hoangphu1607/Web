@@ -72,7 +72,7 @@
     {{-- Slideshow --}}
     <link rel="stylesheet" href="{{asset('css/product/product details/slideshowproduct.css')}}">
     
-    <script src="{{asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
+  
     
 @stop
 
@@ -507,6 +507,7 @@
     {{--jquery.autocomplete.js--}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     {{--quick defined--}}
+    
     {{-- slideshow --}}
     <script src="{{asset('js/custom/user/product/product details/slideshow.js')}}"></script>
     <script>
@@ -520,6 +521,8 @@
             first_Price = "{{$data_query->price}}";
         }
         var getPriceById = "{{route('getPriceById')}}";
+        var urlSearch = "{{route('searchProduct')}}";
     </script>
     <script src="{{asset('js/custom/user/order.js')}}"></script>
+    <script src="{{asset('js/vendor/modernizr-2.8.3.min.js')}}"></script>
 @stop
