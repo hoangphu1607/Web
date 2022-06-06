@@ -112,33 +112,37 @@ class HomeController extends Controller
     //search bar - get data result
     public function search(Request $request)
     {
-            $render = '';
-            //lấy dữ liệu dựa trên chuỗi nhập vào từ thanh search bar
-            $products = DB::table('product')
-            ->select('product.pro_name','product.pro_avatar','description_detail.price','product.id')
-            ->leftJoin('description_detail','product.id','=','description_detail.product_id')
-            ->where('pro_name', 'LIKE', '%' . $request->pro_name . '%')
-            ->get();
-            //render các thẻ html cho giao diện
-            foreach ($products as $key => $value) {
-                $avatar = asset("$value->pro_avatar");
-                $name = $value->pro_name;
-                $price = $value->price;
-                $id = $value->id;
-                $url = route('showProductDetailById',['id'=> $id]);
-                $render .= '
-                            <div class="result-item">
-                                <div class="item-img"><a href="'.$url.'"><img img src="'.$avatar.'"></a></div>
-                                <div class="item-title" >
-                                    <a href="'.$url.'"><h4>'.$name.'</h4></a>
-                                    <p>'.$price.'</p>
-                                </div>
-                            </div>';
-            }
-            //trả data về cho 
-            return response()->json([
-               'render' => $render,
-            ]);
+            if ($request->ajax()) {
+                $render = '';
+                //lấy dữ liệu dựa trên chuỗi nhập vào từ thanh search bar
+                $products = DB::table('product')
+                ->select('product.pro_name','product.pro_avatar','description_detail.price','product.id')
+                ->leftJoin('description_detail','product.id','=','description_detail.product_id')
+                ->where('product.pro_name', 'LIKE', '%' . $request->pro_name . '%')
+                ->get();
+                //render các thẻ html cho giao diện
+                foreach ($products as $key => $value) {
+
+                    $avatar = asset("$value->pro_avatar");
+                    $name = $value->pro_name;
+                    $price = $value->price;
+                    $id = $value->id;               
+                    $url = route('showProductDetailById',['id'=> $id]);
+                    
+                    $render .= '
+                                <div class="result-item">
+                                    <div class="item-img"><a href="'.$url.'"><img img src="'.$avatar.'"></a></div>
+                                    <div class="item-title" >
+                                        <a href="'.$url.'"><h4>'.$name.'</h4></a>
+                                        <p>'.$price.'</p>
+                                    </div>
+                                </div>';
+                }
+                //trả data về cho 
+                return response()->json([
+                'render' => $render,
+                ]);
+                }
     }
 }   
 
