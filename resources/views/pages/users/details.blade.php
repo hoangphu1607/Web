@@ -89,7 +89,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-sm-4">
-                {{-- <div class="product-item-categori">
+                <div class="product-item-categori">
                     <div class="product-type">
                         <h2>Product Type</h2>
                         <ul>
@@ -105,7 +105,7 @@
                             <li><a href="#"><i class="fa fa-angle-right"></i>Bags</a></li>
                         </ul>
                     </div>
-                </div> --}}
+                </div>
                 {{-- <div class="price-filter">
                     <h2>Filter by price</h2>
                     <div id="slider-range"></div>
@@ -234,7 +234,7 @@
                             </div> --}}
                             <div class="product-item-details">
                                 <p>Mô Tả</p>
-                                <p>@php echo $data_query->pro_content @endphp</p>
+                                {{-- <p>@php echo $data_query->pro_content @endphp</p> --}}
                             </div>
                             <div class="size-chart">
                                 <p>Các Loại: 
@@ -315,32 +315,31 @@
                         </div>
                     </div>
                 </div>
+                <br>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="description-tab">
                         <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#description" role="tab" data-toggle="tab">Description</a></li>
-                                <li role="presentation"><a href="#information" role="tab" data-toggle="tab">Addisonal information</a></li>
-                                <li role="presentation"><a href="#reviews" role="tab" data-toggle="tab">Reviews (3)</a></li>
+                                <li role="presentation" class="active"><a href="#description" role="tab" data-toggle="tab">Mô tả</a></li>
+                                {{-- <li role="presentation"><a href="#information" role="tab" data-toggle="tab">Addisonal information</a></li> --}}
+                                {{-- <li role="presentation"><a href="#reviews" role="tab" data-toggle="tab">Đánh giá (3)</a></li> --}}
                             </ul>
                               <!-- Tab panes -->
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane active" id="description">
-                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
-
-                                    <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
+                                    <p>@php echo $data_query->pro_content @endphp</p>
                                 </div>
-                                <div role="tabpanel" class="tab-pane" id="information">
+                                {{-- <div role="tabpanel" class="tab-pane" id="information">
                                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.</p>
 
                                     <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. </p>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="reviews">
+                                </div> --}}
+                                {{-- <div role="tabpanel" class="tab-pane" id="reviews">
                                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
 
                                     <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
