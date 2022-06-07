@@ -4,18 +4,24 @@ window.onload = function () {
     $.ajax({
         url:getDataProduct, // var getDataProduct in file chart/product.blade.php
         success: function(data){
-            // console.log(data.order);
+            // console.log(data.top10);
             var product = data.product;
             var length = data.product.length;
             var datacol = $(product).map(function() {return this.c_name;}).get(); 
             var dataset = $(product).map(function() {return this.soluong;}).get(); 
             renderChar(datacol,dataset,length,'Loại Sản Phẩm','Cate');
+
             var order = data.order; 
             var length = data.order.length;
             var datacol = $(order).map(function() {return this.pro_name;}).get(); 
             var dataset = $(order).map(function() {return this.soluong;}).get(); 
             renderChar(datacol,dataset,length,'Bán Trong Tháng','Product-Sold-Month');
-            
+
+            var top10 = data.top10; 
+            var length = data.top10.length;
+            var datacol = $(top10).map(function() {return this.pro_name;}).get(); 
+            var dataset = $(top10).map(function() {return this.soluong;}).get(); 
+            renderChar(datacol,dataset,length,'Top 10','Top_10_Sales');
         },
         error: function(error){
             console.log(error);

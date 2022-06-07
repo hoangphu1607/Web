@@ -113,8 +113,8 @@
 									<div class="panel panel-default">
 										<div class="panel-heading">
 											<h4 class="panel-title">
-												<i class="fa-solid fa-fish-fins"></i> {{$cate->c_name}}
-												<a class="collapsed" data-toggle="collapse" href="#colOne" data-parent="#accrodian"></a>
+												<i class="fa-solid fa-fish-fins"></i> 
+												<a class="collapsed" href="#cate_{{$cate->id}}">{{$cate->c_name}}</a>
 											</h4>
 										</div>
 										{{-- <div class="panel-collapse collapse" id="colOne">
@@ -314,7 +314,7 @@
 							@if(!empty($dataCategories) && !empty($dataProduct))
 							@foreach ($dataCategories as $cate)
 							<div class="product-items">
-								<h2 class="product-header">{{$cate->c_name}}</h2>
+								<h2 class="product-header" id="cate_{{$cate->id}}">{{$cate->c_name}}</h2>
 								<div class="row">
 									<div id="product-slider" class="owl-carousel">
 										@php
