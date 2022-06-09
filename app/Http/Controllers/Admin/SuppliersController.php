@@ -25,7 +25,7 @@ class SuppliersController extends Controller
             'suppliers_name' => 'required',
             'suppliers_mail' =>'required',
             'suppliers_phonenumber' => 'required|digits:10|numeric',
-            'suppliers_image' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'suppliers_avt' => 'image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ],
         [
             'suppliers_name.required' => 'Tên nhà cung cấp không được bỏ trống',
@@ -33,15 +33,17 @@ class SuppliersController extends Controller
             'suppliers_phonenumber.required' => 'Số điện thoại nhà cung cấp không được bỏ trống',
             'suppliers_phonenumber.digits' => 'Số điện thoại không hợp lệ',
             'suppliers_phonenumber.numeric' => 'Số điện thoại không hợp lệ',
-            'suppliers_image.image' => 'Avatar không đúng định dạng !!!',
-            'suppliers_image.mimes' => 'Avatar không đúng định dạng !!!',
-        ]);        
-        if ($request->hasFile('suppliers_image')) {
-            $file = $request->suppliers_image; //Lấy file từ form sang -- image là dữ liệu nhập vào  
+            'suppliers_avt.image' => 'Avatar không đúng định dạng !!!',
+            'suppliers_avt.mimes' => 'Avatar không đúng định dạng !!!',
+        ]);  
+             
+        if ($request->hasFile('suppliers_avt')) {
+            $file = $request->suppliers_avt; //Lấy file từ form sang -- image là dữ liệu nhập vào  
            // $fileName =  $request->categories_name .'.'. $file->getClientOriginalExtension();//$request->categories_name đổi tên hình theo tên loại sản phẩm
-            $imageName = time().'.'.$request->suppliers_image->extension();      // nên làm cách này cho ko trùng tên ảnh      
+            $imageName = time().'.'.$request->suppliers_avt->extension();      // nên làm cách này cho ko trùng tên ảnh      
             $file->move('img\suppliers', $imageName); 
             $path_img = 'img\suppliers\\'. $imageName;
+            
             $dataInsert = [
                 $s_name = $request->suppliers_name,
                 $s_mail = $request->suppliers_mail,

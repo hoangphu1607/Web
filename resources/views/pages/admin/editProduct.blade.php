@@ -151,7 +151,7 @@
     <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
     {{-- <script src="{{asset('js/custum/categories.js')}}"></script> --}}
     <script>    
-    ClassicEditor.create(document.querySelector('#editor1'))
+    var editor1 = ClassicEditor.create(document.querySelector('#editor1'))
     .catch(error =>{
         console.error(error)
     });
@@ -356,7 +356,8 @@
           success: function(data) { 
             console.log(data );  
             toastr["success"]("Thay Đổi thành công!!!", "Thông Báo");   
-            table.ajax.reload();
+            // table.ajax.reload();
+            const myTimeout = setTimeout(reload,100);
           },
           error: function(error){
             console.log(error);
@@ -367,6 +368,9 @@
           }
         });   
       });
+      function reload() {
+        location.reload();
+      }
       $('#formAddImages').on('submit',function(e) {
         e.preventDefault();
         var data = new FormData(this);

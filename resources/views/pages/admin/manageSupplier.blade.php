@@ -191,7 +191,8 @@
                     console.log(response);
                     table.ajax.reload();               
                 },
-                error:function(error){              
+                error:function(error){        
+                  console.log(error);      
                     let tb = error.responseJSON.errors;
                     for(var i in tb){
                         $('.error_' + i).text(tb[i][0]);
