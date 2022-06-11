@@ -89,7 +89,7 @@
                             
                             <div class="header-chart">
                                 <ul class="list-inline">
-                                    <li><a href="#"><i class="fa fa-cart-arrow-down"></i></a></li>
+                                    <li><a href="{{route('showBillPlaced')}}"><i class="fa fa-cart-arrow-down"></i></a></li>
                                     <li class="chart-li list-data"><a href="{{route('showBill')}}">ĐƠN HÀNG</a>
                                         <ul>
                                             <li id="header-order">

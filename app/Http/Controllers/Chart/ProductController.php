@@ -48,11 +48,19 @@ class ProductController extends Controller
         ->orderBy('soluong','desc')
         ->limit(10)
         ->get();
+        //danh thu trong tháng
+        $data_sell = DB::table("bill")
+        ->select('create_at',DB::raw('SUM(b_total) AS b_total'))
+        ->whereMonth('create_at',$now->month)
+        ->where("bill.b_status", "=", 3)
+        ->groupBy('create_at')
+        ->get();
         return response()->json([
             'test' => 'Hi',
             'product' => $data,
             'order' => $order,
-            'top10' => $top10
+            'top10' => $top10,
+            'data_sell' => $data_sell
         ]);
     }
 }

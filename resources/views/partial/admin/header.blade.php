@@ -80,7 +80,7 @@
                                         <li><a href="{{route('delivery_confirmation')}}">HOÀN TẤT GIAO DỊCH</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="{{route('showPageSale')}}">Giới Thiệu Sản Phẩm</a></li>  
+                                <li><a href="{{route('showOffer')}}">Giới Thiệu Sản Phẩm</a></li>  
                                 <li>
                                     <a href="{{route('showPageSale')}}">Khuyến Mãi</a>
                                     <ul class="sub-menu">

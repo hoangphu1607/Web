@@ -4,7 +4,7 @@ window.onload = function () {
     $.ajax({
         url:getDataProduct, // var getDataProduct in file chart/product.blade.php
         success: function(data){
-            // console.log(data.top10);
+            console.log(data.data_sell);
             var product = data.product;
             var length = data.product.length;
             var datacol = $(product).map(function() {return this.c_name;}).get(); 
@@ -22,6 +22,12 @@ window.onload = function () {
             var datacol = $(top10).map(function() {return this.pro_name;}).get(); 
             var dataset = $(top10).map(function() {return this.soluong;}).get(); 
             renderChar(datacol,dataset,length,'Top 10','Top_10_Sales');
+
+            var data_sell = data.data_sell;
+            var dataMoney = $(data_sell).map(function() {return this.b_total;}).get(); 
+            var dataLabel = $(data_sell).map(function() {return this.create_at;}).get(); 
+            LineChart(dataLabel,dataMoney,'total_money');
+            
         },
         error: function(error){
             console.log(error);
@@ -61,4 +67,24 @@ function renderChar(datacol,dataset,length,label,idChart) {
             }
         }
     });        
+}
+
+function LineChart(labels,data,id_element){
+    const speedCanvas = document.getElementById(id_element);
+    // Chart.defaults.font.family = "Teko";
+    // Chart.defaults.font.size = 22;
+    // Chart.defaults.color = "black";
+
+    let speedData = {
+    labels: labels,
+    datasets: [{
+        label: "Car Speed (mph)",
+        data: data
+    }]
+    };
+
+    let lineChart = new Chart(speedCanvas, {
+        type: 'line',
+        data: speedData
+    });
 }

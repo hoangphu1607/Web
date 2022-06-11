@@ -89,7 +89,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 col-sm-4">
-                <div class="product-item-categori">
+                {{-- <div class="product-item-categori">
                     <div class="product-type">
                         <h2>Product Type</h2>
                         <ul>
@@ -105,7 +105,7 @@
                             <li><a href="#"><i class="fa fa-angle-right"></i>Bags</a></li>
                         </ul>
                     </div>
-                </div>
+                </div> --}}
                 {{-- <div class="price-filter">
                     <h2>Filter by price</h2>
                     <div id="slider-range"></div>
