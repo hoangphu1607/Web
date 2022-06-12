@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 class ManageOrder extends Controller
 {
     //show page manage order
@@ -78,6 +79,28 @@ class ManageOrder extends Controller
                 'note' => $html,
             ]);
         }if($action == "updateStatus"){
+            //lấy dữ liệu đặt hàng
+            $select = DB::table('bill')
+            ->join('user','user.id', '=','bill.b_user_id')
+            ->where('b_id', $request->id)
+            ->first();
+            $name = $select->u_name;
+            $gmail = $select->u_email;
+            $total = $select->b_total;
+            if($select->b_status == 1){
+                $dataBill = DB::table('bill_detail')
+                ->join('product','product.id','=','bill_detail.bd_product_id')
+                ->join('description_detail','description_detail.product_id','=','product.id')
+                ->select('product.pro_name','type','bd_price','bd_amount','bd_total_amount')
+                ->where('bd_bill_id', $request->id)
+                ->get();
+
+                Mail::send('partial.admin.email',compact('name','dataBill','total'),function($email) use($name,$gmail){
+                    $email->subject('Cảm Ơn Bạn Đã Đặt Hàng');
+                    $email->to($gmail);
+                });
+            }
+            
             DB::table('bill')
             ->where('b_id', $request->id)
             ->update([
@@ -101,5 +124,13 @@ class ManageOrder extends Controller
     {
         $code = 3;
         return view('pages.admin.list_order',compact('code'));
+    }
+    //send email
+    public function send_email(){
+        $name = "Phú";
+        Mail::send('partial.admin.email',compact('name'),function($email){
+            $email->subject('Cảm Ơn Bạn Đã Đặt Hàng');
+            $email->to('hoangphu329@gmail.com','Đồ Đồng Nát');
+        });
     }
 }
