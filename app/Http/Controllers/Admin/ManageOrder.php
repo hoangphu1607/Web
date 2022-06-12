@@ -94,8 +94,22 @@ class ManageOrder extends Controller
                 ->select('product.pro_name','type','bd_price','bd_amount','bd_total_amount')
                 ->where('bd_bill_id', $request->id)
                 ->get();
-
-                Mail::send('partial.admin.email',compact('name','dataBill','total'),function($email) use($name,$gmail){
+                $title = "VẬN CHUYỂN:";
+                $content = "Đơn hàng của bạn đang được chuyển đến, xin vui lòng chờ đợi 30-60 phút. Shipper sẽ gửi đến ngay!!";
+                Mail::send('partial.admin.email',compact('name','dataBill','total','title','content'),function($email) use($name,$gmail){
+                    $email->subject('Cảm Ơn Bạn Đã Đặt Hàng');
+                    $email->to($gmail);
+                });
+            }else{
+                $dataBill = DB::table('bill_detail')
+                ->join('product','product.id','=','bill_detail.bd_product_id')
+                ->join('description_detail','description_detail.product_id','=','product.id')
+                ->select('product.pro_name','type','bd_price','bd_amount','bd_total_amount')
+                ->where('bd_bill_id', $request->id)
+                ->get();
+                $title = "THANH TOÁN THÀNH CÔNG:";
+                $content = "Đơn hàng của bạn đã được thanh toán thành công! Cảm ơn Quý Khách";
+                Mail::send('partial.admin.email',compact('name','dataBill','total','title','content'),function($email) use($name,$gmail){
                     $email->subject('Cảm Ơn Bạn Đã Đặt Hàng');
                     $email->to($gmail);
                 });

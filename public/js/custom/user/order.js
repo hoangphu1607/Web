@@ -1,12 +1,14 @@
 function confirOrder(id_bill,id_user) {
     // e.preventDefault();
-
+    var thongtin = jQuery("textarea#thongtinkhac").val();
+    // console.log(thongtin);
     $.ajax({
         url:urlOrderConfirm,
         method:'post',
         data:{
             id_bill : id_bill,
             id_user: id_user,
+            thongtin:thongtin,
             _token: _token            
         },
         success: function(data){

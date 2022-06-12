@@ -48,7 +48,7 @@ $(document).on('click','#productItem',function(e){
                 node.append('<button data-id="'+data.product[i].idDes+'" type="button" class="btn btn-danger op" id="op" >'+data.product[i].type+'</button> ');
             }
             //tạo div child bời vì khi ấn vào lần nữa sẽ xóa nó
-            $('#content').append('<div id="content_child">'+data.product[0].pro_content+'</div>');
+            // $('#content').append('<div id="content_child">'+data.product[0].pro_content+'</div>');
             //add img
             $('#single-img').append(data.arr);
         },

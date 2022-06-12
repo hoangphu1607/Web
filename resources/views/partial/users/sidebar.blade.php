@@ -71,9 +71,9 @@
                                     </div>	
                                 </div>	
                             </div>
-                            <div class="slide-image">
+                            {{-- <div class="slide-image">
                                 <img class="wow slideInUp"  data-wow-duration="1.5s" data-wow-delay="0s" src="img/slider/si1.png" alt="slider caption" />
-                            </div>
+                            </div> --}}
                         </div>
                         <div id="htmlcaption2" class="nivo-html-caption slider-caption-2">
                             <div class="slider-progress"></div>					
@@ -91,9 +91,9 @@
                                     </div>	
                                 </div>	
                             </div>
-                            <div class="slide-image slide2-image">
+                            {{-- <div class="slide-image slide2-image">
                                 <img class="wow slideInUp"  data-wow-duration="1.5s" data-wow-delay="0s" src="{{asset('img/product/chacua.webp')}}" alt="slider caption" />
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

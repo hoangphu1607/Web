@@ -156,7 +156,7 @@ Route::prefix('admin')->group( function(){
     Route::get('dang-giao-hang',[ManageOrder::class, 'showDelivery'])->middleware('checkLogin')->name('showDelivery');
     //show page xác nhận giao hàng
     Route::get('xac-nhan-giao-hang',[ManageOrder::class, 'delivery_confirmation'])->middleware('checkLogin')->name('delivery_confirmation');
-    //send email
+    //send emailid="thongtinkhac"
     Route::get('send_email',[ManageOrder::class, 'send_email'])->middleware('checkLogin');
 
     //Quản lý giảm giá

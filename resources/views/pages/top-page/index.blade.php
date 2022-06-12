@@ -144,10 +144,10 @@
 								<div class="best-sell-product">
 									<div class="best-product-img">
 										{{-- Ảnh của phần best sale!! nên đặt chiều cao và rộng là: 80 71 --}}
-										<a href="#"><img src="{{asset('')}}{{$item->pro_avatar}}" alt="product" style="max-width: 71px; height: 80px"></a>
+										<a href="{{route('showProductDetailById',['id'=>$item->id])}}"><img src="{{asset('')}}{{$item->pro_avatar}}" alt="product" style="max-width: 71px; height: 80px"></a>
 									</div>
 									<div class="best-product-content">
-										<h2><a href="#">{{$item->pro_name}}</a></h2>
+										<h2><a href="{{route('showProductDetailById',['id'=>$item->id])}}">{{$item->pro_name}}</a></h2>
 										<h3>
 											<span style="color: #129FD8 ;font-size: 16px">{{number_format($item->price, 0, ',', '.') . "đ"}}/ 
 												<span style="color: #7A7A7A; font-size: 10px">{{$item->type}}</span>

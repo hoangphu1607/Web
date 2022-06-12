@@ -127,7 +127,8 @@ class Bill extends Controller
             'create_at' => date('Y-m-d'),
             'city' => $select->city_id,
             'district' => $select->district_id,
-            'ward' => $select->wards_id
+            'ward' => $select->wards_id,
+            'b_note' => $request->thongtin
         ]);
         return response()->json([
             'data' => true,

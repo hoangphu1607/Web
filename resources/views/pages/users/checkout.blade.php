@@ -155,7 +155,7 @@
                                         Thông Tin Khác
                                     </label>
                                     <div class="col-md-9">
-                                        <textarea rows="9"></textarea>
+                                        <textarea rows="9" id="thongtinkhac"></textarea>
                                     </div>
                                 </div>
                             </form>
@@ -226,7 +226,7 @@
                                     Thông Tin Khác
                                 </label>
                                 <div class="col-md-9">
-                                    <textarea rows="9"></textarea>
+                                    <textarea rows="9" ></textarea>
                                 </div>
                             </div>
                             </form>

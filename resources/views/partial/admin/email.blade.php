@@ -31,7 +31,7 @@ width: 100% !important;
 <tr>
 <td class="header" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; padding: 25px 0; text-align: center;">
 <a href="https://markdownmail.com" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #bbbfc3; font-size: 19px; font-weight: bold; text-decoration: none; text-shadow: 0 1px 0 #ffffff; display: inline-block;">
-<img src="https://thietkeweb9999.com/data/upload/blog/logo/top-140-mau-logo-nha-hang-dep-thu-hut-thuc-khach16.jpg" class="logo" alt="Laravel Logo" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; max-width: 100%; border: none;"></a>
+<img src="https://thietkeweb9999.com/data/upload/blog/logo/top-140-mau-logo-nha-hang-dep-thu-hut-thuc-khach16.jpg" class="logo" alt="Laravel Logo" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;width: 340px;height: 325px; border: none;"></a>
 </td>
 </tr>
 <!-- Email Body --><tr>
@@ -65,8 +65,8 @@ width: 100% !important;
 </tbody>
 </table>
 </div>
-<h3 style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #2F3133; font-size: 14px; font-weight: bold; margin-top: 0; text-align: left;">VẬN CHUYỂN:</h3>
-<p style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #74787e; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">Đơn hàng của bạn đang được chuyển đến, xin vui lòng chờ đợi 30-60 phút. Shipper sẽ gửi đến ngay!!</p>
+<h3 style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #2F3133; font-size: 14px; font-weight: bold; margin-top: 0; text-align: left;">{{$title}}</h3>
+<p style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #74787e; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">{{$content}}</p>
 
 {{-- <table class="action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; margin: 30px auto; padding: 0; text-align: center; width: 100%; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%;"><tr>
 <td align="center" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;">
