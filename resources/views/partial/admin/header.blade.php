@@ -40,7 +40,7 @@
                                 <li><a href="checkout.html"><i class="fa fa-check-square-o"></i>Checkout</a></li> --}}
                                 @if(session('id_admin'))                                    
                                     <li>
-                                        <a href="#" style="color: #85ff85"><i class="fa fa-user"></i>Xin Chào {{session('admin_name')}} !!!</a>
+                                        <a href="#" style="color: #85ff85"><i class="fa fa-user"></i>Xin Chào {{session('admin_name')}}</a>
                                     </li>
                                     <li>
                                         <a href="{{route('admin_logout')}}"><i class="fa fa-user-times"></i> Đăng Xuất </a>

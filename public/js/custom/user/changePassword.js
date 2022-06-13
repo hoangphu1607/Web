@@ -1,11 +1,8 @@
-$('#loginuser').on('submit',function(e) {
+$('#changepassword').on('submit',function(e) {
     e.preventDefault();
-    var data = new FormData(this);
+    var data = new FormData(this).values();
     console.log(data);
-    var url = window.location.href;
-    // var url = 'http://web.com:8080/home';
-    // console.log(url);
-    // $('.error').text('');
+    $('.error').text('');
     // $.ajax({
     //     url:url,
     //     method:'POST',

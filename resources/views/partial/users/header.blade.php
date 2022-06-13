@@ -32,7 +32,13 @@
                             <ul class="list-inline">
                                 @if(session('id_user'))                                    
                                     <li>
-                                        <a href="{{route('user.index')}}" style="color: #85ff85"><i class="fa fa-user"></i>Xin Chào {{session('user_name')}} !!!</a>
+                                        <div id="user-name">
+                                            <a href="{{route('user.index')}}" style="color: #85ff85" ><i class="fa fa-user"></i>Xin Chào {{session('user_name')}}</a>
+                                            <div class="user-dropdown-menu">
+                                                <a href="{{route('user.index')}}">Thông tin tài khoản</a>
+                                                <a href="{{route('changePasswordPage')}}">Đổi mật khẩu</a>
+                                            </div>
+                                        </div>
                                     </li>
                                     <li>
                                         <a href="{{route('logout')}}"><i class="fa fa-user-times"></i> Đăng Xuất </a>

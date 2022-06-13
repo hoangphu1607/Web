@@ -144,5 +144,19 @@ class HomeController extends Controller
                 ]);
                 }
     }
+
+    //return change password page
+    public function changePasswordPage()
+    {
+        return view('pages.users.changepassword');
+    }
+
+    //Update new password 
+    public function UpdatePassword(Request $request)
+    {
+        return response()->json([
+            'test' => 'test',
+        ]);
+    }
 }   
 

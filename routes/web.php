@@ -71,6 +71,12 @@ Route::prefix('home')->group( function(){
 
     //search bar
     Route::get('tim-kiem',[HomeController::class,'search'])->name('searchProduct');
+
+    //change password page
+    Route::get('doi-mat-khau',[HomeController::class,'changePasswordPage'])->name('changePasswordPage');
+
+    //update new password 
+    Route::post('doi-mat-khau',[HomeController::class,'UpdatePassword'])->name('UpdatePassword');
     
 });
 
