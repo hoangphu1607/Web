@@ -8,7 +8,7 @@
 						<div class="footer-logo">
 							<a href="index.html"><img src="{{asset('img/footer-logo.png')}}" alt="logo"></a>
 						</div>
-						<p>Lorem ipsum dolor sit amet, coetuer adipiscing elit. Aenean comodo liula eget dolor. Aenean massa. Cum sociis natoque penatibus.</p>
+						<p>Hải Sản PT là nơi để mọi tín đồ hải sản có thể tìm được rất nhiều sản phẩm tươi ngon cũng như chất lượng được đảm bảo an toàn vệ sinh.</p>
 						<ul class="list-inline">
 							<li><a href="#"><img src="{{asset('img/visa-card/visa-card-1.png')}}" alt="card" class="img-responsive"></a></li>
 							<li><a href="#"><img src="{{asset('img/visa-card/visa-card-2.png')}}" alt="card" class="img-responsive"></a></li>
@@ -19,43 +19,35 @@
 				</div>
 				<div class="col-md-3 col-sm-6">
 					<div class="footer-menu-area">
-						<h2 class="footer-heading">MY ACCOUNT</h2>
+						<h2 class="footer-heading">Chính sách</h2>
 						<div class="footer-menu">
 							<ul>
-								<li><a href="#"><i class="fa fa-angle-right"></i>My Account</a></li>
-								<li><a href="#"><i class="fa fa-angle-right"></i>About Us</a></li>
-								<li><a href="#"><i class="fa fa-angle-right"></i>Contact</a></li>
-								<li><a href="#"><i class="fa fa-angle-right"></i>Affiliates</a></li>
-								<li><a href="#"><i class="fa fa-angle-right"></i>Meet The Maker</a></li>
+								<li><a href=""><i class="fa fa-angle-right"></i>Giao nhận hàng</a></li>
+								<li><a href=""><i class="fa fa-angle-right"></i>Hướng dẫn đặt hàng</a></li>
+								<li><a href=""><i class="fa fa-angle-right"></i>Chính Sách Giải quyết khiếu nại</a></li>
+								<li><a href=""><i class="fa fa-angle-right"></i>Cam kết chất lượng</a></li>
 							</ul>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6 hidden-sm hidden-xs">
 					<div class="footer-menu-area">
-						<h2 class="footer-heading">Opening time</h2>
+						<h2 class="footer-heading">Thời gian mở cửa</h2>
 						<div class="footer-menu opening-time">
-							<ul>
-								<li><i class="fa fa-angle-right"></i>Satarday<span>7.00 AM - 7.00 PM</span></li>
-								<li><i class="fa fa-angle-right"></i>Sunday<span>7.00 AM - 7.00 PM</span></li>
-								<li><i class="fa fa-angle-right"></i>Monday<span>7.00 AM - 7.00 PM</span></li>
-								<li><i class="fa fa-angle-right"></i>Tuesday<span>7.00 AM - 7.00 PM</span></li>
-								<li><i class="fa fa-angle-right"></i>Thusday<span>7.00 AM - 7.00 PM</span></li>
-							</ul>
+							<p>Từ thứ hai đến chủ nhật<span>8h - 21h</span></p>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-6">
 					<div class="contact-info-area">
-						<h2 class="footer-heading">Contact Us</h2>
+						<h2 class="footer-heading">Liên hệ </h2>
 						<div class="contact-info">
 							<div class="contanct-details">
 								<div class="info-icon">
 									<i class="fa fa-phone"></i>
 								</div>
 								<div class="info-content">
-									<p>+1 (00) 86 868 868 666</p>
-									<p>+1 (00) 42 868 666 888</p>
+									<p>(+84) 02703822141</p>				
 								</div>
 							</div>
 							<div class="contanct-details">
@@ -63,8 +55,8 @@
 									<i class="fa fa-envelope-o"></i>
 								</div>
 								<div class="info-content">
-									<p>admin@bootexperts.com</p>
-									<p>info@bootexperts.com</p>
+									<p>Website: http://web.com/home</p>
+									<p>Email: spktvl@vlute.edu.vn</p>
 								</div>
 							</div>
 							<div class="contanct-details">
@@ -72,7 +64,7 @@
 									<i class="fa fa-map-marker"></i>
 								</div>
 								<div class="info-content">
-									<p>68 Dohava Stress, Lorem isput Spust, New York- US</p>
+									<p>73 Nguyễn Huệ Phường 2 TP. Vĩnh Long</p>
 								</div>
 							</div>
 						</div>
