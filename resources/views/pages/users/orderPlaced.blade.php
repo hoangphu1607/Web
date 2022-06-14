@@ -131,12 +131,12 @@
                         </table>
                     </div>
                     <div class="cart-button">
-                        <button type="button" class="btn" onclick="window.location.href='{{route('home')}}'">Continue Shopping</button>
+                        <button type="button" class="btn" onclick="window.location.href='{{route('home')}}'">Tiếp tục mua sắm</button>
                         <button type="button" class="btn floatright" onclick="window.location.href='{{route('showCheckOut')}}'">THANH TOÁN</button>
                     </div>
                 </div>
             </div>
-            <div class="row">
+            {{-- <div class="row">
                 <div class="cart-shopping-area fix">
                     <div class="col-md-4 col-sm-4">
                         <div class="calculate-shipping chart-all">
@@ -190,7 +190,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 @stop
