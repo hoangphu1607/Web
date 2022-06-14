@@ -122,8 +122,8 @@
                             <!-- Input group -->
                             <div class="input-group input-group-merge">
                                 <!-- Input -->
-                                <input type="password" placeholder="Mật khẩu cũ" class="form-control form-control-appended"  name="user_old_password" /><!-- Icon -->
-                                <label style="color: red;" class="error error_user_email" ></label>
+                                <input type="password" placeholder="Mật khẩu cũ" class="form-control form-control-appended input-pw"  name="user_old_password" /><!-- Icon -->
+                                <label style="color: red;" class="error error_user_old_password" ></label>
                             </div>
                             <!-- thông báo lỗi -->
                             @error('user_email')
@@ -142,8 +142,8 @@
                             <!-- Input group -->
                             <div class="input-group input-group-merge">
                                 <!-- Input -->
-                                <input type="password" placeholder="Mật khẩu mới" class="form-control form-control-appended" name="user_new_password" /><!-- Icon -->
-                                <label style="color: red;" class="error error_user_email" ></label>
+                                <input type="password" placeholder="Mật khẩu mới" class="form-control form-control-appended input-pw" name="user_new_password" /><!-- Icon -->
+                                <label style="color: red;" class="error error_user_new_password" ></label>
                             </div>
                             <!-- thông báo lỗi -->
                             @error('user_email')
@@ -162,8 +162,8 @@
                             <!-- Input group -->
                             <div class="input-group input-group-merge">
                                 <!-- Input -->
-                                <input type="password" placeholder="Xác nhận mật khẩu mới" class="form-control form-control-appended" name="user_confirm_new_password" /><!-- Icon -->
-                                <label style="color: red;" class="error error_user_email" ></label>
+                                <input type="password" placeholder="Xác nhận mật khẩu mới" class="form-control form-control-appended input-pw" name="user_confirm_new_password" /><!-- Icon -->
+                                <label style="color: red;" class="error error_user_confirm_new_password" ></label>
                             </div>
                             <!-- thông báo lỗi -->
                             @error('user_email')
@@ -183,6 +183,7 @@
 @section('scripts')
     <script src="{{asset('js/custom/user/changePassword.js')}}"></script>
     <script>
+        var url_home = "{{route('home')}}";
         var url = "{{route('UpdatePassword')}}";
     </script>
 @stop

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\user;
-
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -148,14 +148,51 @@ class HomeController extends Controller
     //return change password page
     public function changePasswordPage()
     {
-        return view('pages.users.changepassword');
+        if(session('id_user') == null){
+            return redirect()->route('home');
+        }
+        else
+            return view('pages.users.changepassword');
     }
 
     //Update new password 
     public function UpdatePassword(Request $request)
     {
+        $rules = [
+            'user_old_password' => 'required',
+            'user_new_password' => 'required|min:8',
+            'user_confirm_new_password' => 'required|same:user_new_password',
+        ];
+        $messages = [
+            'user_old_password.required' => 'Tên tài khoản không được bỏ trống',
+            'user_new_password.required' => 'Mật khẩu không được bỏ trống',
+            'user_new_password.min' => 'Mật khẩu quá ngắn(nhập ít nhất 8 ký tự)',
+            'user_confirm_new_password.required' => 'Mật khẩu không được bỏ trống',
+            'user_confirm_new_password.same' => 'Mật khẩu không khớp',           
+        ];
+        $check = Validator::make($request->all(),$rules,$messages);
+        $check->validate(); 
+        
+        $password = DB::table('user') 
+        ->select('u_password')
+        ->where('id',session('id_user'))
+        ->first();
+
+        $old_pw = sha1($request->user_old_password);
+        $new_pw = sha1($request->user_confirm_new_password);
+
+        if ($old_pw == $password->u_password) {
+            $update = DB::table('user')
+              ->where('id', session('id_user'))
+              ->update(['u_password' => $new_pw]);
+            $success = true;
+        }
+        else {
+            $success = false;
+        }
+            
         return response()->json([
-            'test' => 'test',
+            'success' => $success,
         ]);
     }
 }   

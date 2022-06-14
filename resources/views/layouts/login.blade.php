@@ -25,7 +25,7 @@
     @yield('styles')
 </head>
 <body class="home-one">
-    @include('partial.admin.header')
+    {{-- @include('partial.admin.header') --}}
     {{-- @yield('ckeditor') --}}
     @yield('content')
 
