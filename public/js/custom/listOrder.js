@@ -95,8 +95,15 @@ function delivery(idBill) {
         },
         method: 'GET',
         success: function(data){
-            toastr["success"]("Thành Công", "Thông Báo")  ;                  
-            table.ajax.reload();       
+            console.log(data);
+
+            if(data.success){
+                toastr["success"]("Thành Công", "Thông Báo")  ;                  
+                table.ajax.reload(); 
+            }else{
+                toastr["error"]("Số Lượng Không Đủ","Lỗi");
+            }
+                  
         },
         error: function(error){
             console.log(error);

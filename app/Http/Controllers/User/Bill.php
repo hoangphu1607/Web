@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use NumberFormatter;
 use Carbon;
 use function PHPSTORM_META\type;
+use function PHPUnit\Framework\isNull;
 
 class Bill extends Controller
 {
@@ -118,7 +119,10 @@ class Bill extends Controller
         $select = DB::table('user')
         ->where('id', $request->id_user)
         ->first();
-
+        $note = $request->thongtin;
+        if($note == null){
+            $note = "" ;
+        }
         DB::table('bill')
         ->where('b_id', $request->id_bill)
         ->where('b_user_id', $request->id_user)
@@ -128,7 +132,7 @@ class Bill extends Controller
             'city' => $select->city_id,
             'district' => $select->district_id,
             'ward' => $select->wards_id,
-            'b_note' => $request->thongtin
+            'b_note' => $note
         ]);
         return response()->json([
             'data' => true,

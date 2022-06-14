@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\ManageOrder;
 use App\Http\Controllers\Chart\ProductController;
 use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\SaleController;
+use App\Http\Controllers\Admin\Title;
 // use App\Http\Controllers\Process_accout;
 
 /*
@@ -174,6 +175,8 @@ Route::prefix('admin')->group( function(){
     Route::get('getDataProductOnSale',[SaleController::class,'ProductOnSale'])->middleware('checkLogin')->name('getDataProductOnSale');
     Route::post('DeleteProductSale',[SaleController::class,'DeleteProductSale'])->middleware('checkLogin')->name('DeleteProductSale');
     
+    //thông báo
+    Route::get('thong-bao',[Title::class,'showThongBao'])->middleware('checkLogin')->name('showThongBao');
 });
 
 

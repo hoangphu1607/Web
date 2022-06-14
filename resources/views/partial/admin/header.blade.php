@@ -89,7 +89,11 @@
                                     </ul>
                                 </li>                               
                                 {{-- <li><a href="shop.html">Gia Vị</a></li> --}}
-                                <li><a href="{{route('showChartProduct')}}">Thống Kê</a></li>
+                                <li><a href="{{route('showChartProduct')}}">Thống Kê</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="{{route('showThongBao')}}">Thông Báo</a></li>
+                                    </ul>
+                                </li>
                                 {{-- <li><a href="shop.html">Lẩu</a> --}}
                                     {{-- <ul class="sub-menu">
                                         <li><a href="blog-right-sidebar.html">Lẩu This</a></li>
