@@ -1,7 +1,7 @@
 $('#loginuser').on('submit',function(e) {
     e.preventDefault();
     var data = new FormData(this);
-    console.log(data);
+    // console.log(data);
     var url = window.location.href;
     // var url = 'http://web.com:8080/home';
     console.log(url);

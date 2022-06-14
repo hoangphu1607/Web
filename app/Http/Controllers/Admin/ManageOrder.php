@@ -79,50 +79,102 @@ class ManageOrder extends Controller
                 'note' => $html,
             ]);
         }if($action == "updateStatus"){
-            //lấy dữ liệu đặt hàng
-            $select = DB::table('bill')
-            ->join('user','user.id', '=','bill.b_user_id')
-            ->where('b_id', $request->id)
-            ->first();
-            $name = $select->u_name;
-            $gmail = $select->u_email;
-            $total = $select->b_total;
-            if($select->b_status == 1){
-                $dataBill = DB::table('bill_detail')
-                ->join('product','product.id','=','bill_detail.bd_product_id')
-                ->join('description_detail','description_detail.product_id','=','product.id')
-                ->select('product.pro_name','type','bd_price','bd_amount','bd_total_amount')
-                ->where('bd_bill_id', $request->id)
-                ->get();
-                $title = "VẬN CHUYỂN:";
-                $content = "Đơn hàng của bạn đang được chuyển đến, xin vui lòng chờ đợi 30-60 phút. Shipper sẽ gửi đến ngay!!";
-                Mail::send('partial.admin.email',compact('name','dataBill','total','title','content'),function($email) use($name,$gmail){
-                    $email->subject('Cảm Ơn Bạn Đã Đặt Hàng');
-                    $email->to($gmail);
-                });
-            }else{
-                $dataBill = DB::table('bill_detail')
-                ->join('product','product.id','=','bill_detail.bd_product_id')
-                ->join('description_detail','description_detail.product_id','=','product.id')
-                ->select('product.pro_name','type','bd_price','bd_amount','bd_total_amount')
-                ->where('bd_bill_id', $request->id)
-                ->get();
-                $title = "THANH TOÁN THÀNH CÔNG:";
-                $content = "Đơn hàng của bạn đã được thanh toán thành công! Cảm ơn Quý Khách";
-                Mail::send('partial.admin.email',compact('name','dataBill','total','title','content'),function($email) use($name,$gmail){
-                    $email->subject('Cảm Ơn Bạn Đã Đặt Hàng');
-                    $email->to($gmail);
-                });
+            //số lượng người dùng đặt
+            $dataBillPlace = DB::table("bill_detail")
+            ->select('bill_detail.bd_product_id','description_detail_id',DB::raw('sum(bill_detail.bd_amount) as soluong'))
+            ->where("bill_detail.bd_bill_id", "=", $request->id)
+            ->groupBy("bd_product_id","description_detail_id")
+            ->get();
+            //kiểm tra trong số lượng tồn kho
+            $checkTonKho = 0;
+            foreach($dataBillPlace as $item){
+                $dataProduct = DB::table("description_detail")
+                ->where("product_id",$item->bd_product_id)
+                ->where("id",$item->description_detail_id)
+                ->first();
+                if($item->soluong > $dataProduct->quantity)
+                    $checkTonKho++;
             }
+            if($checkTonKho == 0){
+                // lấy dữ liệu đặt hàng
+                $select = DB::table('bill')
+                ->join('user','user.id', '=','bill.b_user_id')
+                ->where('b_id', $request->id)
+                ->first();
+                $name = $select->u_name;
+                $gmail = $select->u_email;
+                $total = $select->b_total;
+                if($select->b_status == 1){
+                    //dữ liệu gửi mail
+                    $dataBill = DB::table('bill_detail')
+                    ->join('product','product.id','=','bill_detail.bd_product_id')
+                    ->select('product.pro_name','bd_price','bd_amount','bd_total_amount','bd_product_id')
+                    ->where('bd_bill_id', $request->id)                      
+                    ->get();
+                    //dữ liệu để trừ
+                    $dataInBill = DB::table('bill_detail')
+                    ->join('product','product.id','=','bill_detail.bd_product_id')
+                    ->select('product.pro_name','bd_price','bd_amount','bd_total_amount','description_detail_id','bd_product_id')
+                    ->where('bd_bill_id', $request->id)                      
+                    ->get();
+                    //trừ số lượng
+                    // $text = "";
+                    foreach($dataInBill as $item){
+                        //lấy số lượng
+                        $soluong = DB::table('description_detail')
+                        ->where('product_id',$item->bd_product_id)
+                        ->where('id',$item->description_detail_id)
+                        ->first();
+                        // $text .= "Sản Phẩm: ".$item->bd_product_id ." Loại: ".$item->id;
+                        DB::table('description_detail')
+                        ->where('product_id',$item->bd_product_id)
+                        ->where('id',$item->description_detail_id)
+                        ->update([
+                            'quantity' => $soluong->quantity - $item->bd_amount
+                        ]);
+                    }
+                    // return response()->json([
+                    //     'soluong' => $text,
+                    //     "dataBill" =>$dataBill
+                    // ]);
+                    $title = "VẬN CHUYỂN:";
+                    $content = "Đơn hàng của bạn đang được chuyển đến, xin vui lòng chờ đợi 30-60 phút. Shipper sẽ gửi đến ngay!!";
+                    Mail::send('partial.admin.email',compact('name','dataBill','total','title','content'),function($email) use($name,$gmail){
+                        $email->subject('Cảm Ơn Bạn Đã Đặt Hàng');
+                        $email->to($gmail);
+                    });
+                }else if($select->b_status == 2){
+                    $dataBill = DB::table('bill_detail')
+                    ->join('product','product.id','=','bill_detail.bd_product_id')
+                    ->join('description_detail','description_detail.product_id','=','product.id')
+                    ->select('product.pro_name','type','bd_price','bd_amount','bd_total_amount')
+                    ->where('bd_bill_id', $request->id)
+                    ->get();
+                    $title = "THANH TOÁN THÀNH CÔNG:";
+                    $content = "Đơn hàng của bạn đã được thanh toán thành công! Cảm ơn Quý Khách";
+                    Mail::send('partial.admin.email',compact('name','dataBill','total','title','content'),function($email) use($name,$gmail){
+                        $email->subject('Cảm Ơn Bạn Đã Đặt Hàng');
+                        $email->to($gmail);
+                    });
+                }
+                
+                DB::table('bill')
+                ->where('b_id', $request->id)
+                ->update([
+                    'b_status' => $code + 1
+                ]);
+                return response()->json([
+                    'updateStatus' => 'updateStatus',
+                    'success' => true
+                ]);
+            }else{
+                return response()->json([
+                    'updateStatus' => 'updateStatus',
+                    'success' => false,
+                ]);
+            }
+
             
-            DB::table('bill')
-            ->where('b_id', $request->id)
-            ->update([
-                'b_status' => $code + 1
-            ]);
-            return response()->json([
-                'updateStatus' => 'updateStatus',
-            ]);
         }
         
     }
