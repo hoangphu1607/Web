@@ -151,4 +151,7 @@
 
 @section('scripts')
     <script src="{{asset('js/custom/admin/admin_login.js')}}"></script>
+    <script>
+        var listOrder = "{{route('listOrder')}}";
+    </script>
 @stop

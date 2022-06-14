@@ -88,6 +88,9 @@ Route::prefix('admin')->group( function(){
     //register Admin
     Route::get('register', [manageController::class,'form_register'])->name('form_Register');
     Route::post('register', [manageController::class,'register_admin'])->name('adminRegister');
+    //dang ky nhan vien
+    Route::get('dang-ky-nhan-vien',[manageController::class,'form_register_nv'])->name('form_register_nv');
+    Route::post('register_nhanvien',[manageController::class,'register_nhanvien'])->name('register_nhanvien');
     //admin logout
     Route::get('logout', [manageController::class,'adminLogout'])->name('admin_logout');  
 
@@ -144,39 +147,40 @@ Route::prefix('admin')->group( function(){
     Route::get('ListImgProduct',[ProductsController::class, 'ListImgProduct'])->middleware('checkLogin')->name('ListImgProduct');
     //update hình ảnh chi tiết sản phẩm
     Route::POST('updateProductImagesDetail',[ProductsController::class, 'updateProductImagesDetail'])->middleware('checkLogin')->name('updateProductImagesDetail');
-    //show page offer
-    Route::get('showOffer',[OfferController::class,'showOffer'])->middleware('checkLogin')->name('showOffer');
-    Route::get('dataProductOffer',[OfferController::class,'getDataProduct'])->middleware('checkLogin')->name('dataProductOffer');
-    //set offer Product
-    Route::post('setOffer',[OfferController::class,'setOffer'])->middleware('checkLogin')->name('setOffer');
     //Update Quantity Product
     Route::post('UpdateQuantityProduct',[ProductsController::class,'UpdateQuantityProduct'])->middleware('checkLogin')->name('UpdateQuantityProduct');
 
+    //show page offer
+    Route::get('showOffer',[OfferController::class,'showOffer'])->middleware('checkNhanVien')->name('showOffer');
+    Route::get('dataProductOffer',[OfferController::class,'getDataProduct'])->middleware('checkNhanVien')->name('dataProductOffer');
+    //set offer Product
+    Route::post('setOffer',[OfferController::class,'setOffer'])->middleware('checkNhanVien')->name('setOffer');
+
     //xử lý đặt hàng
-    Route::get('quan-ly-dat-hang',[ManageOrder::class, 'showListOrder'])->middleware('checkLogin')->name('listOrder');
-    Route::get('getBillUserOrder',[ManageOrder::class, 'allBillUserOrder'])->middleware('checkLogin')->name('getBillUserOrder');
+    Route::get('quan-ly-dat-hang',[ManageOrder::class, 'showListOrder'])->middleware('checkNhanVien')->name('listOrder');
+    Route::get('getBillUserOrder',[ManageOrder::class, 'allBillUserOrder'])->middleware('checkNhanVien')->name('getBillUserOrder');
     //get Bill Detail by Id
-    Route::get('getBillDetailById',[ManageOrder::class, 'getBillDetailById'])->middleware('checkLogin')->name('getBillDetailById');
+    Route::get('getBillDetailById',[ManageOrder::class, 'getBillDetailById'])->middleware('checkNhanVien')->name('getBillDetailById');
     //get note by id
-    Route::get('getDataNoteById',[ManageOrder::class, 'processBillById'])->middleware('checkLogin')->name('getDataNoteById');
+    Route::get('getDataNoteById',[ManageOrder::class, 'processBillById'])->middleware('checkNhanVien')->name('getDataNoteById');
     //show page đang giao hàng
-    Route::get('dang-giao-hang',[ManageOrder::class, 'showDelivery'])->middleware('checkLogin')->name('showDelivery');
+    Route::get('dang-giao-hang',[ManageOrder::class, 'showDelivery'])->middleware('checkNhanVien')->name('showDelivery');
     //show page xác nhận giao hàng
-    Route::get('xac-nhan-giao-hang',[ManageOrder::class, 'delivery_confirmation'])->middleware('checkLogin')->name('delivery_confirmation');
+    Route::get('xac-nhan-giao-hang',[ManageOrder::class, 'delivery_confirmation'])->middleware('checkNhanVien')->name('delivery_confirmation');
     //send emailid="thongtinkhac"
-    Route::get('send_email',[ManageOrder::class, 'send_email'])->middleware('checkLogin');
+    Route::get('send_email',[ManageOrder::class, 'send_email'])->middleware('checkNhanVien');
 
     //Quản lý giảm giá
-    Route::get('giam-gia',[SaleController::class,'showPageSale'])->middleware('checkLogin')->name('showPageSale');
-    Route::get('getDataProductSale',[SaleController::class,'getDataProductSale'])->middleware('checkLogin')->name('getDataProductSale');
-    Route::post('setProductSale',[SaleController::class,'setProductSale'])->middleware('checkLogin')->name('setProductSale');
+    Route::get('giam-gia',[SaleController::class,'showPageSale'])->middleware('checkNhanVien')->name('showPageSale');
+    Route::get('getDataProductSale',[SaleController::class,'getDataProductSale'])->middleware('checkNhanVien')->name('getDataProductSale');
+    Route::post('setProductSale',[SaleController::class,'setProductSale'])->middleware('checkNhanVien')->name('setProductSale');
     //Trang Quản Lý Sản Phẩm Đang Giảm Giá
-    Route::get('dang-giam-gia',[SaleController::class,'PageProductOnSale'])->middleware('checkLogin')->name('ProductOnSale');
-    Route::get('getDataProductOnSale',[SaleController::class,'ProductOnSale'])->middleware('checkLogin')->name('getDataProductOnSale');
-    Route::post('DeleteProductSale',[SaleController::class,'DeleteProductSale'])->middleware('checkLogin')->name('DeleteProductSale');
+    Route::get('dang-giam-gia',[SaleController::class,'PageProductOnSale'])->middleware('checkNhanVien')->name('ProductOnSale');
+    Route::get('getDataProductOnSale',[SaleController::class,'ProductOnSale'])->middleware('checkNhanVien')->name('getDataProductOnSale');
+    Route::post('DeleteProductSale',[SaleController::class,'DeleteProductSale'])->middleware('checkNhanVien')->name('DeleteProductSale');
     
     //thông báo
-    Route::get('thong-bao',[Title::class,'showThongBao'])->middleware('checkLogin')->name('showThongBao');
+    Route::get('thong-bao',[Title::class,'showThongBao'])->middleware('checkNhanVien')->name('showThongBao');
 });
 
 
@@ -204,8 +208,8 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function(){
 });
 
 Route::prefix('thong-ke')->group(function () {
-    Route::get('san-pham', [ProductController::class,'showChartProduct'])->middleware('checkLogin')->name('showChartProduct'); 
+    Route::get('san-pham', [ProductController::class,'showChartProduct'])->middleware('checkNhanVien')->name('showChartProduct'); 
     //get data product
-    Route::get('getDataProduct', [ProductController::class,'getDataProduct'])->middleware('checkLogin')->name('getDataProduct'); 
+    Route::get('getDataProduct', [ProductController::class,'getDataProduct'])->middleware('checkNhanVien')->name('getDataProduct'); 
 
 });

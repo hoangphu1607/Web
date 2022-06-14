@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class CheckLogin
+class CheckNhanVien
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,7 @@ class CheckLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        // echo ;
-        if(!$request->session()->has('id_admin') || session('permission') == 3){
+        if(!$request->session()->has('id_admin')){
             return redirect()->route('adminLogin');
         }
         return $next($request);

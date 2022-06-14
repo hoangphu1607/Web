@@ -38,7 +38,11 @@ $('#loginadmin').on('submit',function(e) {
         processData: false,
         success: function (data) {
             if(data.success){
-                location.href = url+"/form-editProduct";
+                if(data.permission == 2){
+                    location.href = url+"/form-editProduct";
+                }else{
+                    location.href = listOrder;
+                }
             } else{
                 $('.error_request').text('Tài khoản hoặc mật khẩu không chính xác');
             }        

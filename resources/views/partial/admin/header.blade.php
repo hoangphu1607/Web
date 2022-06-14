@@ -69,61 +69,55 @@
                     <div class="main-menu hidden-xs">
                         <nav>
                             <ul>
-                                <li><a href="index.html">Trang Chủ</a></li>
-                                <li><a href="{{route('form-editProduct')}}">Sản Phẩm</a></li>
-                                <li><a href="{{route('form_editCategories')}}">Danh Mục</a></li>
-                                <li><a href="{{route('getmanageSuppliers')}}">Nhà Cung Cấp</a></li>
-                                <li><a href="{{route('listOrder')}}">QL Đặt Hàng</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="{{route('listOrder')}}">Chờ Duyệt</a></li>
-                                        <li><a href="{{route('showDelivery')}}">Đang Giao</a></li>
-                                        <li><a href="{{route('delivery_confirmation')}}">HOÀN TẤT GIAO DỊCH</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="{{route('showOffer')}}">Giới Thiệu Sản Phẩm</a></li>  
-                                <li>
-                                    <a href="{{route('showPageSale')}}">Khuyến Mãi</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="{{route('showPageSale')}}">Thêm Sản Phẩm</a></li>
-                                        <li><a href="{{route('ProductOnSale')}}">Đang Khuyến Mãi</a></li>
-                                    </ul>
-                                </li>                               
-                                {{-- <li><a href="shop.html">Gia Vị</a></li> --}}
-                                <li><a href="{{route('showChartProduct')}}">Thống Kê</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="{{route('showThongBao')}}">Thông Báo</a></li>
-                                    </ul>
-                                </li>
-                                {{-- <li><a href="shop.html">Lẩu</a> --}}
-                                    {{-- <ul class="sub-menu">
-                                        <li><a href="blog-right-sidebar.html">Lẩu This</a></li>
-                                        <li><a href="blog-single.html">Lẩu That</a></li>
-                                    </ul>
-                                </li> --}}
-                                
-                                {{-- <li><a href="shop.html">Sushi & Sashimi</a></li> --}}
-                                {{-- <li><a href="blog-left-sidebar.html">Blog</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                                        <li><a href="blog-single.html">Blog Details</a></li>
-                                    </ul>
-                                </li> --}}
-                                {{-- <li><a href="#">Pages</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="shop.html">Shop</a></li>
-                                        <li><a href="shop.html">Men</a></li>
-                                        <li><a href="shop.html">Women</a></li>
-                                        <li><a href="shop.html">Kids</a></li>
-                                        <li><a href="shop.html">Gift</a></li>
-                                        <li><a href="about-us.html">About Us</a></li>
-                                        <li><a href="single-product.html">Single Product</a></li>
-                                        <li><a href="cart.html">Cart</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="look-book.html">Look Book</a></li>
-                                        <li><a href="404.html">Error 404</a></li>
-                                    </ul>
-                                </li> --}}
-                                {{-- <li><a href="contact.html">contact</a></li> --}}
+                                @if (session('permission') == 2)
+                                    <li><a href="index.html">Trang Chủ</a></li>
+                                    <li><a href="{{route('form-editProduct')}}">Sản Phẩm</a></li>
+                                    <li><a href="{{route('form_editCategories')}}">Danh Mục</a></li>
+                                    <li><a href="{{route('getmanageSuppliers')}}">Nhà Cung Cấp</a></li>
+                                    <li><a href="{{route('listOrder')}}">QL Đặt Hàng</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="{{route('listOrder')}}">Chờ Duyệt</a></li>
+                                            <li><a href="{{route('showDelivery')}}">Đang Giao</a></li>
+                                            <li><a href="{{route('delivery_confirmation')}}">HOÀN TẤT GIAO DỊCH</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="{{route('showOffer')}}">Giới Thiệu Sản Phẩm</a></li>  
+                                    <li>
+                                        <a href="{{route('showPageSale')}}">Khuyến Mãi</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="{{route('showPageSale')}}">Thêm Sản Phẩm</a></li>
+                                            <li><a href="{{route('ProductOnSale')}}">Đang Khuyến Mãi</a></li>
+                                        </ul>
+                                    </li>                               
+                                    <li><a href="{{route('showChartProduct')}}">Thống Kê</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="{{route('showThongBao')}}">Thông Báo</a></li>
+                                        </ul>
+                                    </li>  
+                                @else 
+                                    <li><a href="index.html">Trang Chủ</a></li>
+                                    <li><a href="{{route('listOrder')}}">QL Đặt Hàng</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="{{route('listOrder')}}">Chờ Duyệt</a></li>
+                                            <li><a href="{{route('showDelivery')}}">Đang Giao</a></li>
+                                            <li><a href="{{route('delivery_confirmation')}}">HOÀN TẤT GIAO DỊCH</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="{{route('showOffer')}}">Giới Thiệu Sản Phẩm</a></li>  
+                                    <li>
+                                        <a href="{{route('showPageSale')}}">Khuyến Mãi</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="{{route('showPageSale')}}">Thêm Sản Phẩm</a></li>
+                                            <li><a href="{{route('ProductOnSale')}}">Đang Khuyến Mãi</a></li>
+                                        </ul>
+                                    </li>                               
+                                    <li><a href="{{route('showChartProduct')}}">Thống Kê</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="{{route('showThongBao')}}">Thông Báo</a></li>
+                                        </ul>
+                                    </li>  
+                                @endif
+                                                              
                             </ul>
                         </nav>
                     </div>
