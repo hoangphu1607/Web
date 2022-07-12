@@ -89,8 +89,8 @@ Route::prefix('admin')->group( function(){
     Route::get('register', [manageController::class,'form_register'])->name('form_Register');
     Route::post('register', [manageController::class,'register_admin'])->name('adminRegister');
     //dang ky nhan vien
-    Route::get('dang-ky-nhan-vien',[manageController::class,'form_register_nv'])->name('form_register_nv');
-    Route::post('register_nhanvien',[manageController::class,'register_nhanvien'])->name('register_nhanvien');
+    Route::get('dang-ky-nhan-vien',[manageController::class,'form_register_nv'])->middleware('checkLogin')->name('form_register_nv');
+    Route::post('register_nhanvien',[manageController::class,'register_nhanvien'])->middleware('checkLogin')->name('register_nhanvien');
     //admin logout
     Route::get('logout', [manageController::class,'adminLogout'])->name('admin_logout');  
 
@@ -169,6 +169,7 @@ Route::prefix('admin')->group( function(){
     Route::get('xac-nhan-giao-hang',[ManageOrder::class, 'delivery_confirmation'])->middleware('checkNhanVien')->name('delivery_confirmation');
     //send emailid="thongtinkhac"
     Route::get('send_email',[ManageOrder::class, 'send_email'])->middleware('checkNhanVien');
+    Route::get('deleteBill',[ManageOrder::class, 'deleteBill'])->middleware('checkNhanVien')->name('deleteBill');
 
     //Quản lý giảm giá
     Route::get('giam-gia',[SaleController::class,'showPageSale'])->middleware('checkNhanVien')->name('showPageSale');

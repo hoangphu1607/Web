@@ -31,9 +31,14 @@ var table = $('#myTable').DataTable({
             else
                 return 'Hoàn Tất Giao Dịch';
         }},
-        {data:"b_total", // xoa
+        {data:"b_id", // xoa
         render: function(data, type, row){
-            return '<button data-id="'+data+'" type="button" class="btn btn-danger" data-toggle="modal" data-target="#contentModal" id="editContent"><i class="fa-regular fa-trash-can"></i></button>'
+            if(row.b_status == 1){
+                return 'Đang Chờ Duyệt';
+            }else if(row.b_status == 2){
+                return '<button data-id="'+data+'" type="button" class="btn btn-danger" onclick="deleteBill('+data+')"><i class="fa-regular fa-trash-can" ></i></button>'
+            }else if(row.b_status == 3)
+            return '';
         }},
 
     ] ,
@@ -104,6 +109,25 @@ function delivery(idBill) {
                 toastr["error"]("Số Lượng Không Đủ","Lỗi");
             }
                   
+        },
+        error: function(error){
+            console.log(error);
+
+        }
+    })
+}
+
+function deleteBill(idBill) {    
+    $.ajax({
+        url:urldeleteBill,
+        data:{
+            id:idBill,
+        },
+        method: 'GET',
+        success: function(data){
+            console.log(data);
+            toastr["success"]("Thành Công", "Thông Báo")  ;                  
+            table.ajax.reload();          
         },
         error: function(error){
             console.log(error);

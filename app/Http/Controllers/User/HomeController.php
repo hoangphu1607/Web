@@ -50,6 +50,16 @@ class HomeController extends Controller
         ->select('bd_amount', 'product.*', 'description_detail.price','description_detail.type','description_detail.product_id')
         ->where('bill_detail.bd_product_id','=',DB::raw('product.id'))
         ->where('description_detail.product_id','=',DB::raw('product.id'))
+        ->whereNotExists(function($query){ 
+            $date = Carbon::now();
+            $today = $date->toDateString(); 
+            $query->from('sale')
+            ->select('*')
+            ->where('sale.product_id','=',DB::raw('product.id'))
+            ->where('sale.start_sale','<=',$today)
+            ->where('sale.end_sale','>=',$today)
+            ->where('sale.status',1);           
+        })
         ->orderBy('bd_amount','desc')
         ->limit(6)
         ->get();
@@ -60,6 +70,16 @@ class HomeController extends Controller
             ->select('bd_amount', 'product.*', 'description_detail.price','description_detail.type','description_detail.product_id')
             ->where('bill_detail.bd_product_id','=',DB::raw('product.id'))
             ->where('description_detail.product_id','=',DB::raw('product.id'))
+            ->whereNotExists(function($query){ 
+                $date = Carbon::now();
+                $today = $date->toDateString(); 
+                $query->from('sale')
+                ->select('*')
+                ->where('sale.product_id','=',DB::raw('product.id'))
+                ->where('sale.start_sale','<=',$today)
+                ->where('sale.end_sale','>=',$today)
+                ->where('sale.status',1);           
+            })
             ->inRandomOrder()
             ->limit(6)
             ->get();

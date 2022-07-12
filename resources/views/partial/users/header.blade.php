@@ -37,6 +37,7 @@
                                             <div class="user-dropdown-menu">
                                                 <a href="{{route('user.index')}}">Thông tin tài khoản</a>
                                                 <a href="{{route('changePasswordPage')}}">Đổi mật khẩu</a>
+                                                <a href="{{route('showBillPlaced')}}">Hàng Đang Đặt</a>
                                             </div>
                                         </div>
                                     </li>

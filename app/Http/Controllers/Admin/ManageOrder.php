@@ -199,4 +199,17 @@ class ManageOrder extends Controller
             $email->to('hoangphu329@gmail.com','Đồ Đồng Nát');
         });
     }
+
+    //xoa bill
+    public function deleteBill(Request $request)
+    {
+        DB::table('bill')
+        ->where('b_id', $request->id)
+        ->update([
+            'b_status' => 99
+        ]);
+        return response()->json([
+            'test' =>'Hi'
+        ]);
+    }
 }

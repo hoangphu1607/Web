@@ -123,6 +123,7 @@
         var asset = "{{asset('')}}";
         var getDataNoteById = "{{route('getDataNoteById')}}";
         var code = "{{$code}}" ;
+        var urldeleteBill = "{{route('deleteBill')}}";
         if(code == 1){
             console.log('1');
         }else if(code == 2){
